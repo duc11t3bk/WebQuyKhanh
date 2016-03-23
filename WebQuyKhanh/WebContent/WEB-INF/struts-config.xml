@@ -3,10 +3,19 @@
 Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 <struts-config>
 	<form-beans>
-
+		<form-bean name="loginForm" type="form.LoginForm" ></form-bean>
 	</form-beans>
 	<action-mappings>
-
+		<action 
+			path="/login"
+			name="loginForm"
+			input="/home.jsp"
+			scope="session"
+			type="action.LoginAction"
+			 >
+			<forward name="login-success" path="/introduce.jsp" ></forward>
+			<forward name="login-failed" path="/home.jsp"></forward>
+		</action>
 	</action-mappings>
 	<message-resources parameter="action.ApplicationResources" />
 	

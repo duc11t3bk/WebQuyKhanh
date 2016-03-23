@@ -37,26 +37,9 @@ public class ConnectionDAO {
 		}
 		
 	}
-	public void getData(){
-		try {
-			st=conn.createStatement();
-			String sql="select * from document";
-			ResultSet rs=st.executeQuery(sql);
-			while(rs.next()){
-				System.out.println(""+rs.getString(1)+":"
-									 +rs.getString(2)+":"
-									 +rs.getString(3)+":"
-									 +rs.getString(4)
-									  );
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
 	public static void main(String[] args) {
 		ConnectionDAO test= new ConnectionDAO();
 		Connection conn=test.openConnection();
-		test.getData();
 		test.closeConnection();
 	}
 }
