@@ -1,0 +1,17 @@
+.teacher-info h5{
+	display: inline;
+}
+.myItem {
+	border:1px solid black;
+	border-radius: 10px;
+	margin-bottom:20px;
+	text-align: center;
+}
+#new-level {
+	position: fixed;
+	top:-400px;
+	z-index:20;
+	transition : top 1s;
+	-moz-transition : top 1s;
+	-webkit-transition : top 1s;
+}

@@ -1,0 +1,9 @@
+.main-content .panel-body {
+	overflow: auto;
+}
+.main-content .panel-body img {
+	width: 250px;
+	height: 250px;
+	float:left;
+	margin:10px;
+}

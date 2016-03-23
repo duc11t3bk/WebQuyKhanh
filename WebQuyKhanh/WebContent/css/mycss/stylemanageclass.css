@@ -1,0 +1,11 @@
+.teacher-info h5{
+	display: inline;
+}
+#new-class{
+	position: fixed;
+	top:-400px;
+	z-index: 20;
+	transition: top 1s;
+	-moz-transition: top 1s;
+	-webkit-transition: top 1s;
+}
