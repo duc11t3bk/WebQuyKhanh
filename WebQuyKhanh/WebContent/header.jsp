@@ -50,6 +50,22 @@
 		}
 	});
 </script>
+<script type="text/javascript">
+	function doAjaxPost(){
+		var email=$("#mail").val();
+		$.ajax({
+			type: "POST",
+			url : "/home.do",
+			data : "email="+email,
+			success: function(response){
+				$("#show").html(response);
+			},
+			error: function(e){
+				alert("error"+e);
+			}
+		});
+	}
+</script>
 </head>
 <body>
 	<div class="overflow"></div>
@@ -69,24 +85,27 @@
 						<html:form method="post" action="/home">
 							<div class="row">
 								<h5 class="col-lg-2">Email:</h5>
-								<html:text property="email" styleClass="col-lg-6"></html:text>
-								<logic:notEmpty name="LoginForm" scope="session">
-									<span class="col-lg-4" style="color: red"> <bean:write
-											property="emailError" name="LoginForm" scope="session" />
-									</span>
-								</logic:notEmpty>
+								<html:text styleId="mail" property="email" styleClass="col-lg-8"></html:text>								
 							</div>
+							
+								<div class="row" style="text-align:center">
+									<span style="color: red" id="show" > 
+									</span>
+								</div>
+							
 							<div class="row">
 								<h5 class="col-lg-2">Mật khẩu:</h5>
-								<html:password property="password" styleClass="col-lg-6"></html:password>
-								<logic:notEmpty name="LoginForm" scope="session" >
-									<span class="col-lg-4" style="color: red"><bean:write
-											property="passwordError" name="LoginForm" scope="session" />
-									</span>
-								</logic:notEmpty>
+								<html:password property="password" styleClass="col-lg-8"></html:password>								
 							</div>
+							<logic:notEmpty name="loginForm" scope="session" >
+								<div class="row" style="text-align: center">								
+									<span style="color: red"><bean:write
+											property="passwordError" name="loginForm" scope="session" />
+									</span>
+								</div>
+							</logic:notEmpty>
 							<div class="row">
-								<html:submit styleClass="col-lg-2 col-lg-8 btn btn-primary">Đăng nhập</html:submit>
+								<html:button property="submit" styleClass="col-lg-offset-2 col-lg-8 btn btn-primary" onclick="doAjaxPost()" >Đăng nhập</html:button>
 							</div>
 							<div class="row" style="text-align: center">
 								<img src="image/facebook-login-button.png" width="200px"
