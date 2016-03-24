@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%>
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
+<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic"%>
+<%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,17 +13,17 @@
 	<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
 	<link rel="stylesheet" type="text/css" href="css/mycss/stylehome.css">
 	<link rel="stylesheet" type="text/css" href="css/mycss/styleframehome.css">
-
+	<link rel="stylesheet" type="text/css" href="css/mycss/styleheader.css">
 	<script src="js/jquery-2.2.0.min.js"></script>
 	<script src="js/jquery-ui.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/myjs/includehtml.js"></script>
+
 </head>
 <body>
 	<div class="wrapper">
-	<div id="header" class="include" data-include="header.jsp">
-		
-	</div>
+	<jsp:include page="header.jsp"></jsp:include>
+	
 	<div class="container main-container">
 		<div class="row">
 			<div class="content">
@@ -155,11 +159,13 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3 include" data-include="rightcontent.jsp"></div>
+				<div class="col-lg-3">
+					<jsp:include page="rightcontent.jsp"></jsp:include>
+				</div>
 			</div>
 		</div>		
 	</div>	
-	<div id="footer" class="include" data-include="footer.jsp"></div>
+	<div id="footer" class="include" data-include="footer.jsp">	</div>
 	</div>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic"%>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
 <head>
 <meta charset="utf-8" />
@@ -66,14 +66,24 @@
 
 					</div>
 					<div class="panel-body">
-						<html:form method="post" action="/login">
+						<html:form method="post" action="/home">
 							<div class="row">
 								<h5 class="col-lg-2">Email:</h5>
-								<html:text property="email" styleClass="col-lg-8"></html:text>
+								<html:text property="email" styleClass="col-lg-6"></html:text>
+								<logic:notEmpty name="LoginForm" scope="session">
+									<span class="col-lg-4" style="color: red"> <bean:write
+											property="emailError" name="LoginForm" scope="session" />
+									</span>
+								</logic:notEmpty>
 							</div>
 							<div class="row">
 								<h5 class="col-lg-2">Mật khẩu:</h5>
-								<html:password property="password" styleClass="col-lg-8"></html:password>
+								<html:password property="password" styleClass="col-lg-6"></html:password>
+								<logic:notEmpty name="LoginForm" scope="session" >
+									<span class="col-lg-4" style="color: red"><bean:write
+											property="passwordError" name="LoginForm" scope="session" />
+									</span>
+								</logic:notEmpty>
 							</div>
 							<div class="row">
 								<html:submit styleClass="col-lg-2 col-lg-8 btn btn-primary">Đăng nhập</html:submit>
