@@ -1,5 +1,6 @@
 package model.bo;
 
+import model.bean.Member;
 import model.dao.LoginDAO;
 
 public class LoginBO {
@@ -8,7 +9,7 @@ public class LoginBO {
 	public LoginBO(){
 		loginDAO= new LoginDAO();		
 	}
-	public boolean checkLogin(String email, String password){
+	public Member checkLogin(String email, String password){
 		return loginDAO.checkLogin(email,password);
 	}
 }

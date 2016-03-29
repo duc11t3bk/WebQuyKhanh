@@ -51,17 +51,42 @@
 	});
 </script>
 <script type="text/javascript">
-	function doAjaxPost(){
-		var email=$("#mail").val();
+	function doAjaxPost() {
+		$("#emailError").html("");
+		$("#passwordError").html("");
+		$("#notification").html("");
+		var email=$("#email").val();
+		var password=$("#password").val();
+		console.log("email"+email+":password"+password);
+/* 		$.getJSON(
+			"http://localhost:8080/WebQuyKhanh/home.do",
+			function(result){
+				console.log("chaaaay"+result[0].emailError);
+				$("#emailError").html(result[0].emailError);
+				$("#passwordError").html(result[0].passwordError);
+			}
+		); */
 		$.ajax({
 			type: "POST",
-			url : "/home.do",
-			data : "email="+email,
-			success: function(response){
-				$("#show").html(response);
+			url : "http://localhost:8080/WebQuyKhanh/login.do",
+			data :"email="+email+"&password="+password,
+			dataType: "json",
+			success : function(result){
+				if(result[0].checkValidate=="false"){
+					$("#emailError").html(result[0].emailError);
+					$("#passwordError").html(result[0].passwordError);
+				}
+				else{
+					if(result[0].login=="failed"){
+						$("#notification").html("Tài khoản hoặc mật khẩu không đúng");
+					}
+					if(result[0].login=="success"){
+						$("#notification").html("Đăng nhập thành công");
+					}
+				}
 			},
-			error: function(e){
-				alert("error"+e);
+			error : function(e){
+				alert("Error: "+e);
 			}
 		});
 	}
@@ -82,30 +107,33 @@
 
 					</div>
 					<div class="panel-body">
-						<html:form method="post" action="/home">
-							<div class="row">
-								<h5 class="col-lg-2">Email:</h5>
-								<html:text styleId="mail" property="email" styleClass="col-lg-8"></html:text>								
+						<html:form action="/login">
+							<div class="row" style="text-align:center">
+								<label style="color:red" id="notification"></label>
 							</div>
-							
-								<div class="row" style="text-align:center">
-									<span style="color: red" id="show" > 
-									</span>
-								</div>
-							
 							<div class="row">
-								<h5 class="col-lg-2">Mật khẩu:</h5>
-								<html:password property="password" styleClass="col-lg-8"></html:password>								
+								<label class="col-lg-2">Email:</label>
+								<html:text styleId="email" property="email" styleClass="col-lg-8"></html:text>
 							</div>
-							<logic:notEmpty name="loginForm" scope="session" >
-								<div class="row" style="text-align: center">								
-									<span style="color: red"><bean:write
-											property="passwordError" name="loginForm" scope="session" />
-									</span>
+
+							<div class="row" style="text-align: center">
+								<label style="color:red" id="emailError"></label>
+							</div>
+
+							<div class="row">
+								<label class="col-lg-2">Mật khẩu: </label>
+								<html:password styleId="password" property="password" styleClass="col-lg-8"></html:password>
+							</div>
+							<logic:notEmpty name="loginForm" scope="session">
+								<div class="row" style="text-align: center">
+									<label style="color: red" id="passwordError">
+									</label>
 								</div>
 							</logic:notEmpty>
 							<div class="row">
-								<html:button property="submit" styleClass="col-lg-offset-2 col-lg-8 btn btn-primary" onclick="doAjaxPost()" >Đăng nhập</html:button>
+								<html:button property="submit"
+									styleClass="col-lg-offset-2 col-lg-8 btn btn-primary"
+									onclick="doAjaxPost()">Đăng nhập</html:button>
 							</div>
 							<div class="row" style="text-align: center">
 								<img src="image/facebook-login-button.png" width="200px"

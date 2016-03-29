@@ -10,9 +10,12 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import common.Validate;
 import form.LoginForm;
+import model.bean.Member;
 import model.bo.LoginBO;
 
 public class LoginAction extends Action {
@@ -28,47 +31,54 @@ public class LoginAction extends Action {
 		LoginForm loginForm = (LoginForm) form;
 		String email = loginForm.getEmail();
 		String password = loginForm.getPassword();
-		String submit = loginForm.getSubmit();
+		JSONArray jsonArray;
+		jsonArray=checkLoginValidate(email, password,loginForm);
 		
-		System.out.println(""+loginForm.getEmailError());
-		System.out.println(""+loginForm.getPasswordError());
-		boolean checkValid=true;
-		if (submit != null) {
-			checkValid=checkLoginValidate(email, password, loginForm);
-		}
-		if (!checkValid) {
-			PrintWriter out= response.getWriter();
-			out.println("email trống");
-			out.flush();
-			return null;
-		} else {
-			LoginBO loginBO = new LoginBO();
-			if (loginBO.checkLogin(email, password)) {
-				return mapping.findForward("login-success");
-			} else {
-				return mapping.findForward("login-failed");
-			}
-		}
+		PrintWriter out= response.getWriter();
+		out.println(jsonArray.toString());
+		out.flush();
+		out.close();
+		return null;
+	
 	}
 	
-	public boolean checkLoginValidate(String email, String password, LoginForm loginForm){
-		boolean checkValid = true;
-		loginForm.setEmailError("");
-		loginForm.setPasswordError("");
+	@SuppressWarnings("unchecked")
+	public JSONArray checkLoginValidate(String email, String password, LoginForm loginForm){
+		JSONArray jsonArray= new JSONArray();
+		JSONObject jsonObject= new JSONObject();
+		boolean checkValidate=true;
 		if (Validate.isEmpty(email)) {
-			checkValid = false;
-			loginForm.setEmailError("Email trống");
-			System.out.println("" + loginForm.getEmailError());
+			checkValidate=false; 
+			jsonObject.put("emailError","Email trống");
 		} else {
 			if (!Validate.emailValid(email)) {
-				checkValid=false;
-				loginForm.setEmailError("Email vừa nhập không đúng");
+				checkValidate=false; 
+				jsonObject.put("emailError","Email không đúng định dạng");
 			}
 		}
 		if (Validate.isEmpty(password)) {
-			checkValid = false;
-			loginForm.setPasswordError("Passsword trống");
+			checkValidate=false; 
+			jsonObject.put("passwordError","Password trống");
 		}
-		return checkValid;
+		
+		if(!checkValidate){
+			jsonObject.put("checkValidate","false");
+			jsonArray.add(jsonObject);
+			return jsonArray;
+		}
+		else{
+			jsonObject.put("checkValidate","true");
+			LoginBO loginBO= new LoginBO();
+			Member member=loginBO.checkLogin(email, password);
+			if(member!=null){
+				loginForm.setMember(member);
+				jsonObject.put("login", "success");				
+			}
+			else{
+				jsonObject.put("login", "failed");
+			}
+			jsonArray.add(jsonObject);
+			return jsonArray;
+		}
 	}
 }

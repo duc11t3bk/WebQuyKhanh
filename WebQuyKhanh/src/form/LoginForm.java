@@ -15,22 +15,15 @@ public class LoginForm extends ActionForm{
 
 	private String email;
 	private String password;
-	private String submit;
-	private String emailError;
-	private String passwordError;
-
-	public String getEmailError() {
-		return emailError;
+	private Member member;
+	
+	public Member getMember() {
+		return member;
 	}
-	public void setEmailError(String emailError) {
-		this.emailError = emailError;
+	public void setMember(Member member) {
+		this.member = member;
 	}
-	public String getPasswordError() {
-		return passwordError;
-	}
-	public void setPasswordError(String passwordError) {
-		this.passwordError = passwordError;
-	}
+	
 	public String getEmail() {
 		return email;
 	}
@@ -43,11 +36,6 @@ public class LoginForm extends ActionForm{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getSubmit() {
-		return submit;
-	}
-	public void setSubmit(String submit) {
-		this.submit = submit;
-	}
+
 	
 }

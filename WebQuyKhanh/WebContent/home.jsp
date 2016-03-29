@@ -165,7 +165,9 @@
 			</div>
 		</div>		
 	</div>	
-	<div id="footer" class="include" data-include="footer.jsp">	</div>
+	<div id="footer">
+	<jsp:include page="footer.jsp"></jsp:include>
+	</div>
 	</div>
 </body>
 </html>
