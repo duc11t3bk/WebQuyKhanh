@@ -73,7 +73,7 @@
 
 #form-register{
 	position: fixed;
-	top: -400px;
+	top: -600px;
 	z-index: 20;
 	transition: top 1s;
 	-moz-transition: top 1s;

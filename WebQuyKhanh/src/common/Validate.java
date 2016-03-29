@@ -17,10 +17,15 @@ public class Validate {
 		return false;
 	}
 	
-	public static boolean emailValid(String email){
+	public static boolean emailNotValid(String email){
 		pattern= Pattern.compile(EMAIL_PATTERN);
 		matcher= pattern.matcher(email);
-		
-		return matcher.matches();
+		return !matcher.matches();
+	}
+	public static boolean lengthPhoneNumberNotValid(String phoneNumber){
+		return (phoneNumber.length() <9 ) ? true : false;
+	}
+	public static boolean lengthPasswordNotValid(String password){
+		return (password.length() < 6 ) ? true : false;
 	}
 }

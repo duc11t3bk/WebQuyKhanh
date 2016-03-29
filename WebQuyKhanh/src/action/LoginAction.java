@@ -16,7 +16,7 @@ import org.json.simple.JSONObject;
 import common.Validate;
 import form.LoginForm;
 import model.bean.Member;
-import model.bo.LoginBO;
+import model.bo.MemberBO;
 
 public class LoginAction extends Action {
 
@@ -51,7 +51,7 @@ public class LoginAction extends Action {
 			checkValidate=false; 
 			jsonObject.put("emailError","Email trống");
 		} else {
-			if (!Validate.emailValid(email)) {
+			if (Validate.emailNotValid(email)) {
 				checkValidate=false; 
 				jsonObject.put("emailError","Email không đúng định dạng");
 			}
@@ -68,8 +68,8 @@ public class LoginAction extends Action {
 		}
 		else{
 			jsonObject.put("checkValidate","true");
-			LoginBO loginBO= new LoginBO();
-			Member member=loginBO.checkLogin(email, password);
+			MemberBO memberBO= new MemberBO();
+			Member member=memberBO.checkLogin(email, password);
 			if(member!=null){
 				loginForm.setMember(member);
 				jsonObject.put("login", "success");				

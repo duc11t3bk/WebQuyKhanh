@@ -33,10 +33,11 @@
 	});
 </script>
 <script type="text/javascript">
+	/* hide login-form and register-form*/
 	$(document).ready(function() {
 		function closeLogReg() {
 			$("#form-login").css("top", "-400px");
-			$("#form-register").css("top", "-400px");
+			$("#form-register").css("top", "-600px");
 			$(".overflow").hide();
 		}
 		$(".overflow").on("click", function() {
@@ -51,49 +52,53 @@
 	});
 </script>
 <script type="text/javascript">
-	function doAjaxPost() {
+	function login() {
 		$("#emailError").html("");
 		$("#passwordError").html("");
-		$("#notification").html("");
-		var email=$("#email").val();
-		var password=$("#password").val();
-		console.log("email"+email+":password"+password);
-/* 		$.getJSON(
-			"http://localhost:8080/WebQuyKhanh/home.do",
-			function(result){
-				console.log("chaaaay"+result[0].emailError);
-				$("#emailError").html(result[0].emailError);
-				$("#passwordError").html(result[0].passwordError);
-			}
-		); */
+		$("#notification-login").html("");
+		var email = $("#email").val();
+		var password = $("#password").val();
+		console.log("email" + email + ":password" + password);
+		/* 		$.getJSON(
+		 "http://localhost:8080/WebQuyKhanh/home.do",
+		 function(result){
+		 console.log("chaaaay"+result[0].emailError);
+		 $("#emailError").html(result[0].emailError);
+		 $("#passwordError").html(result[0].passwordError);
+		 }
+		 ); */
 		$.ajax({
-			type: "POST",
+			type : "POST",
 			url : "http://localhost:8080/WebQuyKhanh/login.do",
-			data :"email="+email+"&password="+password,
-			dataType: "json",
-			success : function(result){
-				if(result[0].checkValidate=="false"){
+			data : "email=" + email + "&password=" + password,
+			dataType : "json",
+			success : function(result) {
+				if (result[0].checkValidate == "false") {
 					$("#emailError").html(result[0].emailError);
 					$("#passwordError").html(result[0].passwordError);
-				}
-				else{
-					if(result[0].login=="failed"){
-						$("#notification").html("Tài khoản hoặc mật khẩu không đúng");
+				} else {
+					if (result[0].login == "failed") {
+						$("#notification-login").html(
+								"Tài khoản hoặc mật khẩu không đúng");
 					}
-					if(result[0].login=="success"){
-						$("#notification").html("Đăng nhập thành công");
+					if (result[0].login == "success") {
+						$("#notification-login").html("Đăng nhập thành công");
 					}
 				}
 			},
-			error : function(e){
-				alert("Error: "+e);
+			error : function(e) {
+				alert("Error: " + e);
 			}
 		});
+	}
+	function register() {
+
 	}
 </script>
 </head>
 <body>
 	<div class="overflow"></div>
+	<!-- Form đăng nhập -->
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-offset-2 col-lg-8" id="form-login">
@@ -108,32 +113,33 @@
 					</div>
 					<div class="panel-body">
 						<html:form action="/login">
-							<div class="row" style="text-align:center">
-								<label style="color:red" id="notification"></label>
+							<div class="row" style="text-align: center">
+								<label id="notification-login"></label>
 							</div>
 							<div class="row">
 								<label class="col-lg-2">Email:</label>
-								<html:text styleId="email" property="email" styleClass="col-lg-8"></html:text>
+								<html:text styleId="email" property="email"
+									styleClass="col-lg-8"></html:text>
 							</div>
 
 							<div class="row" style="text-align: center">
-								<label style="color:red" id="emailError"></label>
+								<label id="emailError"></label>
 							</div>
 
 							<div class="row">
 								<label class="col-lg-2">Mật khẩu: </label>
-								<html:password styleId="password" property="password" styleClass="col-lg-8"></html:password>
+								<html:password styleId="password" property="password"
+									styleClass="col-lg-8"></html:password>
 							</div>
 							<logic:notEmpty name="loginForm" scope="session">
 								<div class="row" style="text-align: center">
-									<label style="color: red" id="passwordError">
-									</label>
+									<label id="passwordError"> </label>
 								</div>
 							</logic:notEmpty>
 							<div class="row">
 								<html:button property="submit"
 									styleClass="col-lg-offset-2 col-lg-8 btn btn-primary"
-									onclick="doAjaxPost()">Đăng nhập</html:button>
+									onclick="login()">Đăng nhập</html:button>
 							</div>
 							<div class="row" style="text-align: center">
 								<img src="image/facebook-login-button.png" width="200px"
@@ -145,6 +151,7 @@
 			</div>
 		</div>
 	</div>
+	<!-- Form đăng ký -->
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-offset-2 col-lg-8" id="form-register">
@@ -157,32 +164,63 @@
 						<div class="clear"></div>
 					</div>
 					<div class="panel-body">
-						<div class="row">
-							<input class="col-lg-offset-2 col-lg-8" type="text"
-								placeholder="Email" />
-						</div>
-						<div class="row">
-							<input class="col-lg-offset-2 col-lg-8" type="text"
-								placeholder="Số điện thoại" />
-						</div>
-						<div class="row">
-							<input class="col-lg-offset-2 col-lg-8" type="text"
-								placeholder="Mật khẩu" />
-						</div>
-						<div class="row">
-							<input class="col-lg-offset-2 col-lg-8" type="text"
-								placeholder="Xác nhận mật khẩu" />
-						</div>
-						<div class="row">
-							<input class="col-lg-offset-2 col-lg-8 btn btn-primary"
-								type="button" value="Đăng ký" />
-						</div>
+						<html:form action="/register-member">
+							<div class="row" style="color: red">
+								<label id="notification-register"></label>
+							</div>
+							<div class="row">
+								<label class="col-lg-2"><span
+									class="glyphicon glyphicon-envelope"></span> Email</label>
+								<div class="col-lg-8 ">
+									<html:text styleId="emailRegis" styleClass="form-control"
+										property="email" />
+								</div>
+							</div>
+							<div class="row" style="text-align: center">
+								<label id="emailRegisError"></label>
+							</div>
+							<div class="row">
+								<label class="col-lg-2"><span
+									class="glyphicon glyphicon-earphone"></span> Số điện thoại :</label>
+								<div class="col-lg-8 ">
+									<html:text styleId="phonenumberRegis" property="phoneNumber"
+										styleClass="form-control"></html:text>
+								</div>
+							</div>
+							<div class="row" style="text-align: center">
+								<label id="phoneRegisError"></label>
+							</div>
+							<div class="row">
+								<label class="col-lg-2"><span
+									class="glyphicon glyphicon-lock"></span> Mật khẩu :</label>
+								<div class="col-lg-8">
+									<html:text styleId="passwordRegis" styleClass=" form-control"
+										property="password"></html:text>
+								</div>
+							</div>
+							<div class="row">
+								<label class="col-lg-2"><span
+									class="glyphicon glyphicon-lock"></span> Nhập lại mật khẩu </label>
+								<div class="col-lg-8">
+									<html:text styleClass="form-control" styleId="retypePasswordRegis"
+										property="retypePassword"></html:text>
+								</div>
+							</div>
+							<div class="row" style="text-align: center">
+								<label id="passwordRegisError"></label>
+							</div>
+							<div class="row">
+								<html:button
+									styleClass="col-lg-offset-2 col-lg-8 btn btn-primary"
+									property="submit" value="Đăng ký" onclick="register()"></html:button>
+							</div>
+						</html:form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
+	<!-- Menu -->
 	<div class="navigation">
 		<ul class="menu">
 			<li><a href="introduce.html">Giới thiệu</a></li>
