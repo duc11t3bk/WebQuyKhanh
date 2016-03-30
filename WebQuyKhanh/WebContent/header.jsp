@@ -27,7 +27,7 @@
 	$(document).ready(function() {
 		$("#btn-register").on("click", function(e) {
 			e.stopPropagation();
-			$("#form-register").css("top", "20%");
+			$("#form-register").css("top", "12%");
 			$(".overflow").show();
 		});
 	});
@@ -52,6 +52,11 @@
 	});
 </script>
 <script type="text/javascript">
+	function closeLogReg() {
+		$("#form-login").css("top", "-400px");
+		$("#form-register").css("top", "-600px");
+		$(".overflow").hide();
+	}
 	function login() {
 		$("#emailError").html("");
 		$("#passwordError").html("");
@@ -59,30 +64,29 @@
 		var email = $("#email").val();
 		var password = $("#password").val();
 		console.log("email" + email + ":password" + password);
-		/* 		$.getJSON(
-		 "http://localhost:8080/WebQuyKhanh/home.do",
-		 function(result){
-		 console.log("chaaaay"+result[0].emailError);
-		 $("#emailError").html(result[0].emailError);
-		 $("#passwordError").html(result[0].passwordError);
-		 }
-		 ); */
 		$.ajax({
 			type : "POST",
 			url : "http://localhost:8080/WebQuyKhanh/login.do",
 			data : "email=" + email + "&password=" + password,
 			dataType : "json",
-			success : function(result) {
-				if (result[0].checkValidate == "false") {
-					$("#emailError").html(result[0].emailError);
-					$("#passwordError").html(result[0].passwordError);
+			success : function(response) {
+				if (response[0].checkValidate == "false") {
+					$("#emailError").html(response[0].emailError);
+					$("#passwordError").html(response[0].passwordError);
 				} else {
-					if (result[0].login == "failed") {
+					if (response[0].login == "failed") {
 						$("#notification-login").html(
 								"Tài khoản hoặc mật khẩu không đúng");
 					}
-					if (result[0].login == "success") {
+					if (response[0].login == "success") {
 						$("#notification-login").html("Đăng nhập thành công");
+						setTimeout(function() {
+							$("#email").val("");
+							$("#password").val("");
+							$("#notification-login").val("");
+							closeLogReg();
+							location.href = "/WebQuyKhanh/home.jsp";
+						}, 800);
 					}
 				}
 			},
@@ -92,7 +96,51 @@
 		});
 	}
 	function register() {
-
+		$("#emailRegisError").html("");
+		$("#phoneNumberRegisError").html("");
+		$("#passwordRegisError").html("");
+		$("#retypePasswordRegisError").html("");
+		$("#notification-register").html("");
+		var email = $("#emailRegis").val();
+		var phoneNumber = $("#phoneNumberRegis").val();
+		var password = $("#passwordRegis").val();
+		var retypePassword = $("#retypePasswordRegis").val();
+		console.log("email" + email + "phone" + phoneNumber + "password"
+				+ password + "retype" + retypePassword);
+		$.ajax({
+			type : "POST",
+			url : "http://localhost:8080/WebQuyKhanh/register-member.do",
+			data : "email=" + email + "&phoneNumber=" + phoneNumber
+					+ "&password=" + password + "&retypePassword="
+					+ retypePassword,
+			dataType : "json",
+			success : function(response) {
+				var object = response[0];
+				console.log("response" + response[0].register);
+				if (object.register == "failed") {
+					$("#emailRegisError").html(object.emailError);
+					$("#phoneNumberRegisError").html(object.phoneNumberError);
+					$("#passwordRegisError").html(object.passwordError);
+					$("#retypePasswordRegisError").html(
+							object.retypePasswordError);
+				} else {
+					if (object.register == "success") {
+						$("#notification-register").html(object.message);
+						setTimeout(function() {
+							closeLogReg();
+							$("#emailRegis").val("");
+							$("#phoneNumberRegis").val("");
+							$("#passwordRegis").val("");
+							$("#retypePasswordRegis").val("");
+							$("notification-register").val("");
+						}, 1000);
+					}
+				}
+			},
+			error : function(errormessage) {
+				alert("Error" + errormessage);
+			}
+		});
 	}
 </script>
 </head>
@@ -114,7 +162,7 @@
 					<div class="panel-body">
 						<html:form action="/login">
 							<div class="row" style="text-align: center">
-								<label id="notification-login"></label>
+								<label id="notification-login" style="color: red"></label>
 							</div>
 							<div class="row">
 								<label class="col-lg-2">Email:</label>
@@ -123,7 +171,7 @@
 							</div>
 
 							<div class="row" style="text-align: center">
-								<label id="emailError"></label>
+								<label id="emailError" style="color: red"></label>
 							</div>
 
 							<div class="row">
@@ -133,7 +181,7 @@
 							</div>
 							<logic:notEmpty name="loginForm" scope="session">
 								<div class="row" style="text-align: center">
-									<label id="passwordError"> </label>
+									<label id="passwordError" style="color: red"> </label>
 								</div>
 							</logic:notEmpty>
 							<div class="row">
@@ -165,8 +213,8 @@
 					</div>
 					<div class="panel-body">
 						<html:form action="/register-member">
-							<div class="row" style="color: red">
-								<label id="notification-register"></label>
+							<div class="row" style="color: red; text-align: center">
+								<label id="notification-register" style="color: red"></label>
 							</div>
 							<div class="row">
 								<label class="col-lg-2"><span
@@ -177,37 +225,40 @@
 								</div>
 							</div>
 							<div class="row" style="text-align: center">
-								<label id="emailRegisError"></label>
+								<label id="emailRegisError" style="color: red"></label>
 							</div>
 							<div class="row">
 								<label class="col-lg-2"><span
 									class="glyphicon glyphicon-earphone"></span> Số điện thoại :</label>
 								<div class="col-lg-8 ">
-									<html:text styleId="phonenumberRegis" property="phoneNumber"
+									<html:text styleId="phoneNumberRegis" property="phoneNumber"
 										styleClass="form-control"></html:text>
 								</div>
 							</div>
 							<div class="row" style="text-align: center">
-								<label id="phoneRegisError"></label>
+								<label id="phoneNumberRegisError" style="color: red"></label>
 							</div>
 							<div class="row">
 								<label class="col-lg-2"><span
 									class="glyphicon glyphicon-lock"></span> Mật khẩu :</label>
 								<div class="col-lg-8">
-									<html:text styleId="passwordRegis" styleClass=" form-control"
-										property="password"></html:text>
+									<html:password styleId="passwordRegis"
+										styleClass=" form-control" property="password"></html:password>
 								</div>
+							</div>
+							<div class="row" style="text-align: center">
+								<label id="passwordRegisError" style="color: red"></label>
 							</div>
 							<div class="row">
 								<label class="col-lg-2"><span
 									class="glyphicon glyphicon-lock"></span> Nhập lại mật khẩu </label>
 								<div class="col-lg-8">
-									<html:text styleClass="form-control" styleId="retypePasswordRegis"
-										property="retypePassword"></html:text>
+									<html:password styleClass="form-control"
+										styleId="retypePasswordRegis" property="retypePassword"></html:password>
 								</div>
 							</div>
 							<div class="row" style="text-align: center">
-								<label id="passwordRegisError"></label>
+								<label id="retypePasswordRegisError" style="color: red"></label>
 							</div>
 							<div class="row">
 								<html:button
@@ -240,11 +291,29 @@
 					<li><a href="vocaLevel.html">Học từ vựng</a></li>
 					<li><a href="translationLevel.html">Luyện dịch câu</a></li>
 				</ul></li>
-			<li id="btn-login"><a href="#x"><span
-					class="glyphicon glyphicon-log-in"></span> Đăng nhập</a>
-				<ul class="submenu">
-					<li id="btn-register"><a href="#x">Đăng kí</a></li>
-				</ul></li>
+			<logic:empty name="loginForm" property="member" scope="session">
+				<li id="btn-login"><a href="#x"><span
+						class="glyphicon glyphicon-log-in"></span> Đăng nhập</a>
+					<ul class="submenu">
+						<li id="btn-register"><a href="#x">Đăng kí</a></li>
+					</ul></li>
+			</logic:empty>
+			<logic:notEmpty name="loginForm" property="member" scope="session">
+				<li style="float: right"><html:link href="#"
+						styleId="emailUser">
+						<bean:define id="member" name="loginForm" property="member"
+							scope="session" />
+						<img class="img-circle" alt="hinh" src="image/phusi.jpg"
+							height="40px" width="40px">
+						<bean:write name="member" property="email"/>
+					</html:link>
+					<ul class="submenu" style="text-align: left">
+						<li><html:link href="#" style="margin-left:5px;">
+								<span class="glyphicon glyphicon-info-sign"></span> Thông tin cá nhân</html:link></li>
+						<li><html:link action="/logout" style="margin-left:5px;">
+								<span class="glyphicon glyphicon-log-out"></span> Đăng xuất</html:link></li>
+					</ul></li>
+			</logic:notEmpty>
 		</ul>
 	</div>
 	<div class="container" style="margin-top: 50px;">

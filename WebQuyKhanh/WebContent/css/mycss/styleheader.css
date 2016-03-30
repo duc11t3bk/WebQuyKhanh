@@ -82,5 +82,11 @@
 #form-register .panel-body div{
 	margin-bottom: 10px;
 }
-
+#emailUser {
+	display:block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	white-space: nowrap;
+}
 

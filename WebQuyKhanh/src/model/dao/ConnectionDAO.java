@@ -40,19 +40,16 @@ public class ConnectionDAO {
 	}
 	public static String increateID(String tableName, String colName, Connection conn){
 		try {			
-			String sql="select top 1 ? from ? order by ? desc";
-			PreparedStatement getMAXID=conn.prepareStatement(sql);
-			getMAXID.setString(1,colName);
-			getMAXID.setString(2,tableName);
-			getMAXID.setString(3, colName);
+			String sql="select "+colName+" from "+tableName+" order by "+colName+" desc "+" limit 1";
+			Statement stmt=conn.createStatement();
 			System.out.println(""+sql);
-			ResultSet rs=getMAXID.executeQuery();
+			ResultSet rs=stmt.executeQuery(sql);
 			String maxID="";
 			while(rs.next()){
 				maxID=rs.getString(1);
 			}
-			String code=maxID.substring(0, 2);
-			String data=maxID.substring(2,maxID.length());
+			String code=maxID.substring(0,3);
+			String data=maxID.substring(3,maxID.length());
 			String newID=code+String.format("%08d",Integer.valueOf(data)+1);
 			System.out.println("new ID=="+newID);
 			return newID;

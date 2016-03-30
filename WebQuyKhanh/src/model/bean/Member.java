@@ -9,6 +9,15 @@ public class Member {
 	private String password;
 	private String image;
 	private int priority;
+	private String dateattended;
+	
+	
+	public String getDateattended() {
+		return dateattended;
+	}
+	public void setDateattended(String dateattended) {
+		this.dateattended = dateattended;
+	}
 	public String getMemberID() {
 		return memberID;
 	}

@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import model.bean.Member;
 
@@ -61,16 +63,31 @@ public class MemberDAO {
 	public void registerMember(Member memberInfor) {
 		try {
 			conn=connection.openConnection();
-			String sql="insert into Member values(?,?,?,?,?,?,?)";
-			
-			String id=ConnectionDAO.increateID("member", "member_id", conn);
-			System.out.println(""+id);
+			String sql="insert into member values(?,?,?,?,?,?,?,?)";
+			String newID=ConnectionDAO.increateID("member", "member_id", conn);
+			System.out.println(""+newID);
+			memberInfor.setMemberID(newID);
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1,memberInfor.getMemberID());
+			pstmt.setString(2, memberInfor.getTeacherID());
+			pstmt.setString(3,memberInfor.getEmail());
+			pstmt.setString(4,memberInfor.getPhoneNumber());
+			pstmt.setString(5, memberInfor.getPassword());
+			pstmt.setString(6, memberInfor.getImage());
+			pstmt.setInt(7, memberInfor.getPriority());
+			pstmt.setString(8, memberInfor.getDateattended());
+			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
 	public static void main(String[] args){
 		MemberDAO test= new MemberDAO();
 		test.registerMember(null);
+		Date date= new Date();
+		System.out.println(""+date);
+		SimpleDateFormat spdf= new SimpleDateFormat("yyyy-MM-dd");
+		System.out.println(""+spdf.format(date));
 	}
 }
