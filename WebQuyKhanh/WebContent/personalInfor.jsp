@@ -15,10 +15,11 @@
 <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
 <link rel="stylesheet" type="text/css"
 	href="css/mycss/styleframehome.css">
-
+<link rel="stylesheet" type="text/css" href="css/fileinput.css">
 <script src="js/jquery-2.2.0.min.js"></script>
 <script src="js/jquery-ui.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/fileinput.js"></script>
 <script src="js/myjs/includehtml.js"></script>
 </head>
 <body>
@@ -41,19 +42,25 @@
 									<div class="panel-body">
 										<html:form action="/member-edit-infor">
 											<div class="row">
-												<label class="col-lg-2">Mật khẩu hiện tại </label>
+												<label class="col-lg-2"><span
+													class="glyphicon glyphicon-lock"></span> Mật khẩu hiện tại
+												</label>
 												<div class="col-lg-9 ">
 													<html:text styleClass="form-control" property="password"></html:text>
 												</div>
 											</div>
 											<div class="row">
-												<label class="col-lg-2">Nhập mật khẩu mới </label>
+												<label class="col-lg-2"><span
+													class="glyphicon glyphicon-question-sign"></span> Nhập mật
+													khẩu mới </label>
 												<div class="col-lg-9">
 													<html:text styleClass="form-control" property="newPassword"></html:text>
 												</div>
 											</div>
 											<div class="row">
-												<label class="col-lg-2">Xác nhận mật khẩu mới</label>
+												<label class="col-lg-2"><span
+													class="glyphicon glyphicon-question-sign"></span> Xác nhận
+													mật khẩu mới</label>
 												<div class="col-lg-9">
 													<html:text styleClass="form-control"
 														property="retypePassword"></html:text>
@@ -70,35 +77,38 @@
 										<div class="panel-title">Thông tin</div>
 									</div>
 									<div class="panel-body">
+										<html:form action="/member-edit-infor">
 										<div class="row">
+											<label class="col-lg-5"><span
+												class="glyphicon glyphicon-user"></span> Cập nhật ảnh đại
+												diện : </label>
+											<div class="col-lg-4">
+												<html:file styleId="input-1" styleClass="file"
+													property="file" accept="image/*"></html:file>
+											</div>
+										</div>
+										<div class="row" style="margin-top: 50px;">
+											<label class="col-lg-5"><span
+												class="glyphicon glyphicon-envelope"></span> Email :</label>
 											<div class="col-lg-5">
-												<h5 style="display: inline">Cập nhật ảnh đại diện :</h5>
-												<input class="btn btn-default" type="button" value="Upload" />
-											</div>
-											<div class="col-lg-7">
-												<div class="row">
-													<img src="image/avata-Katie.png" width="100px"
-														; height="100px;">
-												</div>
-												<div>
-													<h5>Xem trước</h5>
-												</div>
+												<html:text styleClass="form-control" property="email"
+													readonly="readonly">
+												</html:text>
 											</div>
 										</div>
 										<div class="row">
-											<h5 class="col-lg-5" style="display: inline">Email:</h5>
-											<input class="col-lg-5" type="text" value="nnnn@gmail.com" />
-										</div>
-										<div class="row">
-											<h5 class="col-lg-5" style="display: inline">
-												<span class="glyphicon glyphicon-earphone"></span> Số điện
-												thoại:
-											</h5>
-											<input class="col-lg-5" type="text" value="123456" />
+											<label class="col-lg-5"> <span
+												class="glyphicon glyphicon-earphone"></span> Số điện thoại:
+											</label>
+											<div class="col-lg-5">
+												<html:text property="phoneNumber" styleClass="form-control">
+												</html:text>
+											</div>
 										</div>
 										<div class="row" style="text-align: center">
-											<input class="btn btn-default" type="button" value="Lưu" />
+											<html:submit styleClass="btn btn-default" property="submit">Lưu</html:submit>
 										</div>
+									</html:form>
 									</div>
 								</div>
 							</div>
@@ -114,5 +124,13 @@
 			<jsp:include page="footer.jsp"></jsp:include>
 		</div>
 	</div>
+	<script type="text/javascript">
+		$("#input-1").fileinput({
+			showUpload : false,
+			showRemove : false,
+			browseLabel : "Duyệt ảnh đại diện",
+			previewFileType : "image",
+		});
+	</script>
 </body>
 </html>

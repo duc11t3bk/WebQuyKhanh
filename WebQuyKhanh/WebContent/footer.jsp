@@ -6,8 +6,6 @@
 	<meta charset="utf-8" />
 	<title>Trung Tâm Du Học và Nhật Ngữ Quý Khanh</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<script src="js/jquery-2.2.0.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
 </head>
 <body>
 	<div class="mfooter" style="border-top: 1px solid black">

@@ -36,8 +36,7 @@ Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 			scope="request"
 			type="action.MemberInforAction"
 			>
-			<forward name=""></forward>
-			<forward name=""></forward>
+			<forward name="showMemberInfor" path="/personalInfor.jsp" ></forward>
 		</action>
 	</action-mappings>
 	<message-resources parameter="action.ApplicationResources" />

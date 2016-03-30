@@ -9,8 +9,6 @@
 <link rel="stylesheet" type="text/css"
 	href="css/mycss/stylerightcontent.css">
 <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
-<script src="js/jquery-2.2.0.min.js"></script>
-<script src="js/jquery-ui.js"></script>
 <script src="js/bootstrap.min.js"></script>
 
 <script type="text/javascript">

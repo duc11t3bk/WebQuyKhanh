@@ -12,8 +12,6 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/mycss/styleheader.css">
 
-<script src="js/jquery-2.2.0.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -166,8 +164,10 @@
 							</div>
 							<div class="row">
 								<label class="col-lg-2">Email:</label>
-								<html:text styleId="email" property="email"
-									styleClass="col-lg-8"></html:text>
+								<div class="col-lg-8">
+									<html:text styleId="email" property="email"
+										styleClass="form-control"></html:text>
+								</div>
 							</div>
 
 							<div class="row" style="text-align: center">
@@ -176,8 +176,10 @@
 
 							<div class="row">
 								<label class="col-lg-2">Mật khẩu: </label>
-								<html:password styleId="password" property="password"
-									styleClass="col-lg-8"></html:password>
+								<div class="col-lg-8">
+									<html:password styleId="password" property="password"
+										styleClass="form-control"></html:password>
+								</div>
 							</div>
 							<logic:notEmpty name="loginForm" scope="session">
 								<div class="row" style="text-align: center">
@@ -305,10 +307,11 @@
 							scope="session" />
 						<img class="img-circle" alt="hinh" src="image/phusi.jpg"
 							height="40px" width="40px">
-						<bean:write name="member" property="email"/>
+						<bean:write name="member" property="email" />
 					</html:link>
 					<ul class="submenu" style="text-align: left">
-						<li><html:link href="#" style="margin-left:5px;">
+						<li><html:link action="/member-edit-infor"
+								style="margin-left:5px;">
 								<span class="glyphicon glyphicon-info-sign"></span> Thông tin cá nhân</html:link></li>
 						<li><html:link action="/logout" style="margin-left:5px;">
 								<span class="glyphicon glyphicon-log-out"></span> Đăng xuất</html:link></li>
