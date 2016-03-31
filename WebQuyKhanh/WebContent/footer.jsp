@@ -10,10 +10,10 @@
 <body>
 	<div class="mfooter" style="border-top: 1px solid black">
 		<img src="image/iconqk.jpg" width="80px" height="80px;">
-		<p style="display:inline; text-align:center; color:#ffffff">
+		<label style="display:inline; text-align:center; color:#ffffff">
 			Thông tin liên hệ : 230 Nguyễn Tri Phương - Thanh Khê - Đà Nẵng.
 			Điện thoại : 0511. 6282 666  Email: duhocquykhanh@gmail.com
-		</p>
+		</label>
 	</div>
 </body>
 </html>

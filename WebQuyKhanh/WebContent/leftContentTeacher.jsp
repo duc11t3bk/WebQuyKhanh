@@ -7,8 +7,6 @@
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/mycss/styleleftcontent.css">
-	<script src="js/jquery-2.2.0.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>	
 </head>
 <body>
 	<div class="panel panel-default">

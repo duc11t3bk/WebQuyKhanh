@@ -10,6 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import model.bean.Member;
+import model.bean.Teacher;
 
 public class MemberDAO {
 
@@ -81,6 +82,9 @@ public class MemberDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		finally {
+			connection.closeConnection();
+		}
 	}
 	public void updatePassword(String memberID, String newPassword) {
 		try {
@@ -92,6 +96,51 @@ public class MemberDAO {
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+		finally {
+			connection.closeConnection();
+		}
+	}
+	public void updateInfor(String memberID, String imageName, String phoneNumber) {
+		try {
+			conn=connection.openConnection();
+			String sql="update member set image= ? , phonenumber= ? where member_id= ?";
+			PreparedStatement pstmt= conn.prepareStatement(sql);
+			pstmt.setString(1, imageName);
+			pstmt.setString(2,phoneNumber);
+			pstmt.setString(3, memberID);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			connection.closeConnection();
+		}
+	}
+	public Teacher getTeacherInfor(String teacherID) {
+		try {
+			conn=connection.openConnection();
+			String sql="select * from teacher where teacher_id= ?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1,teacherID);
+			ResultSet rs=pstmt.executeQuery();
+			Teacher teacherInfor= new Teacher();
+			while(rs.next()){
+				teacherInfor.setTeacherID(rs.getString(1));
+				teacherInfor.setName(rs.getString(2));
+				teacherInfor.setDayOfBirth(rs.getString(3));
+				teacherInfor.setSex(rs.getInt(4));
+				teacherInfor.setAddress(rs.getString(5));
+				teacherInfor.setCertificate(rs.getString(6));
+				teacherInfor.setDayOfContract(rs.getString(7));
+			}
+			return teacherInfor;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		finally {
+			connection.closeConnection();
 		}
 	}
 }

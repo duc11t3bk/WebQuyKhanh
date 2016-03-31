@@ -301,24 +301,45 @@
 					</ul></li>
 			</logic:empty>
 			<logic:notEmpty name="loginForm" property="member" scope="session">
+
 				<li style="float: right"><html:link href="#"
 						styleId="emailUser">
 						<bean:define id="member" name="loginForm" property="member"
 							scope="session" />
-						<img class="img-circle" alt="hinh" src="image/phusi.jpg"
+						<bean:define id="image" name="member" property="image"></bean:define>
+						<img class="img-circle" alt="hinh" src="avata/${image }"
 							height="40px" width="40px">
 						<bean:write name="member" property="email" />
-					</html:link>
-					<ul class="submenu" style="text-align: left">
-						<li><html:link action="/member-edit-infor"
-								style="margin-left:5px;">
-								<span class="glyphicon glyphicon-info-sign"></span> Thông tin cá nhân</html:link></li>
-						<li><html:link action="/logout" style="margin-left:5px;">
-								<span class="glyphicon glyphicon-log-out"></span> Đăng xuất</html:link></li>
-					</ul></li>
+					</html:link> 
+					<!-- Menu member --> 
+					<logic:equal value="0" name="member"
+						property="priority">
+						<ul class="submenu" style="text-align: left">
+							<li><html:link action="/member-update-infor"
+									style="margin-left:5px;">
+									<span class="glyphicon glyphicon-info-sign"></span> Thông tin cá nhân</html:link></li>
+							<li><html:link action="/logout" style="margin-left:5px;">
+									<span class="glyphicon glyphicon-log-out"></span> Đăng xuất</html:link></li>
+						</ul>
+					</logic:equal> 
+					<!-- Menu teacher admin --> 
+					<logic:notEqual value="0"
+						name="member" property="priority">
+						<ul class="submenu" style="text-align: left">
+							<li><html:link action="/member-update-infor"
+									style="margin-left:5px;">
+									<span class="glyphicon glyphicon-info-sign"></span> Thông tin cá nhân</html:link></li>
+							<li><html:link action="/teacher-update-infor" style="margin-left:5px">
+									<span class="glyphicon glyphicon-cog"></span> Trang Quản lí</html:link></li>
+							<li><html:link action="/logout" style="margin-left:5px;">
+									<span class="glyphicon glyphicon-log-out"></span> Đăng xuất</html:link></li>
+						</ul>
+					</logic:notEqual></li>
+
 			</logic:notEmpty>
 		</ul>
 	</div>
+	
 	<div class="container" style="margin-top: 50px;">
 		<div class="row">
 			<div id="myCarousel" class="carousel slide" data-ride="carousel">

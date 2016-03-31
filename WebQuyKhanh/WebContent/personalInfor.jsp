@@ -40,7 +40,7 @@
 										<div class="panel-title">Đổi mật khẩu</div>
 									</div>
 									<div class="panel-body">
-										<html:form action="/member-edit-infor">
+										<html:form action="/member-update-infor">
 											<div class="row">
 												<div class="col-lg-2">
 													<label><span class="glyphicon glyphicon-lock"></span>
@@ -97,7 +97,7 @@
 										<div class="panel-title">Thông tin</div>
 									</div>
 									<div class="panel-body">
-										<html:form action="/member-edit-infor" enctype="multipart/form-data">
+										<html:form action="/member-update-infor" enctype="multipart/form-data">
 											<div class="row">
 												<div class="col-lg-5">
 													<label><span class="glyphicon glyphicon-user"></span>

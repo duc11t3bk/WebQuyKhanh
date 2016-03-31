@@ -1,24 +1,31 @@
 package model.bo;
 
 import model.bean.Member;
+import model.bean.Teacher;
 import model.dao.MemberDAO;
 
 public class MemberBO {
 
-	private MemberDAO loginDAO;
+	private MemberDAO memberDAO;
 	public MemberBO(){
-		loginDAO= new MemberDAO();		
+		memberDAO= new MemberDAO();		
 	}
 	public Member checkLogin(String email, String password){
-		return loginDAO.checkLogin(email,password);
+		return memberDAO.checkLogin(email,password);
 	}
 	public boolean isEmailExist(String email) {
-		return loginDAO.isEmailExist(email);
+		return memberDAO.isEmailExist(email);
 	}
 	public void registerMember(Member memberInfor) {
-		loginDAO.registerMember(memberInfor);
+		memberDAO.registerMember(memberInfor);
 	}
 	public void updatePassword(String memberID, String newPassword) {
-		loginDAO.updatePassword(memberID,newPassword);
+		memberDAO.updatePassword(memberID,newPassword);
+	}
+	public void updateInfor(String memberID, String imageName, String phoneNumber) {
+		memberDAO.updateInfor(memberID,imageName,phoneNumber);
+	}
+	public Teacher getTeacherInfor(String teacherID) {
+		return memberDAO.getTeacherInfor(teacherID);
 	}
 }

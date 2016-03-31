@@ -6,7 +6,7 @@ public class Teacher {
 
 	private String teacherID;
 	private String name;
-	private Date dayOfBirth;
+	private String dayOfBirth;
 	private int sex;
 	private String address;
 	private String certificate;
@@ -24,10 +24,10 @@ public class Teacher {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Date getDayOfBirth() {
+	public String getDayOfBirth() {
 		return dayOfBirth;
 	}
-	public void setDayOfBirth(Date dayOfBirth) {
+	public void setDayOfBirth(String dayOfBirth) {
 		this.dayOfBirth = dayOfBirth;
 	}
 	public int getSex() {
