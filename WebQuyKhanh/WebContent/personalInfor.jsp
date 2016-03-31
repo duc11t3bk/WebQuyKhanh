@@ -42,29 +42,49 @@
 									<div class="panel-body">
 										<html:form action="/member-edit-infor">
 											<div class="row">
-												<label class="col-lg-2"><span
-													class="glyphicon glyphicon-lock"></span> Mật khẩu hiện tại
-												</label>
+												<div class="col-lg-2">
+													<label><span class="glyphicon glyphicon-lock"></span>
+														Mật khẩu hiện tại </label>
+												</div>
 												<div class="col-lg-9 ">
-													<html:text styleClass="form-control" property="password"></html:text>
+													<html:password styleClass="form-control" property="password"></html:password>
 												</div>
 											</div>
-											<div class="row">
-												<label class="col-lg-2"><span
-													class="glyphicon glyphicon-question-sign"></span> Nhập mật
-													khẩu mới </label>
-												<div class="col-lg-9">
-													<html:text styleClass="form-control" property="newPassword"></html:text>
-												</div>
+											<div class="row" style="text-align: center">
+												<label style="color: red"> <bean:write
+														name="memberForm" property="passwordError" />
+												</label>
 											</div>
 											<div class="row">
-												<label class="col-lg-2"><span
-													class="glyphicon glyphicon-question-sign"></span> Xác nhận
-													mật khẩu mới</label>
-												<div class="col-lg-9">
-													<html:text styleClass="form-control"
-														property="retypePassword"></html:text>
+												<div class="col-lg-2">
+													<label><span
+														class="glyphicon glyphicon-question-sign"></span> Nhập mật
+														khẩu mới </label>
 												</div>
+												<div class="col-lg-9">
+													<html:password styleClass="form-control" property="newPassword"></html:password>
+												</div>
+											</div>
+											<div class="row" style="text-align: center">
+												<label style="color: red"> <bean:write
+														name="memberForm" property="newPasswordError" />
+												</label>
+											</div>
+											<div class="row">
+												<div class="col-lg-2">
+													<label><span
+														class="glyphicon glyphicon-question-sign"></span> Xác nhận
+														mật khẩu mới</label>
+												</div>
+												<div class="col-lg-9">
+													<html:password styleClass="form-control"
+														property="retypePassword"></html:password>
+												</div>
+											</div>
+											<div class="row" style="text-align: center">
+												<label style="color: red"> <bean:write
+														name="memberForm" property="retypePasswordError" />
+												</label>
 											</div>
 											<div class="row" style="text-align: center">
 												<html:submit property="submit" styleClass="btn btn-default">Đổi mật khẩu</html:submit>
@@ -77,38 +97,43 @@
 										<div class="panel-title">Thông tin</div>
 									</div>
 									<div class="panel-body">
-										<html:form action="/member-edit-infor">
-										<div class="row">
-											<label class="col-lg-5"><span
-												class="glyphicon glyphicon-user"></span> Cập nhật ảnh đại
-												diện : </label>
-											<div class="col-lg-4">
-												<html:file styleId="input-1" styleClass="file"
-													property="file" accept="image/*"></html:file>
+										<html:form action="/member-edit-infor" enctype="multipart/form-data">
+											<div class="row">
+												<div class="col-lg-5">
+													<label><span class="glyphicon glyphicon-user"></span>
+														Cập nhật ảnh đại diện : </label>
+												</div>
+												<div class="col-lg-4">
+													<html:file styleId="input-1" styleClass="file"
+														property="file" accept="image/*"></html:file>
+												</div>
 											</div>
-										</div>
-										<div class="row" style="margin-top: 50px;">
-											<label class="col-lg-5"><span
-												class="glyphicon glyphicon-envelope"></span> Email :</label>
-											<div class="col-lg-5">
-												<html:text styleClass="form-control" property="email"
-													readonly="readonly">
-												</html:text>
+											<div class="row" style="margin-top: 50px;">
+												<div class="col-lg-5">
+													<label><span class="glyphicon glyphicon-envelope"></span>
+														Email :</label>
+												</div>
+												<div class="col-lg-5">
+													<html:text styleClass="form-control" property="email"
+														disabled="true">
+													</html:text>
+												</div>
 											</div>
-										</div>
-										<div class="row">
-											<label class="col-lg-5"> <span
-												class="glyphicon glyphicon-earphone"></span> Số điện thoại:
-											</label>
-											<div class="col-lg-5">
-												<html:text property="phoneNumber" styleClass="form-control">
-												</html:text>
+											<div class="row">
+												<div class="col-lg-5">
+													<label> <span class="glyphicon glyphicon-earphone"></span>
+														Số điện thoại:
+													</label>
+												</div>
+												<div class="col-lg-5">
+													<html:text property="phoneNumber" styleClass="form-control">
+													</html:text>
+												</div>
 											</div>
-										</div>
-										<div class="row" style="text-align: center">
-											<html:submit styleClass="btn btn-default" property="submit">Lưu</html:submit>
-										</div>
-									</html:form>
+											<div class="row" style="text-align: center">
+												<html:submit styleClass="btn btn-default" property="submit">Lưu</html:submit>
+											</div>
+										</html:form>
 									</div>
 								</div>
 							</div>

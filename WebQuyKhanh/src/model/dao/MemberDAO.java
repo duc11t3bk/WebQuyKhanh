@@ -35,7 +35,8 @@ public class MemberDAO {
 				member.setPhoneNumber(rs.getString(4));
 				member.setPassword(rs.getString(5));
 				member.setImage(rs.getString(6));
-				member.setPriority(rs.getInt(7));
+				member.setPriority(Integer.valueOf(rs.getString(7)));
+				member.setDateattended(rs.getString(8));
 				return member;
 			}
 			return null;
@@ -81,13 +82,16 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void main(String[] args){
-		MemberDAO test= new MemberDAO();
-		test.registerMember(null);
-		Date date= new Date();
-		System.out.println(""+date);
-		SimpleDateFormat spdf= new SimpleDateFormat("yyyy-MM-dd");
-		System.out.println(""+spdf.format(date));
+	public void updatePassword(String memberID, String newPassword) {
+		try {
+			conn=connection.openConnection();
+			String sql="update member set password= ? where member_ID= ?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1,newPassword);
+			pstmt.setString(2,memberID);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

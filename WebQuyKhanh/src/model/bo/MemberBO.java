@@ -18,4 +18,7 @@ public class MemberBO {
 	public void registerMember(Member memberInfor) {
 		loginDAO.registerMember(memberInfor);
 	}
+	public void updatePassword(String memberID, String newPassword) {
+		loginDAO.updatePassword(memberID,newPassword);
+	}
 }

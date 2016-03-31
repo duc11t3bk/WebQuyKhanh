@@ -11,14 +11,49 @@ public class MemberForm extends ActionForm {
 	private String teacherID;
 	private String email;
 	private String phoneNumber;
+	private String phoneNumberError;
 	private String password;
+	private String passwordError;
 	private String newPassword;
+	private String newPasswordError;
 	private String retypePassword;
+	private String retypePasswordError;
 	private String image;
 	private int priority;
 	private Member member;
 	private FormFile file;
+	private String submit;
 	
+	public String getPhoneNumberError() {
+		return phoneNumberError;
+	}
+	public void setPhoneNumberError(String phoneNumberError) {
+		this.phoneNumberError = phoneNumberError;
+	}
+	public String getPasswordError() {
+		return passwordError;
+	}
+	public void setPasswordError(String passwordError) {
+		this.passwordError = passwordError;
+	}
+	public String getNewPasswordError() {
+		return newPasswordError;
+	}
+	public void setNewPasswordError(String newPasswordError) {
+		this.newPasswordError = newPasswordError;
+	}
+	public String getRetypePasswordError() {
+		return retypePasswordError;
+	}
+	public void setRetypePasswordError(String retypePasswordError) {
+		this.retypePasswordError = retypePasswordError;
+	}
+	public String getSubmit() {
+		return submit;
+	}
+	public void setSubmit(String submit) {
+		this.submit = submit;
+	}
 	public FormFile getFile() {
 		return file;
 	}

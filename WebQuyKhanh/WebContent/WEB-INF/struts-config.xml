@@ -24,8 +24,7 @@ Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 		</action>
 		<action 
 			path="/logout"
-			name="loginForm"
-			scope="session"
+			scope="request"
 			type="action.LogoutAction"
 			>
 			<forward name="logout-success" path="/home.jsp" ></forward>
@@ -37,6 +36,7 @@ Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 			type="action.MemberInforAction"
 			>
 			<forward name="showMemberInfor" path="/personalInfor.jsp" ></forward>
+			<forward name="changePasswordSuccess" path="/logout.do" ></forward>
 		</action>
 	</action-mappings>
 	<message-resources parameter="action.ApplicationResources" />

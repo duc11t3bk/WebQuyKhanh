@@ -1,7 +1,9 @@
 package model.bean;
 
-public class Member {
+import java.io.Serializable;
 
+public class Member implements Serializable {
+	
 	private String memberID;
 	private String teacherID;
 	private String email;
@@ -59,7 +61,5 @@ public class Member {
 	}
 	public void setPriority(int priority) {
 		this.priority = priority;
-	}
-	
-	
+	}	
 }
