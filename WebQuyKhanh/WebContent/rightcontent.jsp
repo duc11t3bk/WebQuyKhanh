@@ -18,7 +18,7 @@
 </script>
 </head>
 <body>
-	<div class="panel panel-primary" style="margin-top: 20px">
+	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<div class="panel-title">Đăng ký học</div>
 		</div>

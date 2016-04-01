@@ -1,5 +1,7 @@
 package common;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,5 +29,21 @@ public class Validate {
 	}
 	public static boolean lengthPasswordNotValid(String password){
 		return (password.length() < 6 ) ? true : false;
+	}
+	public static boolean dateNotValid(String day){
+		SimpleDateFormat sdf= new SimpleDateFormat("dd-MM-yyyy");
+		try {
+			Date currentDay= new Date();
+			Date dayOfBirth = sdf.parse(day);
+			System.out.println("dayOfBirth"+dayOfBirth+"currentDay"+currentDay);
+			System.out.println(""+dayOfBirth.after(currentDay));
+			return dayOfBirth.after(currentDay) ? true : false;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	public static void main(String[] args){
+		Validate.dateNotValid("08-08-2020");
 	}
 }

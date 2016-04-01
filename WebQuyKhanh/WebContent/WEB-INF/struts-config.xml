@@ -47,6 +47,7 @@ Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 			>
 			<forward name="showTeacherInfor" path="/teacherManageInformation.jsp"></forward>
 			<forward name="updateSuccess" path="/logout.do"></forward>
+			<forward name="updateFailed" path="/teacher-update-infor.do"></forward>
 		</action>
 	</action-mappings>
 	<message-resources parameter="action.ApplicationResources" />

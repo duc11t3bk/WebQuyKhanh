@@ -19,6 +19,7 @@ import common.StringProcess;
 import common.Validate;
 import form.LoginForm;
 import form.MemberForm;
+import model.bean.Member;
 import model.bo.MemberBO;
 
 public class MemberUpdateInforAction extends Action {
@@ -49,9 +50,11 @@ public class MemberUpdateInforAction extends Action {
 				System.out.println("" + imageName);
 			}
 			MemberBO memberBO = new MemberBO();
-			memberBO.updateInfor(memberForm.getMember().getMemberID(),
-					imageName, memberForm.getPhoneNumber());
-
+			Member member= new Member();
+			member.setMemberID(memberForm.getMember().getMemberID());
+			member.setImage(imageName);
+			member.setPhoneNumber(memberForm.getPhoneNumber());
+			memberBO.updateMemberInfor(member);
 			return mapping.findForward("updateSuccess");
 		} else {
 			memberForm.setPhoneNumber(loginForm.getMember().getPhoneNumber());

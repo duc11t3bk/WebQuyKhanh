@@ -22,10 +22,13 @@ public class MemberBO {
 	public void updatePassword(String memberID, String newPassword) {
 		memberDAO.updatePassword(memberID,newPassword);
 	}
-	public void updateInfor(String memberID, String imageName, String phoneNumber) {
-		memberDAO.updateInfor(memberID,imageName,phoneNumber);
+	public void updateMemberInfor(Member member) {
+		memberDAO.updateMemberInfor(member);
 	}
 	public Teacher getTeacherInfor(String teacherID) {
 		return memberDAO.getTeacherInfor(teacherID);
+	}
+	public void updateTeacherInfor(Teacher teacher) {
+		 memberDAO.updateTeacherInfor(teacher);
 	}
 }
