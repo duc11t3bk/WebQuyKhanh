@@ -120,7 +120,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12" style="text-align:center; margin-top:10px">
-				<a class="btn btn-primary m-btn" href="home.html">Trang Chủ</a>
+				<a class="btn btn-primary m-btn" href="home.jsp">Trang Chủ</a>
 				<a class="btn btn-primary m-btn" href="#">Học từ vựng</a>
 			</div>			
 		</div>

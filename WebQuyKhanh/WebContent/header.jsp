@@ -276,8 +276,8 @@
 	<!-- Menu -->
 	<div class="navigation">
 		<ul class="menu">
-			<li><a href="introduce.html">Giới thiệu</a></li>
-			<li><a href="home.html"><span
+			<li><a href="introduce.jsp">Giới thiệu</a></li>
+			<li><a href="home.jsp"><span
 					class="glyphicon glyphicon-home"></span> Trang chủ</a></li>
 			<li><a href="japanStudyAbroad.html"><span
 					class="glyphicon glyphicon-plane"></span> Du học Nhật Bản</a></li>

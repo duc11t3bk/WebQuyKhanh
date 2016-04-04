@@ -1,15 +1,15 @@
-
 /*
 
-example :
-	<div class="include" data-include="header" data-type=".html"> </div>
+ example :
+ <div class="include" data-include="header" data-type=".html"> </div>
 
-*/
-
-	var includes= $(".include");
-	jQuery.each(includes,function(){
+ */
+$(document).ready(function(){
+	var includes = $(".include");
+	jQuery.each(includes, function() {
 		var file = $(this).data("include");
+		console.log("file"+file);
 		$(this).load(file);
 	});
-
+});
 

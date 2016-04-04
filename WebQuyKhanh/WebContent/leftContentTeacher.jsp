@@ -15,7 +15,7 @@
 				<li><a href="teacherManageInformation.html">Thông tin cá nhân</a></li>
 				<li><a href="teacherViewSchedule.html">Xem thời khóa biểu</a></li>
 				<li>
-					<a href="teacherManagePost.html">Quản lí bài đăng</a>					
+					<a href="teacherManagePosts.jsp">Quản lí bài đăng</a>					
 				</li>
 				<li><a href="teacherManageStudent.html">Quản lí học viên</a></li>
 				<li>

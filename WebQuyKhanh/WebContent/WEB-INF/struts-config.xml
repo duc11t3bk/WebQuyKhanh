@@ -6,6 +6,7 @@ Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 		<form-bean name="loginForm" type="form.LoginForm"></form-bean>
 		<form-bean name="memberForm" type="form.MemberForm" ></form-bean>
 		<form-bean name="teacherForm" type="form.TeacherForm"></form-bean>
+		<form-bean name="postsForm" type="form.PostsForm"></form-bean>
 	</form-beans>
 	<action-mappings>
 		<action 
@@ -48,6 +49,15 @@ Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 			<forward name="showTeacherInfor" path="/teacherManageInformation.jsp"></forward>
 			<forward name="updateSuccess" path="/logout.do"></forward>
 			<forward name="updateFailed" path="/teacher-update-infor.do"></forward>
+		</action>
+		<action 
+			path="/create-new-posts"
+			name="postsForm"
+			scope="request"
+			type="action.CreatePostsAction"
+			>
+			<forward name="createSuccess" path="teacherManagePosts.jsp"></forward>
+			<forward name="createFailed" path="teacherCreateNewPosts.jsp"></forward>
 		</action>
 	</action-mappings>
 	<message-resources parameter="action.ApplicationResources" />

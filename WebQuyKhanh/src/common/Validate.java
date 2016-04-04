@@ -35,8 +35,8 @@ public class Validate {
 		try {
 			Date currentDay= new Date();
 			Date dayOfBirth = sdf.parse(day);
-			System.out.println("dayOfBirth"+dayOfBirth+"currentDay"+currentDay);
-			System.out.println(""+dayOfBirth.after(currentDay));
+//			System.out.println("dayOfBirth"+dayOfBirth+"currentDay"+currentDay);
+//			System.out.println(""+dayOfBirth.after(currentDay));
 			return dayOfBirth.after(currentDay) ? true : false;
 		} catch (Exception e) {
 			e.printStackTrace();
