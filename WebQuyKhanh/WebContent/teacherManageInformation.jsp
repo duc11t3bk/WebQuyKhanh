@@ -35,7 +35,7 @@
 			<div class="row">
 				<div class="content">
 					<div class="col-lg-2">
-						<jsp:include page="leftContentTeacher.jsp"></jsp:include>
+						<jsp:include page="leftContentMenu.jsp"></jsp:include>
 					</div>
 					<div class="col-lg-10 main-content">
 						<div class="panel panel-info">

@@ -6,6 +6,7 @@ public class Posts {
 
 	private String postID;
 	private String teacherID;
+	private String teacherName;
 	private String title;
 	private String content;
 	private String datePosted;
@@ -14,6 +15,12 @@ public class Posts {
 	private String category;
 	
 	
+	public String getTeacherName() {
+		return teacherName;
+	}
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
+	}
 	public String getDatePosted() {
 		return datePosted;
 	}

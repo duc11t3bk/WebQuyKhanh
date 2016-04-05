@@ -20,7 +20,7 @@
 <script src="js/jquery-ui.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/fileinput.js"></script>
-<script src="ckeditor/ckeditor.js"></script>
+<script src="libs/ckeditor/ckeditor.js"></script>
 <script src="js/myjs/includehtml.js"></script>
 <style type="text/css">
 .teacher-info h5 {
@@ -35,7 +35,7 @@
 			<div class="row">
 				<div class="content">
 					<div class="col-lg-2">
-						<jsp:include page="leftContentTeacher.jsp"></jsp:include>
+						<jsp:include page="leftContentMenu.jsp"></jsp:include>
 					</div>
 					<div class="col-lg-10 main-content">
 						<div class="panel panel-info">
@@ -43,7 +43,8 @@
 								<div class="panel-title">Thêm bài viết mới</div>
 							</div>
 							<div class="panel-body">
-								<html:form action="/create-new-posts">
+								<html:form action="/create-new-posts"
+										enctype="multipart/form-data">
 									<div class="row">
 										<label class="col-lg-3">Chọn mục :</label>
 										<div class="col-lg-9">
@@ -61,33 +62,39 @@
 											<html:text property="title" styleClass="form-control"></html:text>
 										</div>
 									</div>
-									<div class="row" style="text-align:center">
-										<label><bean:write name="postsForm" property="titleError" /></label>
+									<div class="row">
+										<div class="col-lg-offset-2 col-lg-10"
+											style="text-align: center">
+											<label style="color: red"><bean:write
+													name="postsForm" property="titleError" /></label>
+										</div>
 									</div>
 									<div class="row" style="margin-top: 10px">
 										<label class="col-lg-3">Upload ảnh : </label>
 										<div class="col-lg-9">
-											<div class="col-lg-6" style="padding-left:0px">
+											<div class="col-lg-6" style="padding-left: 0px">
 												<html:file property="file" styleClass="file"
 													styleId="input-1" accept="image/*"></html:file>
 											</div>
 										</div>
 									</div>
-									<div class="row" style="margin-top:20px;">
+									<div class="row" style="margin-top: 20px;">
 										<div class="col-lg-12">
-											<div class="col-lg-2" style="padding-left:0px;">
-												 <label>Nội dung :</label>
+											<div class="col-lg-2" style="padding-left: 0px;">
+												<label>Nội dung :</label>
 											</div>
-											<div class="col-lg-10" style="text-align:center">
-												<label><bean:write name="postsForm" property="contentError" /> </label>
+											<div class="col-lg-10" style="text-align: center">
+												<label style="color: red"><bean:write
+														name="postsForm" property="contentError" /> </label>
 											</div>
 										</div>
 										<div class="col-lg-12">
-											<html:textarea styleId="editor1" property="content" style="width:100%" ></html:textarea>
+											<html:textarea styleId="editor1" property="content"
+												style="width:100%"></html:textarea>
 										</div>
 									</div>
-									<div class="row" style="text-align: center; margin-top:20px">
-										<input class="btn btn-info" type="button" value="Đăng" />
+									<div class="row" style="text-align: center; margin-top: 20px">
+											<html:submit styleClass="btn btn-info">Đăng</html:submit>
 									</div>
 								</html:form>
 							</div>
@@ -102,12 +109,12 @@
 	</div>
 	<script type="text/javascript">
 		$("#input-1").fileinput({
-			showUpload: false,
-			showRemove: false,
-			browseLabel: "Tải ảnh lên",
-			PreviewFileType: "image",
+			showUpload : false,
+			showRemove : false,
+			browseLabel : "Tải ảnh lên",
+			PreviewFileType : "image",
 		});
-		
+
 		CKEDITOR.replace("editor1");
 	</script>
 </body>

@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
+
 public class ConnectionDAO {
 	
 	private Connection conn;
@@ -41,26 +43,36 @@ public class ConnectionDAO {
 	public static String increateID(String tableName, String colName, Connection conn){
 		try {			
 			String sql="select "+colName+" from "+tableName+" order by "+colName+" desc "+" limit 1";
-			Statement stmt=conn.createStatement();
-			System.out.println(""+sql);
-			ResultSet rs=stmt.executeQuery(sql);
-			String maxID="";
-			while(rs.next()){
-				maxID=rs.getString(1);
+			Statement stmt=conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+//			System.out.println(""+sql);
+			ResultSet rs=stmt.executeQuery(sql);		
+			if(!rs.next()){
+				String code=tableName.substring(0,3);
+				String newID=code+String.format("%08d",1);
+				return newID;
 			}
-			String code=maxID.substring(0,3);
-			String data=maxID.substring(3,maxID.length());
-			String newID=code+String.format("%08d",Integer.valueOf(data)+1);
-			System.out.println("new ID=="+newID);
-			return newID;
+			else{
+				rs.beforeFirst();
+				String maxID="";
+				while(rs.next()){
+					maxID=rs.getString(1);
+				}
+				String code=maxID.substring(0,3);
+				String data=maxID.substring(3,maxID.length());
+				String newID=code+String.format("%08d",Integer.valueOf(data)+1);
+				System.out.println("new ID=="+newID);
+				return newID;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
+
 	public static void main(String[] args) {
 		ConnectionDAO test= new ConnectionDAO();
 		Connection conn=test.openConnection();
+		System.out.println("ID="+ConnectionDAO.increateID("post", "post_id", conn));
 		test.closeConnection();
 	}
 	

@@ -13,6 +13,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.upload.FormFile;
 
 import common.FileProcess;
+import common.StringProcess;
 import common.Validate;
 import form.LoginForm;
 import form.PostsForm;
@@ -35,30 +36,31 @@ public class CreatePostsAction extends Action {
 		LoginForm loginForm=(LoginForm)request.getSession().getAttribute("loginForm");
 		PostsForm postsForm=(PostsForm)form;
 		
-		String title= postsForm.getTitle();
-		String content= postsForm.getContent();
+		String title=StringProcess.toUTF8(postsForm.getTitle());
+		String content=StringProcess.toUTF8(postsForm.getContent());
 		String category= postsForm.getCategory();		
 		FormFile file= postsForm.getFile();
 		
 		if(checkValidate(title, content, postsForm)){
 			String imageName="";
 			imageName=FileProcess.uploadImage(file, getServlet(), "postsimage");
-			Posts posts= new Posts();
-			posts.setTitle(title);
-			posts.setContent(content);
-			posts.setCategory(category);
-			posts.setImage(imageName);
-			posts.setTeacherID(loginForm.getMember().getTeacherID());
-			posts.setViews(0);
+			Posts post= new Posts();
+			post.setTitle(title);
+			post.setContent(content);
+			post.setCategory(category);
+			post.setImage(imageName);
+			post.setTeacherID(loginForm.getMember().getTeacherID());
+			post.setViews(0);
 			Date date= new Date();
 			SimpleDateFormat sdf= new SimpleDateFormat("dd-MM-yyyy");
-			posts.setDatePosted(sdf.format(date));
+			post.setDatePosted(sdf.format(date));
 			PostsBO postBO= new PostsBO();
-			if(postBO.addNewPosts(posts)){
+			if(postBO.addNewPosts(post)){
 				return mapping.findForward("createSuccess");
 			}
 		}
-		
+		postsForm.setTitle(StringProcess.toUTF8(postsForm.getTitle()));
+		postsForm.setContent(StringProcess.toUTF8(postsForm.getContent()));
 		return mapping.findForward("createFailed");
 	}
 	

@@ -1,5 +1,6 @@
 package form;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.apache.struts.action.ActionForm;
@@ -11,20 +12,46 @@ public class PostsForm extends ActionForm {
 
 	private String postID;
 	private String teacherID;
+	private String teacherName;
 	private String title;
 	private String content;
 	private String datePosted;
 	private String image;
 	private int	views;
 	private String category;
-	private Posts posts;
+	private Posts post;
 	private FormFile file;
 	private String submit;
 	private String titleError;
 	private String contentError;
+	private ArrayList<Posts> posts;
+	private String action;
 	
 	
-	
+	public String getTeacherName() {
+		return teacherName;
+	}
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
+	}
+	public String getAction() {
+		return action;
+	}
+	public void setAction(String action) {
+		this.action = action;
+	}
+	public Posts getPost() {
+		return post;
+	}
+	public void setPost(Posts post) {
+		this.post = post;
+	}
+	public ArrayList<Posts> getPosts() {
+		return posts;
+	}
+	public void setPosts(ArrayList<Posts> posts) {
+		this.posts = posts;
+	}
 	public String getTitleError() {
 		return titleError;
 	}
@@ -96,11 +123,5 @@ public class PostsForm extends ActionForm {
 	}
 	public void setCategory(String category) {
 		this.category = category;
-	}
-	public Posts getPosts() {
-		return posts;
-	}
-	public void setPosts(Posts posts) {
-		this.posts = posts;
 	}
 }
