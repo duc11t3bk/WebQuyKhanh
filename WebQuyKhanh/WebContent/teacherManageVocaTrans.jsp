@@ -42,7 +42,7 @@
 								<span class="glyphicon glyphicon-remove" style="cursor: pointer"></span>
 							</div>
 							<div class="row">
-								<h5 class="col-lg-3" style="display: inline">Tên mục mới</h5>
+								<label class="col-lg-3">Tên mục mới</label>
 								<input class="col-lg-6" type="text" />
 							</div>
 							<div class="row" style="text-align: center">

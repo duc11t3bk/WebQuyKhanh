@@ -8,6 +8,7 @@ Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 		<form-bean name="teacherForm" type="form.TeacherForm"></form-bean>
 		<form-bean name="postsForm" type="form.PostsForm"></form-bean>
 		<form-bean name="studentForm" type="form.StudentForm" ></form-bean>
+		<form-bean name="vocabularyForm" type="form.VocabularyForm"></form-bean>
 	</form-beans> 
 	<action-mappings>
 		<action 
@@ -57,8 +58,8 @@ Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 			scope="request"
 			type="action.CreatePostsAction"
 			>
-			<forward name="createSuccess" path="/teacherManagePosts.jsp"></forward>
-			<forward name="createFailed" path="/teacherCreateNewPosts.jsp"></forward>
+			<forward name="createSuccess" path="/manage-posts.do"></forward>
+			<forward name="createFailed" path="/manage-posts.do"></forward>
 		</action>
 		<action 
 			path="/manage-posts"
@@ -85,6 +86,14 @@ Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 			type="action.ManageStudentAction"
 			>
 			<forward name="teacherShowListStudent" path="/teacherManageStudent.jsp"></forward>
+		</action>
+		<action 
+		 	path="/manage-vocabulary"
+		 	name="vocabularyForm"
+		 	scope="request"
+		 	type="action.TeacherManageVocaAction"
+		 	>
+		 	<forward name="showListLevel" path="/teacherManageVocaTrans.jsp"></forward>
 		</action>
 	</action-mappings>
 	<message-resources parameter="action.ApplicationResources" />
