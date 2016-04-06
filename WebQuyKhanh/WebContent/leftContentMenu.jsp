@@ -42,7 +42,7 @@
 					<li><a href="teacherViewSchedule.html">Xem thời khóa biểu</a></li>
 					<li><html:link action="/manage-posts">Quản lí bài đăng</html:link>
 					</li>
-					<li><a href="teacherManageStudent.html">Quản lí học viên</a></li>
+					<li><html:link action="/manage-student" >Quản lí học viên</html:link></li>
 					<li><a href="teacherManageVocaTrans.html">Quản lí từ vựng</a>
 						<ul class="submenu">
 							<li><a href="teacherManageVocaTransLesson.html">Bài 1 -

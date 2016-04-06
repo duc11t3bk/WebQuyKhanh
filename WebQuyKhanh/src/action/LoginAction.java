@@ -19,7 +19,11 @@ import model.bean.Member;
 import model.bo.MemberBO;
 
 public class LoginAction extends Action {
-
+	
+	public static int ADMIN=3;
+	public static int TEACHER=1;
+	public static int MEMBER=0;
+	
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {

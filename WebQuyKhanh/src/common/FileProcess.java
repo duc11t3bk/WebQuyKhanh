@@ -44,14 +44,15 @@ public class FileProcess {
 		return null;
 	}
 
-	public static void deleteOldImage(String filePath, String fileName) {
+	public static void deleteOldImage(ActionServlet servlet, String fileName, String folderName) {
 		if (!"".equals(fileName)) {
+			String filePath=servlet.getServletContext().getRealPath("/")+folderName;
 			File file = new File(filePath, fileName);
 			if (file.exists()) {
 				file.delete();
 			}
-			String localPath = "/home/davy/Git/WebQuyKhanh/WebContent/avata";
-			File localFile = new File(filePath, fileName);
+			String localPath = "/home/davy/Git/WebQuyKhanh/WebContent/"+folderName;
+			File localFile = new File(localPath, fileName);
 			if (localFile.exists()) {
 				localFile.delete();
 			}

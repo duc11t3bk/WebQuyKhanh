@@ -36,6 +36,8 @@
 		function closeLogReg() {
 			$("#form-login").css("top", "-400px");
 			$("#form-register").css("top", "-600px");
+			$("#new-level").css("top","-300px");
+			$("#form-confirm").css("top","-300px");
 			$(".overflow").hide();
 		}
 		$(".overflow").on("click", function() {

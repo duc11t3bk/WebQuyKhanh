@@ -47,7 +47,7 @@
 										enctype="multipart/form-data">
 									<div class="row">
 										<label class="col-lg-3">Chọn mục :</label>
-										<div class="col-lg-9">
+										<div class="col-lg-5">
 											<html:select property="category" styleClass="dropdownlist">
 												<html:option value="DHNB">Du học Nhật Bản</html:option>
 												<html:option value="LHTN">Lớp học tiếng Nhật</html:option>

@@ -44,8 +44,7 @@ public class TeacherUpdateInforAction extends Action {
 			String imageName = "";
 			if (!"".equals(file.getFileName())) {
 				imageName = FileProcess.uploadImage(file, getServlet(), "avata");
-				String filePath = getServlet().getServletContext().getRealPath("/") + "avata";
-				FileProcess.deleteOldImage(filePath, loginForm.getMember().getImage());
+				FileProcess.deleteOldImage(getServlet(), loginForm.getMember().getImage(),"avata");
 			}
 			if (checkValidateInfor(teacherForm)) {
 				Member memberInfor = new Member();

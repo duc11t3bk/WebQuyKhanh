@@ -46,8 +46,21 @@ body {
 	padding: 10px;
 	background-color: transparent;
 	border-radius : 4px;
-	
+	width: 100%;
 }
 #cke_1_contents {
 	height: 400px !important;
+}
+.btn-add-new {
+	background-color: transparent;
+	color : #337ab7;
+	padding: 20px;
+	border: 1px solid #337ab7;
+	border-radius : 4px;
+	box-shadow: 2px 2px 5px #888888;
+}
+.btn-add-new:hover {
+	background-color:#337ab7;
+	color : white;
+	box-shadow: 5px 5px 5px #888888;
 }

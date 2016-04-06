@@ -117,4 +117,37 @@ public class PostsDAO {
 		}
 	}
 
+	public boolean updatePosts(Posts post) {
+		try {
+			conn=connection.openConnection();
+			String sql="update post set title= ?, content= ? , image= ?, category=?  where post_id= ?";
+			PreparedStatement pstmt= conn.prepareStatement(sql);
+			pstmt.setString(1, post.getTitle());
+			pstmt.setString(2, post.getContent());
+			pstmt.setString(3, post.getImage());
+			pstmt.setString(4, post.getCategory());
+			pstmt.setString(5, post.getPostID());
+			return (pstmt.executeUpdate() !=0) ? true : false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		finally {
+			connection.closeConnection();
+		}
+	}
+
+	public boolean deletePosts(String postID) {
+		try {
+			conn= connection.openConnection();
+			String sql= "delete from post where post_id= ?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, postID);
+			return (pstmt.executeUpdate() != 0) ? true : false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 }

@@ -46,8 +46,11 @@
 								<html:form action="/edit-posts" enctype="multipart/form-data">
 									<html:hidden property="postID"/>
 									<html:hidden property="image"/> 
+									<div class="row" style="text-align:center">
+										<label style="color:red"><bean:write name="postsForm" property="notification" /> </label>
+									</div>
 									<div class="row">
-										<label class="col-lg-3">Chọn mục :</label>
+										<label class="col-lg-2">Chọn mục :</label>
 										<div class="col-lg-3">
 											<html:select property="category" styleClass="dropdownlist">
 												<html:option value="DHNB">Du học Nhật Bản</html:option>
@@ -58,11 +61,15 @@
 										</div>
 										<div class="col-lg-3">
 											<label><span class="glyphicon glyphicon-pencil"></span> Người đăng : </label>
-											<html:text styleClass="form-control" property="teacherName" readonly="true"></html:text>					
+											<html:text styleClass="form-control" property="teacherName" readonly="true" style="cursor:not-allowed"></html:text>					
 										</div>
-										<div class="col-lg-3">
+										<div class="col-lg-2">
 											<label><span class="glyphicon glyphicon-calendar"></span>Ngày đăng : </label>
-											<html:text styleClass="form-control" property="datePosted" readonly="true"></html:text>
+											<html:text styleClass="form-control" property="datePosted" readonly="true" style="cursor:not-allowed"></html:text>
+										</div>
+										<div class="col-lg-2">
+											<label><span class="glyphicon glyphicon-eye-open"></span> Lượt xem : </label>
+											<html:text styleClass="form-control" property="views" readonly="true" style="cursor:not-allowed"></html:text>
 										</div>
 									</div>
 									<div class="row" style="margin-top: 10px">
@@ -111,7 +118,7 @@
 										</div>
 									</div>
 									<div class="row" style="text-align: center; margin-top: 20px">
-										<html:submit styleClass="btn btn-info">Lưu</html:submit>
+										<html:submit property="submit" styleClass="btn btn-info">Lưu</html:submit>
 									</div>
 								</html:form>
 							</div>

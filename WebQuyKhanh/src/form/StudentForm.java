@@ -1,21 +1,36 @@
-package model.bean;
+package form;
 
-public class Student {
+import java.util.ArrayList;
+
+import org.apache.struts.action.ActionForm;
+
+import model.bean.Class;
+import model.bean.Student;
+
+public class StudentForm extends ActionForm {
 
 	private String studentID;
 	private String name;
 	private String email;
 	private String phoneNumber;
 	private String classID;
-	private String className;
 	private int amountPaid;
+	private Student student;
+	private ArrayList<Class> listClass;
+	private ArrayList<Student> students;
 	
 	
-	public String getClassName() {
-		return className;
+	public ArrayList<Student> getStudents() {
+		return students;
 	}
-	public void setClassName(String className) {
-		this.className = className;
+	public void setStudents(ArrayList<Student> students) {
+		this.students = students;
+	}
+	public ArrayList<Class> getListClass() {
+		return listClass;
+	}
+	public void setListClass(ArrayList<Class> listClass) {
+		this.listClass = listClass;
 	}
 	public String getStudentID() {
 		return studentID;
@@ -53,4 +68,12 @@ public class Student {
 	public void setAmountPaid(int amountPaid) {
 		this.amountPaid = amountPaid;
 	}
+	public Student getStudent() {
+		return student;
+	}
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+	
+	
 }

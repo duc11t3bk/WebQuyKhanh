@@ -42,36 +42,51 @@ public class EditPostsAction extends Action {
 				postsForm.setCategory(post.getCategory());
 				postsForm.setDatePosted(post.getDatePosted());
 				postsForm.setImage(post.getImage());
+				postsForm.setViews(post.getViews());
 				return mapping.findForward("showPostsContent");
 				
 			}
 			if ("delete".equals(action)) {
-
+				PostsBO postsBO = new PostsBO();
+				if(postsBO.deletePosts(postID)){
+					return mapping.findForward("deleteSuccess");
+				};
 			}
 		}
-		System.out.println("chayyyyyyyyyyyyyyyyy");
-		System.out.println(""+StringProcess.toUTF8(postsForm.getSubmit()));
 		if ("Lưu".equals(StringProcess.toUTF8(postsForm.getSubmit()))) {
 			String title = StringProcess.toUTF8(postsForm.getTitle());
 			String content = StringProcess.toUTF8(postsForm.getContent());
-			System.out.println(""+postsForm.getImage());
 			FormFile file = postsForm.getFile();
 			PostsBO postsBO = new PostsBO();
 			if (checkValidate(title, content, postsForm)) {
+				Posts post= new Posts();
+				post.setImage(postsForm.getImage());
 				if (!"".equals(file.getFileName())) {
 					String imageName = FileProcess.uploadImage(file, getServlet(), "postsimage");
-					String oldImagePath = getServlet().getServletContext().getRealPath("/") + "postsimage";
-					String oldImageName = postsForm.getPost().getImage();
-					FileProcess.deleteOldImage(oldImagePath, oldImageName);
-					postsForm.getPost().setImage(imageName);
+					String oldImageName = postsForm.getImage();
+					FileProcess.deleteOldImage(getServlet(), oldImageName,"postsimage");
+					post.setImage(imageName);
+					postsForm.setImage(imageName);
 				}
-				System.out.println("chay khong loi");
+				post.setPostID(postsForm.getPostID());
+				post.setTitle(title);
+				post.setContent(content);
+				post.setDatePosted(postsForm.getDatePosted());
+				post.setTeacherName(StringProcess.toUTF8(postsForm.getTeacherName()));
+				post.setCategory(postsForm.getCategory());
+				post.setViews(postsForm.getViews());
+				if(postsBO.updatePosts(post)){
+					postsForm.setNotification("Chỉnh sửa bài viết thành công");
+				}
+				else{
+					postsForm.setNotification("Xảy ra lỗi trong quá trình cập nhật");
+				}
 			}
-			else{
-				System.out.println("chayyyyyyyyyyyyyy loi");
-			}
+			postsForm.setTitle(StringProcess.toUTF8(postsForm.getTitle()));
+			postsForm.setContent(StringProcess.toUTF8(postsForm.getContent()));
+			postsForm.setTeacherName(StringProcess.toUTF8(postsForm.getTeacherName()));
 		}
-		return mapping.findForward("editFailed");
+		return mapping.findForward("editResult");
 	}
 
 	public boolean checkValidate(String title, String content, PostsForm postsForm) {

@@ -20,5 +20,11 @@ public class PostsBO {
 	public Posts getPosts(String postID) {
 		return postsDAO.getPosts(postID);
 	}
+	public boolean updatePosts(Posts post) {
+		return postsDAO.updatePosts(post);
+	}
+	public boolean deletePosts(String postID) {
+		return postsDAO.deletePosts(postID);
+	}
 	
 }

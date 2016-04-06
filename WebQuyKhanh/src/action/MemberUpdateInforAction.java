@@ -45,8 +45,7 @@ public class MemberUpdateInforAction extends Action {
 			String imageName = "";
 			if (!"".equals(file.getFileName())) {
 				imageName = FileProcess.uploadImage(file, getServlet(), "avata");
-				String filePath = getServlet().getServletContext().getRealPath("/") + "avata";
-				FileProcess.deleteOldImage(filePath, memberForm.getMember().getImage());
+				FileProcess.deleteOldImage(getServlet(), memberForm.getMember().getImage(),"avata");
 				System.out.println("" + imageName);
 			}
 			MemberBO memberBO = new MemberBO();

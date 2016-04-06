@@ -7,7 +7,8 @@ Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 		<form-bean name="memberForm" type="form.MemberForm" ></form-bean>
 		<form-bean name="teacherForm" type="form.TeacherForm"></form-bean>
 		<form-bean name="postsForm" type="form.PostsForm"></form-bean>
-	</form-beans>
+		<form-bean name="studentForm" type="form.StudentForm" ></form-bean>
+	</form-beans> 
 	<action-mappings>
 		<action 
 			input="/home.jsp"
@@ -74,8 +75,16 @@ Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 			type="action.EditPostsAction"
 			>
 			<forward name="showPostsContent" path="/teacherEditPosts.jsp"></forward>
-			<forward name="editSuccess" path="/manage-post.do"></forward>
-			<forward name="editFailed" path="/teacherEditPosts.jsp"></forward>
+			<forward name="editResult" path="/teacherEditPosts.jsp"></forward>
+			<forward name="deleteSuccess" path="/manage-posts.do"></forward>
+		</action>
+		<action 
+			path="/manage-student"
+			name="studentForm"
+			scope="request"
+			type="action.ManageStudentAction"
+			>
+			<forward name="teacherShowListStudent" path="/teacherManageStudent.jsp"></forward>
 		</action>
 	</action-mappings>
 	<message-resources parameter="action.ApplicationResources" />

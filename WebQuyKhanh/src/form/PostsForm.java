@@ -26,8 +26,14 @@ public class PostsForm extends ActionForm {
 	private String contentError;
 	private ArrayList<Posts> posts;
 	private String action;
+	private String notification;
 	
-	
+	public String getNotification() {
+		return notification;
+	}
+	public void setNotification(String notification) {
+		this.notification = notification;
+	}
 	public String getTeacherName() {
 		return teacherName;
 	}
