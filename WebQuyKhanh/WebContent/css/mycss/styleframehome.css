@@ -62,5 +62,8 @@ body {
 .btn-add-new:hover {
 	background-color:#337ab7;
 	color : white;
-	box-shadow: 5px 5px 5px #888888;
+	box-shadow: 7px 7px 5px #888888;
+}
+.btn-add-new span {
+	font-size: 20px;
 }
