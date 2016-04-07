@@ -1,5 +1,7 @@
 package form;
 
+import java.util.ArrayList;
+
 import org.apache.struts.action.ActionForm;
 
 import model.bean.Lesson;
@@ -7,7 +9,7 @@ import model.bean.LessonStatus;
 import model.bean.Level;
 import model.bean.WordStatus;
 
-public class VocabularyForm extends ActionForm {
+public class JapaneseForm extends ActionForm {
 
 	private String lessonID;
 	private String levelID;
@@ -21,7 +23,36 @@ public class VocabularyForm extends ActionForm {
 	private Level level;
 	private LessonStatus lessonStatus;
 	private WordStatus wordStatus;
+	private String action;
+	private ArrayList<Level> listLevel;
+	private ArrayList<Lesson> listLesson;
+	private String submit;
 	
+	
+	public String getSubmit() {
+		return submit;
+	}
+	public void setSubmit(String submit) {
+		this.submit = submit;
+	}
+	public ArrayList<Lesson> getListLesson() {
+		return listLesson;
+	}
+	public void setListLesson(ArrayList<Lesson> listLesson) {
+		this.listLesson = listLesson;
+	}
+	public ArrayList<Level> getListLevel() {
+		return listLevel;
+	}
+	public void setListLevel(ArrayList<Level> listLevel) {
+		this.listLevel = listLevel;
+	}
+	public String getAction() {
+		return action;
+	}
+	public void setAction(String action) {
+		this.action = action;
+	}
 	public String getLessonID() {
 		return lessonID;
 	}

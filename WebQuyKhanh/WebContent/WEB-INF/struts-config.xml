@@ -8,7 +8,7 @@ Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 		<form-bean name="teacherForm" type="form.TeacherForm"></form-bean>
 		<form-bean name="postsForm" type="form.PostsForm"></form-bean>
 		<form-bean name="studentForm" type="form.StudentForm" ></form-bean>
-		<form-bean name="vocabularyForm" type="form.VocabularyForm"></form-bean>
+		<form-bean name="japaneseForm" type="form.JapaneseForm"></form-bean>
 	</form-beans> 
 	<action-mappings>
 		<action 
@@ -88,12 +88,12 @@ Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 			<forward name="teacherShowListStudent" path="/teacherManageStudent.jsp"></forward>
 		</action>
 		<action 
-		 	path="/manage-vocabulary"
-		 	name="vocabularyForm"
+		 	path="/manage-japanese"
+		 	name="japaneseForm"
 		 	scope="request"
-		 	type="action.TeacherManageVocaAction"
+		 	type="action.TeacherManageJapaneseAction"
 		 	>
-		 	<forward name="showListLevel" path="/teacherManageVocaTrans.jsp"></forward>
+		 	<forward name="showListLevel" path="/teacherManageJapanese.jsp"></forward>
 		</action>
 	</action-mappings>
 	<message-resources parameter="action.ApplicationResources" />

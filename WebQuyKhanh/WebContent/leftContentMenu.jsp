@@ -43,7 +43,7 @@
 					<li><html:link action="/manage-posts">Quản lí bài đăng</html:link>
 					</li>
 					<li><html:link action="/manage-student" >Quản lí học viên</html:link></li>
-					<li><a href="teacherManageVocaTrans.jsp">Quản lí từ vựng</a>
+					<li><html:link action="/manage-japanese?action=vocabulary">Quản lí từ vựng</html:link>
 						<ul class="submenu">
 							<li><a href="teacherManageVocaTransLesson.html">Bài 1 -
 									Bài 25</a>

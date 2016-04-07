@@ -1,0 +1,70 @@
+.teacher-info h5{
+	display: inline;
+}
+.myItem {
+	border:1px solid black;
+	border-radius: 10px;
+	text-align: center;
+	padding:20px;
+	box-shadow : 3px 3px 5px #888888;
+	border : 1px solid #008282;
+	color : #008282;
+	cursor: pointer;
+}
+.myItem:hover {
+	color :white;
+	background-color : #008282;
+	box-shadow: 10px 10px 5px #888888;
+}
+#new-level {
+	position: fixed;
+	top:-400px;
+	z-index:20;
+	transition : top 1s;
+	-moz-transition : top 1s;
+	-webkit-transition : top 1s;
+}
+#new-lesson {
+	position: fixed;
+	top:-400px;
+	z-index:20;
+	transition : top 1s;
+	-moz-transition : top 1s;
+	-webkit-transition : top 1s;
+}
+.btn-lesson {
+	width: 80px;
+	height: 80px;
+	border: 1px solid #337ab7;
+	color : #337ab7;
+	border-radius : 40px;
+	cursor : pointer;
+	background-color: transparent;
+	box-shadow: 1px 1px 5px #888888;
+}
+.btn-lesson:hover {
+	color: white;
+	background-color : #337ab7;
+	box-shadow: 5px 5px 5px #888888; 
+}
+.btn-add-lesson {
+	border-left: 1px solid #008282;
+	border-right: 1px solid #008282;
+	border-bottom:1px solid #008282;
+	border-radius: 0px 0px 14px 14px;
+	background-color: white;
+	color : #008282;
+	font-size: 30px;
+	text-align: center;
+	box-shadow: 2px 2px 5px #888888;
+	padding: 5px;
+	cursor: pointer;
+}
+.btn-add-lesson:hover {
+	background-color: #008282;
+	color : white;
+	box-shadow: 5px 5px 5px #888888;
+}
+.list-lesson {
+	
+}
