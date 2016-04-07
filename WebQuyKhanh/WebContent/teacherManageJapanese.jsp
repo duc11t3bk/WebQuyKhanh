@@ -31,40 +31,49 @@
 	});
 </script>
 <script type="text/javascript">
-	function createNewLesson(levelID){
-		console.log("levelID="+levelID);
-		$("#new-lesson").css("top","30%");
+	function createNewLesson(levelID) {
+		console.log("levelID=" + levelID);
+		$("#new-lesson").css("top", "30%");
 		$(".overflow").show();
 		$("#mylevel").val(levelID);
 	}
 </script>
 <script type="text/javascript">
-	function checkValidateLevel(){
-		boolean check;
-		var levelName=$("#myLevelName").val();
-		$.ajax({
-			type : "POST",
-			url : "http://localhost:8080/WebQuyKhanh/manage-japanese.do",
-			data : "action=checkvalidatelevel&levelName="+levelName,
-			dataType : "json",
-			success : function(response){
-				var jsonObject=response[0];
-				var result=jsonObject.result;
-				if(result=="success"){
-					check=true;
-				}
-				else{
-					check=false;
-					console.log("error result"+levelNameError);
-					$("#levelNameError").html(jsonObject.levelNameError);
-				}
-			},
-			error : function(errormessage){
-				alert("error"+ errormessage);
-			},
+	$(document).ready(function() {
+		$("#form-level").submit(function(e) {
+			e.preventDefault();
+			var levelName = $("#myLevelName").val();
+			var form=this;
+			var action=$("#action").val();
+			console.log("action"+action);
+			var dataAjax;
+			if(action=="vocabulary"){
+				dataAjax="action=vocabulary&type=validatelevel&levelName=" + levelName;
+			}
+			else{
+				dataAjax="action=translate&type=validatelevel&levelName="+levelName;
+			}
+			$.ajax({
+				type : "POST",
+				url : "http://localhost:8080/WebQuyKhanh/manage-japanese.do",
+				data : dataAjax,
+				dataType : "json",
+				success : function(response) {
+					var jsonObject = response[0];
+					var result = jsonObject.result;
+					console.log("result"+result);
+					if (result == "success") {
+						$(form).submit();
+					} else {
+						$("#levelNameError").html(jsonObject.levelNameError);
+					}
+				},
+				error : function(errormessage) {
+					alert("error" + errormessage);
+				},
+			});
 		});
-		return check;
-	}
+	});
 </script>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -94,13 +103,13 @@
 </head>
 <body>
 	<div class="wrapper">
-		<html:hidden property="action" name="japaneseForm" />
+		<html:hidden styleId="action" property="action" name="japaneseForm" />
 		<div class="container">
 			<div class="row">
 				<div id="new-level" class="col-lg-offset-3 col-lg-6">
 					<div class="panel panel-default">
 						<div class="panel-body" style="padding-top: 0px">
-							<html:form action="/manage-japanese">
+							<html:form styleId="form-level" action="/manage-japanese">
 								<div class="row" style="text-align: right">
 									<span class="glyphicon glyphicon-remove"
 										style="cursor: pointer"></span>
@@ -108,14 +117,15 @@
 								<div class="row">
 									<label class="col-lg-3">Tên mục mới</label>
 									<div class="col-lg-8">
-										<html:text styleId="myLevelName" styleClass="form-control" property="levelName"></html:text>
+										<html:text styleId="myLevelName" styleClass="form-control"
+											property="levelName" name="japaneseForm"></html:text>
 									</div>
 								</div>
-								<div class="row" style="text-align:center">
-									<label id="levelNameError" style="color:red"></label>
+								<div class="row" style="text-align: center">
+									<label id="levelNameError" style="color: red"></label>
 								</div>
 								<div class="row" style="text-align: center; margin-top: 20px;">
-									<html:submit styleClass="btn btn-default" property="submit" onclick="return checkvalidatelevel()">Tạo mục mới</html:submit>
+									<html:submit styleClass="btn btn-default" property="submit">Tạo mục mới</html:submit>
 								</div>
 							</html:form>
 						</div>
@@ -136,12 +146,14 @@
 								<div class="row">
 									<label class="col-lg-3">Tên bài mới</label>
 									<div class="col-lg-8">
-										<html:text styleId="myLessonName" styleClass="form-control" property="lessonName"></html:text>
-										<html:hidden styleClass="form-control" styleId="mylevel" property="levelID"/>
+										<html:text styleId="myLessonName" styleClass="form-control"
+											property="lessonName"></html:text>
+										<html:hidden styleClass="form-control" styleId="mylevel"
+											property="levelID" />
 									</div>
 								</div>
-								<div class="row" style="text-align:center">
-									<label id="lessonNameError" style="color:red"></label>
+								<div class="row" style="text-align: center">
+									<label id="lessonNameError" style="color: red"></label>
 								</div>
 								<div class="row" style="text-align: center; margin-top: 20px;">
 									<html:submit styleClass="btn btn-default" property="submit">Tạo bài mới</html:submit>
@@ -195,7 +207,8 @@
 											style="border: 1px solid black; border-radius: 4px;">
 											<div class="col-lg-12"
 												style="margin-bottom: 10px; height: 30px;">
-												<div class="col-lg-offset-3 col-lg-6 btn-add-lesson" onclick="createNewLesson('${levelID}')">
+												<div class="col-lg-offset-3 col-lg-6 btn-add-lesson"
+													onclick="createNewLesson('${levelID}')">
 													<span class="glyphicon glyphicon-plus"></span>
 												</div>
 											</div>

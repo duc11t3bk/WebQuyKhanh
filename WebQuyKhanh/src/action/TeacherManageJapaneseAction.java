@@ -30,10 +30,16 @@ public class TeacherManageJapaneseAction extends Action {
 
 		JapaneseForm japaneseForm = (JapaneseForm) form;
 		String action = japaneseForm.getAction();
-		String submit = japaneseForm.getSubmit();
+		String submit = StringProcess.toUTF8(japaneseForm.getSubmit());
+		System.out.println("submit "+submit);
+		System.out.println("action"+action);
+		System.out.println("chayyyyyyy11");
 		if ("vocabulary".equals(action)) {
 			JapaneseBO japaneseBO = new JapaneseBO();
+			String type=japaneseForm.getType();
 			if(submit!=null){
+				System.out.println("chayyyyyyy");
+				
 				if("Tạo mục mới".equals(submit)){
 					String levelName=StringProcess.toUTF8(japaneseForm.getLevelName());
 					Level newLevel= new Level();
@@ -43,8 +49,17 @@ public class TeacherManageJapaneseAction extends Action {
 				}
 				if("Tạo bài mới".equals(submit)){
 					String lessonName=StringProcess.toUTF8(japaneseForm.getLessonName());
-					String levelID=japaneseForm.getLevelID();
-					
+					String levelID=japaneseForm.getLevelID();			
+				}
+				
+			}
+			if(type!=null){
+				if("validatelevel".equals(type)){
+					String levelName=StringProcess.toUTF8(japaneseForm.getLevelName());
+					JSONArray jsonArray=checkValidateLevel(levelName);
+					PrintWriter write=response.getWriter();
+					write.println(jsonArray.toString());
+					return null;
 				}
 			}
 			ArrayList<Level> listLevel = japaneseBO.getListLevel(action);
@@ -63,13 +78,7 @@ public class TeacherManageJapaneseAction extends Action {
 				return mapping.findForward("showListLesson");
 			}
 		}
-		if("checkvalidatelevel".equals(action)){
-			String levelName=StringProcess.toUTF8(japaneseForm.getLevelName());
-			JSONArray jsonArray=checkValidateLevel(levelName);
-			PrintWriter write=response.getWriter();
-			write.println(jsonArray.toString());
-			return null;
-		}
+
 		return super.execute(mapping, form, request, response);
 	}
 	@SuppressWarnings("unchecked")

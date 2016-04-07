@@ -27,8 +27,15 @@ public class JapaneseForm extends ActionForm {
 	private ArrayList<Level> listLevel;
 	private ArrayList<Lesson> listLesson;
 	private String submit;
+	private String type;
 	
 	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public String getSubmit() {
 		return submit;
 	}
