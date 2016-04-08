@@ -94,6 +94,8 @@ Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 		 	type="action.TeacherManageJapaneseAction"
 		 	>
 		 	<forward name="showListLevel" path="/teacherManageJapanese.jsp"></forward>
+		 	<forward name="showVocabularyLesson" path="/teacherManageVocabulary.jsp"></forward>
+		 	<forward name="showTranslateLesson" path="/teacherManageTranslate.jsp"></forward>
 		</action>
 	</action-mappings>
 	<message-resources parameter="action.ApplicationResources" />

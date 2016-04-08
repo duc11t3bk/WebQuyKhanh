@@ -16,6 +16,7 @@ import org.json.simple.JSONObject;
 import common.StringProcess;
 import common.Validate;
 import form.JapaneseForm;
+import model.bean.JapaneseData;
 import model.bean.Lesson;
 import model.bean.Level;
 import model.bo.JapaneseBO;
@@ -31,35 +32,51 @@ public class TeacherManageJapaneseAction extends Action {
 		JapaneseForm japaneseForm = (JapaneseForm) form;
 		String action = japaneseForm.getAction();
 		String submit = StringProcess.toUTF8(japaneseForm.getSubmit());
-		System.out.println("submit "+submit);
 		System.out.println("action"+action);
-		System.out.println("chayyyyyyy11");
+		System.out.println("type="+japaneseForm.getType());
 		if ("vocabulary".equals(action)) {
 			JapaneseBO japaneseBO = new JapaneseBO();
 			String type=japaneseForm.getType();
-			if(submit!=null){
-				System.out.println("chayyyyyyy");
-				
-				if("Tạo mục mới".equals(submit)){
-					String levelName=StringProcess.toUTF8(japaneseForm.getLevelName());
-					Level newLevel= new Level();
-					newLevel.setLevelName(levelName);
-					newLevel.setCategory("voca");
-					japaneseBO.addNewLevel(newLevel);
-				}
-				if("Tạo bài mới".equals(submit)){
-					String lessonName=StringProcess.toUTF8(japaneseForm.getLessonName());
-					String levelID=japaneseForm.getLevelID();			
-				}
-				
-			}
 			if(type!=null){
-				if("validatelevel".equals(type)){
-					String levelName=StringProcess.toUTF8(japaneseForm.getLevelName());
-					JSONArray jsonArray=checkValidateLevel(levelName);
+				if("add-level".equals(type)){
+					String levelName=japaneseForm.getLevelName();
+					JSONArray jsonArray=checkValidate(levelName);
+					JSONObject jsonObject=(JSONObject)jsonArray.get(0);
+					String result=jsonObject.get("result").toString();
+					if("success".equals(result)){
+						Level level= new Level();
+						level.setLevelName(levelName);
+						level.setCategory("voca");
+						japaneseBO.addNewLevel(level);
+					}
 					PrintWriter write=response.getWriter();
 					write.println(jsonArray.toString());
+					write.flush();
+					write.close();
 					return null;
+				}
+				if("add-lesson".equals(type)){
+					String lessonName=japaneseForm.getLessonName();
+					String levelID= japaneseForm.getLevelID();
+					JSONArray jsonArray=checkValidate(lessonName);
+					JSONObject jsonObject=(JSONObject)jsonArray.get(0);
+					String result=jsonObject.get("result").toString();
+					if("success".equals(result)){
+						Lesson lesson= new Lesson();
+						lesson.setLessonName(lessonName);
+						lesson.setLevelID(levelID);
+						japaneseBO.addNewLesson(lesson);
+					}
+					PrintWriter write=response.getWriter();
+					write.println(jsonArray.toString());
+					write.flush();
+					write.close();
+				}
+				if("view-lesson".equals(type)){
+					String lessonID= japaneseForm.getLessonID();
+					ArrayList<JapaneseData> listData= japaneseBO.getListData(lessonID);
+					japaneseForm.setListData(listData);
+					return mapping.findForward("showVocabularyLesson");
 				}
 			}
 			ArrayList<Level> listLevel = japaneseBO.getListLevel(action);
@@ -69,29 +86,27 @@ public class TeacherManageJapaneseAction extends Action {
 			return mapping.findForward("showListLevel");
 		}
 		if ("translate".equals(action)) {
-			String levelID = japaneseForm.getLevelID();
-			if (levelID == null) {
-
-				return mapping.findForward("showListLevel");
-			} else {
-
-				return mapping.findForward("showListLesson");
-			}
+			JapaneseBO japaneseBO = new JapaneseBO();
+			ArrayList<Level> listLevel= japaneseBO.getListLevel(action);
+			ArrayList<Lesson> listLesson= japaneseBO.getListLesson(action);
+			japaneseForm.setListLevel(listLevel);
+			japaneseForm.setListLesson(listLesson);
+			return mapping.findForward("showListLevel");
 		}
-
 		return super.execute(mapping, form, request, response);
 	}
 	@SuppressWarnings("unchecked")
-	public JSONArray checkValidateLevel(String levelName){
+	public JSONArray checkValidate(String data){
 		JSONArray jsonArray= new JSONArray();
 		JSONObject jsonObject= new JSONObject();
 		boolean check=true;
-		if(Validate.isEmpty(levelName)){
+		if(Validate.isEmpty(data)){
 			check=false;
-			jsonObject.put("levelNameError", "Tên mục không được bỏ trống");
+			jsonObject.put("message", "Tên không được bỏ trống");
 		}
 		if(check){
 			jsonObject.put("result", "success");
+			jsonObject.put("message", "Tạo mới thành công");
 			jsonArray.add(jsonObject);
 		}
 		else{

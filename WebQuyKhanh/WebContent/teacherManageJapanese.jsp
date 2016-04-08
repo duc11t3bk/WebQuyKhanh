@@ -13,6 +13,8 @@
 
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+<link rel="stylesheet" type="text/css" media="all"
+	href="libs/MaterialDesign-Webfont-master/css/materialdesignicons.min.css">
 <link rel="stylesheet" type="text/css"
 	href="css/mycss/styleframehome.css">
 <link rel="stylesheet" type="text/css"
@@ -40,18 +42,16 @@
 </script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("#form-level").submit(function(e) {
-			e.preventDefault();
+		$("#add-level").on("click",function() {
 			var levelName = $("#myLevelName").val();
-			var form=this;
 			var action=$("#action").val();
 			console.log("action"+action);
 			var dataAjax;
 			if(action=="vocabulary"){
-				dataAjax="action=vocabulary&type=validatelevel&levelName=" + levelName;
+				dataAjax="action=vocabulary&type=add-level&levelName="+levelName;
 			}
 			else{
-				dataAjax="action=translate&type=validatelevel&levelName="+levelName;
+				dataAjax="action=translate&type=add-level&levelName="+levelName;
 			}
 			$.ajax({
 				type : "POST",
@@ -63,14 +63,55 @@
 					var result = jsonObject.result;
 					console.log("result"+result);
 					if (result == "success") {
-						$(form).submit();
+						$("#levelNameError").html(jsonObject.message);
+						setTimeout(function(){
+							window.location.href="http://localhost:8080/WebQuyKhanh/manage-japanese.do?action="+action;
+						},1000);
 					} else {
-						$("#levelNameError").html(jsonObject.levelNameError);
+						$("#levelNameError").html(jsonObject.message);
 					}
 				},
 				error : function(errormessage) {
 					alert("error" + errormessage);
 				},
+			});
+		});
+	});
+</script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#add-lesson").on("click",function(){	
+			var lessonName=$("#myLessonName").val();
+			var levelID=$("#mylevel").val();
+			var action=$("#action").val();
+			var dataAjax;
+			if("vocabulary"==action){
+				dataAjax="action="+action+"&type=add-lesson&lessonName="+lessonName+"&levelID="+levelID;
+			}
+			else{
+				dataAjax="action="+action+"&type=add-level&lessonName="+lessonName+"&levelID="+levelID;
+			}
+			$.ajax({
+				type : "POST",
+				url : "http://localhost:8080/WebQuyKhanh/manage-japanese.do",
+				data : dataAjax,
+				dataType : "json",
+				success : function(response){
+					var jsonObject= response[0];
+					var result= jsonObject.result;
+					if(result=="success"){
+						$("#lessonNameError").html(jsonObject.message);
+						setTimeout(function(){
+							window.location.href="http://localhost:8080/WebQuyKhanh/manage-japanese.do?action="+action;
+						}, 1000);
+					}
+					if(result=="failed"){
+						$("#lessonNameError").html(jsonObject.message);
+					}
+				},
+				error : function(errormessage){
+					alert("error :"+errormessage);
+				}
 			});
 		});
 	});
@@ -104,41 +145,40 @@
 <body>
 	<div class="wrapper">
 		<html:hidden styleId="action" property="action" name="japaneseForm" />
+		<!------------------------- Add new level -------------------------------->
 		<div class="container">
 			<div class="row">
 				<div id="new-level" class="col-lg-offset-3 col-lg-6">
 					<div class="panel panel-default">
 						<div class="panel-body" style="padding-top: 0px">
-							<html:form styleId="form-level" action="/manage-japanese">
-								<div class="row" style="text-align: right">
-									<span class="glyphicon glyphicon-remove"
-										style="cursor: pointer"></span>
+							<div class="row" style="text-align: right">
+								<span class="glyphicon glyphicon-remove" style="cursor: pointer"></span>
+							</div>
+							<div class="row">
+								<label class="col-lg-3">Tên mục mới</label>
+								<div class="col-lg-8">
+									<html:text styleId="myLevelName" styleClass="form-control"
+										property="levelName" name="japaneseForm"></html:text>
 								</div>
-								<div class="row">
-									<label class="col-lg-3">Tên mục mới</label>
-									<div class="col-lg-8">
-										<html:text styleId="myLevelName" styleClass="form-control"
-											property="levelName" name="japaneseForm"></html:text>
-									</div>
-								</div>
-								<div class="row" style="text-align: center">
-									<label id="levelNameError" style="color: red"></label>
-								</div>
-								<div class="row" style="text-align: center; margin-top: 20px;">
-									<html:submit styleClass="btn btn-default" property="submit">Tạo mục mới</html:submit>
-								</div>
-							</html:form>
+							</div>
+							<div class="row" style="text-align: center">
+								<label id="levelNameError" style="color: red"></label>
+							</div>
+							<div class="row" style="text-align: center; margin-top: 20px;">
+								<html:button styleId="add-level" styleClass="btn btn-default"
+									property="btnSubmit">Tạo mục mới</html:button>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		<!------------------------- Add new lesson -------------------------------->
 		<div class="container">
 			<div class="row">
 				<div id="new-lesson" class="col-lg-offset-3 col-lg-6">
 					<div class="panel panel-default">
 						<div class="panel-body" style="padding-top: 0px">
-							<html:form action="/manage-japanese">
 								<div class="row" style="text-align: right">
 									<span class="glyphicon glyphicon-remove"
 										style="cursor: pointer"></span>
@@ -147,18 +187,17 @@
 									<label class="col-lg-3">Tên bài mới</label>
 									<div class="col-lg-8">
 										<html:text styleId="myLessonName" styleClass="form-control"
-											property="lessonName"></html:text>
+											property="lessonName" name="japaneseForm"></html:text>
 										<html:hidden styleClass="form-control" styleId="mylevel"
-											property="levelID" />
+											property="levelID" name="japaneseForm"/>
 									</div>
 								</div>
 								<div class="row" style="text-align: center">
 									<label id="lessonNameError" style="color: red"></label>
 								</div>
 								<div class="row" style="text-align: center; margin-top: 20px;">
-									<html:submit styleClass="btn btn-default" property="submit">Tạo bài mới</html:submit>
+									<html:button styleId="add-lesson" styleClass="btn btn-default" property="submit">Tạo bài mới</html:button>
 								</div>
-							</html:form>
 						</div>
 					</div>
 				</div>
@@ -184,7 +223,7 @@
 										mới
 									</button>
 								</div>
-								<!-- Lis level -->
+	<!------------------------- List level -------------------------------->
 								<logic:iterate id="level" name="japaneseForm"
 									property="listLevel">
 									<bean:define id="levelID" name="level" property="levelID"></bean:define>
@@ -202,7 +241,7 @@
 												</div>
 											</div>
 										</div>
-										<!-- List lesson -->
+		<!------------------------- List lesson -------------------------------->
 										<div class="col-lg-12 list-lesson"
 											style="border: 1px solid black; border-radius: 4px;">
 											<div class="col-lg-12"
@@ -216,12 +255,14 @@
 												style="margin-top: 20px; margin-bottom: 10px;">
 												<logic:iterate id="lesson" name="japaneseForm"
 													property="listLesson">
+													<bean:define id="lessonID" name="lesson" property="lessonID"></bean:define>
+													<bean:define id="action" name="japaneseForm" property="action" ></bean:define>
 													<logic:equal value="${levelID }" name="lesson"
 														property="levelID">
 														<div class="col-lg-3" style="text-align: center;">
-															<html:link href="#x">
+															<html:link action="/manage-japanese?action=${action }&type=view-lesson&lessonID=${lessonID }">
 																<button class="btn-lesson">
-																	<span class="glyphicon glyphicon-file"></span>
+																	<i class="mdi mdi-translate"></i>
 																	<bean:write property="lessonName" name="lesson" />
 																</button>
 															</html:link>

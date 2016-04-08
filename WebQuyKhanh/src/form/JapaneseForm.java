@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.apache.struts.action.ActionForm;
 
+import model.bean.JapaneseData;
 import model.bean.Lesson;
 import model.bean.LessonStatus;
 import model.bean.Level;
@@ -26,16 +27,25 @@ public class JapaneseForm extends ActionForm {
 	private String action;
 	private ArrayList<Level> listLevel;
 	private ArrayList<Lesson> listLesson;
+	private ArrayList<JapaneseData> listData;
 	private String submit;
 	private String type;
 	
 	
+	public ArrayList<JapaneseData> getListData() {
+		return listData;
+	}
+	public void setListData(ArrayList<JapaneseData> listData) {
+		this.listData = listData;
+	}
 	public String getType() {
 		return type;
 	}
 	public void setType(String type) {
 		this.type = type;
 	}
+
+
 	public String getSubmit() {
 		return submit;
 	}

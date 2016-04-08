@@ -5,8 +5,8 @@ public class JapaneseData {
 	private String dataID;
 	private String lessonID;
 	private String levelID;
-	private String japanContent;
-	private String vietnamContent;
+	private String japanese;
+	private String vietnamese;
 	private String dataSound;
 	
 	public String getDataID() {
@@ -27,17 +27,17 @@ public class JapaneseData {
 	public void setLevelID(String levelID) {
 		this.levelID = levelID;
 	}
-	public String getJapanContent() {
-		return japanContent;
+	public String getJapanese() {
+		return japanese;
 	}
-	public void setJapanContent(String japanContent) {
-		this.japanContent = japanContent;
+	public void setJapanese(String japanese) {
+		this.japanese = japanese;
 	}
-	public String getVietnamContent() {
-		return vietnamContent;
+	public String getVietnamese() {
+		return vietnamese;
 	}
-	public void setVietnamContent(String vietnamContent) {
-		this.vietnamContent = vietnamContent;
+	public void setVietnamese(String vietnamese) {
+		this.vietnamese = vietnamese;
 	}
 	public String getDataSound() {
 		return dataSound;

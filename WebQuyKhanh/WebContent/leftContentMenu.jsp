@@ -58,7 +58,7 @@
 									<li><a href="">Bài 2</a></li>
 								</ul></li>
 						</ul></li>
-					<li><a href="">Quản lí dịch câu</a>
+					<li><html:link action="/manage-japanese?action=translate"> Quản lí dịch câu</html:link>
 						<ul class="submenu">
 							<li><a href="">Bài 1 - Bài 25</a></li>
 							<li><a href="">Bài 26 - Bài 30</a></li>

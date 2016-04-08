@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import com.sun.xml.internal.fastinfoset.vocab.Vocabulary;
 
+import model.bean.JapaneseData;
 import model.bean.Lesson;
 import model.bean.Level;
 
@@ -101,6 +102,50 @@ public class JapaneseDAO {
 		}
 		finally {
 			connection.closeConnection();
+		}
+	}
+
+	public void addNewLesson(Lesson lesson) {
+		try {
+			conn=connection.openConnection();
+			String lessonID=ConnectionDAO.increateID("japaneselesson", "lesson_id", conn);
+			lesson.setLessonID(lessonID);
+			String sql="insert into japaneselesson values(?,?,?)";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, lesson.getLessonID());
+			pstmt.setString(2, lesson.getLevelID());
+			pstmt.setString(3, lesson.getLessonName());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			connection.closeConnection();
+		}
+	}
+
+	public ArrayList<JapaneseData> getListData(String lessonID) {
+		try {
+			conn=connection.openConnection();
+			String sql=" select * from japanesedata where lesson_id= ?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, lessonID);
+			ResultSet rs= pstmt.executeQuery();
+			ArrayList<JapaneseData> listData= new ArrayList<JapaneseData>();
+			while(rs.next()){
+				JapaneseData japaneseData= new JapaneseData();
+				japaneseData.setDataID(rs.getString(1));
+				japaneseData.setLessonID(rs.getString(2));
+				japaneseData.setLevelID(rs.getString(3));
+				japaneseData.setJapanese(rs.getString(4));
+				japaneseData.setVietnamese(rs.getString(5));
+				japaneseData.setDataSound(rs.getString(6));
+				listData.add(japaneseData);
+			}
+			return listData;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 	
