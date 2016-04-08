@@ -19,11 +19,12 @@
 	href="css/mycss/styleframehome.css">
 <link rel="stylesheet" type="text/css"
 	href="css/mycss/stylemanagejapanese.css">
+<link rel="stylesheet" type="text/css" href="css/mycss/styleformconfirm.css">
 <script src="js/jquery-2.2.0.min.js"></script>
 <script src="js/jquery-ui.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/myjs/includehtml.js"></script>
-
+<script src="js/myjs/form-confirm.js" ></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#createNew").on("click", function() {
@@ -141,6 +142,13 @@
 		}
 	});
 </script>
+<script type="text/javascript">
+	function deleteLevel(action,levelID){
+		var path="x#";
+		console.log("action="+action+"levelID="+levelID);
+		formConfirm(path,"Bạn có chắc chắn muốn xóa mục này ?");
+	}
+</script>
 </head>
 <body>
 	<div class="wrapper">
@@ -204,6 +212,7 @@
 			</div>
 		</div>
 		<jsp:include page="header2.jsp"></jsp:include>
+		<jsp:include page="form-confirm.jsp"></jsp:include>
 		<div class="container main-container2">
 			<div class="row">
 				<div class="content">
@@ -227,17 +236,24 @@
 								<logic:iterate id="level" name="japaneseForm"
 									property="listLevel">
 									<bean:define id="levelID" name="level" property="levelID"></bean:define>
+									<bean:define id="action" name="japaneseForm" property="action" ></bean:define>
 									<div class="row" style="margin-top: 20px">
 										<div class="row">
 											<div class="col-lg-offset-3 col-lg-6 myItem">
-												<div class="col-lg-2">
-													<label><span class="glyphicon glyphicon-book"
-														style="font-size: 30px"></span> </label>
+												<div class="col-lg-12" style="text-align:right;">
+													<span class="glyphicon glyphicon-trash my-trash"
+														style="font-size: 15px;" onclick="deleteLevel('${action }','${levelID }')"></span>
 												</div>
-												<div class="col-lg-10" style="margin-top: 5px">
-													<h4>
-														<bean:write property="levelName" name="level" />
-													</h4>
+												<div class="col-lg-12">
+													<div class="col-lg-2">
+														<label><span class="glyphicon glyphicon-book"
+															style="font-size: 30px"></span> </label>
+													</div>
+													<div class="col-lg-10" style="margin-top: 5px">
+														<h4>
+															<bean:write property="levelName" name="level" />
+														</h4>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -256,7 +272,6 @@
 												<logic:iterate id="lesson" name="japaneseForm"
 													property="listLesson">
 													<bean:define id="lessonID" name="lesson" property="lessonID"></bean:define>
-													<bean:define id="action" name="japaneseForm" property="action" ></bean:define>
 													<logic:equal value="${levelID }" name="lesson"
 														property="levelID">
 														<div class="col-lg-3" style="text-align: center;">

@@ -148,5 +148,38 @@ public class JapaneseDAO {
 			return null;
 		}
 	}
+
+	public Lesson getLesson(String lessonID) {
+		try {
+			conn=connection.openConnection();
+			String sql="select jales.lesson_id, jales.level_id, jales.name, jalev.name"
+					+ " from japaneselesson jales join japaneselevel jalev"
+					+ " on (jales.level_id = jalev.level_id) "
+					+ " where jales.lesson_id = ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, lessonID);
+			ResultSet rs= pstmt.executeQuery();
+			Lesson lesson= new Lesson();
+			while(rs.next()){
+				lesson.setLessonID(rs.getString(1));
+				lesson.setLevelID(rs.getString(2));
+				lesson.setLessonName(rs.getString(3));
+				lesson.setLevelName(rs.getString(4));
+			}
+			return lesson;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public void deleteLevel(String levelID) {
+		try {
+			conn=connection.openConnection();
+			String sql="delete from japanese ";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 }

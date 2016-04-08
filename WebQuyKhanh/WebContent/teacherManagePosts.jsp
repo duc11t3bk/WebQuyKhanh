@@ -24,6 +24,7 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
 <script src="js/myjs/includehtml.js"></script>
+<script src="js/myjs/form-confirm.js"></script>
 <style type="text/css">
 .teacher-info h5 {
 	display: inline;
@@ -31,58 +32,15 @@
 </style>
 <script type="text/javascript">
 	function deletePost(postID){
-		console.log("postID :"+postID);
-		$("#form-confirm").css("top","20%");
-		$(".overflow").show();
-		$("#ok").on("click",function(){
-			window.location.href="/WebQuyKhanh/edit-posts.do?postID="+postID+"&action=delete";
-			console.log("url"+window.location.href);
-		});
-		$("#cancel").on("click",function(){
-			$("#form-confirm").css("top","-300px");
-			$(".overflow").hide();
-		});
+		var path="/WebQuyKhanh/edit-posts.do?postID="+postID+"&action=delete";
+		formConfirm(path,"Bạn có chắc chắn muốn xóa bài viết này ?");
 	}
 </script>
 </head>
 <body>
 	<div class="wrapper">
 		<jsp:include page="header2.jsp"></jsp:include>
-		<div class="overflow"></div>
-		<div class="container" style="margin-top: 50px">
-			<div class="row">
-				<div class="col-lg-offset-4 col-lg-5" id="form-confirm">
-					<div class="panel panel-primary">
-						<div class="panel-body">
-							<div class="row">
-								<div class="col-lg-2">
-									<span class="glyphicon glyphicon-question-sign"
-										style="font-size: 50px"></span>
-								</div>
-								<div class="col-lg-10" style="margin-top: 15px">
-									<label>Bạn có chắc chắn muốn xóa bài viết này ?</label>
-								</div>
-							</div>
-							<div class="row">
-								<hr style="border: 3px solid #337ab7">
-							</div>
-							<div class="row" style="text-align: center">
-								<div class="col-lg-offset-2 col-lg-4">
-									<label><button id="ok" class="btn-confirm">
-											<span class="glyphicon glyphicon-ok"></span> Có
-										</button></label>
-								</div>
-								<div class="col-lg-4">
-									<label><button id="cancel" class="btn-confirm">
-											<span class="glyphicon glyphicon-remove"></span> Không
-										</button></label>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		<jsp:include page="form-confirm.jsp"></jsp:include>
 		<div class="container main-container2">
 			<div class="row">
 				<div class="content">

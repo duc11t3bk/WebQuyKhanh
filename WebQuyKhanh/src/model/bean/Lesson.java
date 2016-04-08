@@ -5,7 +5,15 @@ public class Lesson {
 	private String lessonID;
 	private String levelID;
 	private String lessonName;
-
+	private String levelName;
+	
+	
+	public String getLevelName() {
+		return levelName;
+	}
+	public void setLevelName(String levelName) {
+		this.levelName = levelName;
+	}
 	public String getLessonID() {
 		return lessonID;
 	}

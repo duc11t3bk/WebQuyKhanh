@@ -31,7 +31,6 @@ public class JapaneseForm extends ActionForm {
 	private String submit;
 	private String type;
 	
-	
 	public ArrayList<JapaneseData> getListData() {
 		return listData;
 	}

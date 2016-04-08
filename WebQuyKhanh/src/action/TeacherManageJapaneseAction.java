@@ -71,12 +71,18 @@ public class TeacherManageJapaneseAction extends Action {
 					write.println(jsonArray.toString());
 					write.flush();
 					write.close();
+					return null;
 				}
 				if("view-lesson".equals(type)){
 					String lessonID= japaneseForm.getLessonID();
 					ArrayList<JapaneseData> listData= japaneseBO.getListData(lessonID);
 					japaneseForm.setListData(listData);
+					japaneseForm.setLesson(japaneseBO.getLesson(lessonID));
 					return mapping.findForward("showVocabularyLesson");
+				}
+				if("delete".equals(type)){
+					String levelID=japaneseForm.getLevelID();
+					japaneseBO.deleteLevel(levelID);
 				}
 			}
 			ArrayList<Level> listLevel = japaneseBO.getListLevel(action);

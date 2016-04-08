@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic"%>
@@ -7,18 +7,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<meta charset="utf-8"/>
-	<meta name="author" content="Minh Duc" />
-	<title>Trung Tâm Du Học và Nhật Ngữ Quý Khanh</title>
+<meta charset="utf-8" />
+<meta name="author" content="Minh Duc" />
+<title>Trung Tâm Du Học và Nhật Ngữ Quý Khanh</title>
 
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
-	<link rel="stylesheet" type="text/css" href="css/mycss/styleframehome.css">
-	<link rel="stylesheet" type="text/css" href="css/mycss/stylemanagevocatrans.css">	
-	<script src="js/jquery-2.2.0.min.js"></script>
-	<script src="js/jquery-ui.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/myjs/includehtml.js"></script>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="libs/bootstrap-table-master/dist/bootstrap-table.min.css">
+<link rel="stylesheet" type="text/css"
+	href="css/mycss/styleframehome.css">
+<link rel="stylesheet" type="text/css"
+	href="css/mycss/stylemanagevocatrans.css">
+<script src="js/jquery-2.2.0.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
+<script src="js/myjs/includehtml.js"></script>
 
 </head>
 <body>
@@ -30,46 +34,61 @@
 					<div class="col-lg-2">
 						<jsp:include page="leftContentMenu.jsp"></jsp:include>
 					</div>
-					<div class="col-lg-10 main-content" style="z-index:1">
+					<div class="col-lg-10 main-content" style="z-index: 1">
 						<div class="panel panel-info">
 							<div class="panel-heading">
 								<div class="panel-title">
 									<ol class="breadcrumb">
-									  	<li><a href="#">Quản lí từ vựng</a></li>
-									  	<li><a href=""> Bài 1 - Bài 25</a></li>	
-									  	<li class="active">Bài 1</li>					
+										<bean:define id="lesson" name="japaneseForm" property="lesson"></bean:define>
+										<li><html:link action="/manage-japanese?action=vocabulary"> Quản lí từ vựng</html:link></li>
+										<li><html:link action="/manage-japanese?action=vocabulary"><bean:write property="levelName" name="lesson"/> </html:link></li>
+										<li class="active"><bean:write property="lessonName" name="lesson"/> </li>
 									</ol>
 								</div>
 							</div>
 							<div class="panel-body">
 								<div class="row">
 									<div class="col-lg-6">
-										<button class="btn btn-default" style="padding:20px; margin-left:30px"><span class="glyphicon glyphicon-repeat"></span> Tải lại từ vựng </button>
+										<button class="btn btn-default"
+											style="padding: 20px; margin-left: 30px">
+											<span class="glyphicon glyphicon-repeat"></span> Tải lại từ
+											vựng
+										</button>
 									</div>
 									<div class="col-lg-6">
-										<button class="btn btn-default" style="padding:20px; margin-left:30px"><span class="glyphicon glyphicon-trash"></span> Xóa dữ liệu </button>
+										<button class="btn btn-default"
+											style="padding: 20px; margin-left: 30px">
+											<span class="glyphicon glyphicon-trash"></span> Xóa dữ liệu
+										</button>
 									</div>
 								</div>
-								<div class="row" style="margin-top:20px; height:100px">
-									<table>
+								<div class="row" style="margin-top: 20px; height: 100px">
+									<table data-toggle="table"
+											data-search="true"
+											data-pagination="true"
+											data-page-size="30"
+											data-page-list="[30,60,All]"
+											data-height="500"
+									>
 										<thead>
 											<tr>
-												<th>Tiếng Nhật</th>
-												<th>Tiếng Việt </th>
+												<th data-width="50%">Tiếng Nhật</th>
+												<th data-width="50%">Tiếng Việt</th>
 											</tr>
 										</thead>
 										<tbody>
-											<logic:iterate id="data" name="japaneseForm" property="listData" >
+											<logic:iterate id="data" name="japaneseForm"
+												property="listData">
 												<tr>
-													<td><bean:write property="japanese" name="data"/> </td>
-													<td><bean:write property="vietnamese" name="data"/> </td>
+													<td><bean:write property="japanese" name="data" /></td>
+													<td><bean:write property="vietnamese" name="data" /></td>
 												</tr>
 											</logic:iterate>
 										</tbody>
 									</table>
 								</div>
 							</div>
-						</div>						
+						</div>
 					</div>
 				</div>
 			</div>

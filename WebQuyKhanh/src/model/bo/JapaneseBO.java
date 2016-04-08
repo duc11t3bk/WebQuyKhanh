@@ -34,5 +34,13 @@ public class JapaneseBO {
 	public ArrayList<JapaneseData> getListData(String lessonID) {
 		return japaneseDAO.getListData(lessonID);
 	}
+
+	public Lesson getLesson(String lessonID) {
+		return japaneseDAO.getLesson(lessonID);
+	}
+
+	public void deleteLevel(String levelID) {
+		japaneseDAO.deleteLevel(levelID);
+	}
 	
 }
