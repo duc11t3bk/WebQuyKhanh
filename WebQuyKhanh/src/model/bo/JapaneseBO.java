@@ -39,8 +39,15 @@ public class JapaneseBO {
 		return japaneseDAO.getLesson(lessonID);
 	}
 
-	public void deleteLevel(String levelID) {
-		japaneseDAO.deleteLevel(levelID);
+	public boolean deleteLevel(String levelID) {
+		return japaneseDAO.deleteLevel(levelID);
 	}
-	
+
+	public boolean importFileExcel(String lessonID, String filePath) {
+		return japaneseDAO.importFileExcel(lessonID,filePath);
+	}
+
+	public void deleteLesson(String lessonID) {
+		japaneseDAO.deleteLesson(lessonID);
+	}
 }

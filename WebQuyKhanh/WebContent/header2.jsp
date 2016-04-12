@@ -39,6 +39,7 @@
 			$("#new-level").css("top","-300px");
 			$("#new-lesson").css("top","-300px");
 			$("#form-confirm").css("top","-300px");
+			$("#form-upload-lesson").css("top","-100%");
 			$(".overflow").hide();
 		}
 		$(".overflow").on("click", function() {

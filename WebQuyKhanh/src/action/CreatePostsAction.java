@@ -43,7 +43,7 @@ public class CreatePostsAction extends Action {
 		
 		if(checkValidate(title, content, postsForm)){
 			String imageName="";
-			imageName=FileProcess.uploadImage(file, getServlet(), "postsimage");
+			imageName=FileProcess.uploadFile(file, getServlet(), "postsimage");
 			Posts post= new Posts();
 			post.setTitle(title);
 			post.setContent(content);

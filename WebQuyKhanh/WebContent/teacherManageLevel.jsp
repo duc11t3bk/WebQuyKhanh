@@ -56,7 +56,7 @@
 			}
 			$.ajax({
 				type : "POST",
-				url : "http://localhost:8080/WebQuyKhanh/manage-japanese.do",
+				url : "http://localhost:8080/WebQuyKhanh/manage-level.do",
 				data : dataAjax,
 				dataType : "json",
 				success : function(response) {
@@ -66,7 +66,7 @@
 					if (result == "success") {
 						$("#levelNameError").html(jsonObject.message);
 						setTimeout(function(){
-							window.location.href="http://localhost:8080/WebQuyKhanh/manage-japanese.do?action="+action;
+							window.location.href="http://localhost:8080/WebQuyKhanh/manage-level.do?action="+action;
 						},1000);
 					} else {
 						$("#levelNameError").html(jsonObject.message);
@@ -94,7 +94,7 @@
 			}
 			$.ajax({
 				type : "POST",
-				url : "http://localhost:8080/WebQuyKhanh/manage-japanese.do",
+				url : "http://localhost:8080/WebQuyKhanh/manage-level.do",
 				data : dataAjax,
 				dataType : "json",
 				success : function(response){
@@ -103,7 +103,7 @@
 					if(result=="success"){
 						$("#lessonNameError").html(jsonObject.message);
 						setTimeout(function(){
-							window.location.href="http://localhost:8080/WebQuyKhanh/manage-japanese.do?action="+action;
+							window.location.href="http://localhost:8080/WebQuyKhanh/manage-level.do?action="+action;
 						}, 1000);
 					}
 					if(result=="failed"){
@@ -144,7 +144,7 @@
 </script>
 <script type="text/javascript">
 	function deleteLevel(action,levelID){
-		var path="x#";
+		var path="http://localhost:8080/WebQuyKhanh/manage-level.do?action="+action+"&type=delete&levelID="+levelID;
 		console.log("action="+action+"levelID="+levelID);
 		formConfirm(path,"Bạn có chắc chắn muốn xóa mục này ?");
 	}
@@ -226,11 +226,16 @@
 							</div>
 							<div class="panel-body">
 								<div class="row">
-									<button id="createNew" class="btn-add-new"
-										style="padding: 20px; margin-left: 30px">
-										<span class="glyphicon glyphicon-new-window"></span> Tạo mục
-										mới
-									</button>
+									<div class="col-lg-3">
+										<button id="createNew" class="btn-add-new"
+											style="padding: 20px; margin-left: 30px">
+											<span class="glyphicon glyphicon-new-window"></span> Tạo mục
+											mới
+										</button>
+									</div>
+									<div class="col-lg-6" style="text-align: center">
+										<label style="color:red"><bean:write property="deleteLevelError" name="japaneseForm"/> </label>
+									</div>
 								</div>
 	<!------------------------- List level -------------------------------->
 								<logic:iterate id="level" name="japaneseForm"
@@ -275,7 +280,7 @@
 													<logic:equal value="${levelID }" name="lesson"
 														property="levelID">
 														<div class="col-lg-3" style="text-align: center;">
-															<html:link action="/manage-japanese?action=${action }&type=view-lesson&lessonID=${lessonID }">
+															<html:link action="/manage-lesson?action=${action }&lessonID=${lessonID }">
 																<button class="btn-lesson">
 																	<i class="mdi mdi-translate"></i>
 																	<bean:write property="lessonName" name="lesson" />

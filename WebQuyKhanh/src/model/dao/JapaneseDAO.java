@@ -1,13 +1,20 @@
 package model.dao;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 import com.sun.xml.internal.fastinfoset.vocab.Vocabulary;
 
+import common.StringProcess;
+import jxl.Cell;
+import jxl.Sheet;
+import jxl.Workbook;
+import jxl.WorkbookSettings;
 import model.bean.JapaneseData;
 import model.bean.Lesson;
 import model.bean.Level;
@@ -147,6 +154,9 @@ public class JapaneseDAO {
 			e.printStackTrace();
 			return null;
 		}
+		finally{
+			connection.closeConnection();
+		}
 	}
 
 	public Lesson getLesson(String lessonID) {
@@ -171,15 +181,135 @@ public class JapaneseDAO {
 			e.printStackTrace();
 			return null;
 		}
-	}
-
-	public void deleteLevel(String levelID) {
-		try {
-			conn=connection.openConnection();
-			String sql="delete from japanese ";
-		} catch (Exception e) {
-			e.printStackTrace();
+		finally{
+			connection.closeConnection();
 		}
 	}
-	
+
+	public boolean deleteLevel(String levelID) {
+		try {
+			conn=connection.openConnection();
+			String sqlCheck="select * from japaneselesson where level_id= ?";
+			PreparedStatement pstmt=conn.prepareStatement(sqlCheck);
+			pstmt.setString(1, levelID);
+			ResultSet rs= pstmt.executeQuery();
+			if(rs.next()){
+				return false;
+			}
+			else{
+				String sql="delete from japaneselevel where level_id= ?";
+				PreparedStatement pstmt2=conn.prepareStatement(sql);
+				pstmt2.setString(1, levelID);
+				return (pstmt2.executeUpdate() != 0) ? true : false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		finally {
+			connection.closeConnection();
+		}
+	}
+
+	public boolean importFileExcel(String lessonID, String filePath) {
+		try {
+			/**delete lesson data*/
+			deleteLessonData(lessonID);
+			/********************/
+			conn=connection.openConnection();
+			String sqlLevelID="select level_id from japaneselesson where lesson_id = ?";
+			PreparedStatement pstmt= conn.prepareStatement(sqlLevelID);
+			pstmt.setString(1, lessonID);
+			ResultSet rs1= pstmt.executeQuery();
+			String levelID="";
+			if(rs1.next()){
+				levelID=rs1.getString(1);
+			}
+			WorkbookSettings ws= new WorkbookSettings();
+			ws.setEncoding("CP1252");
+			Workbook workBook= Workbook.getWorkbook(new File(filePath),ws);
+			Sheet sheet= workBook.getSheet(0);
+			int rows=(sheet.getRows());
+			System.out.println("rows="+sheet.getRows());
+			System.out.println("rows="+rows);
+			ArrayList<JapaneseData> listData= new ArrayList<JapaneseData>();
+			String id=ConnectionDAO.increateID("japanesedata", "data_id", conn);
+			String code=id.substring(0, 3);
+			int value=Integer.valueOf(id.substring(3,id.length()));
+			for(int row=1; row<rows; row++){
+				Cell cellJapanese=sheet.getCell(0, row);
+				Cell cellVietnamese=sheet.getCell(1, row);
+				Cell cellAudio=sheet.getCell(2, row);
+				JapaneseData data= new JapaneseData();
+				data.setDataID(code+String.format("%08d",value));
+				data.setJapanese(cellJapanese.getContents());
+				data.setVietnamese(cellVietnamese.getContents());
+				data.setDataSound(cellAudio.getContents());
+				data.setLessonID(lessonID);
+				data.setLevelID(levelID);
+				listData.add(data);
+				value++;
+				System.out.println(""+cellVietnamese.getContents());
+			}
+			String sqlInsert= "insert into japanesedata values(?,?,?,?,?,?)";
+			PreparedStatement pstmtInsertData=conn.prepareStatement(sqlInsert);
+			for(int i=0; i<listData.size(); i++){
+				pstmtInsertData.setString(1, listData.get(i).getDataID());
+				pstmtInsertData.setString(2, listData.get(i).getLessonID());
+				pstmtInsertData.setString(3, listData.get(i).getLevelID());
+				pstmtInsertData.setString(4, listData.get(i).getJapanese());
+				pstmtInsertData.setString(5, listData.get(i).getVietnamese());
+				pstmtInsertData.setString(6, listData.get(i).getDataSound());
+				pstmtInsertData.addBatch();
+			}
+
+			int count= pstmtInsertData.executeBatch()[0];
+			System.out.println(""+count);
+			return (count!=0) ? true : false;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		finally {
+			connection.closeConnection();
+		}
+	}
+	public boolean deleteLessonData(String lessonID){
+		try {
+			conn=connection.openConnection();
+			String sql="delete from japanesedata where data_id in "
+					+ " (select data_id from "
+					+ " ( select jd.data_id "
+					+ " from japanesedata jd join japaneselevel jl "
+					+ " on (jd.level_id=jl.level_id)"
+					+ " where (jl.category= ?) and (jd.lesson_id= ?)) p )";
+			System.out.println("sql delete"+sql);
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, "voca");
+			pstmt.setString(2, lessonID);
+			return (pstmt.executeUpdate() !=0) ? true : false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		finally {
+			connection.closeConnection();
+		}
+	}
+
+	public void deleteLesson(String lessonID) {
+		try {
+			deleteLessonData(lessonID);
+			conn=connection.openConnection();
+			String sql="delete from japaneselesson where lesson_id= ?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, lessonID);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			connection.closeConnection();
+		}
+	}
 }

@@ -3,6 +3,7 @@ package form;
 import java.util.ArrayList;
 
 import org.apache.struts.action.ActionForm;
+import org.apache.struts.upload.FormFile;
 
 import model.bean.JapaneseData;
 import model.bean.Lesson;
@@ -30,7 +31,29 @@ public class JapaneseForm extends ActionForm {
 	private ArrayList<JapaneseData> listData;
 	private String submit;
 	private String type;
+	private String deleteLevelError;
+	private FormFile fileExcel;
+	private FormFile[] fileAudio;
 	
+	
+	public FormFile getFileExcel() {
+		return fileExcel;
+	}
+	public void setFileExcel(FormFile fileExcel) {
+		this.fileExcel = fileExcel;
+	}
+	public FormFile[] getFileAudio() {
+		return fileAudio;
+	}
+	public void setFileAudio(FormFile[] fileAudio) {
+		this.fileAudio = fileAudio;
+	}
+	public String getDeleteLevelError() {
+		return deleteLevelError;
+	}
+	public void setDeleteLevelError(String deleteLevelError) {
+		this.deleteLevelError = deleteLevelError;
+	}
 	public ArrayList<JapaneseData> getListData() {
 		return listData;
 	}

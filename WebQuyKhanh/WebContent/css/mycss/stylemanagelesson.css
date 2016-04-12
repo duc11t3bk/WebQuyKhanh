@@ -1,0 +1,12 @@
+#form-upload-lesson {
+	border: 1px solid black;
+	background-color: white;
+	margin-top: 100px;
+	border-radius : 4px;
+	position: absolute;
+	top: -100%;
+	z-index: 12;
+	transition : top 0.75s;
+	-moz-transition : top 0.75s;
+	-webkit-transition : top 0.75s;
+}

@@ -43,7 +43,7 @@
 					<li><html:link action="/manage-posts">Quản lí bài đăng</html:link>
 					</li>
 					<li><html:link action="/manage-student" >Quản lí học viên</html:link></li>
-					<li><html:link action="/manage-japanese?action=vocabulary">Quản lí từ vựng</html:link>
+					<li><html:link action="/manage-level?action=vocabulary">Quản lí từ vựng</html:link>
 						<ul class="submenu">
 							<li><a href="teacherManageVocaTransLesson.html">Bài 1 -
 									Bài 25</a>
@@ -58,11 +58,8 @@
 									<li><a href="">Bài 2</a></li>
 								</ul></li>
 						</ul></li>
-					<li><html:link action="/manage-japanese?action=translate"> Quản lí dịch câu</html:link>
-						<ul class="submenu">
-							<li><a href="">Bài 1 - Bài 25</a></li>
-							<li><a href="">Bài 26 - Bài 30</a></li>
-						</ul></li>
+					<li><html:link action="/manage-level?action=translate"> Quản lí dịch câu</html:link>
+					</li>
 				</ul>
 			</logic:equal>
 		</div>

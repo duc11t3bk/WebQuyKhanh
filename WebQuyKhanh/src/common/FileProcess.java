@@ -9,7 +9,7 @@ import org.apache.struts.upload.FormFile;
 
 public class FileProcess {
 
-	public static String uploadImage(FormFile file, ActionServlet servlet, String folderName) {
+	public static String uploadFile(FormFile file, ActionServlet servlet, String folderName) {
 
 		String filePath = servlet.getServletContext().getRealPath("/") + folderName;
 		System.out.println("" + filePath);
@@ -33,8 +33,8 @@ public class FileProcess {
 				fos.close();
 
 				// copy file to folder avata
-				//String destPath = "/home/davy/Git/WebQuyKhanh/WebContent/" + folderName;
-				String destPath="C:\\Users\\viettel\\Documents\\gitspace\\WebQuyKhanh\\WebQuyKhanh\\WebContent\\"+folderName;
+				String destPath = "/home/davy/Git/WebQuyKhanh/WebContent/" + folderName;
+				//String destPath="C:\\Users\\viettel\\Documents\\gitspace\\WebQuyKhanh\\WebQuyKhanh\\WebContent\\"+folderName;
 				File destFile = new File(destPath, imageName);
 				FileUtils.copyFile(newFile, destFile);
 			} catch (Exception ex) {
@@ -45,7 +45,7 @@ public class FileProcess {
 		return null;
 	}
 
-	public static void deleteOldImage(ActionServlet servlet, String fileName, String folderName) {
+	public static void deleteOldFile(ActionServlet servlet, String fileName, String folderName) {
 		if (!"".equals(fileName)) {
 			String filePath=servlet.getServletContext().getRealPath("/")+folderName;
 			File file = new File(filePath, fileName);

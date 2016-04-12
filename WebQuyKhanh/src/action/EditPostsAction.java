@@ -62,9 +62,9 @@ public class EditPostsAction extends Action {
 				Posts post= new Posts();
 				post.setImage(postsForm.getImage());
 				if (!"".equals(file.getFileName())) {
-					String imageName = FileProcess.uploadImage(file, getServlet(), "postsimage");
+					String imageName = FileProcess.uploadFile(file, getServlet(), "postsimage");
 					String oldImageName = postsForm.getImage();
-					FileProcess.deleteOldImage(getServlet(), oldImageName,"postsimage");
+					FileProcess.deleteOldFile(getServlet(), oldImageName,"postsimage");
 					post.setImage(imageName);
 					postsForm.setImage(imageName);
 				}

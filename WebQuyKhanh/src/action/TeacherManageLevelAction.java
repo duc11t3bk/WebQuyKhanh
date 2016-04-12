@@ -21,7 +21,7 @@ import model.bean.Lesson;
 import model.bean.Level;
 import model.bo.JapaneseBO;
 
-public class TeacherManageJapaneseAction extends Action {
+public class TeacherManageLevelAction extends Action {
 
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
@@ -73,16 +73,13 @@ public class TeacherManageJapaneseAction extends Action {
 					write.close();
 					return null;
 				}
-				if("view-lesson".equals(type)){
-					String lessonID= japaneseForm.getLessonID();
-					ArrayList<JapaneseData> listData= japaneseBO.getListData(lessonID);
-					japaneseForm.setListData(listData);
-					japaneseForm.setLesson(japaneseBO.getLesson(lessonID));
-					return mapping.findForward("showVocabularyLesson");
-				}
 				if("delete".equals(type)){
 					String levelID=japaneseForm.getLevelID();
-					japaneseBO.deleteLevel(levelID);
+					if(!japaneseBO.deleteLevel(levelID)){
+						System.out.println("xóa lỗi");
+						japaneseForm.setDeleteLevelError("Bạn phải xóa các bài học trong mục trước");
+					}
+					System.out.println("xóa không lỗi");
 				}
 			}
 			ArrayList<Level> listLevel = japaneseBO.getListLevel(action);
