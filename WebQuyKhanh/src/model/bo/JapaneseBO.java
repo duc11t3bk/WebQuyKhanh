@@ -50,4 +50,8 @@ public class JapaneseBO {
 	public void deleteLesson(String lessonID) {
 		japaneseDAO.deleteLesson(lessonID);
 	}
+
+	public ArrayList<String> getFilesAudio(String lessonID) {
+		return japaneseDAO.getFilesAudio(lessonID);
+	}
 }

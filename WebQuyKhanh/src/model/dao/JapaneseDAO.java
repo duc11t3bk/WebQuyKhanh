@@ -312,4 +312,27 @@ public class JapaneseDAO {
 			connection.closeConnection();
 		}
 	}
+
+	public ArrayList<String> getFilesAudio(String lessonID) {
+		try {
+			conn=connection.openConnection();
+			String sql="select sound"
+					+ " from japanesedata where lesson_id= ?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, lessonID);
+			ResultSet rs= pstmt.executeQuery();
+			ArrayList<String> filesAudioName= new ArrayList<String>();
+			while(rs.next()){
+				filesAudioName.add(rs.getString(1));
+			}
+			return filesAudioName;
+					
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		finally {
+			connection.closeConnection();
+		}
+	}
 }

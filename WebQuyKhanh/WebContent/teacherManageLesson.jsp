@@ -51,7 +51,7 @@
 				<div id="form-upload-lesson" class="col-lg-offset-3 col-lg-6" style="padding: 0px; padding-bottom: 10px">
 					<html:hidden property="action" />
 					<html:hidden property="lessonID"/>
-					<div class="col-lg-12">
+					<div class="col-lg-12" style="text-align:center; margin-top:10px;">
 						<label>Upload từ mới </label>		
 					</div>
 					<div class="col-lg-12" style="padding: 0px">
@@ -67,7 +67,7 @@
 						<label>Chọn file nghe bên dưới </label>
 					</div>
 					<div class="col-lg-12" style="margin-top: 10px;">
-						<html:file property="fileAudio" multiple ></html:file>
+						<input type="file" name="filesAudio" class="file" id="input-2" multiple>
 					</div>
 					<div class="col-lg-12" style="text-align: center; margin-top:20px;">
 						<html:submit styleClass="btn-confirm" property="submit">Tải lên</html:submit>
@@ -100,6 +100,9 @@
 								</div>
 							</div>
 							<div class="panel-body">
+								<div class="row" style="text-align: center">
+									<label style="color : #5CB85C"><bean:write name="japaneseForm" property="notification"  /> </label>
+								</div>
 								<div class="row" style="margin-top: 10px">
 									<div class="col-lg-6" >
 										<button class="btn-add-new" onclick="formUploadLesson()"

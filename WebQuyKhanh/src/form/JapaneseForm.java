@@ -33,20 +33,27 @@ public class JapaneseForm extends ActionForm {
 	private String type;
 	private String deleteLevelError;
 	private FormFile fileExcel;
-	private FormFile[] fileAudio;
+	private ArrayList<FormFile> filesAudio;
+	private String notification;
 	
 	
+	public String getNotification() {
+		return notification;
+	}
+	public void setNotification(String notification) {
+		this.notification = notification;
+	}
 	public FormFile getFileExcel() {
 		return fileExcel;
 	}
 	public void setFileExcel(FormFile fileExcel) {
 		this.fileExcel = fileExcel;
 	}
-	public FormFile[] getFileAudio() {
-		return fileAudio;
+	public ArrayList<FormFile> getFilesAudio() {
+		return filesAudio;
 	}
-	public void setFileAudio(FormFile[] fileAudio) {
-		this.fileAudio = fileAudio;
+	public void setFilesAudio(ArrayList<FormFile> filesAudio) {
+		this.filesAudio = filesAudio;
 	}
 	public String getDeleteLevelError() {
 		return deleteLevelError;
