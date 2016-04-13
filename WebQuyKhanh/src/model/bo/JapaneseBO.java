@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import model.bean.JapaneseData;
 import model.bean.Lesson;
+import model.bean.LessonStatus;
 import model.bean.Level;
+import model.bean.WordStatus;
 import model.dao.JapaneseDAO;
 
 public class JapaneseBO {
@@ -53,5 +55,13 @@ public class JapaneseBO {
 
 	public ArrayList<String> getFilesAudio(String lessonID) {
 		return japaneseDAO.getFilesAudio(lessonID);
+	}
+
+	public LessonStatus getLessonStatus(String memberID, String lessonID) {
+		return japaneseDAO.getLessonStatus(memberID,lessonID);
+	}
+
+	public ArrayList<WordStatus> getListWordStatus(String memberID, String lessonID) {
+		return japaneseDAO.getListWordStatus(memberID, lessonID);
 	}
 }

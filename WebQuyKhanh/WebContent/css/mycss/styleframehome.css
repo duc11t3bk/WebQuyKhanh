@@ -2,9 +2,8 @@ html,body {
 	height: 100%;
 }
 body {
-	background-image: url("../../image/bg2.jpg"); 
+	background-color : #e9eaed !important;
 	background-size: 100% 100%;
-
 }
 
 .wrapper{
@@ -47,6 +46,8 @@ body {
 	background-color: transparent;
 	border-radius : 4px;
 	width: 100%;
+	box-shadow : 2px 2px 5px #888888;
+	height: 44px;
 }
 #cke_1_contents {
 	height: 400px !important;
@@ -66,4 +67,19 @@ body {
 }
 .btn-add-new span {
 	font-size: 20px;
+}
+#mypanel {
+	box-shadow : 3px 3px 10px #888888;
+}
+.btn-learn {
+	background-color: transparent;
+	padding: 10px;
+	border-radius : 4px;
+	box-shadow : 2px 2px 5px #888888;
+	color : #5CB85C;
+}
+.btn-learn:hover {
+	background-color: #5CB85C;
+	color : white;
+	box-shadow: 5px 5px 5px #888888;
 }

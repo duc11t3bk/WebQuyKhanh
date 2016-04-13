@@ -4,20 +4,25 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.sun.corba.se.impl.orb.PrefixParserAction;
 import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 import com.sun.xml.internal.fastinfoset.vocab.Vocabulary;
 
 import common.StringProcess;
+import common.Validate;
 import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.WorkbookSettings;
 import model.bean.JapaneseData;
 import model.bean.Lesson;
+import model.bean.LessonStatus;
 import model.bean.Level;
+import model.bean.WordStatus;
 
 public class JapaneseDAO {
 
@@ -162,10 +167,11 @@ public class JapaneseDAO {
 	public Lesson getLesson(String lessonID) {
 		try {
 			conn=connection.openConnection();
-			String sql="select jales.lesson_id, jales.level_id, jales.name, jalev.name"
+			String sql="select jales.lesson_id, jales.level_id, jales.name, jalev.name, jalev.category "
 					+ " from japaneselesson jales join japaneselevel jalev"
 					+ " on (jales.level_id = jalev.level_id) "
 					+ " where jales.lesson_id = ?";
+			System.out.println("sql===="+sql);
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, lessonID);
 			ResultSet rs= pstmt.executeQuery();
@@ -175,6 +181,14 @@ public class JapaneseDAO {
 				lesson.setLevelID(rs.getString(2));
 				lesson.setLessonName(rs.getString(3));
 				lesson.setLevelName(rs.getString(4));
+				lesson.setCategory(rs.getString(5));
+			}
+			String sqlCount="select count(*) from japanesedata where lesson_id = ?";
+			PreparedStatement pstmtCount= conn.prepareStatement(sqlCount);
+			pstmtCount.setString(1, lessonID);
+			ResultSet rsCount=pstmtCount.executeQuery();
+			while(rsCount.next()){
+				lesson.setTotalData(rsCount.getInt(1));
 			}
 			return lesson;
 		} catch (SQLException e) {
@@ -323,7 +337,9 @@ public class JapaneseDAO {
 			ResultSet rs= pstmt.executeQuery();
 			ArrayList<String> filesAudioName= new ArrayList<String>();
 			while(rs.next()){
-				filesAudioName.add(rs.getString(1));
+				if(!Validate.isEmpty(rs.getString(1))){
+					filesAudioName.add(rs.getString(1));
+				}
 			}
 			return filesAudioName;
 					
@@ -333,6 +349,98 @@ public class JapaneseDAO {
 		}
 		finally {
 			connection.closeConnection();
+		}
+	}
+
+	public LessonStatus getLessonStatus(String memberID, String lessonID) {
+		try {
+			conn=connection.openConnection();
+			String sql="select * from lessonstatus where member_id= ? and lesson_id = ?";
+			PreparedStatement pstmt=conn.prepareStatement(sql,ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+			pstmt.setString(1, memberID);
+			pstmt.setString(2, lessonID);
+			ResultSet rs= pstmt.executeQuery();
+			LessonStatus lessonStatus= new LessonStatus();
+			if(rs.next()){
+				rs.beforeFirst();
+				while(rs.next()){
+					lessonStatus.setMemberID(rs.getString(1));
+					lessonStatus.setLessonID(rs.getString(2));
+					lessonStatus.setComplete(rs.getInt(3));
+				}
+			}
+			else{
+				String sqlInsert="insert into lessonstatus values(?,?,?)";
+				PreparedStatement pstmtInsert=conn.prepareCall(sqlInsert);
+				pstmtInsert.setString(1, memberID);
+				pstmtInsert.setString(2, lessonID);
+				pstmtInsert.setInt(3,0);
+				pstmtInsert.executeUpdate();
+				lessonStatus.setMemberID(memberID);
+				lessonStatus.setLessonID(lessonID);
+				lessonStatus.setComplete(0);
+			}
+			return lessonStatus;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		finally{
+			connection.closeConnection();
+		}
+	}
+
+	public ArrayList<WordStatus> getListWordStatus(String memberID, String lessonID) {
+		try {
+			conn=connection.openConnection();
+			String sql="select lw.member_id, lw.data_id, lw.accuracy "
+					+ " from learnword lw join japanesedata jd on (lw.data_id = jd.data_id)"
+					+ " where (jd.lesson_id = ?) and (lw.member_id= ?)";
+			PreparedStatement pstmt = conn.prepareStatement(sql,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			pstmt.setString(1, lessonID);
+			pstmt.setString(2, memberID);
+			ResultSet rs= pstmt.executeQuery();
+			ArrayList<WordStatus> listWordStatus= new ArrayList<WordStatus>();
+			if(rs.next()){
+				rs.beforeFirst();
+				while(rs.next()){
+					WordStatus wordStatus= new WordStatus();
+					wordStatus.setMemberID(rs.getString(1));
+					wordStatus.setDataID(rs.getString(2));
+					wordStatus.setAccuracy(StringProcess.convertAccuracy(rs.getInt(3)));
+					listWordStatus.add(wordStatus);
+				}
+			}
+			else{
+				String sqlGetDataID="select data_id "
+								+ "  from japanesedata"
+								+ " where lesson_id = ?";
+				PreparedStatement pstmtGetDataID=conn.prepareCall(sqlGetDataID);
+				pstmtGetDataID.setString(1, lessonID);
+				ResultSet rsGetDataID= pstmtGetDataID.executeQuery();
+				ArrayList<String> listDataID= new ArrayList<String>();
+				while(rsGetDataID.next()){
+					listDataID.add(rsGetDataID.getString(1));
+				}
+				String sqlInsertWordStatus="insert into learnword values(?,?,?)";
+				PreparedStatement pstmtInsert=conn.prepareStatement(sqlInsertWordStatus);
+				for(int i=0; i<listDataID.size(); i++){
+					pstmtInsert.setString(1,memberID);
+					pstmtInsert.setString(2, listDataID.get(i));
+					pstmtInsert.setInt(3, 0);
+					pstmtInsert.addBatch();
+					WordStatus wordStatus= new WordStatus();
+					wordStatus.setMemberID(memberID);
+					wordStatus.setDataID(listDataID.get(i));
+					wordStatus.setAccuracy(0);
+					listWordStatus.add(wordStatus);
+				}
+				pstmtInsert.executeBatch();
+			}
+			return listWordStatus;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 }

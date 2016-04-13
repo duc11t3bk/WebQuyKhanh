@@ -36,6 +36,10 @@
 		function closeLogReg() {
 			$("#form-login").css("top", "-400px");
 			$("#form-register").css("top", "-600px");
+			$("#new-level").css("top","-300px");
+			$("#new-lesson").css("top","-300px");
+			$("#form-confirm").css("top","-300px");
+			$("#form-upload-lesson").css("top","-100%");
 			$(".overflow").hide();
 		}
 		$(".overflow").on("click", function() {
@@ -290,8 +294,8 @@
 			<li><a href="#"><span class="glyphicon glyphicon-hourglass"></span>
 					Học từ vựng</a>
 				<ul class="submenu">
-					<li><a href="vocaLevel.html">Học từ vựng</a></li>
-					<li><a href="translationLevel.html">Luyện dịch câu</a></li>
+					<li><html:link action="/member-manage-level?action=vocabulary">Học từ vựng</html:link></li>
+					<li><html:link action="/member-manage-level?action=translate">Luyện dịch câu</html:link></li>
 				</ul></li>
 			<logic:empty name="loginForm" property="member" scope="session">
 				<li id="btn-login"><a href="#x"><span
@@ -326,7 +330,7 @@
 					<logic:notEqual value="0"
 						name="member" property="priority">
 						<ul class="submenu" style="text-align: left">
-							<li><html:link action="/member-update-infor"
+							<li><html:link action="/teacher-update-infor"
 									style="margin-left:5px;">
 									<span class="glyphicon glyphicon-info-sign"></span> Thông tin cá nhân</html:link></li>
 							<li><html:link action="/teacher-update-infor" style="margin-left:5px">
@@ -339,8 +343,7 @@
 			</logic:notEmpty>
 		</ul>
 	</div>
-	
-	<div class="container" style="margin-top: 50px;">
+		<div class="container" style="margin-top: 50px;">
 		<div class="row">
 			<div id="myCarousel" class="carousel slide" data-ride="carousel">
 				<!-- Indicators -->
@@ -379,6 +382,7 @@
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>
+
+	

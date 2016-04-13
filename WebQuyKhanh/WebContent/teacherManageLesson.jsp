@@ -61,13 +61,13 @@
 						<label>Chọn file Excel nội dung bên dưới </label>
 					</div>
 					<div class="col-lg-12" style="margin-top: 10px">
-						<html:file styleId="input-1" property="fileExcel" styleClass="file"></html:file>
+						<html:file styleId="input-1" property="fileExcel" styleClass="file" accept=".xls"></html:file>
 					</div>
 					<div class="col-lg-12" style="margin-top:20px" >
 						<label>Chọn file nghe bên dưới </label>
 					</div>
 					<div class="col-lg-12" style="margin-top: 10px;">
-						<input type="file" name="filesAudio" class="file" id="input-2" multiple>
+						<input type="file" name="filesAudio" class="file" id="input-2" multiple accept=".mp3">
 					</div>
 					<div class="col-lg-12" style="text-align: center; margin-top:20px;">
 						<html:submit styleClass="btn-confirm" property="submit">Tải lên</html:submit>
@@ -101,7 +101,8 @@
 							</div>
 							<div class="panel-body">
 								<div class="row" style="text-align: center">
-									<label style="color : #5CB85C"><bean:write name="japaneseForm" property="notification"  /> </label>
+									<label style="color : #5CB85C"><bean:write name="japaneseForm" property="notifySuccess"  /> </label>
+									<label style="color: red"><bean:write name="japaneseForm" property="notifyError" /> </label>
 								</div>
 								<div class="row" style="margin-top: 10px">
 									<div class="col-lg-6" >
@@ -126,8 +127,9 @@
 											data-page-list="[30,60,All]" data-height="500">
 											<thead>
 												<tr>
-													<th data-width="50%">Tiếng Nhật</th>
-													<th data-width="50%">Tiếng Việt</th>
+													<th data-width="40%">Tiếng Nhật</th>
+													<th data-width="40%">Tiếng Việt</th>
+													<th data-width="20%">File Nghe</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -136,6 +138,7 @@
 													<tr>
 														<td><bean:write property="japanese" name="data" /></td>
 														<td><bean:write property="vietnamese" name="data" /></td>
+														<td><bean:write property="dataSound" name="data"/></td>
 													</tr>
 												</logic:iterate>
 											</tbody>

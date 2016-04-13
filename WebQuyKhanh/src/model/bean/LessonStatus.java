@@ -4,7 +4,7 @@ public class LessonStatus {
 
 	private String memberID;
 	private String lessonID;
-	private int accuracy;
+	private int complete;
 	private String category;
 	public String getMemberID() {
 		return memberID;
@@ -18,11 +18,11 @@ public class LessonStatus {
 	public void setLessonID(String lessonID) {
 		this.lessonID = lessonID;
 	}
-	public int getAccuracy() {
-		return accuracy;
+	public int getComplete() {
+		return complete;
 	}
-	public void setAccuracy(int accuracy) {
-		this.accuracy = accuracy;
+	public void setComplete(int complete) {
+		this.complete = complete;
 	}
 	public String getCategory() {
 		return category;

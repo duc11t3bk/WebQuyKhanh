@@ -34,7 +34,7 @@
 							<a href="#" id="new-more">Xem thêm <span class="glyphicon glyphicon-chevron-right"></span></a>
 						</div>
 						<div class="col-lg-6" style="padding-left:0px;">
-							<div class="panel panel-primary" style="height:250px">
+							<div id="mypanel" class="panel panel-default" style="height:250px">
 								<div class="panel-heading">
 									<div class="panel-title"><a href="#">Tin mới đăng</a></div>
 								</div>
@@ -51,7 +51,7 @@
 					</div>
 					<div class="row">
 						<div class="col-lg-12">
-							<div class="panel panel-primary">
+							<div id="mypanel" class="panel panel-default">
 								<div class="panel-heading">
 									<div class="panel-title"><a href="#">Du học Nhật Bản</a></div>
 								</div>
@@ -111,7 +111,7 @@
 							<a href="#" id="new-more">Xem thêm <span class="glyphicon glyphicon-chevron-right"></span></a>
 						</div>
 						<div class="col-lg-6" style="padding-left:0px;">
-							<div class="panel panel-primary" style="height:250px">
+							<div id="mypanel" class="panel panel-default" style="height:250px">
 								<div class="panel-heading">
 									<div class="panel-title"><a href="#">Lớp học tiếng Nhật</a></div>
 								</div>
@@ -128,7 +128,7 @@
 					</div>
 					<div class="row">
 						<div class="col-lg-6">
-							<div class="panel panel-primary">
+							<div id="mypanel" class="panel panel-default">
 								<div class="panel-heading">
 									<div class="panel-title">Tuyển dụng</div>
 								</div>
@@ -143,7 +143,7 @@
 							</div>
 						</div>
 						<div class="col-lg-6">
-							<div class="panel panel-primary">
+							<div id="mypanel" class="panel panel-default">
 								<div class="panel-heading">
 									<div class="panel-title">Tài liệu tham khảo</div>
 								</div>

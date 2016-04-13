@@ -35,7 +35,7 @@ public class FileProcess {
 				// copy file to folder avata
 				String destPath = "/home/davy/Git/WebQuyKhanh/WebContent/" + folderName;
 				//String destPath="C:\\Users\\viettel\\Documents\\gitspace\\WebQuyKhanh\\WebQuyKhanh\\WebContent\\"+folderName;
-				File destFile = new File(destPath, imageName);
+				File destFile = new File(destPath,imageName);
 				FileUtils.copyFile(newFile, destFile);
 			} catch (Exception ex) {
 				ex.printStackTrace();
@@ -53,7 +53,7 @@ public class FileProcess {
 				file.delete();
 			}
 			String localPath = "/home/davy/Git/WebQuyKhanh/WebContent/"+folderName;
-			File localFile = new File(localPath, fileName);
+			File localFile = new File(localPath,fileName);
 			if (localFile.exists()) {
 				localFile.delete();
 			}

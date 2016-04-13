@@ -29,19 +29,40 @@ public class JapaneseForm extends ActionForm {
 	private ArrayList<Level> listLevel;
 	private ArrayList<Lesson> listLesson;
 	private ArrayList<JapaneseData> listData;
+	private ArrayList<WordStatus> listWordStatus;
 	private String submit;
 	private String type;
 	private String deleteLevelError;
 	private FormFile fileExcel;
 	private ArrayList<FormFile> filesAudio;
-	private String notification;
+	private String notifyError;
+	private String notifySuccess;
+	private String learnOption;
 	
-	
-	public String getNotification() {
-		return notification;
+
+	public String getLearnOption() {
+		return learnOption;
 	}
-	public void setNotification(String notification) {
-		this.notification = notification;
+	public void setLearnOption(String learnOption) {
+		this.learnOption = learnOption;
+	}
+	public ArrayList<WordStatus> getListWordStatus() {
+		return listWordStatus;
+	}
+	public void setListWordStatus(ArrayList<WordStatus> listWordStatus) {
+		this.listWordStatus = listWordStatus;
+	}
+	public String getNotifyError() {
+		return notifyError;
+	}
+	public void setNotifyError(String notifyError) {
+		this.notifyError = notifyError;
+	}
+	public String getNotifySuccess() {
+		return notifySuccess;
+	}
+	public void setNotifySuccess(String notifySuccess) {
+		this.notifySuccess = notifySuccess;
 	}
 	public FormFile getFileExcel() {
 		return fileExcel;

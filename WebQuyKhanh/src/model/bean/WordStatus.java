@@ -4,7 +4,7 @@ public class WordStatus {
 
 	private String dataID;
 	private String memberID;
-	private String accuracy;
+	private int accuracy;
 	
 	public String getDataID() {
 		return dataID;
@@ -18,11 +18,10 @@ public class WordStatus {
 	public void setMemberID(String memberID) {
 		this.memberID = memberID;
 	}
-	public String getAccuracy() {
+	public int getAccuracy() {
 		return accuracy;
 	}
-	public void setAccuracy(String accuracy) {
+	public void setAccuracy(int accuracy) {
 		this.accuracy = accuracy;
 	}
-	
 }

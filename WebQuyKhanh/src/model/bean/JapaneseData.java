@@ -2,6 +2,8 @@ package model.bean;
 
 public class JapaneseData {
 
+	public static int NUMBER_ANSWER=4;
+	public static int NUMBER_QUESTION=5;
 	private String dataID;
 	private String lessonID;
 	private String levelID;
