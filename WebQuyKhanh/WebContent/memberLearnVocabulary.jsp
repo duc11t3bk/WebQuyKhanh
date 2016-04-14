@@ -44,12 +44,43 @@
 		var jsonObject = JSON.parse(response);
 		var primary_word = jsonObject.primary_word;
 		var extra_word = jsonObject.extra_word;
-		var QUESTION = 1;
+		var TOTAL_QUESTION = 1;
+		var questions= new Array(0,0,0,0,0);
+		var accuracy= new Array(0,0,0,0,0);
 		var formLearns = $(".form-learn");
 		for (var i = 0; i < formLearns.length; i++) {
 			$(formLearns[i]).css("display", "none");
 		}
 		$("#form-new-word").css("display","block");
+		/* while(TOTAL_QUESTION <=5){
+			if(TOTAL_QUESTION==1||TOTAL_QUESTION==2
+					||TOTAL_QUESTION==7||TOTAL_QUESTION==8||TOTAL_QUESTION==14){
+				
+			}
+			switch(TOTAL_QUESTION){
+				case 1 : {
+					$(formLearns[question[0]]).css("display","block");
+					
+				}
+			}
+		} */
+	});
+	function playaudio(){
+		var name=$(this).prop("tagName");
+		console.log("name"+name);
+		var audio=($(this).find("#audio"))[0];
+		audio.play();
+	}
+	$(document).ready(function(){
+		var btn_volume=$(".my-volume");
+		for(var i=0; i<btn_volume.length; i++){
+			$(btn_volume[i]).on("click",function(){
+				var tagName=$(this).prop("tagName");
+				console.log("name"+tagName);
+				var audio=$(this).find("audio")[0];
+				audio.play();
+			});
+		}
 	});
 </script>
 </head>
@@ -90,15 +121,18 @@
 						<div class="col-lg-offset-1 col-lg-10">
 							<div class="col-lg-offset-1 col-lg-1">
 								<span class="glyphicon glyphicon-volume-up my-volume"
-									style="font-size: 50px;"></span>
+									style="font-size: 50px;"><audio id="audio1" src="http://www.w3schools.com/html/horse.mp3"></audio></span>
+								<span class="glyphicon glyphicon-volume-up my-volume"
+									style="font-size: 50px;" ><audio id="audio2" src="http://www.w3schools.com/html/horse.mp3"></audio></span>									
+									 
 							</div>
 							<div class="col-lg-9">
 								<div class="col-lg-12">
 									<div class="col-lg-9" style="padding-left: 0px">
-										<label style="font-size: 40px">Watashi</label>
+										<label style="font-size: 40px" id="fnw-ja"></label>
 									</div>
 									<div class="col-lg-3">
-										<div class="col-lg-12 btn-next">
+										<div class="col-lg-12 btn-next" id="fnw-btn-next">
 											<div class="col-lg-12">
 												<span style="font-size: 40px"
 													class="glyphicon glyphicon-chevron-right"></span>
@@ -111,7 +145,7 @@
 									<hr>
 								</div>
 								<div class="col-lg-12">
-									<h5 style="font-size: 30px">Tôi</h5>
+									<h5 style="font-size: 30px" id="fnw-vi">Tôi</h5>
 								</div>
 								<div class="col-lg-12">
 									<hr>
@@ -127,7 +161,7 @@
 										style="font-size: 50px"></span>
 								</div>
 								<div class="col-lg-8">
-									<label style="font-size: 50px">Tôi</label>
+									<label id="fqvi-ja-vi" style="font-size: 50px" >Tôi</label>
 								</div>
 								<div class="col-lg-2">
 									<span class="glyphicon glyphicon-time" style="font-size: 50px"></span>
@@ -135,15 +169,15 @@
 							</div>
 							<div class="col-lg-12"
 								style="margin-bottom: 20px; margin-top: 50px;">
-								<div class="col-lg-offset-2 col-lg-3 btn-answer">Item 1</div>
-								<div class="col-lg-offset-1 col-lg-3 btn-answer">item 2</div>
+								<div id="fqvi-ja-answer1" class="col-lg-offset-2 col-lg-3 btn-answer" >Item 1</div>
+								<div id="fqvi-ja-answer2" class="col-lg-offset-1 col-lg-3 btn-answer" >item 2</div>
 							</div>
 							<div class="col-lg-12" style="margin-bottom: 20px;">
-								<div class="col-lg-offset-2 col-lg-3 btn-answer">Item 1</div>
-								<div class="col-lg-offset-1 col-lg-3 btn-answer">item 2</div>
+								<div id="fqvi-ja-answer3" class="col-lg-offset-2 col-lg-3 btn-answer" >Item 1</div>
+								<div id="fqvi-ja-answer4" class="col-lg-offset-1 col-lg-3 btn-answer">item 2</div>
 							</div>
 							<div class="col-lg-12">
-								<div class="col-lg-offset-4 col-lg-3 btn-answer">
+								<div id="fqvi-ja-view-answer" class="col-lg-offset-4 col-lg-3 btn-answer">
 									<div class="col-lg-3"
 										style="padding-left: 0px; font-size: 20px">
 										<span class="glyphicon glyphicon-repeat"></span>
@@ -158,10 +192,10 @@
 							<div class="col-lg-12" style="margin-bottom: 20px">
 								<div class="col-lg-offset-1 col-lg-1">
 									<span class="glyphicon glyphicon-question-sign"
-										style="font-size: 50px"></span>
+										schur nhtyle="font-size: 50px"></span>
 								</div>
 								<div class="col-lg-8">
-									<label style="font-size: 50px">Tôi</label>
+									<label id="fqja-vi-vi" style="font-size: 50px">Tôi</label>
 								</div>
 								<div class="col-lg-2">
 									<span class="glyphicon glyphicon-time" style="font-size: 50px"></span>
@@ -170,22 +204,22 @@
 							<div class="col-lg-12"
 								style="margin-bottom: 20px; margin-top: 50px;">
 								<div class="col-lg-12" style="margin-bottom: 10px;">
-									<div class="col-lg-offset-3 col-lg-5 btn-answer">Item 1</div>
+									<div id="fqja-vi-answer1" class="col-lg-offset-3 col-lg-5 btn-answer">Item 1</div>
 								</div>
 								<div class="col-lg-12" style="margin-bottom: 10px;">
-									<div class="col-lg-offset-3 col-lg-5 btn-answer">Item 1</div>
+									<div id="fqja-vi-answer1" class="col-lg-offset-3 col-lg-5 btn-answer">Item 1</div>
 								</div>
 								<div class="col-lg-12" style="margin-bottom: 10px;">
-									<div class="col-lg-offset-3 col-lg-5 btn-answer">Item 1</div>
+									<div id="fqja-vi-answer1" class="col-lg-offset-3 col-lg-5 btn-answer">Item 1</div>
 								</div>
 							</div>
 							<div class="col-lg-12">
-								<div class="col-lg-offset-4 col-lg-3 btn-answer">
+								<div  class="col-lg-offset-4 col-lg-3 btn-answer">
 									<div class="col-lg-3"
 										style="padding-left: 0px; font-size: 20px">
 										<span class="glyphicon glyphicon-repeat"></span>
 									</div>
-									Xem câu trả lời
+									<h5 id="fqja-vi-view-answer">Xem câu trả lời</h5>
 								</div>
 							</div>
 						</div>
