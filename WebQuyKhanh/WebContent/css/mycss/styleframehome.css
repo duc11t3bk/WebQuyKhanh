@@ -20,11 +20,14 @@ body {
 	padding-bottom: 100px;
 }
 .main-container2 {
-	padding-bottom: 200px;
 	margin-top:40px;
+	padding-bottom: 200px;
 }
 .content{
 	margin-top: 20px;
+}
+.form-container{
+	position: relative;
 }
 .mybtn{
 	width: 50%;

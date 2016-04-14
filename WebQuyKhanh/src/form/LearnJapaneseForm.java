@@ -12,9 +12,30 @@ public class LearnJapaneseForm extends ActionForm {
 	
 	private Lesson lesson;
 	private ArrayList<JapaneseData> listData;
-	private ArrayList<String> listAnswer;
 	private ArrayList<WordStatus> listWordStatus;
+	private String lessonID;
+	private String memberID;
+	private String dataResponse;
 	
+	
+	public String getDataResponse() {
+		return dataResponse;
+	}
+	public void setDataResponse(String dataResponse) {
+		this.dataResponse = dataResponse;
+	}
+	public String getLessonID() {
+		return lessonID;
+	}
+	public void setLessonID(String lessonID) {
+		this.lessonID = lessonID;
+	}
+	public String getMemberID() {
+		return memberID;
+	}
+	public void setMemberID(String memberID) {
+		this.memberID = memberID;
+	}
 	public Lesson getLesson() {
 		return lesson;
 	}
@@ -26,12 +47,6 @@ public class LearnJapaneseForm extends ActionForm {
 	}
 	public void setListData(ArrayList<JapaneseData> listData) {
 		this.listData = listData;
-	}
-	public ArrayList<String> getListAnswer() {
-		return listAnswer;
-	}
-	public void setListAnswer(ArrayList<String> listAnswer) {
-		this.listAnswer = listAnswer;
 	}
 	public ArrayList<WordStatus> getListWordStatus() {
 		return listWordStatus;

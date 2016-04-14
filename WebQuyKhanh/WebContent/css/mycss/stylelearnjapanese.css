@@ -1,0 +1,60 @@
+.form-learn {
+	background-color: white;
+	box-shadow : 3px 3px 5px #888888;
+	padding: 50px 20px;
+	margin-bottom: 20px;
+	position: absolute;
+}
+.form-learn hr {
+	border-color: #c6c1c1;
+	box-shadow: 1px 1px 3px #888888;
+}
+.btn-next {
+	background-color : #c6c1c1;
+	color : white;
+	border-radius : 10px;
+	text-align:center;
+	height: 80px;
+	box-shadow : 3px 3px 5px #888888;
+	cursor: pointer;
+}
+.btn-next:hover {
+	background-color : #44b3ee;
+	box-shadow: 5px 5px 5px #888888;
+}
+.my-volume, .my-volume-question {
+	color: #c6c1c1;
+	font-size: 50px;
+	border-radius : 30px;
+	box-shadow: 3px 3px 5px #888888;
+	cursor: pointer;
+}
+.my-volume:hover, .my-volume-question:hover {
+	color : black;
+	box-shadow: 7px 7px 5px #888888;
+}
+.my-volume-question {
+	font-size: 100px;
+	color: #c6c1c1;
+	border-radius : 50px;
+}
+.btn-answer {
+	width: 100%;
+	padding: 10px;
+	border : 1px solid #ddd;
+	border-radius : 10px;
+	box-shadow : 3px 3px 5px #888888;
+	cursor: pointer;
+}
+.btn-answer:hover {
+	box-shadow : 7px 7px 10px #888888;
+}
+.text-answer {
+	width: 100%;
+	padding:10px;
+	font-size: 20px;
+	border-radius:20px;
+	display: block;
+	text-align:center;
+	box-shadow: 3px 3px 5px #888888;
+}

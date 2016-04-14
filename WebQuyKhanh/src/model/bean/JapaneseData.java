@@ -2,15 +2,23 @@ package model.bean;
 
 public class JapaneseData {
 
-	public static int NUMBER_ANSWER=4;
-	public static int NUMBER_QUESTION=5;
+	public static int NUMBER_ANSWERS=4;
+	public static int NUMBER_QUESTIONS=5;
+	public static int NUMBER_NEW_WORDS=8;
 	private String dataID;
 	private String lessonID;
 	private String levelID;
 	private String japanese;
 	private String vietnamese;
 	private String dataSound;
+	private String memberID;
 	
+	public String getMemberID() {
+		return memberID;
+	}
+	public void setMemberID(String memberID) {
+		this.memberID = memberID;
+	}
 	public String getDataID() {
 		return dataID;
 	}

@@ -95,7 +95,8 @@
 														<html:option value="2">Ôn tập</html:option>
 													</html:select>
 												</div> 
-												<html:link href="#X">
+												<bean:define id="lessonID" name="lesson" property="lessonID"></bean:define>
+												<html:link action="/member-learn-vocabulary?lessonID=${lessonID }">
 													<input class="col-lg-3 btn-learn"
 														type="button" value="Học những từ này" />
 												</html:link>
