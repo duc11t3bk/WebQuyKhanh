@@ -115,34 +115,55 @@
 			return answers;
 		}
 		
-		function loadFormNewWord(currentWord){
+		function loadFormNewWord(currentWord,type){
 			$(formLearns[questions[currentWord]]).css("display","block");
 			$("#fnw-ja").html(""+primary_word[currentWord].japanese);
 			$("#fnw-vi").html(""+primary_word[currentWord].vietnamese);
 			var audio=$("#fnw-audio")[0];
 			$(audio).attr("src","japanese/audio/"+lessonID+"/"+primary_word[currentWord].audio);
-			questions[currentWord]+=1;
-			TOTAL_QUESTION+=1;
+			if(type=="learn"){
+				questions[currentWord]+=1;
+				TOTAL_QUESTION+=1;	
+			}
 		}
 		function loadFormLearnNewWord(firstWord,secondWord,threeWord){
 			var condition;
+			console.log("firstWord="+firstWord+":"+questions[firstWord]);
+			console.log("secondWord="+secondWord+":"+questions[secondWord]);
 			if(threeWord==-1){
-				condition= (questions[firstWord] <3) && (questions[secondWord]<3);
+				if(TOTAL_QUESTION<13){
+					condition= (questions[firstWord] <3) || (questions[secondWord]<3);	
+				}
+				else{
+					condition=(questions[firstWord]<6)|| (questions[secondWord]<6);
+				}
 			}
 			else{
-				condition= (questions[firstWord] <6)&& (questions[secondWord] <6) && (questions[threeWord]<6);
+				condition= (questions[firstWord] <6)|| (questions[secondWord] <6) || (questions[threeWord]<6);
 			}
 			console.log("condition"+condition);
 			var currentWord=0;
 			if(condition){
 				if(threeWord==-1){
 					currentWord=Math.floor((Math.random()*2)+firstWord);
-					if(questions[currentWord]==3){
-						if(currentWord==firstWord) {
-							currentWord=secondWord;
-						}
-						else{
-							currentWord=firstWord;
+					if(TOTAL_QUESTION<13){
+						if(questions[currentWord]==3){
+							if(currentWord==firstWord){
+								currentWord=secondWord;
+							}
+							else{
+								currentWord=firstWord;
+							}
+						}	
+					}
+					else{
+						if(questions[currentWord]==6){
+							if(currentWord==firstWord){
+								currentWord=secondWord;
+							}
+							else{
+								currentWord=firstWord;
+							}
 						}
 					}
 				}
@@ -186,10 +207,11 @@
 								else{
 									console.log("false");
 								}
+								questions[currentWord]+=1;
+								TOTAL_QUESTION+=1;
+								showQuestion();
 							});
 						}
-						questions[currentWord]+=1;
-						TOTAL_QUESTION+=1;
 						break;
 					}
 					case 2 : {
@@ -215,10 +237,11 @@
 								else{
 									console.log("false");
 								}
+								questions[currentWord]+=1;
+								TOTAL_QUESTION+=1;
+								showQuestion();
 							});
 						}
-						questions[currentWord]+=1;
-						TOTAL_QUESTION+=1;
 						break;
 					}
 					case 3 : {
@@ -298,6 +321,9 @@
 			}
 		}
 		function showQuestion() {
+// 			for(var i=0; i<accuracy.length; i++){
+// 				console.log("i"+i+":"+accuracy[i]+"\n");
+// 			}
 			for (var i = 0; i < formLearns.length; i++) {
 				$(formLearns[i]).css("display", "none");
 			}
@@ -305,11 +331,11 @@
 				console.log("total question"+TOTAL_QUESTION);
 				switch (TOTAL_QUESTION) {
 				case 0: {
-					loadFormNewWord(0);
+					loadFormNewWord(0,"learn");
 					break;
 				}
 				case 1: {
-					loadFormNewWord(1);
+					loadFormNewWord(1,"learn");
 					break;
 				}
 				case 2:
@@ -320,11 +346,11 @@
 					break;
 				}
 				case 6: {
-					loadFormNewWord(2);
+					loadFormNewWord(2,"learn");
 					break;
 				}
 				case 7: {
-					loadFormNewWord(3);
+					loadFormNewWord(3,"learn");
 					break;
 				}
 				case 8:
@@ -335,7 +361,7 @@
 					break;
 				}
 				case 12: {
-					loadFormNewWord(4);
+					loadFormNewWord(4,"learn");
 					break;
 				}
 				case 13:
@@ -364,7 +390,6 @@
 		for(var i=0; i<btn_next.length; i++){
 			$(btn_next[i]).on("click",function(){
 				showQuestion();
-				console.log("runnn");
 			});
 		}
 	});

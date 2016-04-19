@@ -29,7 +29,11 @@
 	box-shadow: 3px 3px 5px #888888;
 	cursor: pointer;
 }
-.my-volume:hover, .my-volume-question:hover {
+.my-volume:hover{
+	color:black;
+	box-shadow: 7px 7px 5px #888888;
+}
+.my-volume-question:hover {
 	background-color: #03A9F4;
 	box-shadow: 7px 7px 5px #888888;
 }
