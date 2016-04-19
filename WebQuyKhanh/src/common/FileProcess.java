@@ -33,8 +33,8 @@ public class FileProcess {
 				fos.close();
 
 				// copy file to folder avata
-				String destPath = "/home/davy/Git/WebQuyKhanh/WebContent/" + folderName;
-				//String destPath="C:\\Users\\viettel\\Documents\\gitspace\\WebQuyKhanh\\WebQuyKhanh\\WebContent\\"+folderName;
+				//String destPath = "/home/davy/Git/WebQuyKhanh/WebContent/" + folderName;
+				String destPath="C:\\Users\\viettel\\Documents\\gitspace\\WebQuyKhanh\\WebQuyKhanh\\WebContent\\"+folderName;
 				File destFile = new File(destPath,imageName);
 				FileUtils.copyFile(newFile, destFile);
 			} catch (Exception ex) {
@@ -52,7 +52,8 @@ public class FileProcess {
 			if (file.exists()) {
 				file.delete();
 			}
-			String localPath = "/home/davy/Git/WebQuyKhanh/WebContent/"+folderName;
+			//String localPath = "/home/davy/Git/WebQuyKhanh/WebContent/"+folderName;
+			String localPath="C:\\Users\\viettel\\Documents\\gitspace\\WebQuyKhanh\\WebQuyKhanh\\WebContent\\"+folderName;
 			File localFile = new File(localPath,fileName);
 			if (localFile.exists()) {
 				localFile.delete();

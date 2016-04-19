@@ -39,6 +39,7 @@
 </script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		var lessonID=$("#lessonID").val();
 		var response = $("#dataResponse").val();
 		console.log("jsonObject \n" + response);
 		var jsonObject = JSON.parse(response);
@@ -48,29 +49,33 @@
 		var questions= new Array(0,0,0,0,0);
 		var accuracy= new Array(0,0,0,0,0);
 		var formLearns = $(".form-learn");
+		
 		for (var i = 0; i < formLearns.length; i++) {
 			$(formLearns[i]).css("display", "none");
 		}
 		$("#form-new-word").css("display","block");
-		/* while(TOTAL_QUESTION <=5){
-			if(TOTAL_QUESTION==1||TOTAL_QUESTION==2
-					||TOTAL_QUESTION==7||TOTAL_QUESTION==8||TOTAL_QUESTION==14){
+		$("#fnw-ja").html(""+primary_word[0].japanese);
+		$("#fnw-vi").html(""+primary_word[0].vietnamese);
+		var audio=$("#fnw-audio")[0];
+		$(audio).attr("src","japanese/audio/"+lessonID+"/"+primary_word[0].audio);
+		
+// 		while(TOTAL_QUESTION <=25){
+// 			if(TOTAL_QUESTION==1||TOTAL_QUESTION==2
+// 					||TOTAL_QUESTION==7||TOTAL_QUESTION==8||TOTAL_QUESTION==14){
 				
-			}
-			switch(TOTAL_QUESTION){
-				case 1 : {
-					$(formLearns[question[0]]).css("display","block");
-					
-				}
-			}
-		} */
+// 			}
+// 			switch(TOTAL_QUESTION){
+// 				case 1 : {
+// 					$(formLearns[questions[0]]).css("display","block");
+// 					$("#fnw-ja").html(""+primary_word[0].japanese);
+// 					$("#fnw-vi").html(""+primary_word[0].vietnamese);
+// 					var audio=$("#fnw-audio")[0];
+// 					$(audio).attr("src","japanese/audio/"+lessonID+"/"+primary_word[0].audio);
+// 				}
+// 			}
+// 		}
 	});
-	function playaudio(){
-		var name=$(this).prop("tagName");
-		console.log("name"+name);
-		var audio=($(this).find("#audio"))[0];
-		audio.play();
-	}
+ 
 	$(document).ready(function(){
 		var btn_volume=$(".my-volume");
 		for(var i=0; i<btn_volume.length; i++){
@@ -81,7 +86,7 @@
 				audio.play();
 			});
 		}
-	});
+	}); 
 </script>
 </head>
 <body>
@@ -92,6 +97,7 @@
 				<div class="row">
 					<html:hidden styleId="dataResponse" property="dataResponse"
 						name="learnJapaneseForm" />
+					<html:hidden styleId="lessonID" property="lessonID" name="learnJapaneseForm"/>
 					<div class="panel panel-success">
 						<div class="panel-body learnProcess">
 							<div class="row">
@@ -121,10 +127,7 @@
 						<div class="col-lg-offset-1 col-lg-10">
 							<div class="col-lg-offset-1 col-lg-1">
 								<span class="glyphicon glyphicon-volume-up my-volume"
-									style="font-size: 50px;"><audio id="audio1" src="http://www.w3schools.com/html/horse.mp3"></audio></span>
-								<span class="glyphicon glyphicon-volume-up my-volume"
-									style="font-size: 50px;" ><audio id="audio2" src="http://www.w3schools.com/html/horse.mp3"></audio></span>									
-									 
+									style="font-size: 50px;"><audio id="fnw-audio"></audio></span>													 
 							</div>
 							<div class="col-lg-9">
 								<div class="col-lg-12">

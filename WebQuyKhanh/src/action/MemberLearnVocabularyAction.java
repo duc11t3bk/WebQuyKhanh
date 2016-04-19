@@ -57,6 +57,7 @@ public class MemberLearnVocabularyAction extends Action {
 		jsonObject.put("extra_word", jsonArrayExtraWord);
 		System.out.println(""+jsonObject.toString());
 		learnJapaneseForm.setDataResponse(jsonObject.toString());
+		learnJapaneseForm.setLessonID(lessonID);
 		return mapping.findForward("startLearning");
 	}
 }

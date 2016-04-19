@@ -31,8 +31,10 @@ public class TeacherManageLessonAction extends Action {
 			FormFile fileExcel= japaneseForm.getFileExcel();
 			ArrayList<FormFile> filesAudio=japaneseForm.getFilesAudio();
 			if((!Validate.isEmpty(fileExcel.getFileName()))&&(!Validate.isEmpty(filesAudio.get(0).getFileName()))){
-				String fileExcelName=FileProcess.uploadFile(fileExcel, getServlet(), "japanese/excel");
-				String filePath="/home/davy/Git/WebQuyKhanh/WebContent/japanese/excel/"+fileExcelName;
+				//String fileExcelName=FileProcess.uploadFile(fileExcel, getServlet(), "japanese/excel");
+				//String filePath="/home/davy/Git/WebQuyKhanh/WebContent/japanese/excel/"+fileExcelName;
+				String fileExcelName=FileProcess.uploadFile(fileExcel, getServlet(), "japanese\\excel");
+				String filePath="C:\\Users\\viettel\\Documents\\gitspace\\WebQuyKhanh\\WebQuyKhanh\\WebContent\\japanese\\excel\\"+fileExcelName;
 				/**upload file excel*/
 				japaneseBO.importFileExcel(lessonID,filePath);
 				/**delete file excel after import data*/
