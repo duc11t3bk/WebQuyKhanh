@@ -31,10 +31,10 @@ public class TeacherManageLessonAction extends Action {
 			FormFile fileExcel= japaneseForm.getFileExcel();
 			ArrayList<FormFile> filesAudio=japaneseForm.getFilesAudio();
 			if((!Validate.isEmpty(fileExcel.getFileName()))&&(!Validate.isEmpty(filesAudio.get(0).getFileName()))){
-				//String fileExcelName=FileProcess.uploadFile(fileExcel, getServlet(), "japanese/excel");
-				//String filePath="/home/davy/Git/WebQuyKhanh/WebContent/japanese/excel/"+fileExcelName;
-				String fileExcelName=FileProcess.uploadFile(fileExcel, getServlet(), "japanese\\excel");
-				String filePath="C:\\Users\\viettel\\Documents\\gitspace\\WebQuyKhanh\\WebQuyKhanh\\WebContent\\japanese\\excel\\"+fileExcelName;
+				String fileExcelName=FileProcess.uploadFile(fileExcel, getServlet(), "japanese/excel");
+				String filePath="/home/davy/Git/WebQuyKhanh/WebContent/japanese/excel/"+fileExcelName;
+				//String fileExcelName=FileProcess.uploadFile(fileExcel, getServlet(), "japanese\\excel");
+				//String filePath="C:\\Users\\viettel\\Documents\\gitspace\\WebQuyKhanh\\WebQuyKhanh\\WebContent\\japanese\\excel\\"+fileExcelName;
 				/**upload file excel*/
 				japaneseBO.importFileExcel(lessonID,filePath);
 				/**delete file excel after import data*/
@@ -60,6 +60,7 @@ public class TeacherManageLessonAction extends Action {
 				/**delete file audio */
 				ArrayList<String> oldFilesAudio=japaneseBO.getFilesAudio(lessonID);
 				for(int i=0; i<oldFilesAudio.size(); i++){
+					System.out.println(""+oldFilesAudio.get(i));
 					FileProcess.deleteOldFile(getServlet(), oldFilesAudio.get(i), "japanese/audio/"+lessonID);
 				}
 				FileProcess.deleteOldFile(getServlet(), lessonID, "japanese/audio");

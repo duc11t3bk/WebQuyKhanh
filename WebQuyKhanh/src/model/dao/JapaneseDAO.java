@@ -290,6 +290,7 @@ public class JapaneseDAO {
 	}
 	public boolean deleteLessonData(String lessonID){
 		try {
+			deleteLearnWordData(lessonID);
 			conn=connection.openConnection();
 			String sql="delete from japanesedata where data_id in "
 					+ " (select data_id from "
@@ -310,10 +311,44 @@ public class JapaneseDAO {
 			connection.closeConnection();
 		}
 	}
-
-	public void deleteLesson(String lessonID) {
+	public boolean deleteLearnWordData(String lessonID){
 		try {
+			conn=connection.openConnection();
+			String sql="delete from learnword where data_id in "
+					+ " ( select data_id from "
+					+ " (select lw.data_id"
+					+ " from japanesedata jd join learnword lw on (jd.data_id=lw.data_id) "
+					+ " where jd.lesson_id= ? ) p )";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, lessonID);
+			return (pstmt.executeUpdate() !=0) ? true : false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		finally{
+			connection.closeConnection();
+		}
+	}
+	public boolean deleteLessonStatus(String lessonID){
+		try {
+			conn=connection.openConnection();
+			String sql="delete from lessonstatus where lesson_id= ?";
+			PreparedStatement pstmt= conn.prepareStatement(sql);
+			pstmt.setString(1, lessonID);
+			return (pstmt.executeUpdate() !=0) ? true : false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		finally {
+			connection.closeConnection();
+		}
+	}
+	public void deleteLesson(String lessonID) {
+		try {			
 			deleteLessonData(lessonID);
+			deleteLessonStatus(lessonID);
 			conn=connection.openConnection();
 			String sql="delete from japaneselesson where lesson_id= ?";
 			PreparedStatement pstmt=conn.prepareStatement(sql);

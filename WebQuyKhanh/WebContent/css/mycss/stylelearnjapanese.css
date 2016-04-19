@@ -30,13 +30,18 @@
 	cursor: pointer;
 }
 .my-volume:hover, .my-volume-question:hover {
-	color : black;
+	background-color: #03A9F4;
 	box-shadow: 7px 7px 5px #888888;
 }
 .my-volume-question {
-	font-size: 100px;
-	color: #c6c1c1;
+	font-size: 80px;
+	color: white;
+	background-color: #01579B;
 	border-radius : 50px;
+	padding: 10px;
+}
+.my-volume-question-selected {
+	background-color: #03A9F4;
 }
 .btn-answer {
 	width: 100%;
@@ -56,5 +61,10 @@
 	border-radius:20px;
 	display: block;
 	text-align:center;
+	border:1px solid #ddd;
 	box-shadow: 3px 3px 5px #888888;
+}
+.text-answer:focus { 
+	border: 1px solid #66afe9;
+	box-shadow: 7px 7px 5px #888888;
 }
