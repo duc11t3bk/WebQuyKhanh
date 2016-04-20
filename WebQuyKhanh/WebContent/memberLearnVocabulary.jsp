@@ -46,6 +46,7 @@
 		var primary_word = jsonObject.primary_word;
 		var extra_word = jsonObject.extra_word;
 		var TOTAL_QUESTION = 0;
+		var currentWord=0;
 		var questions= new Array(0,0,0,0,0);
 		var accuracy= new Array(0,0,0,0,0);
 		var formLearns = ["#form-new-word","#form-question-vi-ja","#form-question-ja-vi",
@@ -115,16 +116,13 @@
 			return answers;
 		}
 		
-		function loadFormNewWord(currentWord,type){
-			$(formLearns[questions[currentWord]]).css("display","block");
-			$("#fnw-ja").html(""+primary_word[currentWord].japanese);
-			$("#fnw-vi").html(""+primary_word[currentWord].vietnamese);
+		function loadFormNewWord(word){
+			$(formLearns[questions[word]]).css("display","block");
+			$("#fnw-ja").html(""+primary_word[word].japanese);
+			$("#fnw-vi").html(""+primary_word[word].vietnamese);
 			var audio=$("#fnw-audio")[0];
-			$(audio).attr("src","japanese/audio/"+lessonID+"/"+primary_word[currentWord].audio);
-			if(type=="learn"){
-				questions[currentWord]+=1;
-				TOTAL_QUESTION+=1;	
-			}
+			$(audio).attr("src","japanese/audio/"+lessonID+"/"+primary_word[word].audio);
+			currentWord=word;
 		}
 		function loadFormLearnNewWord(firstWord,secondWord,threeWord){
 			var condition;
@@ -142,7 +140,7 @@
 				condition= (questions[firstWord] <6)|| (questions[secondWord] <6) || (questions[threeWord]<6);
 			}
 			console.log("condition"+condition);
-			var currentWord=0;
+			
 			if(condition){
 				if(threeWord==-1){
 					currentWord=Math.floor((Math.random()*2)+firstWord);
@@ -207,8 +205,6 @@
 								else{
 									console.log("false");
 								}
-								questions[currentWord]+=1;
-								TOTAL_QUESTION+=1;
 								showQuestion();
 							});
 						}
@@ -237,8 +233,6 @@
 								else{
 									console.log("false");
 								}
-								questions[currentWord]+=1;
-								TOTAL_QUESTION+=1;
 								showQuestion();
 							});
 						}
@@ -268,10 +262,9 @@
 								else{
 									console.log("false");
 								}
+								showQuestion();
 							});
 						}
-						questions[currentWord]+=1;
-						TOTAL_QUESTION+=1;
 						break;
 					}
 					case 4 : {
@@ -301,41 +294,47 @@
 								src=src.substring(src.lastIndexOf("/")+1,src.length);
 								if(data==src){
 									console.log("true");
+									accuracy[currentWord]+=1;
 								}
 								else{
 									console.log("false");
 								}
 							});
 						}
-						questions[currentWord]+=1;
-						TOTAL_QUESTION+=1;
 						break;
 					}
 					case 5 : {
 						$("fq-write-vi").html(""+primary_word[currentWord].vietnamese);
-						questions[currentWord]+=1;
-						TOTAL_QUESTION+=1;
+						$("#fq-write-answer").on("keyup",function(){
+							var japanese=primary_word[currentWord].japanese;
+							var data=$(this).val();
+							console.log("data="+data);
+							if(japanese==data){
+								console.log("true");
+								accuracy[currentWord]+=1;
+							}
+							else{
+								console.log("false");
+							}
+						});
 						break;
 					}
 				}
 			}
 		}
 		function showQuestion() {
-// 			for(var i=0; i<accuracy.length; i++){
-// 				console.log("i"+i+":"+accuracy[i]+"\n");
-// 			}
 			for (var i = 0; i < formLearns.length; i++) {
 				$(formLearns[i]).css("display", "none");
 			}
-			if (TOTAL_QUESTION <= 25) {
+			if (TOTAL_QUESTION < 25) {
 				console.log("total question"+TOTAL_QUESTION);
 				switch (TOTAL_QUESTION) {
 				case 0: {
-					loadFormNewWord(0,"learn");
+					loadFormNewWord(0);
 					break;
 				}
 				case 1: {
-					loadFormNewWord(1,"learn");
+					loadFormNewWord(1);
 					break;
 				}
 				case 2:
@@ -346,11 +345,11 @@
 					break;
 				}
 				case 6: {
-					loadFormNewWord(2,"learn");
+					loadFormNewWord(2);
 					break;
 				}
 				case 7: {
-					loadFormNewWord(3,"learn");
+					loadFormNewWord(3);
 					break;
 				}
 				case 8:
@@ -361,7 +360,7 @@
 					break;
 				}
 				case 12: {
-					loadFormNewWord(4,"learn");
+					loadFormNewWord(4);
 					break;
 				}
 				case 13:
@@ -383,9 +382,30 @@
 					break;
 				}
 				}
+				questions[currentWord]+=1;
+				console.log("currentWord="+currentWord);
+				TOTAL_QUESTION+=1;
+			}
+			else{
+				var jsonArray= new Array();
+				for(var i=0; i<accuracy.length; i++){
+					var jsonObject= new Object();
+					jsonObject.data_id=primary_word[i].data_id;
+					jsonObject.accuracy=accuracy[i];
+					jsonObject.japanese=primary_word[i].japanese;
+					jsonObject.vietnamese=primary_word[i].vietnamese;
+					jsonArray.push(jsonObject);
+				}
+				var jsonString=JSON.stringify(jsonArray);
+				console.log("jsonString="+jsonString);
+				$("#dataReceive").val(""+jsonString);
+				$("#form-submit").submit();
 			}
 		}
-		showQuestion();
+		
+		/**start learning*/
+ 		showQuestion();
+		/****************/
 		var btn_next=$(".btn-next");
 		for(var i=0; i<btn_next.length; i++){
 			$(btn_next[i]).on("click",function(){
@@ -423,6 +443,11 @@
 					<html:hidden styleId="dataResponse" property="dataResponse"
 						name="learnJapaneseForm" />
 					<html:hidden styleId="lessonID" property="lessonID" name="learnJapaneseForm"/>
+					<!-- Push data after learning -->
+					<html:form styleId="form-submit" action="/member-learn-vocabulary">
+						<html:hidden styleId="dataReceive" property="dataReceive"/>
+					</html:form>
+					<!-- -------------------------- -->
 					<div class="panel panel-success">
 						<div class="panel-body learnProcess">
 							<div class="row">

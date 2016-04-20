@@ -16,8 +16,43 @@ public class LearnJapaneseForm extends ActionForm {
 	private String lessonID;
 	private String memberID;
 	private String dataResponse;
+	private String dataReceive;
+	private String submit;
+	private int trueAnswers;
+	private int accuracy;
+	private String time;
 	
 	
+	public int getTrueAnswers() {
+		return trueAnswers;
+	}
+	public void setTrueAnswers(int trueAnswers) {
+		this.trueAnswers = trueAnswers;
+	}
+	public int getAccuracy() {
+		return accuracy;
+	}
+	public void setAccuracy(int accuracy) {
+		this.accuracy = accuracy;
+	}
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
+	}
+	public String getSubmit() {
+		return submit;
+	}
+	public void setSubmit(String submit) {
+		this.submit = submit;
+	}
+	public String getDataReceive() {
+		return dataReceive;
+	}
+	public void setDataReceive(String dataReceive) {
+		this.dataReceive = dataReceive;
+	}
 	public String getDataResponse() {
 		return dataResponse;
 	}

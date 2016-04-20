@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.bean.JapaneseData;
+import model.bean.WordStatus;
 
 public class LearnJapaneseDAO {
 
@@ -46,6 +47,24 @@ public class LearnJapaneseDAO {
 			return null;
 		}finally {
 			connection.closeConnection();
+		}
+	}
+
+	public boolean updateWordStatus(ArrayList<WordStatus> listWordStatus) {
+		try {
+			conn= connection.openConnection();
+			String sql="update learnword set accuracy = ? where data_id= ? and member_id= ?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			for(int i=0; i<listWordStatus.size(); i++){
+				pstmt.setInt(1, listWordStatus.get(i).getAccuracy());
+				pstmt.setString(2, listWordStatus.get(i).getDataID());
+				pstmt.setString(3, listWordStatus.get(i).getMemberID());
+				pstmt.addBatch();
+			}
+			return (pstmt.executeBatch()[0] !=0) ? true : false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
 		}
 	}
 	
