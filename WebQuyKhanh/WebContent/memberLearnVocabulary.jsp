@@ -184,7 +184,7 @@
 				switch(questions[currentWord]){
 					case 1: {
 						$("#fqvi-ja-vi").html(""+primary_word[currentWord].vietnamese);
-						var answers=$(".fqvi-ja-answer");
+						
 						var listAnswers=randomAnswer(currentWord, "ja");
 						var trueAnswers=Math.floor(Math.random()*4);
 						$(answers[trueAnswers]).html(""+primary_word[currentWord].japanese);
@@ -195,24 +195,11 @@
 								j+=1;
 							}
 						}
-						for(var i=0; i<answers.length; i++){
-							$(answers[i]).on("click",function(){
-								var data=$(this).html();
-								if(primary_word[currentWord].japanese == data){
-									console.log("true");
-									accuracy[currentWord]+=1;
-								}
-								else{
-									console.log("false");
-								}
-								showQuestion();
-							});
-						}
+						
 						break;
 					}
 					case 2 : {
 						$("#fqja-vi-ja").html(primary_word[currentWord].japanese);
-						var answers=$(".fqja-vi-answer");
 						var trueAnswer=Math.floor(Math.random()*answers.length);
 						var listAnswer=randomAnswer(currentWord, "vi");
 						$(answers[trueAnswer]).html(""+primary_word[currentWord].vietnamese);
@@ -223,25 +210,11 @@
 								j+=1;
 							}
 						}
-						for(var i=0; i<answers.length; i++){
-							$(answers[i]).on("click",function(){
-								var data=$(this).html();
-								if(data==primary_word[currentWord].vietnamese){
-									console.log("true");
-									accuracy[currentWord]+=1;
-								}
-								else{
-									console.log("false");
-								}
-								showQuestion();
-							});
-						}
 						break;
 					}
 					case 3 : {
 						var audio=$("#fq-listen-1-ja")[0];
 						$(audio).attr("src","japanese/audio/"+lessonID+"/"+primary_word[currentWord].audio);
-						var answers=$(".fq-listen-1-answer");
 						var trueAnswer=Math.floor(Math.random()*answers.length);
 						var listAnswer=randomAnswer(currentWord,"vi");
 						$(answers[trueAnswer]).html(""+primary_word[currentWord].vietnamese);
@@ -252,24 +225,11 @@
 								j+=1;
 							}
 						}
-						for(var i=0; i<answers.length; i++){
-							$(answers[i]).on("click",function(){
-								var data=$(this).html();
-								if(data==primary_word[currentWord].vietnamese){
-									console.log("true");
-									accuracy[currentWord]+=1;
-								}
-								else{
-									console.log("false");
-								}
-								showQuestion();
-							});
-						}
 						break;
 					}
 					case 4 : {
 						$("#fq-listen-3-vi").html(""+primary_word[currentWord].vietnamese);
-						var answers=$(".fq-listen-3-answer");
+						
 						var trueAnswer=Math.floor(Math.random()*answers.length);
 						var listAnswer=randomAnswerAudio(currentWord);
 						var audio =$(answers[trueAnswer]).find("audio")[0];
@@ -282,47 +242,20 @@
 								j+=1;
 							}
 						}
-						for(var i=0; i<answers.length; i++){
-							$(answers[i]).on("click",function(){
-								for(var j=0; j<answers.length; j++){
-									$(answers[j]).removeClass("my-volume-question-selected");
-								}
-								$(this).addClass("my-volume-question-selected");
-								var data=primary_word[currentWord].audio;
-								var audio=$(this).find("audio")[0];
-								var src=$(audio).attr("src");
-								src=src.substring(src.lastIndexOf("/")+1,src.length);
-								if(data==src){
-									console.log("true");
-									accuracy[currentWord]+=1;
-								}
-								else{
-									console.log("false");
-								}
-							});
-						}
 						break;
 					}
 					case 5 : {
 						$("fq-write-vi").html(""+primary_word[currentWord].vietnamese);
-						$("#fq-write-answer").on("keyup",function(){
-							var japanese=primary_word[currentWord].japanese;
-							var data=$(this).val();
-							console.log("data="+data);
-							if(japanese==data){
-								console.log("true");
-								accuracy[currentWord]+=1;
-							}
-							else{
-								console.log("false");
-							}
-						});
 						break;
 					}
 				}
 			}
 		}
 		function showQuestion() {
+			console.log("*********************\n");
+			for(var i=0; i<accuracy.length; i++){
+				console.log(""+i+": "+accuracy[i]+"\n");
+			}
 			for (var i = 0; i < formLearns.length; i++) {
 				$(formLearns[i]).css("display", "none");
 			}
@@ -404,7 +337,9 @@
 		}
 		
 		/**start learning*/
- 		showQuestion();
+ 		if(TOTAL_QUESTION==0){
+ 			showQuestion();	
+ 		}
 		/****************/
 		var btn_next=$(".btn-next");
 		for(var i=0; i<btn_next.length; i++){
@@ -412,6 +347,82 @@
 				showQuestion();
 			});
 		}
+		/**event form question vi-ja*/
+		var fq_vi_ja_answers=$(".fqvi-ja-answer");
+		for(var i=0; i<fq_vi_ja_answers.length; i++){
+			$(fq_vi_ja_answers[i]).on("click",function(){
+				var data=$(this).html();
+				if(primary_word[currentWord].japanese == data){
+					console.log("true"+" currentWord"+currentWord);
+					accuracy[currentWord]+=1;
+				}
+				else{
+					console.log("false");
+				}
+			});
+		}
+		/**event form question ja-vi*/
+		var fq_ja_vi_answers=$(".fqja-vi-answer");
+		for(var i=0; i<fq_ja_vi_answers.length; i++){
+			$(fq_ja_vi_answers[i]).on("click",function(){
+				var data=$(this).html();
+				if(data==primary_word[currentWord].vietnamese){
+					console.log("true"+" currentWord"+currentWord);
+					accuracy[currentWord]+=1;
+				}
+				else{
+					console.log("false");
+				}
+			});
+		}
+		/**event form question listen-1*/
+		var fq_listen_1_answers=$(".fq-listen-1-answer");
+		for(var i=0; i<fq_listen_1_answers.length; i++){
+			$(fq_listen_1_answers[i]).on("click",function(){
+				var data=$(this).html();
+				if(data==primary_word[currentWord].vietnamese){
+					console.log("true"+" currentWord"+currentWord);
+					accuracy[currentWord]+=1;
+				}
+				else{
+					console.log("false");
+				}
+			});
+		}
+		/**event form question listen 3*/
+		var fq_listen_3_answers=$(".fq-listen-3-answer");
+		for(var i=0; i<fq_listen_3_answers.length; i++){
+			$(fq_listen_3_answers[i]).on("click",function(){
+				for(var j=0; j<fq_listen_3_answers.length; j++){
+					$(fq_listen_3_answers[j]).removeClass("my-volume-question-selected");
+				}
+				$(this).addClass("my-volume-question-selected");
+				var data=primary_word[currentWord].audio;
+				var audio=$(this).find("audio")[0];
+				var src=$(audio).attr("src");
+				src=src.substring(src.lastIndexOf("/")+1,src.length);
+				if(data==src){
+					console.log("true"+" currentWord"+currentWord);
+					accuracy[currentWord]+=1;
+				}
+				else{
+					console.log("false");
+				}
+			});
+		}
+		/**event form question write*/
+		$("#fq-write-answer").on("keyup",function(){
+			var japanese=primary_word[currentWord].japanese;
+			var data=$(this).val();
+			console.log("data="+data);
+			if(japanese==data){
+				console.log("true"+" currentWord"+currentWord);
+				accuracy[currentWord]+=1;
+			}
+			else{
+				console.log("false");
+			}
+		});
 	});
 
 	$(document).ready(function() {
