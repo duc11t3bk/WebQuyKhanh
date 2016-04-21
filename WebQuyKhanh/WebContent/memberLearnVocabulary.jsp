@@ -47,6 +47,7 @@
 		var extra_word = jsonObject.extra_word;
 		var TOTAL_QUESTION = 0;
 		var currentWord=0;
+		var trueAnswers;
 		var questions= new Array(0,0,0,0,0);
 		var accuracy= new Array(0,0,0,0,0);
 		var formLearns = ["#form-new-word","#form-question-vi-ja","#form-question-ja-vi",
@@ -117,11 +118,12 @@
 		}
 		
 		function loadFormNewWord(word){
-			$(formLearns[questions[word]]).css("display","block");
+			$(formLearns[0]).css("display","block");
 			$("#fnw-ja").html(""+primary_word[word].japanese);
 			$("#fnw-vi").html(""+primary_word[word].vietnamese);
 			var audio=$("#fnw-audio")[0];
 			$(audio).attr("src","japanese/audio/"+lessonID+"/"+primary_word[word].audio);
+			audio.play();
 			currentWord=word;
 		}
 		function loadFormLearnNewWord(firstWord,secondWord,threeWord){
@@ -184,9 +186,9 @@
 				switch(questions[currentWord]){
 					case 1: {
 						$("#fqvi-ja-vi").html(""+primary_word[currentWord].vietnamese);
-						
+						var answers=$(".fqvi-ja-answer");
 						var listAnswers=randomAnswer(currentWord, "ja");
-						var trueAnswers=Math.floor(Math.random()*4);
+						trueAnswers=Math.floor(Math.random()*4);
 						$(answers[trueAnswers]).html(""+primary_word[currentWord].japanese);
 						var j=0;
 						for(var i=0; i<answers.length; i++){
@@ -200,7 +202,8 @@
 					}
 					case 2 : {
 						$("#fqja-vi-ja").html(primary_word[currentWord].japanese);
-						var trueAnswer=Math.floor(Math.random()*answers.length);
+						var answers=$(".fqja-vi-answer");
+						trueAnswer=Math.floor(Math.random()*answers.length);
 						var listAnswer=randomAnswer(currentWord, "vi");
 						$(answers[trueAnswer]).html(""+primary_word[currentWord].vietnamese);
 						var j=0;
@@ -215,11 +218,12 @@
 					case 3 : {
 						var audio=$("#fq-listen-1-ja")[0];
 						$(audio).attr("src","japanese/audio/"+lessonID+"/"+primary_word[currentWord].audio);
-						var trueAnswer=Math.floor(Math.random()*answers.length);
+						var answers=$(".fq-listen-1-answer");
+						trueAnswer=Math.floor(Math.random()*answers.length);
 						var listAnswer=randomAnswer(currentWord,"vi");
 						$(answers[trueAnswer]).html(""+primary_word[currentWord].vietnamese);
 						var j=0;
-						for(var i=0; i<listAnswer.length; i++){
+						for(var i=0; i<answers.length; i++){
 							if(i!=trueAnswer){
 								$(answers[i]).html(""+listAnswer[j]);
 								j+=1;
@@ -229,8 +233,8 @@
 					}
 					case 4 : {
 						$("#fq-listen-3-vi").html(""+primary_word[currentWord].vietnamese);
-						
-						var trueAnswer=Math.floor(Math.random()*answers.length);
+						var answers=$(".fq-listen-3-answer");
+						trueAnswer=Math.floor(Math.random()*answers.length);
 						var listAnswer=randomAnswerAudio(currentWord);
 						var audio =$(answers[trueAnswer]).find("audio")[0];
 						$(audio).attr("src","japanese/audio/"+lessonID+"/"+primary_word[currentWord].audio);
@@ -251,15 +255,18 @@
 				}
 			}
 		}
+		function hideAllForm(){
+			for (var i = 0; i < formLearns.length; i++) {
+				$(formLearns[i]).css("display", "none");
+			}
+		}
 		function showQuestion() {
 			console.log("*********************\n");
 			for(var i=0; i<accuracy.length; i++){
 				console.log(""+i+": "+accuracy[i]+"\n");
 			}
-			for (var i = 0; i < formLearns.length; i++) {
-				$(formLearns[i]).css("display", "none");
-			}
-			if (TOTAL_QUESTION < 25) {
+			hideAllForm();
+			if (TOTAL_QUESTION < 30) {
 				console.log("total question"+TOTAL_QUESTION);
 				switch (TOTAL_QUESTION) {
 				case 0: {
@@ -299,18 +306,23 @@
 				case 13:
 				case 14:
 				case 15:
-				case 16: {
+				case 16:
+				case 17:
+				case 18: {
 					loadFormLearnNewWord(0, 1, -1);
 					break;
 				}
-				case 17:
-				case 18:
 				case 19:
 				case 20:
 				case 21:
 				case 22:
 				case 23:
-				case 24: {
+				case 24:
+				case 25:
+				case 26:
+				case 27:
+				case 28:
+				case 29: {
 					loadFormLearnNewWord(2, 3, 4);
 					break;
 				}
@@ -355,9 +367,24 @@
 				if(primary_word[currentWord].japanese == data){
 					console.log("true"+" currentWord"+currentWord);
 					accuracy[currentWord]+=1;
+					$(this).addClass("btn-answer-true");
+					var btn_true=this;
+					setTimeout(function(){
+						$(btn_true).removeClass("btn-answer-true");
+						showQuestion();
+					}, 1000);
 				}
 				else{
 					console.log("false");
+					$(this).addClass("btn-answer-false");
+					$(fq_vi_ja_answers[trueAnswers]).addClass("btn-answer-true");
+					var btn_false=this;
+					setTimeout(function(){
+						$(btn_false).removeClass("btn-answer-false");
+						$(fq_vi_ja_answers[trueAnswers]).removeClass("btn-answer-true");
+						hideAllForm();
+						loadFormNewWord(currentWord);
+					}, 1000);
 				}
 			});
 		}
@@ -369,9 +396,24 @@
 				if(data==primary_word[currentWord].vietnamese){
 					console.log("true"+" currentWord"+currentWord);
 					accuracy[currentWord]+=1;
+					$(this).addClass("btn-answer-true");
+					var btn_true=this;
+					setTimeout(function(){
+						$(btn_true).removeClass("btn-answer-true");
+						showQuestion();
+					}, 1000);
 				}
 				else{
 					console.log("false");
+					$(this).addClass("btn-answer-false");
+					$(fq_ja_vi_answers[trueAnswers]).addClass("btn-answer-true");
+					var btn_false=this;
+					setTimeout(function(){
+						$(btn_false).removeClass("btn-answer-false");
+						$(fq_ja_vi_answers[trueAnswers]).removeClass("btn-answer-true");
+						hideAllForm();
+						loadFormNewWord(currentWord);
+					}, 1000);
 				}
 			});
 		}
@@ -383,9 +425,24 @@
 				if(data==primary_word[currentWord].vietnamese){
 					console.log("true"+" currentWord"+currentWord);
 					accuracy[currentWord]+=1;
+					$(this).addClass("btn-answer-true");
+					var btn_true=this;
+					setTimeout(function(){
+						$(btn_true).removeClass("btn-answer-true");
+						showQuestion();
+					}, 1000);
 				}
 				else{
 					console.log("false");
+					$(this).addClass("btn-answer-false");
+					$(fq_listen_1_answers[trueAnswers]).addClass("btn-answer-true");
+					var btn_false=this;
+					setTimeout(function(){
+						$(btn_false).removeClass("btn-answer-false");
+						$(fq_listen_1_answers[trueAnswers]).removeClass("btn-answer-true");
+						hideAllForm();
+						loadFormNewWord(currentWord);
+					}, 1000);
 				}
 			});
 		}
@@ -397,17 +454,6 @@
 					$(fq_listen_3_answers[j]).removeClass("my-volume-question-selected");
 				}
 				$(this).addClass("my-volume-question-selected");
-				var data=primary_word[currentWord].audio;
-				var audio=$(this).find("audio")[0];
-				var src=$(audio).attr("src");
-				src=src.substring(src.lastIndexOf("/")+1,src.length);
-				if(data==src){
-					console.log("true"+" currentWord"+currentWord);
-					accuracy[currentWord]+=1;
-				}
-				else{
-					console.log("false");
-				}
 			});
 		}
 		/**event form question write*/
@@ -418,10 +464,54 @@
 			if(japanese==data){
 				console.log("true"+" currentWord"+currentWord);
 				accuracy[currentWord]+=1;
+				$(this).removeClass("btn-answer-false");
+				$(this).addClass("btn-answer-true");
+				var btn_true=this;
+				setTimeout(function(){
+					$(btn_true).removeClass("btn-answer-true");
+					showQuestion();
+				}, 1000);
 			}
 			else{
 				console.log("false");
+				$(this).addClass("btn-answer-false");
 			}
+		});
+		/**event view answer*/
+		var view_answers=$(".view-answer");
+		for(var i=0; i<view_answers.length; i++){
+			$(view_answers[i]).on("click",function(){
+				loadFormNewWord(currentWord);
+			});
+		}
+		/**event form question listen 3*/
+		$("#btn-check-listen-3").on("click",function(){
+			var selected=$(".my-volume-question-selected");
+			var data=primary_word[currentWord].audio;
+			var audio=$(selected[0]).find("audio")[0];
+			var src=$(audio).attr("src");
+			src=src.substring(src.lastIndexOf("/")+1,src.length);
+			if(data==src){
+				console.log("true"+" currentWord"+currentWord);
+				accuracy[currentWord]+=1;
+				$(selected[0]).addClass("btn-answer-true");
+				setTimeout(function(){
+					$(selected[0]).removeClass("btn-answer-true");
+					showQuestion();
+				}, 1000);
+			}
+			else{
+				console.log("false");
+				$(selected[0]).addClass("btn-answer-false");
+				var fq_listen_3_answers=$(".fq-listen-3-answer");
+				$(fq_listen_3_answers[trueAnswers]).addClass("btn-answer-true");
+				setTimeout(function(){
+					$(selected[0]).removeClass("btn-answer-false");
+					$(fq_listen_3_answers[trueAnswers]).removeClass("btn-answer-true");
+					hideAllForm();
+					loadFormNewWord(currentWord);
+				}, 1000);
+			}	
 		});
 	});
 
@@ -550,7 +640,7 @@
 								<div class="col-lg-offset-1 col-lg-3 btn-answer fqvi-ja-answer">item 2</div>
 							</div>
 							<div class="col-lg-12">
-								<div id="fqvi-ja-view-answer" class="col-lg-offset-4 col-lg-3 btn-answer">
+								<div class="col-lg-offset-4 col-lg-3 btn-answer view-answer">
 									<div class="col-lg-3"
 										style="padding-left: 0px; font-size: 20px">
 										<span class="glyphicon glyphicon-repeat"></span>
@@ -599,12 +689,12 @@
 								</div>
 							</div>
 							<div class="col-lg-12">
-								<div  class="col-lg-offset-4 col-lg-3 btn-answer">
+								<div  class="col-lg-offset-4 col-lg-3 btn-answer view-answer">
 									<div class="col-lg-3"
 										style="padding-left: 0px; font-size: 20px">
 										<span class="glyphicon glyphicon-repeat"></span>
 									</div>
-									<h5 id="fqja-vi-view-answer">Xem câu trả lời</h5>
+									<h5 >Xem câu trả lời</h5>
 								</div>
 							</div>
 						</div>
@@ -649,7 +739,7 @@
 								<div class="col-lg-offset-1 col-lg-3 btn-answer fq-listen-1-answer">item 2</div>
 							</div>
 							<div class="col-lg-12">
-								<div class="col-lg-offset-4 col-lg-3 btn-answer">
+								<div class="col-lg-offset-4 col-lg-3 btn-answer view-answer">
 									<div class="col-lg-3"
 										style="padding-left: 0px; font-size: 20px">
 										<span class="glyphicon glyphicon-repeat"></span>
@@ -670,7 +760,7 @@
 									<label id="fq-listen-3-vi">Người kia, người đó (Cách nói lịch sự)</label>
 								</div>
 								<div class="col-lg-3">
-									<div class="col-lg-12 btn-next">
+									<div id="btn-check-listen-3" class="col-lg-12 btn-check">
 										<div class="col-lg-12">
 											<span style="font-size: 40px"
 												class="glyphicon glyphicon-chevron-right"></span>
@@ -705,7 +795,7 @@
 									</div>
 								</div>
 								<div class="col-lg-12" style="margin-top: 20px;">
-									<div class="col-lg-offset-3 col-lg-4 btn-answer">
+									<div class="col-lg-offset-3 col-lg-4 btn-answer view-answer">
 										<div class="col-lg-3"
 											style="padding-left: 0px; font-size: 20px">
 											<span class="glyphicon glyphicon-repeat"></span>
@@ -750,7 +840,7 @@
 									</div>
 								</div>
 								<div class="col-lg-12" style="margin-top: 20px;">
-									<div class="col-lg-offset-3 col-lg-4 btn-answer">
+									<div class="col-lg-offset-3 col-lg-4 btn-answer view-answer">
 										<div class="col-lg-3"
 											style="padding-left: 0px; font-size: 20px">
 											<span class="glyphicon glyphicon-repeat"></span>
