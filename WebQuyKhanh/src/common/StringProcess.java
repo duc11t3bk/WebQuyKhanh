@@ -32,6 +32,9 @@ public class StringProcess {
 	public static int convertAccuracy(int accuracy){
 		return (accuracy*100)/JapaneseData.NUMBER_QUESTIONS;
 	}
+	public static int convertLessonStatus(int complete){
+		return (complete*100)/JapaneseData.TOTAL_QUESTIONS;
+	}
 	public static void main (String[] args){
 		System.out.println(""+StringProcess.formatDate("1993-11-26", "yyyy-MM-dd", "dd-MM-yyyy"));
 	}

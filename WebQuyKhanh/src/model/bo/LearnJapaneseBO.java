@@ -18,4 +18,7 @@ public class LearnJapaneseBO {
 	public boolean updateWordStatus(ArrayList<WordStatus> listWordStatus) {
 		return learnJapaneseDAO.updateWordStatus(listWordStatus);
 	}
+	public boolean updateLessonStatus(ArrayList<WordStatus> listWordStatus, String memberID, String lessonID) {
+		return learnJapaneseDAO.updateLessonStatus(listWordStatus, memberID, lessonID);
+	}
 }

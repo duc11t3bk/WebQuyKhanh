@@ -84,7 +84,7 @@ public class MemberLearnVocabularyAction extends Action {
 				listNewWords.add(data);
 				trueAnswers += wordStatus.getAccuracy();
 			}
-			if (!learnJapaneseBO.updateWordStatus(listWordStatus)) {
+			if (!learnJapaneseBO.updateWordStatus(listWordStatus) || !learnJapaneseBO.updateLessonStatus(listWordStatus,memberID,lessonID)) {
 				return mapping.findForward("occurError");
 			}
 			for (int i = 0; i < listWordStatus.size(); i++) {

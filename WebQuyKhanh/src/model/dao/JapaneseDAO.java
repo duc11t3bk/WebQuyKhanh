@@ -401,7 +401,7 @@ public class JapaneseDAO {
 				while(rs.next()){
 					lessonStatus.setMemberID(rs.getString(1));
 					lessonStatus.setLessonID(rs.getString(2));
-					lessonStatus.setComplete(rs.getInt(3));
+					lessonStatus.setComplete(StringProcess.convertLessonStatus(rs.getInt(3)));
 				}
 			}
 			else{

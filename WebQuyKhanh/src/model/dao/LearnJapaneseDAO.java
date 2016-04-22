@@ -67,5 +67,28 @@ public class LearnJapaneseDAO {
 			return false;
 		}
 	}
-	
+
+	public boolean updateLessonStatus(ArrayList<WordStatus> listWordStatus, String memberID, String lessonID) {
+		try {
+			int totalWordSuccess = 0;
+			for(int i=0; i<listWordStatus.size(); i++){
+				if(listWordStatus.get(i).getAccuracy()==6){
+					totalWordSuccess+=1;
+				}
+			}
+			conn=connection.openConnection();
+			String sql="update lessonstatus set accuracy= accuracy + ? where (member_id= ?) and (lesson_id = ?) ";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, totalWordSuccess);
+			pstmt.setString(2, memberID);
+			pstmt.setString(3, lessonID);
+			return (pstmt.executeUpdate() !=0) ? true : false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		finally {
+			connection.closeConnection();
+		}
+	}
 }
