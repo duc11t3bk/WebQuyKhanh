@@ -29,15 +29,51 @@
 	border-bottom: 1px solid #ddd;
 }
 </style>
+<script type="text/javascript">
+	function eventChangeOption() {
+		var learnOption = $("#learnOption").val();
+		console.log("learn Option" + learnOption);
+		if(learnOption=="review"){	
+			console.log("run ajax");
+			$.ajax({
+				type : "POST",
+				url : "http://localhost:8080/WebQuyKhanh/member-manage-lesson.do?lessonID=les00000011&learnOption="+learnOption,
+				dataType : "json",
+				success : function(response){
+					var result=response[0].result;
+					console.log("result"+result);
+					if(result=="can_review"){
+						$("#btn-submit").prop("disabled",false);
+					}
+					if(result=="cant_review"){
+						$("#notify").html("Bạn phải học thuộc ít nhất một từ trước khi ôn tập");
+						$("#btn-submit").prop("disabled",true);
+						$("#btn-submit").css("cursor","not-allowed");
+					}
+				},
+				error : function(errormessage){
+					alert("error "+errormessage);
+				},
+			});
+		}
+		if(learnOption=="learn"){
+			console.log("not run ajax");
+			$("#notify").html("");
+			$("#btn-submit").prop("disabled",false);
+			$("#btn-submit").css("cursor","pointer");
+		}
+	};
+</script>
 </head>
 <body>
 	<div class="wrapper">
 		<jsp:include page="header.jsp"></jsp:include>
 		<div class="container main-container">
 			<bean:define id="lesson" name="japaneseForm" property="lesson"></bean:define>
-			<div class="row" style="margin-top:20px;">
+			<div class="row" style="margin-top: 20px;">
 				<div class="main-content">
-					<div class="panel panel-primary" style=" box-shadow:3px 3px 10px #888888;">
+					<div class="panel panel-primary"
+						style="box-shadow: 3px 3px 10px #888888;">
 						<div class="panel-body">
 							<logic:equal value="voca" name="lesson" property="category">
 								<ol class="breadcrumb">
@@ -84,22 +120,28 @@
 													%
 												</div>
 											</div>
+											<div>
+												<label id="notify" style="color: red"></label>
+											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-lg-offset-3 col-lg-9">
 											<div class="row">
-												<div class="col-lg-3" style="padding: 0px">
-													<html:select styleClass="dropdownlist" property="learnOption" name="japaneseForm" style="width:100%" >
-														<html:option value="1">Học mới</html:option>
-														<html:option value="2">Ôn tập</html:option>
-													</html:select>
-												</div> 
 												<bean:define id="lessonID" name="lesson" property="lessonID"></bean:define>
-												<html:link action="/member-learn-vocabulary?lessonID=${lessonID }">
-													<input class="col-lg-3 btn-learn"
-														type="button" value="Học những từ này" />
-												</html:link>
+												<html:form action="/member-learn-vocabulary">
+													<html:hidden property="lessonID" name="lesson" />
+													<div class="col-lg-3" style="padding: 0px">
+														<html:select styleId="learnOption"
+															styleClass="dropdownlist" onchange="eventChangeOption()"
+															property="learnOption" style="width:100%">
+															<html:option value="learn">Học mới</html:option>
+															<html:option value="review">Ôn tập</html:option>
+														</html:select>
+													</div>
+													<html:submit styleId="btn-submit" property="submit"
+														styleClass="col-lg-3 btn-learn">Học những từ này</html:submit>
+												</html:form>
 											</div>
 										</div>
 									</div>
@@ -119,11 +161,11 @@
 									<span class="glyphicon glyphicon-tint"></span> <label>Ôn
 										tập</label>
 								</div>
-								<div class="col-lg-3">
+								<!-- 						<div class="col-lg-3">
 									<button class="btn btn-default">
 										<span class="glyphicon glyphicon-cog"></span> Bỏ qua
 									</button>
-								</div>
+								</div> -->
 							</div>
 							<div class="panel panel-default"
 								style="box-shadow: 3px 3px 10px #888888">

@@ -1,5 +1,6 @@
 package action;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,8 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import form.JapaneseForm;
 import form.LoginForm;
@@ -20,6 +23,7 @@ import model.bo.JapaneseBO;
 
 public class MemberManageLesson extends Action {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -28,7 +32,9 @@ public class MemberManageLesson extends Action {
 		JapaneseForm japaneseForm=(JapaneseForm)form;
 		JapaneseBO japaneseBO= new JapaneseBO();
 		String lessonID=japaneseForm.getLessonID();
+		String learnOption=japaneseForm.getLearnOption();
 		System.out.println("lesson ID"+lessonID);
+		System.out.println("learn option"+learnOption);
 		Lesson lesson= japaneseBO.getLesson(lessonID);
 		LessonStatus lessonStatus=japaneseBO.getLessonStatus(memberID,lessonID);
 		ArrayList<JapaneseData> listData= japaneseBO.getListData(lessonID);
@@ -38,6 +44,23 @@ public class MemberManageLesson extends Action {
 		if("voca".equals(lesson.getCategory())){
 			ArrayList<WordStatus> wordStatus= japaneseBO.getListWordStatus(memberID, lessonID);
 			japaneseForm.setListWordStatus(wordStatus);
+			if("review".equals(learnOption)){
+				boolean checkReviewOption=japaneseBO.checkReviewOption(memberID,lessonID);
+				JSONArray jsonArray= new JSONArray();
+				JSONObject jsonObject= new JSONObject();
+				if(checkReviewOption){
+					jsonObject.put("result", "can_review");
+				}
+				else{
+					jsonObject.put("result", "cant_review");
+				}
+				jsonArray.add(jsonObject);
+				PrintWriter write= response.getWriter();
+				write.println(jsonArray.toString());
+				write.flush();
+				write.close();
+				return null;
+			}
 		}
 		if("tran".equals(lesson.getCategory())){
 			

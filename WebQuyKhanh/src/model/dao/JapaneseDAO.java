@@ -477,5 +477,33 @@ public class JapaneseDAO {
 			e.printStackTrace();
 			return null;
 		}
+		finally {
+			connection.closeConnection();
+		}
+	}
+
+	public boolean checkReviewOption(String memberID, String lessonID) {
+		try {
+			conn=connection.openConnection();
+			String sql="select count(*)"
+					+ " from learnword lw join japanesedata jd on (lw.data_id=jd.data_id)"
+					+ " where (lw.member_id= ?) and (jd.lesson_id= ?) and (lw.accuracy= ? )";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, memberID);
+			pstmt.setString(2, lessonID);
+			pstmt.setInt(3, 5);
+			ResultSet rs=pstmt.executeQuery();
+			int totalReview=0;
+			if(rs.next()){
+				totalReview=Integer.valueOf(rs.getString(1));
+			}
+			return (totalReview >= 1) ? true : false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		finally {
+			connection.closeConnection();
+		}
 	}
 }

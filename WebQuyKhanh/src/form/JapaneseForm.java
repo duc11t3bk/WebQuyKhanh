@@ -38,7 +38,6 @@ public class JapaneseForm extends ActionForm {
 	private String notifyError;
 	private String notifySuccess;
 	private String learnOption;
-	
 
 	public String getLearnOption() {
 		return learnOption;
@@ -94,8 +93,6 @@ public class JapaneseForm extends ActionForm {
 	public void setType(String type) {
 		this.type = type;
 	}
-
-
 	public String getSubmit() {
 		return submit;
 	}

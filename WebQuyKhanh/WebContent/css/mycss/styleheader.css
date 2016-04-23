@@ -15,9 +15,9 @@
 .navigation ul {
 	list-style: none;
 	text-align: center;
-	background-color: #008FD5;
+	background-color: #3a5795;
 	width: 100%;
-	padding: 0;
+	padding: 5px;
 }
 .navigation ul li {
 	display: inline-block;
@@ -32,10 +32,10 @@
 	font-weight: bold;
 }
 .navigation ul li:hover{
-	background-color : #ffffff;
+	background-color : #273a64;
 }
 .navigation ul li:hover > a{
-	color:#000000;
+	color:white;
 }
 .menu > li{
 	position: relative;

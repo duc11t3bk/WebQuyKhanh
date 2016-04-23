@@ -64,4 +64,8 @@ public class JapaneseBO {
 	public ArrayList<WordStatus> getListWordStatus(String memberID, String lessonID) {
 		return japaneseDAO.getListWordStatus(memberID, lessonID);
 	}
+
+	public boolean checkReviewOption(String memberID, String lessonID) {
+		return japaneseDAO.checkReviewOption(memberID,lessonID);
+	}
 }

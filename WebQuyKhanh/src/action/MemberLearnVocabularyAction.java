@@ -19,6 +19,7 @@ import form.LearnJapaneseForm;
 import form.LoginForm;
 import model.bean.JapaneseData;
 import model.bean.WordStatus;
+import model.bo.JapaneseBO;
 import model.bo.LearnJapaneseBO;
 
 public class MemberLearnVocabularyAction extends Action {
@@ -33,36 +34,59 @@ public class MemberLearnVocabularyAction extends Action {
 		LearnJapaneseForm learnJapaneseForm = (LearnJapaneseForm) form;
 		LoginForm loginForm = (LoginForm) request.getSession().getAttribute("loginForm");
 		String lessonID = learnJapaneseForm.getLessonID();
+		String learnOption= learnJapaneseForm.getLearnOption();
 		String memberID = loginForm.getMember().getMemberID();
 		LearnJapaneseBO learnJapaneseBO = new LearnJapaneseBO();
+		JapaneseBO japaneseBO= new JapaneseBO();
 		String dataReceive = learnJapaneseForm.getDataReceive();
 		if (dataReceive == null) {
-			ArrayList<JapaneseData> listNewWords = learnJapaneseBO.getListNewWords(memberID, lessonID);
-			JSONObject jsonObject = new JSONObject();
-			/** five word need to learn */
-			JSONArray jsonArrayPrimaryWord = new JSONArray();
-			/** three word use to answer */
-			JSONArray jsonArrayExtraWord = new JSONArray();
-			for (int i = 0; i < listNewWords.size(); i++) {
-				JSONObject jsonObjectChild = new JSONObject();
-				jsonObjectChild.put("data_id", listNewWords.get(i).getDataID());
-				jsonObjectChild.put("lesson_id", listNewWords.get(i).getLessonID());
-				jsonObjectChild.put("level_id", listNewWords.get(i).getLevelID());
-				jsonObjectChild.put("japanese", listNewWords.get(i).getJapanese());
-				jsonObjectChild.put("vietnamese", listNewWords.get(i).getVietnamese());
-				jsonObjectChild.put("audio", listNewWords.get(i).getDataSound());
-				if (i < 5) {
-					jsonArrayPrimaryWord.add(jsonObjectChild);
-				} else {
-					jsonArrayExtraWord.add(jsonObjectChild);
+			if("learn".equals(learnOption)){
+				ArrayList<JapaneseData> listNewWords = learnJapaneseBO.getListNewWords(memberID, lessonID);
+				JSONObject jsonObject = new JSONObject();
+				/** five word need to learn */
+				JSONArray jsonArrayPrimaryWord = new JSONArray();
+				/** three word use to answer */
+				JSONArray jsonArrayExtraWord = new JSONArray();
+				for (int i = 0; i < listNewWords.size(); i++) {
+					JSONObject jsonObjectChild = new JSONObject();
+					jsonObjectChild.put("data_id", listNewWords.get(i).getDataID());
+					jsonObjectChild.put("lesson_id", listNewWords.get(i).getLessonID());
+					jsonObjectChild.put("level_id", listNewWords.get(i).getLevelID());
+					jsonObjectChild.put("japanese", listNewWords.get(i).getJapanese());
+					jsonObjectChild.put("vietnamese", listNewWords.get(i).getVietnamese());
+					jsonObjectChild.put("audio", listNewWords.get(i).getDataSound());
+					if (i < 5) {
+						jsonArrayPrimaryWord.add(jsonObjectChild);
+					} else {
+						jsonArrayExtraWord.add(jsonObjectChild);
+					}
 				}
+				jsonObject.put("primary_word", jsonArrayPrimaryWord);
+				jsonObject.put("extra_word", jsonArrayExtraWord);
+				System.out.println("" + jsonObject.toString());
+				learnJapaneseForm.setDataResponse(jsonObject.toString());
+				learnJapaneseForm.setLessonID(lessonID);
+				learnJapaneseForm.setLesson(japaneseBO.getLesson(lessonID));
+				return mapping.findForward("startLearning");
 			}
-			jsonObject.put("primary_word", jsonArrayPrimaryWord);
-			jsonObject.put("extra_word", jsonArrayExtraWord);
-			System.out.println("" + jsonObject.toString());
-			learnJapaneseForm.setDataResponse(jsonObject.toString());
-			learnJapaneseForm.setLessonID(lessonID);
-			return mapping.findForward("startLearning");
+			else{
+				ArrayList<JapaneseData> listReview= learnJapaneseBO.getListReview(memberID, lessonID);
+				JSONArray jsonArray = new JSONArray();
+				for(int i=0; i<listReview.size(); i++){
+					JSONObject jsonObject= new JSONObject();
+					jsonObject.put("data_id", listReview.get(i).getDataID());
+					jsonObject.put("lesson_id", listReview.get(i).getLessonID());
+					jsonObject.put("level_id", listReview.get(i).getLevelID());
+					jsonObject.put("japanese", listReview.get(i).getJapanese());
+					jsonObject.put("vietnamese", listReview.get(i).getVietnamese());
+					jsonObject.put("audio", listReview.get(i).getDataSound());
+					jsonArray.add(jsonObject);
+				}
+				learnJapaneseForm.setDataResponse(jsonArray.toString());
+				learnJapaneseForm.setLessonID(lessonID);
+				learnJapaneseForm.setLesson(japaneseBO.getLesson(lessonID));
+				return mapping.findForward("startReviewing");
+			}
 		} else {
 			System.out.println("" + dataReceive);
 			JSONParser jsonParser = new JSONParser();
@@ -84,7 +108,7 @@ public class MemberLearnVocabularyAction extends Action {
 				listNewWords.add(data);
 				trueAnswers += wordStatus.getAccuracy();
 			}
-			if (!learnJapaneseBO.updateWordStatus(listWordStatus) || !learnJapaneseBO.updateLessonStatus(listWordStatus,memberID,lessonID)) {
+			if ((!learnJapaneseBO.updateWordStatus(listWordStatus)) || (!learnJapaneseBO.updateLessonStatus(listWordStatus,memberID,lessonID))) {
 				return mapping.findForward("occurError");
 			}
 			for (int i = 0; i < listWordStatus.size(); i++) {
@@ -94,6 +118,7 @@ public class MemberLearnVocabularyAction extends Action {
 			learnJapaneseForm.setListWordStatus(listWordStatus);
 			learnJapaneseForm.setTrueAnswers(trueAnswers);
 			learnJapaneseForm.setAccuracy((trueAnswers * 100) / JapaneseData.TOTAL_QUESTIONS);
+			learnJapaneseForm.setLesson(japaneseBO.getLesson(lessonID));
 			System.out.println("listData"+learnJapaneseForm.getListData().size());
 			return mapping.findForward("finishLearning");
 		}

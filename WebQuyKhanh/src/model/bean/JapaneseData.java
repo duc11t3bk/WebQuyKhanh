@@ -3,9 +3,9 @@ package model.bean;
 public class JapaneseData {
 
 	public static int NUMBER_ANSWERS=4;
-	public static int NUMBER_QUESTIONS=6;
+	public static int NUMBER_QUESTIONS=5;
 	public static int NUMBER_NEW_WORDS=8;
-	public static int TOTAL_QUESTIONS=30;
+	public static int TOTAL_QUESTIONS=25;
 	private String dataID;
 	private String lessonID;
 	private String levelID;

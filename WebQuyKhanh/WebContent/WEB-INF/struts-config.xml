@@ -66,6 +66,7 @@ Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 			type="action.MemberLearnVocabularyAction"
 			>
 			<forward name="startLearning" path="/memberLearnVocabulary.jsp"></forward>
+			<forward name="startReviewing" path="/memberLearnVocabulary.jsp"></forward>
 			<forward name="finishLearning" path="/memberVocabularyFinish.jsp"></forward>
 			<forward name="occurError" path="/errorPage.jsp"></forward>
 		</action>

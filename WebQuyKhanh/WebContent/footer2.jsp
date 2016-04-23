@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div class="col-lg-12 imgBottom"></div>	
-	<div class="mfooter" style="border-top: 1px solid black">
+	<div class="mfooter" style="background-color: #3a5795;">
 		<img src="image/iconqk.jpg" width="80px" height="80px;">
 		<label style="display:inline; text-align:center;color:white">
 			Thông tin liên hệ : 230 Nguyễn Tri Phương - Thanh Khê - Đà Nẵng.

@@ -21,8 +21,15 @@ public class LearnJapaneseForm extends ActionForm {
 	private int trueAnswers;
 	private int accuracy;
 	private String time;
+	private String learnOption;
 	
 	
+	public String getLearnOption() {
+		return learnOption;
+	}
+	public void setLearnOption(String learnOption) {
+		this.learnOption = learnOption;
+	}
 	public int getTrueAnswers() {
 		return trueAnswers;
 	}

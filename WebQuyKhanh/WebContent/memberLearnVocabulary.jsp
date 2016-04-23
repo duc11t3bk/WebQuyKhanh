@@ -21,23 +21,6 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/myjs/includehtml.js"></script>
 
-<script type="text/javascript">
-	function a() {
-		$.ajax({
-			type : "POST",
-			url : "",
-			data : "http://localhost:8080/WebQuyKhanh/member-learn-vocabulary",
-			dataType : "json",
-			success : function(response) {
-
-			},
-			error : function(errormessage) {
-				alert("error :" + errormessage);
-			},
-		});
-	}
-</script>
-
 </head>
 <body>
 	<div class="wrapper">
@@ -45,33 +28,40 @@
 		<div class="container main-container2">
 			<div class="main-content">
 				<div class="row">
+					<html:hidden styleId="learnOption" property="learnOption" name="learnJapaneseForm"/>
 					<html:hidden styleId="dataResponse" property="dataResponse"
 						name="learnJapaneseForm" />
-					<html:hidden styleId="lessonID" property="lessonID" name="learnJapaneseForm"/>
 					<!-- Push data after learning -->
 					<html:form styleId="form-submit" action="/member-learn-vocabulary">
 						<html:hidden styleId="dataReceive" property="dataReceive"/>
+						<html:hidden styleId="lessonID" property="lessonID" name="learnJapaneseForm"/>
 					</html:form>
 					<!-- -------------------------- -->
 					<div class="panel panel-success">
 						<div class="panel-body learnProcess">
+							<bean:define id="lesson" name="learnJapaneseForm" property="lesson"></bean:define>
 							<div class="row">
-								<h5 class="col-lg-12">Học 5 từ mới : Bài 1</h5>
+								<h5 class="col-lg-12">
+									Học 5 từ mới :
+									<bean:write name="lesson" property="levelName" />
+									-
+									<bean:write name="lesson" property="lessonName" />
+								</h5>
 							</div>
 							<div class="row">
 								<div class="col-lg-2">
-									<span class="glyphicon glyphicon-pause"></span>
+									<html:link href="#x"><span class="glyphicon glyphicon-pause"></span></html:link>
 								</div>
 								<div class="col-lg-8">
 									<div class="progress">
-										<div class="progress-bar progress-bar-success"
+										<div id="progress-learn-five-new-word" class="progress-bar progress-bar-success"
 											role="progressbar" aria-valuenow="60" aria-valuemin="0"
-											aria-valuemax="100" style="width: 10%">10%</div>
+											aria-valuemax="100" style="width: 10%"></div>
 									</div>
 								</div>
 								<div class="col-lg-2">
-									<a href="vocaLessonOverview.html"><span
-										class="glyphicon glyphicon-remove"></span></a>
+									<html:link action="/member-manage-level?action=vocabulary"><span
+										class="glyphicon glyphicon-remove"></span></html:link>
 								</div>
 							</div>
 						</div>
@@ -321,7 +311,7 @@
 									<label id="fq-write-vi">Người kia, người đó (Cách nói lịch sự)</label>
 								</div>
 								<div class="col-lg-3">
-									<div class="col-lg-12 btn-next">
+									<div id="btn-check-write" class="col-lg-12 btn-check">
 										<div class="col-lg-12">
 											<span style="font-size: 40px"
 												class="glyphicon glyphicon-chevron-right"></span>
@@ -541,6 +531,7 @@
 					case 3 : {
 						var audio=$("#fq-listen-1-ja")[0];
 						$(audio).attr("src","japanese/audio/"+lessonID+"/"+primary_word[currentWord].audio);
+						audio.play();
 						var answers=$(".fq-listen-1-answer");
 						trueAnswer=Math.floor(Math.random()*answers.length);
 						var listAnswer=randomAnswer(currentWord,"vi");
@@ -593,6 +584,8 @@
 			for(var i=0; i<questions.length; i++){
 				console.log("questions["+i+"] ="+questions[i]);
 			}
+			
+			$("#progress-learn-five-new-word").css("width",Math.floor((TOTAL_QUESTION*100)/30)+"%");
 			hideAllForm();
 			if (TOTAL_QUESTION < 30) {
 				console.log("total question"+TOTAL_QUESTION);
@@ -678,7 +671,13 @@
 		
 		/**start learning*/
  		if(TOTAL_QUESTION==0){
- 			showQuestion();	
+ 			var learnOption=$("#learnOption").val();
+ 			if(learnOption=="learn"){
+ 				showQuestion();	
+ 			}
+ 			if(learnOption=="review"){
+ 				
+ 			}
  		}
 		/****************/
 		var btn_next=$(".btn-next");
@@ -797,6 +796,8 @@
 				var btn_true=this;
 				setTimeout(function(){
 					$(btn_true).removeClass("btn-answer-true");
+					$("#fq-write-answer").removeClass("btn-answer-false");
+					$("#fq-write-answer").removeClass("btn-answer-true");
 					showQuestion();
 				}, 1000);
 			}
@@ -820,6 +821,10 @@
 			var data=primary_word[currentWord].audio;
 			var audio=$(selected[0]).find("audio")[0];
 			var src=$(audio).attr("src");
+			if(src==""|| src==null){
+				hideAllForm();
+				loadFormNewWord(currentWord);
+			}
 			src=src.substring(src.lastIndexOf("/")+1,src.length);
 			if(data==src){
 				console.log("true"+" currentWord"+currentWord);
@@ -844,6 +849,11 @@
 			for(var i=0; i<fq_listen_3_answers.length; i++){
 				$(fq_listen_3_answers[i]).removeClass("my-volume-question-selected");
 			}
+		});
+		$("#btn-check-write").on("click",function(){
+			$("#fq-write-answer").removeClass("btn-answer-false");
+			$("#fq-write-answer").removeClass("btn-answer-true");
+			showQuestion();
 		});
 	});
 

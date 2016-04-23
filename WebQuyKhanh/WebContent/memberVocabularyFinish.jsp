@@ -15,7 +15,8 @@
 <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
 <link rel="stylesheet" type="text/css"
 	href="css/mycss/styleframehome.css">
-
+<link rel="stylesheet" type="text/css"
+	href="css/mycss/stylelearnjapanese.css">
 <script src="js/jquery-2.2.0.min.js"></script>
 <script src="js/jquery-ui.js"></script>
 <script src="js/bootstrap.min.js"></script>
@@ -29,18 +30,26 @@
 				<div class="main-content">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
+							<bean:define id="lesson" name="learnJapaneseForm"
+								property="lesson"></bean:define>
+							<bean:define id="lessonID" name="lesson" property="lessonID"></bean:define>
 							<div class="panel-title">
 								<ol class="breadcrumb">
-									<li><a href="vocaLevel.html">Học từ vựng</a></li>
-									<li><a href="">Bài 1- 25</a></li>
-									<li class="active">Bài 1</li>
+									<li><html:link
+											action="/member-manage-level?action=vocabulary">Học từ vựng </html:link></li>
+									<li><html:link
+											action="/member-manage-level?action=vocabulary">
+											<bean:write name="lesson" property="levelName" />
+										</html:link></li>
+									<li class="active"><bean:write name="lesson"
+											property="lessonName" /></li>
 								</ol>
 							</div>
 						</div>
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-lg-offset-1 col-lg-5">
-									<div class="panel panel-primary">
+									<div class="panel panel-default">
 										<div class="panel-body">
 											<div class="row">
 												<h5 class="col-lg-offset-1 col-lg-8">
@@ -49,6 +58,7 @@
 												<h5 class="col-lg-3">
 													:
 													<bean:write property="trueAnswers" name="learnJapaneseForm" />
+													/25
 												</h5>
 											</div>
 											<div class="row">
@@ -65,48 +75,68 @@
 												<h5 class="col-lg-3">
 													:
 													<bean:write property="accuracy" name="learnJapaneseForm" />
+													%
 												</h5>
 											</div>
 										</div>
 									</div>
 								</div>
 								<div class="col-lg-3">
-									<button class="btn btn-default">
-										<span class="glyphicon glyphicon-chevron-right"></span> Tiếp
-									</button>
+									<html:link action="/member-manage-lesson?lessonID=${lessonID }">
+										<div class="col-lg-12 btn-next">
+											<div class="col-lg-12">
+												<span style="font-size: 40px"
+													class="glyphicon glyphicon-chevron-right"></span>
+											</div>
+											<label style="margin-top: 10px; font-size: 20px">Tiếp</label>
+										</div>
+									</html:link>
 								</div>
 							</div>
-							<div class="row">Những từ bạn đã học</div>
+							<div class="row">
+								<label style="margin-right: 10px;"> Những từ bạn đã học</label>
+							</div>
 							<div class="row">
 								<div class="panel panel-default">
 									<div class="panel-body">
 										<div class="row">
 											<div class="col-lg-4">
-												<h5>Tiếng Nhật</h5>
+												<label>Tiếng Nhật</label>
 											</div>
 											<div class="col-lg-4">
-												<h5>Tiếng Việt</h5>
+												<label>Tiếng Việt</label>
 											</div>
 											<div class="col-lg-4">
-												<h5>Khả năng ghi nhớ</h5>
+												<label>Khả năng ghi nhớ</label>
 											</div>
 										</div>
 										<logic:iterate id="japaneseData" name="learnJapaneseForm"
 											property="listData" indexId="index">
 											<div class="row">
 												<div class="col-lg-4">
-													<h5><bean:write property="japanese" name="japaneseData"/> </h5>
+													<h5>
+														<bean:write property="japanese" name="japaneseData" />
+													</h5>
 												</div>
 												<div class="col-lg-4">
-													<h5><bean:write property="vietnamese" name="japaneseData"/> </h5>
+													<h5>
+														<bean:write property="vietnamese" name="japaneseData" />
+													</h5>
 												</div>
-												<bean:define id="wordStatus" property="listWordStatus[${index }]" name="learnJapaneseForm"></bean:define>
-												<bean:define id="accuracy" name="wordStatus" property="accuracy"></bean:define>
+												<bean:define id="wordStatus"
+													property="listWordStatus[${index }]"
+													name="learnJapaneseForm"></bean:define>
+												<bean:define id="accuracy" name="wordStatus"
+													property="accuracy"></bean:define>
 												<div class="col-lg-4">
 													<div class="progress">
 														<div class="progress-bar progress-bar-success"
-															role="progressbar" aria-valuenow="${accuracy }" aria-valuemin="0"
-															aria-valuemax="100%" style="width:${accuracy}%"><bean:write property="accuracy" name="wordStatus"/> %</div>
+															role="progressbar" aria-valuenow="${accuracy }"
+															aria-valuemin="0" aria-valuemax="100%"
+															style="width:${accuracy}%">
+															<bean:write property="accuracy" name="wordStatus" />
+															%
+														</div>
 													</div>
 												</div>
 											</div>
