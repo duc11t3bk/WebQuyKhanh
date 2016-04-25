@@ -41,20 +41,21 @@ public class MemberManageLesson extends Action {
 		japaneseForm.setLesson(lesson);
 		japaneseForm.setLessonStatus(lessonStatus);
 		japaneseForm.setListData(listData);
+		ArrayList<WordStatus> wordStatus= japaneseBO.getListWordStatus(memberID, lessonID);
+		japaneseForm.setListWordStatus(wordStatus);
 		if("voca".equals(lesson.getCategory())){
-			ArrayList<WordStatus> wordStatus= japaneseBO.getListWordStatus(memberID, lessonID);
-			japaneseForm.setListWordStatus(wordStatus);
+			japaneseForm.setAction("vocabulary");
 			if("review".equals(learnOption)){
 				boolean checkReviewOption=japaneseBO.checkReviewOption(memberID,lessonID);
 				JSONArray jsonArray= new JSONArray();
-				JSONObject jsonObject= new JSONObject();
+				JSONObject jsonObjectChild= new JSONObject();
 				if(checkReviewOption){
-					jsonObject.put("result", "can_review");
+					jsonObjectChild.put("result", "can_review");
 				}
 				else{
-					jsonObject.put("result", "cant_review");
+					jsonObjectChild.put("result", "cant_review");
 				}
-				jsonArray.add(jsonObject);
+				jsonArray.add(jsonObjectChild);
 				PrintWriter write= response.getWriter();
 				write.println(jsonArray.toString());
 				write.flush();
@@ -63,7 +64,7 @@ public class MemberManageLesson extends Action {
 			}
 		}
 		if("tran".equals(lesson.getCategory())){
-			
+			japaneseForm.setAction("translate");
 		}
 		return mapping.findForward("showLessonData");
 	}

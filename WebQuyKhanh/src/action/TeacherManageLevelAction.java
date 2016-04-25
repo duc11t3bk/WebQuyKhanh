@@ -90,6 +90,49 @@ public class TeacherManageLevelAction extends Action {
 		}
 		if ("translate".equals(action)) {
 			JapaneseBO japaneseBO = new JapaneseBO();
+			String type=japaneseForm.getType();
+			if("add-level".equals(type)){
+				String levelName=japaneseForm.getLevelName();
+				JSONArray jsonArray=checkValidate(levelName);
+				JSONObject jsonObject= (JSONObject)jsonArray.get(0);
+				String result=jsonObject.get("result").toString();
+				if("success".equals(result)){
+					Level level= new Level();
+					level.setLevelName(levelName);
+					level.setCategory("tran");
+					japaneseBO.addNewLevel(level);
+				}
+				PrintWriter write=response.getWriter();
+				write.println(jsonArray.toString());
+				write.flush();
+				write.close();
+				return null;
+			}
+			if("add-lesson".equals(type)){
+				String lessonName= japaneseForm.getLessonName();
+				String levelID= japaneseForm.getLevelID();
+				System.out.println("lessonName= "+lessonName);
+				JSONArray jsonArray= checkValidate(lessonName);
+				JSONObject jsonObject= (JSONObject)jsonArray.get(0);
+				String result=jsonObject.get("result").toString();
+				if("success".equals(result)){
+					Lesson lesson= new Lesson();
+					lesson.setLessonName(lessonName);
+					lesson.setLevelID(levelID);
+					japaneseBO.addNewLesson(lesson);
+				}
+				PrintWriter write=response.getWriter();
+				write.println(jsonArray.toString());
+				write.flush();
+				write.close();
+				return null;
+			}
+			if("delete".equals(type)){
+				String levelID=japaneseForm.getLevelID();
+				if(!japaneseBO.deleteLevel(levelID)){
+					japaneseForm.setDeleteLevelError("Bạn phải xóa các bài học trong mục trước");
+				}
+			}
 			ArrayList<Level> listLevel= japaneseBO.getListLevel(action);
 			ArrayList<Lesson> listLesson= japaneseBO.getListLesson(action);
 			japaneseForm.setListLevel(listLevel);

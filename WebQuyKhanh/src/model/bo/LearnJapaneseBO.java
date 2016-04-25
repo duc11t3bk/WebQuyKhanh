@@ -24,4 +24,7 @@ public class LearnJapaneseBO {
 	public ArrayList<JapaneseData> getListReview(String memberID, String lessonID) {
 		return learnJapaneseDAO.getListReview(memberID,lessonID);
 	}
+	public ArrayList<JapaneseData> getListSentences(String memberID, String lessonID) {
+		return learnJapaneseDAO.getListSentences(memberID,lessonID);
+	}
 }

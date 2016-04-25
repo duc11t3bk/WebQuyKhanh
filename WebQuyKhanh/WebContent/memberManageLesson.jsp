@@ -46,7 +46,7 @@
 						$("#btn-submit").prop("disabled",false);
 					}
 					if(result=="cant_review"){
-						$("#notify").html("Bạn phải học thuộc ít nhất một từ trước khi ôn tập");
+						$("#notify").html("Bạn phải học thuộc ít nhất năm từ trước khi ôn tập");
 						$("#btn-submit").prop("disabled",true);
 						$("#btn-submit").css("cursor","not-allowed");
 					}
@@ -89,8 +89,8 @@
 							</logic:equal>
 							<logic:equal value="tran" name="lesson" property="category">
 								<ol class="breadcrumb">
-									<li><html:link action="/member-manage-level?action=tran">Luyện dịch câu</html:link></li>
-									<li><html:link action="/member-manage-level?action=tran">
+									<li><html:link action="/member-manage-level?action=translate">Luyện dịch câu</html:link></li>
+									<li><html:link action="/member-manage-level?action=translate">
 											<bean:write property="levelName" name="lesson" />
 										</html:link></li>
 									<li class="active"><bean:write property="lessonName"
@@ -129,19 +129,36 @@
 										<div class="col-lg-offset-3 col-lg-9">
 											<div class="row">
 												<bean:define id="lessonID" name="lesson" property="lessonID"></bean:define>
-												<html:form action="/member-learn-vocabulary">
-													<html:hidden property="lessonID" name="lesson" />
-													<div class="col-lg-3" style="padding: 0px">
-														<html:select styleId="learnOption"
-															styleClass="dropdownlist" onchange="eventChangeOption()"
-															property="learnOption" style="width:100%">
-															<html:option value="learn">Học mới</html:option>
-															<html:option value="review">Ôn tập</html:option>
-														</html:select>
-													</div>
-													<html:submit styleId="btn-submit" property="submit"
-														styleClass="col-lg-3 btn-learn">Học những từ này</html:submit>
-												</html:form>
+												<logic:equal value="vocabulary" property="action" name="japaneseForm">
+													<html:form action="/member-learn-vocabulary">
+														<html:hidden property="lessonID" name="lesson" />
+														<div class="col-lg-3" style="padding: 0px">
+															<html:select styleId="learnOption"
+																styleClass="dropdownlist" onchange="eventChangeOption()"
+																property="learnOption" style="width:100%">
+																<html:option value="learn">Học mới</html:option>
+																<html:option value="review">Ôn tập</html:option>
+															</html:select>
+														</div>
+														<html:submit styleId="btn-submit" property="submit"
+															styleClass="col-lg-3 btn-learn">Học những từ này</html:submit>
+													</html:form>
+												</logic:equal>
+												<logic:equal value="translate" property="action" name="japaneseForm">
+													<html:form action="/member-learn-translate">
+														<html:hidden property="lessonID" name="lesson" />
+														<div class="col-lg-3" style="padding: 0px">
+															<html:select styleId="learnOption"
+																styleClass="dropdownlist" onchange="eventChangeOption()"
+																property="learnOption" style="width:100%">
+																<html:option value="learn">Học mới</html:option>
+																<html:option value="review">Ôn tập</html:option>
+															</html:select>
+														</div>
+														<html:submit styleId="btn-submit" property="submit"
+															styleClass="col-lg-3 btn-learn">Dịch những câu này</html:submit>
+													</html:form>
+												</logic:equal>
 											</div>
 										</div>
 									</div>

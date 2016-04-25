@@ -100,7 +100,7 @@ public class LearnJapaneseDAO {
 		try {
 			conn=connection.openConnection();
 			String sql="select jd.data_id, jd.lesson_id, jd.level_id, jd.japanese, jd.vietnamese, jd.sound"
-					+ " from learnword lw join japanesedata jd on (lw.data_id = jd=data_id) "
+					+ " from learnword lw join japanesedata jd on (lw.data_id = jd.data_id) "
 					+ " where (lw.member_id = ?) and (jd.lesson_id = ?) and (lw.accuracy =5)";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, memberID);
@@ -121,6 +121,36 @@ public class LearnJapaneseDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+
+	public ArrayList<JapaneseData> getListSentences(String memberID, String lessonID) {
+		try {
+			conn=connection.openConnection();
+			String sql="select jd.data_id, jd.lesson_id, jd.level_id, jd.japanese, jd.vietnamese "
+					+ " from japanesedata jd join learnword lw on (jd.data_id=lw.data_id)"
+					+ " where lw.member_id= ? and jd.lesson_id= ?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, memberID);
+			pstmt.setString(2, lessonID);
+			ResultSet rs=pstmt.executeQuery();
+			ArrayList<JapaneseData> listSentences= new ArrayList<JapaneseData>();
+			while(rs.next()){
+				JapaneseData japaneseData= new JapaneseData();
+				japaneseData.setDataID(rs.getString(1));
+				japaneseData.setLessonID(rs.getString(2));
+				japaneseData.setLevelID(rs.getString(3));
+				japaneseData.setJapanese(rs.getString(4));
+				japaneseData.setVietnamese(rs.getString(5));
+				listSentences.add(japaneseData);
+			}
+			return listSentences;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		finally {
+			connection.closeConnection();
 		}
 	}
 }

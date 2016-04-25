@@ -59,7 +59,12 @@
 							<div class="panel-heading">
 								<div class="panel-title">
 									<ol class="breadcrumb">
-										<li><a href="#">Học từ vựng</a></li>
+										<logic:equal value="vocabulary" name="japaneseForm" property="action">
+											<li><a href="#">Học từ vựng</a></li>
+										</logic:equal>
+										<logic:equal value="translate" name="japaneseForm" property="action">
+											<li><a href="#">Luyện dịch câu</a></li>
+										</logic:equal>
 									</ol>
 								</div>
 							</div>

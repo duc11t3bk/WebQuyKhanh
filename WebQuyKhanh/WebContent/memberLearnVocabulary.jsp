@@ -28,18 +28,21 @@
 		<div class="container main-container2">
 			<div class="main-content">
 				<div class="row">
-					<html:hidden styleId="learnOption" property="learnOption" name="learnJapaneseForm"/>
+					<html:hidden styleId="learnOption" property="learnOption"
+						name="learnJapaneseForm" />
 					<html:hidden styleId="dataResponse" property="dataResponse"
 						name="learnJapaneseForm" />
 					<!-- Push data after learning -->
 					<html:form styleId="form-submit" action="/member-learn-vocabulary">
-						<html:hidden styleId="dataReceive" property="dataReceive"/>
-						<html:hidden styleId="lessonID" property="lessonID" name="learnJapaneseForm"/>
+						<html:hidden styleId="dataReceive" property="dataReceive" />
+						<html:hidden styleId="lessonID" property="lessonID" />
+						<html:hidden styleId="learnOption" property="learnOption" />
 					</html:form>
 					<!-- -------------------------- -->
 					<div class="panel panel-success">
 						<div class="panel-body learnProcess">
-							<bean:define id="lesson" name="learnJapaneseForm" property="lesson"></bean:define>
+							<bean:define id="lesson" name="learnJapaneseForm"
+								property="lesson"></bean:define>
 							<div class="row">
 								<h5 class="col-lg-12">
 									Học 5 từ mới :
@@ -50,18 +53,22 @@
 							</div>
 							<div class="row">
 								<div class="col-lg-2">
-									<html:link href="#x"><span class="glyphicon glyphicon-pause"></span></html:link>
+									<html:link href="#x">
+										<span class="glyphicon glyphicon-pause"></span>
+									</html:link>
 								</div>
 								<div class="col-lg-8">
 									<div class="progress">
-										<div id="progress-learn-five-new-word" class="progress-bar progress-bar-success"
-											role="progressbar" aria-valuenow="60" aria-valuemin="0"
-											aria-valuemax="100" style="width: 10%"></div>
+										<div id="progress-learn-five-new-word"
+											class="progress-bar progress-bar-success" role="progressbar"
+											aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+											style="width: 10%"></div>
 									</div>
 								</div>
 								<div class="col-lg-2">
-									<html:link action="/member-manage-level?action=vocabulary"><span
-										class="glyphicon glyphicon-remove"></span></html:link>
+									<html:link action="/member-manage-level?action=vocabulary">
+										<span class="glyphicon glyphicon-remove"></span>
+									</html:link>
 								</div>
 							</div>
 						</div>
@@ -72,7 +79,7 @@
 						<div class="col-lg-offset-1 col-lg-10">
 							<div class="col-lg-offset-1 col-lg-1">
 								<span class="glyphicon glyphicon-volume-up my-volume"
-									style="font-size: 50px;"><audio id="fnw-audio"></audio></span>													 
+									style="font-size: 50px;"><audio id="fnw-audio"></audio></span>
 							</div>
 							<div class="col-lg-9">
 								<div class="col-lg-12">
@@ -109,7 +116,7 @@
 										style="font-size: 50px"></span>
 								</div>
 								<div class="col-lg-7">
-									<label id="fqvi-ja-vi" style="font-size: 50px" >Tôi</label>
+									<label id="fqvi-ja-vi" style="font-size: 50px">Tôi</label>
 								</div>
 								<div class="col-lg-2">
 									<div class="col-lg-12 btn-next" id="fqvi-ja-next">
@@ -126,12 +133,16 @@
 							</div>
 							<div class="col-lg-12"
 								style="margin-bottom: 20px; margin-top: 50px;">
-								<div class="col-lg-offset-2 col-lg-3 btn-answer fqvi-ja-answer">Item 1</div>
-								<div class="col-lg-offset-1 col-lg-3 btn-answer fqvi-ja-answer">item 2</div>
+								<div class="col-lg-offset-2 col-lg-3 btn-answer fqvi-ja-answer">Item
+									1</div>
+								<div class="col-lg-offset-1 col-lg-3 btn-answer fqvi-ja-answer">item
+									2</div>
 							</div>
 							<div class="col-lg-12" style="margin-bottom: 20px;">
-								<div class="col-lg-offset-2 col-lg-3 btn-answer fqvi-ja-answer">Item 1</div>
-								<div class="col-lg-offset-1 col-lg-3 btn-answer fqvi-ja-answer">item 2</div>
+								<div class="col-lg-offset-2 col-lg-3 btn-answer fqvi-ja-answer">Item
+									1</div>
+								<div class="col-lg-offset-1 col-lg-3 btn-answer fqvi-ja-answer">item
+									2</div>
 							</div>
 							<div class="col-lg-12">
 								<div class="col-lg-offset-4 col-lg-3 btn-answer view-answer">
@@ -170,25 +181,29 @@
 							<div class="col-lg-12"
 								style="margin-bottom: 20px; margin-top: 50px;">
 								<div class="col-lg-12" style="margin-bottom: 10px;">
-									<div class="col-lg-offset-3 col-lg-5 btn-answer fqja-vi-answer">Item 1</div>
+									<div class="col-lg-offset-3 col-lg-5 btn-answer fqja-vi-answer">Item
+										1</div>
 								</div>
 								<div class="col-lg-12" style="margin-bottom: 10px;">
-									<div class="col-lg-offset-3 col-lg-5 btn-answer fqja-vi-answer">Item 1</div>
+									<div class="col-lg-offset-3 col-lg-5 btn-answer fqja-vi-answer">Item
+										1</div>
 								</div>
 								<div class="col-lg-12" style="margin-bottom: 10px;">
-									<div class="col-lg-offset-3 col-lg-5 btn-answer fqja-vi-answer">Item 1</div>
+									<div class="col-lg-offset-3 col-lg-5 btn-answer fqja-vi-answer">Item
+										1</div>
 								</div>
 								<div class="col-lg-12" style="margin-bottom: 10px;">
-									<div class="col-lg-offset-3 col-lg-5 btn-answer fqja-vi-answer">Item 1</div>
+									<div class="col-lg-offset-3 col-lg-5 btn-answer fqja-vi-answer">Item
+										1</div>
 								</div>
 							</div>
 							<div class="col-lg-12">
-								<div  class="col-lg-offset-4 col-lg-3 btn-answer view-answer">
+								<div class="col-lg-offset-4 col-lg-3 btn-answer view-answer">
 									<div class="col-lg-3"
 										style="padding-left: 0px; font-size: 20px">
 										<span class="glyphicon glyphicon-repeat"></span>
 									</div>
-									<h5 >Xem câu trả lời</h5>
+									<h5>Xem câu trả lời</h5>
 								</div>
 							</div>
 						</div>
@@ -225,12 +240,20 @@
 							</div>
 							<div class="col-lg-12"
 								style="margin-bottom: 20px; margin-top: 50px;">
-								<div class="col-lg-offset-2 col-lg-3 btn-answer fq-listen-1-answer">Item 1</div>
-								<div class="col-lg-offset-1 col-lg-3 btn-answer fq-listen-1-answer">item 2</div>
+								<div
+									class="col-lg-offset-2 col-lg-3 btn-answer fq-listen-1-answer">Item
+									1</div>
+								<div
+									class="col-lg-offset-1 col-lg-3 btn-answer fq-listen-1-answer">item
+									2</div>
 							</div>
 							<div class="col-lg-12" style="margin-bottom: 20px;">
-								<div class="col-lg-offset-2 col-lg-3 btn-answer fq-listen-1-answer">Item 1</div>
-								<div class="col-lg-offset-1 col-lg-3 btn-answer fq-listen-1-answer">item 2</div>
+								<div
+									class="col-lg-offset-2 col-lg-3 btn-answer fq-listen-1-answer">Item
+									1</div>
+								<div
+									class="col-lg-offset-1 col-lg-3 btn-answer fq-listen-1-answer">item
+									2</div>
 							</div>
 							<div class="col-lg-12">
 								<div class="col-lg-offset-4 col-lg-3 btn-answer view-answer">
@@ -251,7 +274,8 @@
 										style="font-size: 50px;"></span>
 								</div>
 								<div class="col-lg-6" style="font-size: 50px;">
-									<label id="fq-listen-3-vi">Người kia, người đó (Cách nói lịch sự)</label>
+									<label id="fq-listen-3-vi">Người kia, người đó (Cách
+										nói lịch sự)</label>
 								</div>
 								<div class="col-lg-3">
 									<div id="btn-check-listen-3" class="col-lg-12 btn-check">
@@ -270,12 +294,14 @@
 							<div class="col-lg-12" style="margin-top: 50px;">
 								<div class="col-lg-12" style="text-align: center">
 									<div class="col-lg-offset-1 col-lg-4">
-										<span class="glyphicon glyphicon-volume-up my-volume-question fq-listen-3-answer ">
+										<span
+											class="glyphicon glyphicon-volume-up my-volume-question fq-listen-3-answer ">
 											<audio></audio>
 										</span>
 									</div>
 									<div class="col-lg-4">
-										<span class="glyphicon glyphicon-volume-up my-volume-question fq-listen-3-answer ">
+										<span
+											class="glyphicon glyphicon-volume-up my-volume-question fq-listen-3-answer ">
 											<audio></audio>
 										</span>
 									</div>
@@ -283,7 +309,8 @@
 								<div class="col-lg-12"
 									style="text-align: center; margin-top: 20px;">
 									<div class="col-lg-offset-1 col-lg-8">
-										<span class="glyphicon glyphicon-volume-up my-volume-question fq-listen-3-answer ">
+										<span
+											class="glyphicon glyphicon-volume-up my-volume-question fq-listen-3-answer ">
 											<audio></audio>
 										</span>
 									</div>
@@ -308,7 +335,8 @@
 										style="font-size: 50px;"></span>
 								</div>
 								<div class="col-lg-6" style="font-size: 50px;">
-									<label id="fq-write-vi">Người kia, người đó (Cách nói lịch sự)</label>
+									<label id="fq-write-vi">Người kia, người đó (Cách nói
+										lịch sự)</label>
 								</div>
 								<div class="col-lg-3">
 									<div id="btn-check-write" class="col-lg-12 btn-check">
@@ -352,24 +380,50 @@
 			<jsp:include page="footer2.jsp"></jsp:include>
 		</div>
 	</div>
-	
-<script type="text/javascript">
+
+	<script type="text/javascript">
 	$(document).ready(function() {
 		var lessonID=$("#lessonID").val();
 		var response = $("#dataResponse").val();
 		console.log("jsonObject \n" + response);
-		var jsonObject = JSON.parse(response);
-		var primary_word = jsonObject.primary_word;
-		var extra_word = jsonObject.extra_word;
+		var jsonObject;
+		var primary_word;
+		var extra_word;
 		var TOTAL_QUESTION = 0;
 		var currentWord=0;
 		var trueAnswer;
-		var questions= new Array(0,0,0,0,0);
-		var accuracy= new Array(0,0,0,0,0);
+		var questions= new Array();
+		var accuracy= new Array();
 		var formLearns = ["#form-new-word","#form-question-vi-ja","#form-question-ja-vi",
 		                  "#form-question-listen-1","#form-question-listen-3","#form-question-write"];
-		
-
+		var learnOption=$("#learnOption").val();
+		console.log("learnOption="+learnOption);
+		/**start learning*/
+ 		if(TOTAL_QUESTION==0){
+ 			console.log("learnOption"+learnOption);
+ 			if(learnOption=="learn"){
+ 				jsonObject= JSON.parse(response);
+ 				primary_word= jsonObject.primary_word;
+ 				extra_word= jsonObject.extra_word;
+ 				for(var i=0; i<5; i++){
+ 					questions.push(0);
+ 					accuracy.push(0);
+ 				}
+ 				showQuestion();	
+ 			}
+ 			if(learnOption=="review"){
+ 				console.log("review..........");
+ 				jsonObject= JSON.parse(response);
+ 				primary_word=jsonObject.review_word;
+ 				console.log("primaryword length"+primary_word.length);
+ 				for(var i=0; i<primary_word.length; i++){
+ 					questions.push(1);
+ 					accuracy.push(0);
+ 				}
+ 				showQuestion();
+ 			}
+ 		}
+		/****************/
 //		test form 1
 // 		$(formLearns[0]).css("display","block");
 // 		$("#fnw-ja").html(""+primary_word[0].japanese);
@@ -377,7 +431,7 @@
 // 		var audio=$("#fnw-audio")[0];
 // 		$(audio).attr("src","japanese/audio/"+lessonID+"/"+primary_word[0].audio);
 		
-		function checkNumberExists(listNumber, number){
+		function checkNumberNotExists(listNumber, number){
 			for(var i=0; i<listNumber.length; i++ ){
 				if(number==listNumber[i]){
 					return false;
@@ -393,7 +447,7 @@
 				var randomArray=Math.floor(Math.random()*2);
 				if(randomArray==0){
 					var randomWord=Math.floor(Math.random()*primary_word.length);
-					if(checkNumberExists(listNumber, randomWord)){
+					if(checkNumberNotExists(listNumber, randomWord)){
 						listNumber.push(randomWord);
 						if(type=="vi"){
 							answers.push(primary_word[randomWord].vietnamese);	
@@ -405,7 +459,7 @@
 				}
 				else{
 					var randomWord2=Math.floor(Math.random()*extra_word.length);
-					if(checkNumberExists(listNumber, 5+randomWord2)){
+					if(checkNumberNotExists(listNumber, 5+randomWord2)){
 						listNumber.push(5+randomWord2);
 						if(type=="vi"){
 							answers.push(extra_word[randomWord2].vietnamese);
@@ -418,14 +472,44 @@
 			}
 			return answers;
 		}
-		
+		function randomAnswerReview(currentWord,type){
+			var answers= new Array();
+			var listNumber= new Array();
+			listNumber.push(currentWord);
+			while(answers.length<3){
+				var randomWord=Math.floor(Math.random()*primary_word.length);
+				if(checkNumberNotExists(listNumber, randomWord)){
+					listNumber.push(randomWord);
+					if(type=="vi"){
+						answers.push(primary_word[randomWord].vietnamese);
+					}
+					if(type=="ja"){
+						answers.push(primary_word[randomWord].japanese);
+					}
+				}
+			}
+			return answers;
+		}
+		function randomAnswerAudioReview(currentWord){
+			var answers= new Array();
+			var listNumber= new Array();
+			listNumber.push(currentWord);
+			while(answers.length<2){
+				var randomWord= Math.floor(Math.random()*primary_word.length);
+				if(checkNumberNotExists(listNumber, randomWord)){
+					listNumber.push(randomWord);
+					answers.push(primary_word[randomWord].audio);
+				}
+			}
+			return answers;
+		}
 		function randomAnswerAudio(currentWord){
 			var answers= new Array();
 			var listNumber= new Array();
 			listNumber.push(currentWord);
 			while(answers.length<2){
 				var randomWord=Math.floor(Math.random()*primary_word.length);
-				if(checkNumberExists(listNumber,randomWord)){
+				if(checkNumberNotExists(listNumber,randomWord)){
 					listNumber.push(randomWord);
 					answers.push(primary_word[randomWord].audio);
 				}
@@ -441,6 +525,106 @@
 			$(audio).attr("src","japanese/audio/"+lessonID+"/"+primary_word[word].audio);
 			audio.play();
 			currentWord=word;
+		}
+		function loadFormQuestion(){
+			console.log("run form question");
+			console.log("run form question question currentword="+questions[currentWord]);
+			$(formLearns[questions[currentWord]]).css("display","block");
+			switch(questions[currentWord]){
+				case 1: {
+					$("#fqvi-ja-vi").html(""+primary_word[currentWord].vietnamese);
+					var answers=$(".fqvi-ja-answer");
+					var listAnswer;
+					if(learnOption=="learn"){
+						listAnswer=randomAnswer(currentWord, "ja");	
+					}
+					else{
+						listAnswer=randomAnswerReview(currentWord, "ja");
+					}
+					trueAnswer=Math.floor(Math.random()*answers.length);
+					$(answers[trueAnswer]).html(""+primary_word[currentWord].japanese);
+					var j=0;
+					for(var i=0; i<answers.length; i++){
+						if(i!=trueAnswer){
+							$(answers[i]).html(""+listAnswer[j]);
+							j+=1;
+						}
+					}
+					break;
+				}
+				case 2 : {
+					$("#fqja-vi-ja").html(primary_word[currentWord].japanese);
+					var answers=$(".fqja-vi-answer");
+					trueAnswer=Math.floor(Math.random()*answers.length);
+					var listAnswer;
+					if(learnOption=="learn"){
+						listAnswer=randomAnswer(currentWord, "vi");	
+					}
+					else{
+						listAnswer=randomAnswerReview(currentWord, "vi");
+					}
+					$(answers[trueAnswer]).html(""+primary_word[currentWord].vietnamese);
+					var j=0;
+					for(var i=0; i<answers.length; i++){
+						if(i!=trueAnswer){
+							$(answers[i]).html(listAnswer[j]);
+							j+=1;
+						}
+					}
+					break;
+				}
+				case 3 : {
+					var audio=$("#fq-listen-1-ja")[0];
+					$(audio).attr("src","japanese/audio/"+lessonID+"/"+primary_word[currentWord].audio);
+					audio.play();
+					var answers=$(".fq-listen-1-answer");
+					trueAnswer=Math.floor(Math.random()*answers.length);
+					var listAnswer;
+					if(learnOption=="learn"){
+						listAnswer=randomAnswer(currentWord, "vi");	
+					}
+					else{
+						listAnswer=randomAnswerReview(currentWord, "vi");
+					}
+					$(answers[trueAnswer]).html(""+primary_word[currentWord].vietnamese);
+					var j=0;
+					for(var i=0; i<answers.length; i++){
+						if(i!=trueAnswer){
+							$(answers[i]).html(""+listAnswer[j]);
+							j+=1;
+						}
+					}
+					break;
+				}
+				case 4 : {
+					$("#fq-listen-3-vi").html(""+primary_word[currentWord].vietnamese);
+					var answers=$(".fq-listen-3-answer");
+					trueAnswer=Math.floor(Math.random()*answers.length);
+					var listAnswer;
+					if(learnOption=="learn"){
+						listAnswer=randomAnswerAudio(currentWord);
+					}
+					else{
+						listAnswer=randomAnswerAudioReview(currentWord);
+					}
+					var audio =$(answers[trueAnswer]).find("audio")[0];
+					$(audio).attr("src","japanese/audio/"+lessonID+"/"+primary_word[currentWord].audio);
+					var j=0;
+					for(var i=0; i<answers.length; i++){
+						if(i!=trueAnswer){
+							var audioWrong=$(answers[i]).find("audio")[0];
+							$(audioWrong).attr("src","japanese/audio/"+lessonID+"/"+listAnswer[j]);
+							j+=1;
+						}
+					}
+					break;
+				}
+				case 5 : {
+					$("#fq-write-answer").val("");
+					$("#fq-write-vi").html(""+primary_word[currentWord].vietnamese);
+					break;
+				}
+			}
 		}
 		function loadFormLearnNewWord(firstWord,secondWord,threeWord){
 			var condition;
@@ -496,78 +680,27 @@
 						}
 					}
 				}
-				$(formLearns[questions[currentWord]]).css("display","block");
-				switch(questions[currentWord]){
-					case 1: {
-						$("#fqvi-ja-vi").html(""+primary_word[currentWord].vietnamese);
-						var answers=$(".fqvi-ja-answer");
-						var listAnswer=randomAnswer(currentWord, "ja");
-						trueAnswer=Math.floor(Math.random()*answers.length);
-						$(answers[trueAnswer]).html(""+primary_word[currentWord].japanese);
-						var j=0;
-						for(var i=0; i<answers.length; i++){
-							if(i!=trueAnswer){
-								$(answers[i]).html(""+listAnswer[j]);
-								j+=1;
-							}
-						}
-						break;
-					}
-					case 2 : {
-						$("#fqja-vi-ja").html(primary_word[currentWord].japanese);
-						var answers=$(".fqja-vi-answer");
-						trueAnswer=Math.floor(Math.random()*answers.length);
-						var listAnswer=randomAnswer(currentWord, "vi");
-						$(answers[trueAnswer]).html(""+primary_word[currentWord].vietnamese);
-						var j=0;
-						for(var i=0; i<answers.length; i++){
-							if(i!=trueAnswer){
-								$(answers[i]).html(listAnswer[j]);
-								j+=1;
-							}
-						}
-						break;
-					}
-					case 3 : {
-						var audio=$("#fq-listen-1-ja")[0];
-						$(audio).attr("src","japanese/audio/"+lessonID+"/"+primary_word[currentWord].audio);
-						audio.play();
-						var answers=$(".fq-listen-1-answer");
-						trueAnswer=Math.floor(Math.random()*answers.length);
-						var listAnswer=randomAnswer(currentWord,"vi");
-						$(answers[trueAnswer]).html(""+primary_word[currentWord].vietnamese);
-						var j=0;
-						for(var i=0; i<answers.length; i++){
-							if(i!=trueAnswer){
-								$(answers[i]).html(""+listAnswer[j]);
-								j+=1;
-							}
-						}
-						break;
-					}
-					case 4 : {
-						$("#fq-listen-3-vi").html(""+primary_word[currentWord].vietnamese);
-						var answers=$(".fq-listen-3-answer");
-						trueAnswer=Math.floor(Math.random()*answers.length);
-						var listAnswer=randomAnswerAudio(currentWord);
-						var audio =$(answers[trueAnswer]).find("audio")[0];
-						$(audio).attr("src","japanese/audio/"+lessonID+"/"+primary_word[currentWord].audio);
-						var j=0;
-						for(var i=0; i<answers.length; i++){
-							if(i!=trueAnswer){
-								var audioWrong=$(answers[i]).find("audio")[0];
-								$(audioWrong).attr("src","japanese/audio/"+lessonID+"/"+listAnswer[j]);
-								j+=1;
-							}
-						}
-						break;
-					}
-					case 5 : {
-						$("#fq-write-answer").val("");
-						$("#fq-write-vi").html(""+primary_word[currentWord].vietnamese);
-						break;
-					}
+				loadFormQuestion();
+			}
+		}
+		function loadFormReviewWord(){
+			currentWord=Math.floor(Math.random()*(primary_word.length));
+			var count=0;
+			while(questions[currentWord]==6)
+			{
+				if(currentWord==(primary_word.length-1)){
+					currentWord=0;
 				}
+				else{
+					currentWord+=1;
+				}
+				count+=1;
+				if(count==primary_word.length){
+					break;
+				}
+			}
+			if(count<primary_word.length){
+				loadFormQuestion();	
 			}
 		}
 		function hideAllForm(){
@@ -575,6 +708,39 @@
 				$(formLearns[i]).css("display", "none");
 			}
 		}
+		
+		/**
+		* show question when member chooese review
+		*
+		*/
+		function showQuestionReview(){
+			hideAllForm();
+			$("#progress-learn-five-new-word").css("width",Math.floor((TOTAL_QUESTION*100)/(5*primary_word.length))+"%");
+			if(TOTAL_QUESTION<(5*primary_word.length)){
+				loadFormReviewWord();
+				questions[currentWord]+=1;
+				TOTAL_QUESTION+=1;
+			}
+			else{
+				var jsonArray= new Array();
+				for(var i=0; i<accuracy.length; i++ ){
+					var jsonObject= new Object();
+					jsonObject.data_id=primary_word[i].data_id;
+					jsonObject.accuracy=accuracy[i];
+					jsonObject.japanese=primary_word[i].japanese;
+					jsonObject.vietnamese=primary_word[i].vietnamese;
+					jsonArray.push(jsonObject);
+				}
+				var jsonString= JSON.stringify(jsonArray);
+				console.log("jsonString="+jsonString);
+				$("#dataReceive").val(""+jsonString);
+				$("#form-submit").submit();
+			}
+		}
+		
+		/**
+		*show question when member review or learn 
+		*/
 		function showQuestion() {
 			console.log("*********************\n");
 			for(var i=0; i<accuracy.length; i++){
@@ -584,102 +750,98 @@
 			for(var i=0; i<questions.length; i++){
 				console.log("questions["+i+"] ="+questions[i]);
 			}
-			
-			$("#progress-learn-five-new-word").css("width",Math.floor((TOTAL_QUESTION*100)/30)+"%");
-			hideAllForm();
-			if (TOTAL_QUESTION < 30) {
-				console.log("total question"+TOTAL_QUESTION);
-				switch (TOTAL_QUESTION) {
-				case 0: {
-					loadFormNewWord(0);
-					break;
+			if(learnOption=="learn"){
+				$("#progress-learn-five-new-word").css("width",Math.floor((TOTAL_QUESTION*100)/30)+"%");
+				hideAllForm();
+				if (TOTAL_QUESTION < 30) {
+					console.log("total question"+TOTAL_QUESTION);
+					switch (TOTAL_QUESTION) {
+					case 0: {
+						loadFormNewWord(0);
+						break;
+					}
+					case 1: {
+						loadFormNewWord(1);
+						break;
+					}
+					case 2:
+					case 3:
+					case 4:
+					case 5: {
+						loadFormLearnNewWord(0, 1, -1);
+						break;
+					}
+					case 6: {
+						loadFormNewWord(2);
+						break;
+					}
+					case 7: {
+						loadFormNewWord(3);
+						break;
+					}
+					case 8:
+					case 9:
+					case 10:
+					case 11: {
+						loadFormLearnNewWord(2, 3, -1);
+						break;
+					}
+					case 12: {
+						loadFormNewWord(4);
+						break;
+					}
+					case 13:
+					case 14:
+					case 15:
+					case 16:
+					case 17:
+					case 18: {
+						loadFormLearnNewWord(0, 1, -1);
+						break;
+					}
+					case 19:
+					case 20:
+					case 21:
+					case 22:
+					case 23:
+					case 24:
+					case 25:
+					case 26:
+					case 27:
+					case 28:
+					case 29: {
+						loadFormLearnNewWord(2, 3, 4);
+						break;
+					}
+					}
+					questions[currentWord]+=1;
+					console.log("currentWord="+currentWord);
+					TOTAL_QUESTION+=1;
 				}
-				case 1: {
-					loadFormNewWord(1);
-					break;
+				else{
+					var jsonArray= new Array();
+					for(var i=0; i<accuracy.length; i++){
+						var jsonObject= new Object();
+						jsonObject.data_id=primary_word[i].data_id;
+						jsonObject.accuracy=accuracy[i];
+						jsonObject.japanese=primary_word[i].japanese;
+						jsonObject.vietnamese=primary_word[i].vietnamese;
+						jsonArray.push(jsonObject);
+					}
+					var jsonString=JSON.stringify(jsonArray);
+					console.log("jsonString="+jsonString);
+					$("#dataReceive").val(""+jsonString);
+					$("#form-submit").submit();
 				}
-				case 2:
-				case 3:
-				case 4:
-				case 5: {
-					loadFormLearnNewWord(0, 1, -1);
-					break;
-				}
-				case 6: {
-					loadFormNewWord(2);
-					break;
-				}
-				case 7: {
-					loadFormNewWord(3);
-					break;
-				}
-				case 8:
-				case 9:
-				case 10:
-				case 11: {
-					loadFormLearnNewWord(2, 3, -1);
-					break;
-				}
-				case 12: {
-					loadFormNewWord(4);
-					break;
-				}
-				case 13:
-				case 14:
-				case 15:
-				case 16:
-				case 17:
-				case 18: {
-					loadFormLearnNewWord(0, 1, -1);
-					break;
-				}
-				case 19:
-				case 20:
-				case 21:
-				case 22:
-				case 23:
-				case 24:
-				case 25:
-				case 26:
-				case 27:
-				case 28:
-				case 29: {
-					loadFormLearnNewWord(2, 3, 4);
-					break;
-				}
-				}
-				questions[currentWord]+=1;
-				console.log("currentWord="+currentWord);
-				TOTAL_QUESTION+=1;
 			}
 			else{
-				var jsonArray= new Array();
-				for(var i=0; i<accuracy.length; i++){
-					var jsonObject= new Object();
-					jsonObject.data_id=primary_word[i].data_id;
-					jsonObject.accuracy=accuracy[i];
-					jsonObject.japanese=primary_word[i].japanese;
-					jsonObject.vietnamese=primary_word[i].vietnamese;
-					jsonArray.push(jsonObject);
-				}
-				var jsonString=JSON.stringify(jsonArray);
-				console.log("jsonString="+jsonString);
-				$("#dataReceive").val(""+jsonString);
-				$("#form-submit").submit();
+				//learnOption==review
+				showQuestionReview();
 			}
+			
 		}
 		
-		/**start learning*/
- 		if(TOTAL_QUESTION==0){
- 			var learnOption=$("#learnOption").val();
- 			if(learnOption=="learn"){
- 				showQuestion();	
- 			}
- 			if(learnOption=="review"){
- 				
- 			}
- 		}
-		/****************/
+		/**event for btn-next*/
 		var btn_next=$(".btn-next");
 		for(var i=0; i<btn_next.length; i++){
 			$(btn_next[i]).on("click",function(){
@@ -797,7 +959,6 @@
 				setTimeout(function(){
 					$(btn_true).removeClass("btn-answer-true");
 					$("#fq-write-answer").removeClass("btn-answer-false");
-					$("#fq-write-answer").removeClass("btn-answer-true");
 					showQuestion();
 				}, 1000);
 			}
@@ -822,10 +983,16 @@
 			var audio=$(selected[0]).find("audio")[0];
 			var src=$(audio).attr("src");
 			if(src==""|| src==null){
-				hideAllForm();
-				loadFormNewWord(currentWord);
+				$(fq_listen_3_answers[trueAnswer]).addClass("btn-answer-true");
+				setTimeout(function(){
+					$(fq_listen_3_answers[trueAnswer]).removeClass("btn-answer-true");
+					hideAllForm();
+					loadFormNewWord(currentWord);
+				}, 1000);
 			}
-			src=src.substring(src.lastIndexOf("/")+1,src.length);
+			else{
+				src=src.substring(src.lastIndexOf("/")+1,src.length);	
+			}			
 			if(data==src){
 				console.log("true"+" currentWord"+currentWord);
 				accuracy[currentWord]+=1;

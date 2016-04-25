@@ -44,20 +44,7 @@
 					</li>
 					<li><html:link action="/manage-student" >Quản lí học viên</html:link></li>
 					<li><html:link action="/manage-level?action=vocabulary">Quản lí từ vựng</html:link>
-						<ul class="submenu">
-							<li><a href="teacherManageVocaTransLesson.html">Bài 1 -
-									Bài 25</a>
-								<ul class="sub-submenu">
-									<li><a href="teacherManageVocaTransLessonEdit.html">Bài
-											1</a></li>
-									<li><a href="">Bài 2</a></li>
-								</ul></li>
-							<li><a href="">Bài 26 - Bài 30</a>
-								<ul class="sub-submenu">
-									<li><a href="">Bài 1</a></li>
-									<li><a href="">Bài 2</a></li>
-								</ul></li>
-						</ul></li>
+					</li>
 					<li><html:link action="/manage-level?action=translate"> Quản lí dịch câu</html:link>
 					</li>
 				</ul>

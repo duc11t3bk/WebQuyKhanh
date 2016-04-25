@@ -497,7 +497,7 @@ public class JapaneseDAO {
 			if(rs.next()){
 				totalReview=Integer.valueOf(rs.getString(1));
 			}
-			return (totalReview >= 1) ? true : false;
+			return (totalReview >= 5) ? true : false;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;

@@ -83,6 +83,7 @@
 	$(document).ready(function(){
 		$("#add-lesson").on("click",function(){	
 			var lessonName=$("#myLessonName").val();
+			console.log("lesson name="+lessonName);
 			var levelID=$("#mylevel").val();
 			var action=$("#action").val();
 			var dataAjax;
@@ -90,7 +91,7 @@
 				dataAjax="action="+action+"&type=add-lesson&lessonName="+lessonName+"&levelID="+levelID;
 			}
 			else{
-				dataAjax="action="+action+"&type=add-level&lessonName="+lessonName+"&levelID="+levelID;
+				dataAjax="action="+action+"&type=add-lesson&lessonName="+lessonName+"&levelID="+levelID;
 			}
 			$.ajax({
 				type : "POST",

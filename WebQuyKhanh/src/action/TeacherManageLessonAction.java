@@ -30,29 +30,46 @@ public class TeacherManageLessonAction extends Action {
 		if("Tải lên".equals(StringProcess.toUTF8(japaneseForm.getSubmit()))){
 			FormFile fileExcel= japaneseForm.getFileExcel();
 			ArrayList<FormFile> filesAudio=japaneseForm.getFilesAudio();
-			if((!Validate.isEmpty(fileExcel.getFileName()))&&(!Validate.isEmpty(filesAudio.get(0).getFileName()))){
-				String fileExcelName=FileProcess.uploadFile(fileExcel, getServlet(), "japanese/excel");
-				String filePath="/home/davy/Git/WebQuyKhanh/WebContent/japanese/excel/"+fileExcelName;
-				//String fileExcelName=FileProcess.uploadFile(fileExcel, getServlet(), "japanese\\excel");
-				//String filePath="C:\\Users\\viettel\\Documents\\gitspace\\WebQuyKhanh\\WebQuyKhanh\\WebContent\\japanese\\excel\\"+fileExcelName;
-				/**upload file excel*/
-				japaneseBO.importFileExcel(lessonID,filePath);
-				/**delete file excel after import data*/
-				FileProcess.deleteOldFile(getServlet(), fileExcelName, "japanese/excel");
-				/**delete file audio*/
-				ArrayList<String> oldFilesAudio=japaneseBO.getFilesAudio(lessonID);
-				for(int i=0; i<oldFilesAudio.size(); i++){
-					FileProcess.deleteOldFile(getServlet(), oldFilesAudio.get(i), "japanese/audio/"+lessonID);
+			if("vocabulary".equals(action)){
+				if ((!Validate.isEmpty(fileExcel.getFileName()))
+						&& (!Validate.isEmpty(filesAudio.get(0).getFileName()))) {
+					String fileExcelName = FileProcess.uploadFile(fileExcel, getServlet(), "japanese/excel");
+					String filePath = "/home/davy/Git/WebQuyKhanh/WebContent/japanese/excel/" + fileExcelName;
+					// String fileExcelName=FileProcess.uploadFile(fileExcel,
+					// getServlet(), "japanese\\excel");
+					// String
+					// filePath="C:\\Users\\viettel\\Documents\\gitspace\\WebQuyKhanh\\WebQuyKhanh\\WebContent\\japanese\\excel\\"+fileExcelName;
+					/** upload file excel */
+					japaneseBO.importFileExcel(lessonID, filePath);
+					/** delete file excel after import data */
+					FileProcess.deleteOldFile(getServlet(), fileExcelName, "japanese/excel");
+					/** delete file audio */
+					ArrayList<String> oldFilesAudio = japaneseBO.getFilesAudio(lessonID);
+					for (int i = 0; i < oldFilesAudio.size(); i++) {
+						FileProcess.deleteOldFile(getServlet(), oldFilesAudio.get(i), "japanese/audio/" + lessonID);
+					}
+					FileProcess.deleteOldFile(getServlet(), lessonID, "japanese/audio");
+					/** upload file audio */
+					for (int i = 0; i < filesAudio.size(); i++) {
+						FileProcess.uploadFile(filesAudio.get(i), getServlet(), "japanese/audio/" + lessonID);
+					}
+					japaneseForm.setNotifySuccess("Tải lên thành công");
+				} else {
+					japaneseForm.setNotifyError("Bạn phải chọn file để tải lên !");
 				}
-				FileProcess.deleteOldFile(getServlet(), lessonID, "japanese/audio");
-				/**upload file audio*/
-				for(int i=0; i<filesAudio.size(); i++){
-					FileProcess.uploadFile(filesAudio.get(i), getServlet(), "japanese/audio/"+lessonID);
-				}
-				japaneseForm.setNotifySuccess("Tải lên thành công");
 			}
 			else{
-				japaneseForm.setNotifyError("Bạn phải chọn file để tải lên !");
+				if("translate".equals(action)){
+					if(!Validate.isEmpty(fileExcel.getFileName())){
+						String fileExcelName=FileProcess.uploadFile(fileExcel, getServlet(), "japanese/excel");
+						String filePath = "/home/davy/Git/WebQuyKhanh/WebContent/japanese/excel/" + fileExcelName;
+						japaneseBO.importFileExcel(lessonID, filePath);
+						japaneseForm.setNotifySuccess("Tải lên thành công");
+					}
+					else{
+						japaneseForm.setNotifyError("Bạn phải chọn file để tải lên !");
+					}
+				}
 			}
 		}
 		if("Xóa".equals(submit)){	

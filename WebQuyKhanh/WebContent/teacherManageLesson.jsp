@@ -63,12 +63,14 @@
 					<div class="col-lg-12" style="margin-top: 10px">
 						<html:file styleId="input-1" property="fileExcel" styleClass="file" accept=".xls"></html:file>
 					</div>
-					<div class="col-lg-12" style="margin-top:20px" >
-						<label>Chọn file nghe bên dưới </label>
-					</div>
-					<div class="col-lg-12" style="margin-top: 10px;">
-						<input type="file" name="filesAudio" class="file" id="input-2" multiple accept=".mp3">
-					</div>
+					<logic:equal value="vocabulary" property="action" name="japaneseForm">
+						<div class="col-lg-12" style="margin-top:20px" >
+							<label>Chọn file nghe bên dưới </label>
+						</div>
+						<div class="col-lg-12" style="margin-top: 10px;">
+							<input type="file" name="filesAudio" class="file" id="input-2" multiple accept=".mp3">
+						</div>
+					</logic:equal>
 					<div class="col-lg-12" style="text-align: center; margin-top:20px;">
 						<html:submit styleClass="btn-confirm" property="submit">Tải lên</html:submit>
 					</div>
