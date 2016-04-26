@@ -70,11 +70,13 @@
 										data-page-list="[8,16,All]" data-height="500">
 										<thead>
 											<tr>
-												<th data-width="30%">Họ, tên</th>
-												<th data-width="15%">Ngày sinh</th>
-												<th data-width="15%">Giới tính</th>
-												<th data-width="20%">Số điện thoại</th>
-												<th data-width="20%">Email</th>
+												<th data-width="40%">Họ, tên</th>
+												<th data-width="10%">Ngày sinh</th>
+												<th data-width="10%">Giới tính</th>
+												<th data-width="10%">Số điện thoại</th>
+												<th data-width="10%">Email</th>
+												<th data-width="10%">Xem</th>
+												<th data-width="10%">Xóa</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -90,6 +92,8 @@
 													</logic:equal>
 													<td><bean:write name="teacher" property="phoneNumber"/> </td>
 													<td><bean:write name="teacher" property="email"/> </td>
+													<td><html:link href="#x" style="font-size:20px;"><span class="glyphicon glyphicon-new-window"></span></html:link> </td>
+													<td><html:link href="#x" style="font-size:20px;"><span class="glyphicon glyphicon-trash"></span> </html:link></td>
 												</tr>
 											</logic:iterate>
 										</tbody>
