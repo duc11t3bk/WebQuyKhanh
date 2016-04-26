@@ -91,7 +91,7 @@
 						var btn=this;
 						setTimeout(function(){
 							$(btn).removeClass("btn-answer-true");
-							completes[currentSentence]+=1;
+							completes[currentSentence]+=5;
 							currentSentence+=1;
 							showQuestion();
 						}, 1000);
@@ -128,6 +128,7 @@
 							<html:form styleId="form-submit" action="/member-learn-translate">
 								<html:hidden styleId="dataReceive" property="dataReceive"/>
 								<html:hidden property="lessonID"/>
+								<html:hidden property="learnOption"/>
 							</html:form>
 							<div class="row">
 								<h5 class="col-lg-12">

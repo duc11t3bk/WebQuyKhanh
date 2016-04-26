@@ -3,7 +3,12 @@ package model.bean;
 import java.util.Date;
 
 public class Posts {
-
+	
+	public static String DUHOCNHATBAN="DHNB";
+	public static String LOPHOCTIENGNHAT="LHTN";
+	public static String TUYENDUNG="TD";
+	public static String TAILIEUTHAMKHAO="TLTK";
+	
 	private String postID;
 	private String teacherID;
 	private String teacherName;

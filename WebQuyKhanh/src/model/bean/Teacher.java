@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Teacher {
 
+	private String memberID;
 	private String teacherID;
 	private String name;
 	private String dayOfBirth;
@@ -14,6 +15,13 @@ public class Teacher {
 	private String email;
 	private String phoneNumber;
 	
+	
+	public String getMemberID() {
+		return memberID;
+	}
+	public void setMemberID(String memberID) {
+		this.memberID = memberID;
+	}
 	public String getEmail() {
 		return email;
 	}

@@ -20,13 +20,7 @@ import form.PostsForm;
 import model.bean.Posts;
 import model.bo.PostsBO;
 
-public class CreatePostsAction extends Action {
-
-	public static String DUHOCNHATBAN="DHNB";
-	public static String LOPHOCTIENGNHAT="LHTN";
-	public static String TUYENDUNG="TD";
-	public static String TAILIEUTHAMKHAO="TLTK";
-	
+public class CreatePostsAction extends Action {	
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {

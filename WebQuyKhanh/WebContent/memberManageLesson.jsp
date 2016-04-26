@@ -32,12 +32,13 @@
 <script type="text/javascript">
 	function eventChangeOption() {
 		var learnOption = $("#learnOption").val();
+		var lessonID=$("#lessonID").val();
 		console.log("learn Option" + learnOption);
 		if(learnOption=="review"){	
 			console.log("run ajax");
 			$.ajax({
 				type : "POST",
-				url : "http://localhost:8080/WebQuyKhanh/member-manage-lesson.do?lessonID=les00000011&learnOption="+learnOption,
+				url : "http://localhost:8080/WebQuyKhanh/member-manage-lesson.do?lessonID="+lessonID+"&learnOption="+learnOption,
 				dataType : "json",
 				success : function(response){
 					var result=response[0].result;
@@ -46,7 +47,8 @@
 						$("#btn-submit").prop("disabled",false);
 					}
 					if(result=="cant_review"){
-						$("#notify").html("Bạn phải học thuộc ít nhất năm từ trước khi ôn tập");
+						var message=response[0].message;
+						$("#notify").html(""+message);
 						$("#btn-submit").prop("disabled",true);
 						$("#btn-submit").css("cursor","not-allowed");
 					}
@@ -128,10 +130,9 @@
 									<div class="row">
 										<div class="col-lg-offset-3 col-lg-9">
 											<div class="row">
-												<bean:define id="lessonID" name="lesson" property="lessonID"></bean:define>
 												<logic:equal value="vocabulary" property="action" name="japaneseForm">
 													<html:form action="/member-learn-vocabulary">
-														<html:hidden property="lessonID" name="lesson" />
+														<html:hidden styleId="lessonID" property="lessonID" name="lesson" />
 														<div class="col-lg-3" style="padding: 0px">
 															<html:select styleId="learnOption"
 																styleClass="dropdownlist" onchange="eventChangeOption()"
@@ -146,7 +147,7 @@
 												</logic:equal>
 												<logic:equal value="translate" property="action" name="japaneseForm">
 													<html:form action="/member-learn-translate">
-														<html:hidden property="lessonID" name="lesson" />
+														<html:hidden styleId="lessonID" property="lessonID" name="lesson" />
 														<div class="col-lg-3" style="padding: 0px">
 															<html:select styleId="learnOption"
 																styleClass="dropdownlist" onchange="eventChangeOption()"

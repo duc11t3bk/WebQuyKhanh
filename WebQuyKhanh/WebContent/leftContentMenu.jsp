@@ -23,12 +23,10 @@
 					<li><a href="adminManagePersonal.html">Thông tin cá nhân</a></li>
 					<li><a href="adminManageIntroduce.html">Quản lí trang giới
 							thiệu</a></li>
-					<li><a href="adminManageDocumentation.html">Quản lí tài
-							liệu</a></li>
-					<li><a href="adminManagePost.html">Quản lí bài đăng</a></li>
+					<li><html:link action="/manage-posts">Quản lí bài đăng</html:link></li>
 					<li><a href="adminManageSchedule.html">Quản lí thời khóa
 							biểu</a></li>
-					<li><a href="adminManageTeacher.html">Quản lí giáo viên</a></li>
+					<li><html:link action="/admin-manage-teacher">Quản lí giáo viên</html:link></li>
 					<li><a href="adminManageStudent.html">Quản lí học viên</a></li>
 					<li><a href="adminManageMember.html">Quản lí thành viên</a></li>
 					<li><a href="adminManageClass.html">Quản lí lớp</a></li>

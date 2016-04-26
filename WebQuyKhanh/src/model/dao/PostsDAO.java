@@ -44,22 +44,40 @@ public class PostsDAO {
 		}
 	}
 
-	public ArrayList<Posts> getListPosts(int priority, String teacherID) {
+	public ArrayList<Posts> getListPosts(int priority, String teacherID, String group) {
 		try {
 			conn=connection.openConnection();
 			String sql="";
 			if(priority==3){
-				sql="select p.post_id, p.teacher_id, tc.fullname, p.title, p.content, p.dateposted "
-						+ ", p.image, p.views, p.category "
-						+ " from post p join teacher tc on (p.teacher_id=tc.teacher_id)"
-						+ " order by dateposted desc";
+				if(group==null || "ALL".equals(group)){
+					sql="select p.post_id, p.teacher_id, tc.fullname, p.title, p.content, p.dateposted "
+							+ ", p.image, p.views, p.category "
+							+ " from post p join teacher tc on (p.teacher_id=tc.teacher_id)"
+							+ " order by dateposted desc";
+				}
+				else{
+					sql="select p.post_id, p.teacher_id, tc.fullname, p.title, p.content, p.dateposted "
+							+ ", p.image, p.views, p.category "
+							+ " from post p join teacher tc on (p.teacher_id=tc.teacher_id)"
+							+ " where p.category= '"+group+"'"
+							+ " order by dateposted desc";
+				}
 			}
 			if(priority==1){
-				sql="select p.post_id, p.teacher_id, tc.fullname, p.title, p.content, p.dateposted "
-						+ ", p.image, p.views, p.category "
-						+ " from post p join teacher tc on (p.teacher_id=tc.teacher_id)"
-						+ " where p.teacher_id='"+teacherID+"' "
-						+ " order by dateposted desc";
+				if(group==null || "ALL".equals(group)){
+					sql="select p.post_id, p.teacher_id, tc.fullname, p.title, p.content, p.dateposted "
+							+ ", p.image, p.views, p.category "
+							+ " from post p join teacher tc on (p.teacher_id=tc.teacher_id)"
+							+ " where p.teacher_id='"+teacherID+"' "
+							+ " order by dateposted desc";
+				}
+				else{
+					sql="select p.post_id, p.teacher_id, tc.fullname, p.title, p.content, p.dateposted "
+							+ ", p.image, p.views, p.category "
+							+ " from post p join teacher tc on (p.teacher_id=tc.teacher_id)"
+							+ " where p.teacher_id='"+teacherID+"' and p.category='"+group+"'"
+							+ " order by dateposted desc";
+				}
 			}
 			PreparedStatement pstmt= conn.prepareStatement(sql);
 			ResultSet rs= pstmt.executeQuery();
@@ -75,7 +93,6 @@ public class PostsDAO {
 				post.setImage(rs.getString(7));
 				post.setViews(rs.getInt(8));
 				post.setCategory(rs.getString(9));
-				
 				posts.add(post);
 			}
 			return posts;

@@ -1,5 +1,6 @@
 package form;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.apache.struts.action.ActionForm;
@@ -36,8 +37,15 @@ public class TeacherForm extends ActionForm {
 	private Member member;
 	private String submit;
 	private FormFile file;
-	
+	private ArrayList<Teacher> teachers;
 
+	
+	public ArrayList<Teacher> getTeachers() {
+		return teachers;
+	}
+	public void setTeachers(ArrayList<Teacher> teachers) {
+		this.teachers = teachers;
+	}
 	public String getDayOfBirthError() {
 		return dayOfBirthError;
 	}

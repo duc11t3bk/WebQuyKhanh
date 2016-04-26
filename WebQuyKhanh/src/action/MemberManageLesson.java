@@ -13,6 +13,7 @@ import org.apache.struts.action.ActionMapping;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import common.StringProcess;
 import form.JapaneseForm;
 import form.LoginForm;
 import model.bean.JapaneseData;
@@ -39,6 +40,7 @@ public class MemberManageLesson extends Action {
 		LessonStatus lessonStatus=japaneseBO.getLessonStatus(memberID,lessonID);
 		ArrayList<JapaneseData> listData= japaneseBO.getListData(lessonID);
 		japaneseForm.setLesson(lesson);
+		lessonStatus.setComplete(lessonStatus.getComplete()*100/lesson.getTotalData());
 		japaneseForm.setLessonStatus(lessonStatus);
 		japaneseForm.setListData(listData);
 		ArrayList<WordStatus> wordStatus= japaneseBO.getListWordStatus(memberID, lessonID);
@@ -46,14 +48,15 @@ public class MemberManageLesson extends Action {
 		if("voca".equals(lesson.getCategory())){
 			japaneseForm.setAction("vocabulary");
 			if("review".equals(learnOption)){
-				boolean checkReviewOption=japaneseBO.checkReviewOption(memberID,lessonID);
+				boolean checkReviewVocabulary=japaneseBO.checkReviewVocabulary(memberID,lessonID);
 				JSONArray jsonArray= new JSONArray();
 				JSONObject jsonObjectChild= new JSONObject();
-				if(checkReviewOption){
+				if(checkReviewVocabulary){
 					jsonObjectChild.put("result", "can_review");
 				}
 				else{
 					jsonObjectChild.put("result", "cant_review");
+					jsonObjectChild.put("message", "Bạn phải học thuộc ít nhất năm từ trước khi ôn tập !");
 				}
 				jsonArray.add(jsonObjectChild);
 				PrintWriter write= response.getWriter();
@@ -65,6 +68,24 @@ public class MemberManageLesson extends Action {
 		}
 		if("tran".equals(lesson.getCategory())){
 			japaneseForm.setAction("translate");
+			if("review".equals(learnOption)){
+				boolean checkReviewTranslate=japaneseBO.checkReviewTranslate(memberID,lessonID);
+				JSONArray jsonArray= new JSONArray();
+				JSONObject jsonObject= new JSONObject();
+				if(checkReviewTranslate){
+					jsonObject.put("result", "can_review");
+				}
+				else{
+					jsonObject.put("result", "cant_review");
+					jsonObject.put("message", "Bạn phải hoàn thành ít nhất một câu trước khi ôn tập !");
+				}
+				jsonArray.add(jsonObject);
+				PrintWriter write=response.getWriter();
+				write.println(jsonArray.toString());
+				write.flush();
+				write.close();
+				return null;
+			}
 		}
 		return mapping.findForward("showLessonData");
 	}

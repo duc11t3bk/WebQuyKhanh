@@ -65,7 +65,11 @@ public class JapaneseBO {
 		return japaneseDAO.getListWordStatus(memberID, lessonID);
 	}
 
-	public boolean checkReviewOption(String memberID, String lessonID) {
-		return japaneseDAO.checkReviewOption(memberID,lessonID);
+	public boolean checkReviewVocabulary(String memberID, String lessonID) {
+		return japaneseDAO.checkReviewVocabulary(memberID,lessonID);
+	}
+
+	public boolean checkReviewTranslate(String memberID, String lessonID) {
+		return japaneseDAO.checkReviewTranslate(memberID,lessonID);
 	}
 }

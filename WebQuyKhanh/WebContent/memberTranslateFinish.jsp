@@ -58,7 +58,7 @@
 												<h5 class="col-lg-3">
 													:
 													<bean:write property="trueAnswers" name="learnJapaneseForm" />
-													/25
+													/ <bean:write property="totalQuestion" name="learnJapaneseForm" />
 												</h5>
 											</div>
 											<div class="row">

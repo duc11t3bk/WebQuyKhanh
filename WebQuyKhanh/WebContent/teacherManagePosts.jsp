@@ -35,6 +35,9 @@
 		var path="/WebQuyKhanh/edit-posts.do?postID="+postID+"&action=delete";
 		formConfirm(path,"Bạn có chắc chắn muốn xóa bài viết này ?");
 	}
+	function changeGroup(){
+		$("#form-submit").submit();
+	}
 </script>
 </head>
 <body>
@@ -65,9 +68,20 @@
 								</div>
 
 								<div class="row" style="margin-top: 40px;">
-									<label class="col-lg-5"><span
+									<label class="col-lg-3"><span
 										class="glyphicon glyphicon-list"></span> Danh sách bài viết </label>
-									<div class="col-lg-offset-4 col-lg-3">
+									<div class="col-lg-5">
+										<html:form styleId="form-submit" action="/manage-posts">
+											<html:select styleClass="form-control" property="group" onchange="changeGroup()" style="box-shadow:2px 2px 3px #888888">
+												<html:option value="ALL">Tấc cả</html:option>
+												<html:option value="DHNB">Du học Nhật Bản</html:option>
+												<html:option value="LHTN">Lớp học tiếng Nhật</html:option>
+												<html:option value="TLTK">Tài liệu tham khảo</html:option>
+												<html:option value="TD">Tuyển dụng</html:option>
+											</html:select>
+										</html:form>
+									</div>
+									<div class="col-lg-offset-1 col-lg-3">
 										<label class="col-lg-offset-2 col-lg-10"> <span
 											class="glyphicon glyphicon-search"></span> Tìm kiếm :
 										</label>
@@ -80,7 +94,8 @@
 										<thead>
 											<tr>
 												<th data-width="40%">Tiêu đề</th>
-												<th data-width="8%">Người đăng</th>
+												<th data-width="14%">Người đăng</th>
+												<th data-width="14%">Chuyên mục</th>
 												<th data-width="8%">Ngày đăng</th>
 												<th data-width="8%">Lượt xem</th>
 												<th data-width="8%">Chỉnh sửa</th>
@@ -92,6 +107,7 @@
 												<tr>
 													<td><bean:write property="title" name="post" /></td>
 													<td><bean:write property="teacherName" name="post" /></td>
+													<td><bean:write property="category" name="post" /> </td>
 													<td><bean:write property="datePosted" name="post" /></td>
 													<td><bean:write property="views" name="post" /></td>
 													<bean:define id="postID" name="post" property="postID"></bean:define>

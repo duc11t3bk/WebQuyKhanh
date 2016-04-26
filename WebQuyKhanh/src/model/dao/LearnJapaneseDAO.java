@@ -129,7 +129,7 @@ public class LearnJapaneseDAO {
 			conn=connection.openConnection();
 			String sql="select jd.data_id, jd.lesson_id, jd.level_id, jd.japanese, jd.vietnamese "
 					+ " from japanesedata jd join learnword lw on (jd.data_id=lw.data_id)"
-					+ " where lw.member_id= ? and jd.lesson_id= ?";
+					+ " where lw.member_id= ? and jd.lesson_id= ? and lw.accuracy=0";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, memberID);
 			pstmt.setString(2, lessonID);

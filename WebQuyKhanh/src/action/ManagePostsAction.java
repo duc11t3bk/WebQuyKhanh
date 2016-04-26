@@ -24,13 +24,27 @@ public class ManagePostsAction extends Action {
 		response.setCharacterEncoding("utf-8");
 		LoginForm loginForm = (LoginForm) request.getSession().getAttribute("loginForm");
 		PostsForm postsForm = (PostsForm) form;
-		
+
 		PostsBO postsBO = new PostsBO();
 		int priority = loginForm.getMember().getPriority();
 		String teacherID = loginForm.getMember().getTeacherID();
-		ArrayList<Posts> posts = postsBO.getListPosts(priority, teacherID);
+		String group= postsForm.getGroup();
+		ArrayList<Posts> posts=postsBO.getListPosts(priority, teacherID, group);
+		for (int i = 0; i < posts.size(); i++) {
+			String category = "";
+			if (posts.get(i).getCategory().equals(Posts.DUHOCNHATBAN)) {
+				category = "Du Học Nhật Bản";
+			} else if (posts.get(i).getCategory().equals(Posts.LOPHOCTIENGNHAT)) {
+				category = "Lớp Học Tiếng Nhật";
+			} else if (posts.get(i).getCategory().equals(Posts.TAILIEUTHAMKHAO)) {
+				category = "Tài liệu tham khảo";
+			} else if (posts.get(i).getCategory().equals(Posts.TUYENDUNG)) {
+				category = "Tuyển dụng";
+			}
+			posts.get(i).setCategory(category);
+		}
 		postsForm.setPosts(posts);
-	
+
 		return mapping.findForward("showListPosts");
 	}
 }

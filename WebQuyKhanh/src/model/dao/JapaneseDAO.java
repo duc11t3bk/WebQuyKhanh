@@ -183,13 +183,7 @@ public class JapaneseDAO {
 				lesson.setLevelName(rs.getString(4));
 				lesson.setCategory(rs.getString(5));
 			}
-			String sqlCount="select count(*) from japanesedata where lesson_id = ?";
-			PreparedStatement pstmtCount= conn.prepareStatement(sqlCount);
-			pstmtCount.setString(1, lessonID);
-			ResultSet rsCount=pstmtCount.executeQuery();
-			while(rsCount.next()){
-				lesson.setTotalData(rsCount.getInt(1));
-			}
+			lesson.setTotalData(getTotalData(lessonID));
 			return lesson;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -199,7 +193,26 @@ public class JapaneseDAO {
 			connection.closeConnection();
 		}
 	}
-
+	public int getTotalData(String lessonID){
+		try {
+			conn=connection.openConnection();
+			String sqlCount="select count(*) from japanesedata where lesson_id = ?";
+			PreparedStatement pstmtCount= conn.prepareStatement(sqlCount);
+			pstmtCount.setString(1, lessonID);
+			ResultSet rsCount=pstmtCount.executeQuery();
+			int totalData=0;
+			while(rsCount.next()){
+				totalData+=rsCount.getInt(1);
+			}
+			return totalData;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+		finally{
+			connection.closeConnection();
+		}
+	}
 	public boolean deleteLevel(String levelID) {
 		try {
 			conn=connection.openConnection();
@@ -292,16 +305,17 @@ public class JapaneseDAO {
 		try {
 			deleteLearnWordData(lessonID);
 			conn=connection.openConnection();
-			String sql="delete from japanesedata where data_id in "
+/*			String sql="delete from japanesedata where data_id in "
 					+ " (select data_id from "
 					+ " ( select jd.data_id "
 					+ " from japanesedata jd join japaneselevel jl "
 					+ " on (jd.level_id=jl.level_id)"
-					+ " where (jl.category= ?) and (jd.lesson_id= ?)) p )";
+					+ " where (jl.category= ?) and (jd.lesson_id= ?)) p )";*/
+			String sql="delete from japanesedata where lesson_id= ?";
 			System.out.println("sql delete"+sql);
 			PreparedStatement pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, "voca");
-			pstmt.setString(2, lessonID);
+//			pstmt.setString(1, "voca");
+			pstmt.setString(1, lessonID);
 			return (pstmt.executeUpdate() !=0) ? true : false;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -346,9 +360,9 @@ public class JapaneseDAO {
 		}
 	}
 	public void deleteLesson(String lessonID) {
-		try {			
-			deleteLessonData(lessonID);
-			deleteLessonStatus(lessonID);
+		try {
+			boolean check1=deleteLessonData(lessonID);
+			boolean check2=deleteLessonStatus(lessonID);
 			conn=connection.openConnection();
 			String sql="delete from japaneselesson where lesson_id= ?";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
@@ -401,7 +415,7 @@ public class JapaneseDAO {
 				while(rs.next()){
 					lessonStatus.setMemberID(rs.getString(1));
 					lessonStatus.setLessonID(rs.getString(2));
-					lessonStatus.setComplete(StringProcess.convertLessonStatus(rs.getInt(3)));
+					lessonStatus.setComplete(rs.getInt(3));
 				}
 			}
 			else{
@@ -482,7 +496,7 @@ public class JapaneseDAO {
 		}
 	}
 
-	public boolean checkReviewOption(String memberID, String lessonID) {
+	public boolean checkReviewVocabulary(String memberID, String lessonID) {
 		try {
 			conn=connection.openConnection();
 			String sql="select count(*)"
@@ -504,6 +518,27 @@ public class JapaneseDAO {
 		}
 		finally {
 			connection.closeConnection();
+		}
+	}
+
+	public boolean checkReviewTranslate(String memberID, String lessonID) {
+		try {
+			conn=connection.openConnection();
+			String sql="select count(*) "
+					+ " from japanesedata jd join learnword lw on (jd.data_id=lw.data_id) "
+					+ " where lw.member_id= ? and jd.lesson_id= ? and lw.accuracy= 5";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, memberID);
+			pstmt.setString(2, lessonID);
+			int totalReview=0;
+			ResultSet rs=pstmt.executeQuery();
+			if(rs.next()){
+				totalReview+=Integer.valueOf(rs.getString(1));
+			}
+			return (totalReview >0) ? true : false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
 		}
 	}
 }

@@ -64,6 +64,7 @@ public class TeacherManageLessonAction extends Action {
 						String fileExcelName=FileProcess.uploadFile(fileExcel, getServlet(), "japanese/excel");
 						String filePath = "/home/davy/Git/WebQuyKhanh/WebContent/japanese/excel/" + fileExcelName;
 						japaneseBO.importFileExcel(lessonID, filePath);
+						FileProcess.deleteOldFile(getServlet(), fileExcelName, "japanese/excel");
 						japaneseForm.setNotifySuccess("Tải lên thành công");
 					}
 					else{

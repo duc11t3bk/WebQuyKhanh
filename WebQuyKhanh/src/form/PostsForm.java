@@ -27,7 +27,15 @@ public class PostsForm extends ActionForm {
 	private ArrayList<Posts> posts;
 	private String action;
 	private String notification;
+	private String group;
 	
+	
+	public String getGroup() {
+		return group;
+	}
+	public void setGroup(String group) {
+		this.group = group;
+	}
 	public String getNotification() {
 		return notification;
 	}

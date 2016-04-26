@@ -14,8 +14,8 @@ public class PostsBO {
 	public boolean addNewPosts(Posts posts) {
 		return postsDAO.addNewPosts(posts);
 	}
-	public ArrayList<Posts> getListPosts(int priority, String teacherID) {
-		return postsDAO.getListPosts(priority,teacherID);
+	public ArrayList<Posts> getListPosts(int priority, String teacherID, String group) {
+		return postsDAO.getListPosts(priority,teacherID, group);
 	}
 	public Posts getPosts(String postID) {
 		return postsDAO.getPosts(postID);
