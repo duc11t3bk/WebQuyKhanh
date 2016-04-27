@@ -31,4 +31,7 @@ public class MemberBO {
 	public void updateTeacherInfor(Teacher teacher) {
 		 memberDAO.updateTeacherInfor(teacher);
 	}
+	public Member getMember(String memberID) {
+		return memberDAO.getMember(memberID);
+	}
 }

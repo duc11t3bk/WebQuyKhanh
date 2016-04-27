@@ -11,6 +11,7 @@ import model.bean.Teacher;
 
 public class TeacherForm extends ActionForm {
 
+	private String memberID;
 	private String teacherID;
 	private String name;
 	private String dayOfBirth;
@@ -38,8 +39,35 @@ public class TeacherForm extends ActionForm {
 	private String submit;
 	private FormFile file;
 	private ArrayList<Teacher> teachers;
-
+	private String image;
+	private String action;
+	private String dataRegister;
 	
+	
+	public String getDataRegister() {
+		return dataRegister;
+	}
+	public void setDataRegister(String dataRegister) {
+		this.dataRegister = dataRegister;
+	}
+	public String getAction() {
+		return action;
+	}
+	public void setAction(String action) {
+		this.action = action;
+	}
+	public String getMemberID() {
+		return memberID;
+	}
+	public void setMemberID(String memberID) {
+		this.memberID = memberID;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
 	public ArrayList<Teacher> getTeachers() {
 		return teachers;
 	}

@@ -43,64 +43,7 @@
 								<div class="panel-title">Thông tin cá nhân</div>
 							</div>
 							<div class="panel-body">
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<div class="panel-title">Đổi mật khẩu</div>
-									</div>
-									<div class="panel-body">
-										<html:form action="/teacher-update-infor">
-											<div class="row">
-												<div class="col-lg-3">
-													<label><span class="glyphicon glyphicon-lock"></span>Mật
-														khẩu hiện tại :</label>
-												</div>
-												<div class="col-lg-7">
-													<html:password styleClass="form-control"
-														property="password"></html:password>
-												</div>
-											</div>
-											<div class="row" style="text-align: center">
-												<label style="color: red"><bean:write
-														name="teacherForm" property="passwordError" /> </label>
-											</div>
-											<div class="row">
-												<div class="col-lg-3">
-													<label><span
-														class="glyphicon glyphicon-question-sign"></span>Nhập mật
-														khẩu mới</label>
-												</div>
-												<div class="col-lg-7">
-													<html:password styleClass="form-control"
-														property="newPassword"></html:password>
-												</div>
-											</div>
-											<div class="row" style="text-align: center">
-												<label style="color: red"><bean:write
-														name="teacherForm" property="newPasswordError" /> </label>
-											</div>
-											<div class="row">
-												<div class="col-lg-3">
-													<label><span
-														class="glyphicon glyphicon-question-sign"></span>Xác nhận
-														mật khẩu mới </label>
-												</div>
-												<div class="col-lg-7">
-													<html:password styleClass="form-control"
-														property="retypePassword"></html:password>
-												</div>
-											</div>
-											<div class="row" style="text-align: center">
-												<label style="color: red"><bean:write
-														name="teacherForm" property="retypePasswordError" /> </label>
-											</div>
-											<div class="row" style="text-align: center; margin-top: 10px">
-												<html:submit styleClass="btn btn-info" property="submit">Đổi mật khẩu</html:submit>
-											</div>
-										</html:form>
-									</div>
-								</div>
-
-								<div class="panel panel-default">
+								<div class="panel panel-default div-shadow">
 									<div class="panel-heading">
 										<div class="panel-title">Thông tin</div>
 									</div>
@@ -108,12 +51,19 @@
 										<html:form action="/teacher-update-infor"
 											enctype="multipart/form-data">
 											<div class="row">
-												<div class="col-lg-5">
-													<label>Cập nhật ảnh đại diện : </label>
+												<div class="col-lg-3">
+													<bean:define id="image" name="teacherForm" property="image"></bean:define>
+													<html:img styleClass="img-circle" alt="hinh"
+														src="avata/${image }" width="100%" height="200px" />
 												</div>
-												<div class="col-lg-4">
+												<div class="col-lg-offset-2 col-lg-4">
 													<html:file styleId="input-1" property="file"
 														styleClass="file" accept="image/*"></html:file>
+												</div>
+											</div>
+											<div class="row" style="margin-top:10px;">
+												<div class="col-lg-3" style="text-align: center">
+													<label>Cập nhật ảnh đại diện : </label>
 												</div>
 											</div>
 											<div class="row" style="margin-top: 30px">
@@ -221,6 +171,62 @@
 											</div>
 											<div class="row" style="text-align: center; margin-top: 10px">
 												<html:submit styleClass="btn btn-info" property="submit">Lưu</html:submit>
+											</div>
+										</html:form>
+									</div>
+								</div>
+								<div class="panel panel-default div-shadow">
+									<div class="panel-heading">
+										<div class="panel-title">Đổi mật khẩu</div>
+									</div>
+									<div class="panel-body">
+										<html:form action="/teacher-update-infor">
+											<div class="row">
+												<div class="col-lg-3">
+													<label><span class="glyphicon glyphicon-lock"></span>Mật
+														khẩu hiện tại :</label>
+												</div>
+												<div class="col-lg-7">
+													<html:password styleClass="form-control"
+														property="password"></html:password>
+												</div>
+											</div>
+											<div class="row" style="text-align: center">
+												<label style="color: red"><bean:write
+														name="teacherForm" property="passwordError" /> </label>
+											</div>
+											<div class="row">
+												<div class="col-lg-3">
+													<label><span
+														class="glyphicon glyphicon-question-sign"></span>Nhập mật
+														khẩu mới</label>
+												</div>
+												<div class="col-lg-7">
+													<html:password styleClass="form-control"
+														property="newPassword"></html:password>
+												</div>
+											</div>
+											<div class="row" style="text-align: center">
+												<label style="color: red"><bean:write
+														name="teacherForm" property="newPasswordError" /> </label>
+											</div>
+											<div class="row">
+												<div class="col-lg-3">
+													<label><span
+														class="glyphicon glyphicon-question-sign"></span>Xác nhận
+														mật khẩu mới </label>
+												</div>
+												<div class="col-lg-7">
+													<html:password styleClass="form-control"
+														property="retypePassword"></html:password>
+												</div>
+											</div>
+											<div class="row" style="text-align: center">
+												<label style="color: red"><bean:write
+														name="teacherForm" property="retypePasswordError" /> </label>
+											</div>
+											<div class="row" style="text-align: center; margin-top: 10px">
+												<html:submit styleClass="btn btn-info" property="submit">Đổi mật khẩu</html:submit>
 											</div>
 										</html:form>
 									</div>

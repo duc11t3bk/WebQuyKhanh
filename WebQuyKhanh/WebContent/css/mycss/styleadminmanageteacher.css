@@ -1,0 +1,51 @@
+#register-teacher{
+	height: 400px;
+	border: 1px solid #ddd;
+	background-color: white;
+	border-radius: 5px;
+	box-shadow: 3px 3px 5px #888888;
+	padding-bottom: 20px;
+	position: fixed;
+	top: -100%;
+	z-index: 10;
+	transition: top 0.75s;
+	-moz-transition: top 0.75s;
+	-webkit-transition: top 0.75s;	
+}
+#register-teacher .row {
+	margin-bottom: 10px;
+}
+#register-teacher .form-control{
+	box-shadow: 1px 1px 5px #888888;
+}
+#register-teacher .form-control:hover{
+	box-shadow: 5px 5px 5px #888888;
+}
+.my-btn{
+	width: 80px;
+	padding: 5px;
+	border: 1px solid #337ab7;
+	color : #337ab7;
+	background-color: white;
+	border-radius : 4px;
+	box-shadow: 1px 1px 5px #888888;
+	font-weight: bold;
+	margin: 10px;
+}
+.my-btn:hover{
+	box-shadow: 5px 5px 5px #888888;
+	color: white;
+	background-color: #337ab7;
+}
+#my-remove{
+	font-size: 20px;
+	transform: scale(0.8,0.8);
+	-moz-transform: scale(0.8,0.8);
+	-webkit-transform: scale(0.8,0.8);
+	cursor: pointer;
+}
+#my-remove:hover{
+	transform: scale(1,1);
+	-moz-transform: scale(1,1);
+	-webkit-transform: scale(1,1);
+}

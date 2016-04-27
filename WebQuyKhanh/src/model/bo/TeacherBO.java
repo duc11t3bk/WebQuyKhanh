@@ -14,5 +14,7 @@ public class TeacherBO {
 	public ArrayList<Teacher> getListTeacher() {
 		return teacherDAO.getListTeacher();
 	}
-	
+	public boolean deleteTeacher(String teacherID) {
+		return teacherDAO.deleteTeacher(teacherID);
+	}
 }

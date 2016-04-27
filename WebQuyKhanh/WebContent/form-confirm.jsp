@@ -12,8 +12,7 @@
 </head>
 <body>
 	<!----- Form-confirm  ----->
-	<div class="overflow"></div>
-	<div class="container" style="margin-top: 50px">
+	<div class="container">
 		<div class="row">
 			<div class="col-lg-offset-4 col-lg-5" id="form-confirm">
 				<div class="panel panel-primary">

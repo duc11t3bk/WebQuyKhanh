@@ -44,5 +44,25 @@ public class TeacherDAO {
 			e.printStackTrace();
 			return null;
 		}
+		finally {
+			connection.closeConnection();
+		}
+	}
+	public boolean deleteTeacher(String teacherID) {
+		try {
+			conn=connection.openConnection();
+			String sqlDeleteMemberInfor="delete from member where teacher_id= ?";
+			PreparedStatement pstmt1=conn.prepareStatement(sqlDeleteMemberInfor);
+			pstmt1.setString(1, teacherID);
+			pstmt1.executeUpdate();
+			String sqlDeleteTeacherInfor="delete from teacher where teacher_id= ?";
+			PreparedStatement pstmt2=conn.prepareStatement(sqlDeleteTeacherInfor);
+			pstmt2.setString(1, teacherID);
+			
+			return (pstmt2.executeUpdate() !=0) ? true : false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 }

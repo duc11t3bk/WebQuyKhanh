@@ -18,6 +18,7 @@ import form.TeacherForm;
 import model.bean.Member;
 import model.bean.Teacher;
 import model.bo.MemberBO;
+import model.bo.TeacherBO;
 import model.dao.MemberDAO;
 
 public class TeacherUpdateInforAction extends Action {
@@ -28,8 +29,14 @@ public class TeacherUpdateInforAction extends Action {
 		response.setCharacterEncoding("utf-8");
 		LoginForm loginForm = (LoginForm) request.getSession().getAttribute("loginForm");
 		TeacherForm teacherForm = (TeacherForm) form;
-		teacherForm.setMember(loginForm.getMember());
+		String memberID= teacherForm.getMemberID();
 		MemberBO memberBO = new MemberBO();
+		if(memberID==null){
+			teacherForm.setMember(loginForm.getMember());
+		}
+		else{
+			teacherForm.setMember(memberBO.getMember(memberID));
+		}
 		Teacher teacher = memberBO.getTeacherInfor(teacherForm.getMember().getTeacherID());
 		teacherForm.setTeacher(teacher);
 		teacherForm.setEmail(teacherForm.getMember().getEmail());
@@ -44,7 +51,7 @@ public class TeacherUpdateInforAction extends Action {
 			String imageName = "";
 			if (!"".equals(file.getFileName())) {
 				imageName = FileProcess.uploadFile(file, getServlet(), "avata");
-				FileProcess.deleteOldFile(getServlet(), loginForm.getMember().getImage(),"avata");
+				FileProcess.deleteOldFile(getServlet(), teacherForm.getMember().getImage(),"avata");
 			}
 			if (checkValidateInfor(teacherForm)) {
 				Member memberInfor = new Member();
@@ -77,6 +84,7 @@ public class TeacherUpdateInforAction extends Action {
 			teacherForm.setAddress(teacher.getAddress());
 			teacherForm.setCertificate(teacher.getCertificate());
 			teacherForm.setDayOfContract(teacher.getDayOfContract());
+			teacherForm.setImage(teacherForm.getMember().getImage());
 		}
 		return mapping.findForward("showTeacherInfor");
 	}

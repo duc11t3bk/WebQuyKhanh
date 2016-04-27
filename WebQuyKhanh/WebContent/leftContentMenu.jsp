@@ -20,7 +20,7 @@
 				scope="session"></bean:define>
 			<logic:equal value="3" name="member" property="priority">
 				<ul>
-					<li><a href="adminManagePersonal.html">Thông tin cá nhân</a></li>
+					<li><html:link action="/teacher-update-infor">Thông tin cá nhân</html:link></li>
 					<li><a href="adminManageIntroduce.html">Quản lí trang giới
 							thiệu</a></li>
 					<li><html:link action="/manage-posts">Quản lí bài đăng</html:link></li>
