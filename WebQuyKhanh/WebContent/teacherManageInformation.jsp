@@ -13,12 +13,13 @@
 
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
-<link rel="stylesheet" type="text/css"
-	href="css/mycss/styleframehome.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" type="text/css" href="css/mycss/styleframehome.css">
 <link rel="stylesheet" type="text/css" href="css/fileinput.css">
 <script src="js/jquery-2.2.0.min.js"></script>
 <script src="js/jquery-ui.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-datetimepicker.min.js"></script>
 <script src="js/fileinput.js"></script>
 <script src="js/myjs/includehtml.js"></script>
 
@@ -27,6 +28,18 @@
 	display: inline;
 }
 </style>
+<script type="text/javascript">
+	/** http://www.malot.fr/bootstrap-datetimepicker/index.php*/
+	$(document).ready(function(){
+		$(".datetimepicker").datetimepicker({
+			format: "dd-mm-yyyy",
+			todayBtn : 1,
+			autoclose: true,
+			startView: 2,
+			minView: 2,
+		});
+	});
+</script>
 </head>
 <body>
 	<div class="wrapper">
@@ -85,7 +98,7 @@
 														Ngày sinh :</label>
 												</div>
 												<div class="col-lg-5">
-													<html:text styleClass="form-control" property="dayOfBirth"></html:text>
+													<html:text styleClass="form-control datetimepicker" property="dayOfBirth"></html:text>
 												</div>
 											</div>
 											<div class="row" style="text-align: center">
@@ -161,7 +174,7 @@
 														Ngày kí hợp đồng :</label>
 												</div>
 												<div class="col-lg-5">
-													<html:text styleClass="form-control"
+													<html:text styleClass="form-control datetimepicker"
 														property="dayOfContract"></html:text>
 												</div>
 											</div>

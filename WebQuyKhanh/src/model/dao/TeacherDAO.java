@@ -70,6 +70,9 @@ public class TeacherDAO {
 			e.printStackTrace();
 			return false;
 		}
+		finally{
+			connection.closeConnection();
+		}
 	}
 	public void addNewTeacher(Teacher teacher) {
 		try {
@@ -83,20 +86,22 @@ public class TeacherDAO {
 			PreparedStatement pstmtTeacher=conn.prepareStatement(sqlAddTeacher);
 			pstmtTeacher.setString(1, teacherID);
 			pstmtTeacher.setString(2, teacher.getName());
-			pstmtTeacher.setString(3, "");
+			pstmtTeacher.setString(3, teacher.getDateattended());
 			pstmtTeacher.setInt(4, 0);
 			pstmtTeacher.setString(5, "");
 			pstmtTeacher.setString(6, "");
-			pstmtTeacher.setString(7, "");
+			pstmtTeacher.setString(7, teacher.getDateattended());
 			pstmtTeacher.executeUpdate();
 			String sqlAddMember="insert into member values (?,?,?,?,?,?,?,?)";
 			PreparedStatement pstmtMember=conn.prepareStatement(sqlAddMember);
 			pstmtMember.setString(1, memberID);
 			pstmtMember.setString(2, teacherID);
 			pstmtMember.setString(3, teacher.getEmail());
-			pstmtMember.setString(4, teacher.getPassword());
-			pstmtMember.setInt(5, 1);
-			pstmtMember.setString(6, teacher.getDateattended());
+			pstmtMember.setString(4, "");
+			pstmtMember.setString(5, teacher.getPassword());
+			pstmtMember.setString(6,"");
+			pstmtMember.setInt(7, 1);
+			pstmtMember.setString(8, teacher.getDateattended());
 			pstmtMember.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
