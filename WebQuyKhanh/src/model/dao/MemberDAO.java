@@ -193,7 +193,7 @@ public class MemberDAO {
 				member.setEmail(rs.getString(3));
 				member.setPhoneNumber(rs.getString(4));
 				member.setPassword(rs.getString(5));
-				member.setImage(rs.getString(6));
+				member.setImage(rs.getString(6));			
 				member.setPriority(rs.getInt(7));
 			}
 			return member;

@@ -34,7 +34,11 @@ public class TeacherDAO {
 				teacher.setMemberID(rs.getString(1));
 				teacher.setTeacherID(rs.getString(2));
 				teacher.setName(rs.getString(3));
-				teacher.setDayOfBirth(StringProcess.formatDate(rs.getString(4), "yyyy-MM-dd", "dd-MM-yyyy"));
+				if(rs.getString(4)!=null){
+					teacher.setDayOfBirth(StringProcess.formatDate(rs.getString(4), "yyyy-MM-dd", "dd-MM-yyyy"));
+				}else{
+					teacher.setDayOfBirth(rs.getString(4));
+				}
 				teacher.setSex(rs.getInt(5));
 				teacher.setPhoneNumber(rs.getString(6));
 				teacher.setEmail(rs.getString(7));
@@ -75,12 +79,17 @@ public class TeacherDAO {
 			conn=connection.openConnection();
 			String teacherID=ConnectionDAO.increateID("teacher", "teacher_id", conn);
 			String memberID=ConnectionDAO.increateID("member", "member_id", conn);
-			String sqlAddTeacher="insert into teacher (teacher_id, fullname) values(?,?)";
+			String sqlAddTeacher="insert into teacher values(?,?,?,?,?,?,?)";
 			PreparedStatement pstmtTeacher=conn.prepareStatement(sqlAddTeacher);
 			pstmtTeacher.setString(1, teacherID);
 			pstmtTeacher.setString(2, teacher.getName());
+			pstmtTeacher.setString(3, "");
+			pstmtTeacher.setInt(4, 0);
+			pstmtTeacher.setString(5, "");
+			pstmtTeacher.setString(6, "");
+			pstmtTeacher.setString(7, "");
 			pstmtTeacher.executeUpdate();
-			String sqlAddMember="insert into member (member_id, teacher_id, email, password, priority, dateattended) values (?,?,?,?,?,?)";
+			String sqlAddMember="insert into member values (?,?,?,?,?,?,?,?)";
 			PreparedStatement pstmtMember=conn.prepareStatement(sqlAddMember);
 			pstmtMember.setString(1, memberID);
 			pstmtMember.setString(2, teacherID);
