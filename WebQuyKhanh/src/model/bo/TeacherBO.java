@@ -17,4 +17,7 @@ public class TeacherBO {
 	public boolean deleteTeacher(String teacherID) {
 		return teacherDAO.deleteTeacher(teacherID);
 	}
+	public void addNewTeacher(Teacher teacher) {
+		teacherDAO.addNewTeacher(teacher);
+	}
 }

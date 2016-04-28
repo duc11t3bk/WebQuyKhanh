@@ -16,6 +16,8 @@ import org.json.simple.parser.JSONParser;
 import common.StringProcess;
 import common.Validate;
 import form.TeacherForm;
+import model.bean.Member;
+import model.bean.Teacher;
 import model.bo.MemberBO;
 import model.bo.TeacherBO;
 
@@ -32,8 +34,17 @@ public class AdminManageTeacherAction extends Action {
 		String dataRegister=teacherForm.getDataRegister();
 		if(dataRegister !=null ){
 			JSONParser jsonParse= new JSONParser();
-			JSONObject teacher=(JSONObject)jsonParse.parse(dataRegister);
-			JSONArray jsonArray=checkValidate(teacher);
+			JSONObject jsonTeacherObject=(JSONObject)jsonParse.parse(dataRegister);
+			JSONArray jsonArray=checkValidate(jsonTeacherObject);
+			JSONObject jsonObject=(JSONObject)jsonArray.get(0);
+			String result=jsonObject.get("result").toString();
+			if("success".equals(result)){
+				Teacher teacher= new Teacher();
+				teacher.setName(jsonTeacherObject.get("name").toString());
+				teacher.setEmail(jsonTeacherObject.get("email").toString());
+				teacher.setPassword(jsonTeacherObject.get("password").toString());
+				teacherBO.addNewTeacher(teacher);				
+			}
 			PrintWriter write= response.getWriter();
 			write.println(""+jsonArray.toString());
 			write.flush();
@@ -98,11 +109,9 @@ public class AdminManageTeacherAction extends Action {
 			jsonObject.put("retypePasswordError", "Bạn chưa xác nhận lại mật khẩu !");
 		}
 		else{
-			if(!Validate.isEmpty(password)&&!Validate.lengthPasswordNotValid(password)){
-				if(!retypePassword.equals(password)){
+			if(!retypePassword.equals(password)){
 					checkValidate=false;
 					jsonObject.put("retypePasswordError", "Xác nhận mật khẩu không đúng !");
-				}
 			}
 		}
 		if(checkValidate){

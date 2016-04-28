@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import common.StringProcess;
 import model.bean.Teacher;
@@ -63,6 +65,35 @@ public class TeacherDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
+		}
+	}
+	public void addNewTeacher(Teacher teacher) {
+		try {
+			Date date= new Date();
+			SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
+			teacher.setDateattended(sdf.format(date));
+			conn=connection.openConnection();
+			String teacherID=ConnectionDAO.increateID("teacher", "teacher_id", conn);
+			String memberID=ConnectionDAO.increateID("member", "member_id", conn);
+			String sqlAddTeacher="insert into teacher (teacher_id, fullname) values(?,?)";
+			PreparedStatement pstmtTeacher=conn.prepareStatement(sqlAddTeacher);
+			pstmtTeacher.setString(1, teacherID);
+			pstmtTeacher.setString(2, teacher.getName());
+			pstmtTeacher.executeUpdate();
+			String sqlAddMember="insert into member (member_id, teacher_id, email, password, priority, dateattended) values (?,?,?,?,?,?)";
+			PreparedStatement pstmtMember=conn.prepareStatement(sqlAddMember);
+			pstmtMember.setString(1, memberID);
+			pstmtMember.setString(2, teacherID);
+			pstmtMember.setString(3, teacher.getEmail());
+			pstmtMember.setString(4, teacher.getPassword());
+			pstmtMember.setInt(5, 1);
+			pstmtMember.setString(6, teacher.getDateattended());
+			pstmtMember.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally{
+			connection.closeConnection();
 		}
 	}
 }

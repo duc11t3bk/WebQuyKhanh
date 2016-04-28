@@ -21,6 +21,7 @@
 	href="css/mycss/styleformconfirm.css">
 <link rel="stylesheet" type="text/css"
 	href="css/mycss/styleadminmanageteacher.css">
+<link rel="stylesheet" type="text/css" href="css/mycss/styletooltip.css">
 <script src="js/jquery-2.2.0.min.js"></script>
 <script src="js/jquery-ui.js"></script>
 <script src="js/bootstrap.min.js"></script>
@@ -83,21 +84,26 @@
 							$("#retypePassword-teacher").val("");
 							$("#register-teacher").css("top", "-100%");
 							$(".overflow").hide();
+							location.reload();
 						}, 700);
 					}
 					console.log("result"+result);
 					if("failed"==result){
 						console.log(""+object.nameError);
 						if(object.nameError!=null){
+							$("#name-teacher").css("border-color","red");
 							$("#nameError-teacher").html(""+object.nameError);	
 						}
 						if(object.emailError!=null){
+							$("#email-teacher").css("border-color","red");
 							$("#emailError-teacher").html(""+object.emailError);	
 						}
 						if(object.passwordError!=null){
+							$("#password-teacher").css("border-color","red");
 							$("#passwordError-teacher").html(""+object.passwordError);	
 						}
 						if(object.retypePasswordError!=null){
+							$("#retypePassword-teacher").css("border-color","red");
 							$("#retypePasswordError-teacher").html(""+object.retypePasswordError);	
 						}
 					}
@@ -106,6 +112,58 @@
 					alert("error "+errormessage);
 				}
 			});
+		});
+		function resetStatus(){
+			var toolTipText=$(".tooltiptext");
+			for(var i=0 ;i<toolTipText.length; i++){
+				$(toolTipText[i]).css("visibility","hidden");
+				$(toolTipText[i]).css("opacity","0");
+			}
+			var formControl=$("#register-teacher .form-control");
+			for(var i=0; i<formControl.length; i++){
+				$(formControl[i]).css("border-color","#ccc");
+			}
+		}
+		$("#name-teacher").focus(function(){
+			resetStatus();
+			$(this).css("border-color","#66afe9");
+			$("#nameError-teacher").css("visibility","visible");
+			$("#nameError-teacher").css("opacity","1");
+			setTimeout(function(){
+				$("#nameError-teacher").css("opacity","0");
+				$("#nameError-teacher").css("visibility","hidden");
+			}, 1500);
+		});
+		$("#email-teacher").focus(function(){
+			resetStatus();
+			$(this).css("border-color","#66afe9");
+			$("#emailError-teacher").css("visibility","visible");
+			$("#emailError-teacher").css("opacity","1");
+			setTimeout(function(){
+				$("#emailError-teacher").css("opacity","0");
+				$("#emailError-teacher").css("visibility","hidden");
+			}, 1500);
+		});
+		$("#password-teacher").focus(function(){
+			resetStatus();
+			$(this).css("border-color","#66afe9");
+			$("#passwordError-teacher").css("visibility","visible");
+			$("#passwordError-teacher").css("opacity","1");
+			setTimeout(function(){
+				$("#passwordError-teacher").css("opacity","0");
+				$("#passwordError-teacher").css("visibility","hidden");
+			}, 1500);
+			
+		});
+		$("#retypePassword-teacher").focus(function(){
+			resetStatus();
+			$(this).css("border-color","#66afe9");
+			$("#retypePasswordError-teacher").css("visibility","visible");
+			$("#retypePasswordError-teacher").css("opacity","1");
+			setTimeout(function(){
+				$("#retypePasswordError-teacher").css("opacity","0");
+				$("#retypePasswordError-teacher").css("visibility","hidden");
+			}, 1500)			
 		});
 	});
 </script>
@@ -137,12 +195,10 @@
 									<label><span class="glyphicon glyphicon-user"></span>
 										Họ, tên</label>
 								</div>
-								<div class="col-lg-9">
+								<div class="col-lg-9 mytooltip">
 									<html:text styleId="name-teacher" property="name" styleClass="form-control"></html:text>
+									<span id="nameError-teacher" class="tooltiptext">Mời bạn nhập họ, tên</span>
 								</div>
-							</div>
-							<div class="col-lg-12" style="text-align: center">
-								<label id="nameError-teacher" style="color:red"></label>
 							</div>
 						</div>
 						<div class="row">
@@ -151,12 +207,10 @@
 									<label><span class="glyphicon glyphicon-envelope"></span>
 										Email</label>
 								</div>
-								<div class="col-lg-9">
+								<div class="col-lg-9 mytooltip">
 									<html:text styleId="email-teacher" property="email" styleClass="form-control"></html:text>
+									<span id="emailError-teacher" class="tooltiptext">Mời bạn nhập email</span>
 								</div>
-							</div>
-							<div class="col-lg-12" style="text-align: center">
-								<label id="emailError-teacher" style="color:red"></label>
 							</div>
 						</div>
 						<div class="row">
@@ -165,12 +219,10 @@
 									<label><span class="glyphicon glyphicon-lock"></span>
 										Mật khẩu</label>
 								</div>
-								<div class="col-lg-9">
+								<div class="col-lg-9 mytooltip">
 									<html:password styleId="password-teacher" property="password" styleClass="form-control"></html:password>
+									<span id="passwordError-teacher" class="tooltiptext">Mời bạn nhập mật khẩu</span>
 								</div>
-							</div>
-							<div class="col-lg-12" style="text-align: center">
-								<label id="passwordError-teacher" style="color :red"></label>
 							</div>
 						</div>
 						<div class="row">
@@ -179,12 +231,10 @@
 									<label><span class="glyphicon glyphicon-lock"></span>
 										Nhập lại mật khẩu</label>
 								</div>
-								<div class="col-lg-9">
+								<div class="col-lg-9 mytooltip">
 									<html:password styleId="retypePassword-teacher" property="retypePassword" styleClass="form-control"></html:password>
+									<span id="retypePasswordError-teacher" class="tooltiptext">Bạn hãy nhập lại mật khẩu</span>
 								</div>
-							</div>
-							<div class="col-lg-12" style="text-align: center">
-								<label id="retypePasswordError-teacher" style="color : red"></label>
 							</div>
 						</div>
 						<div class="row">

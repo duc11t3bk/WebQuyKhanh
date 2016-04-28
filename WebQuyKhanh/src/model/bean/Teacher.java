@@ -2,7 +2,7 @@ package model.bean;
 
 import java.util.Date;
 
-public class Teacher {
+public class Teacher extends Member{
 
 	private String memberID;
 	private String teacherID;
