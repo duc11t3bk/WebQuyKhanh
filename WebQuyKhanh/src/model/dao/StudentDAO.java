@@ -1,5 +1,6 @@
 package model.dao;
 
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -89,6 +90,94 @@ public class StudentDAO {
 			return null;
 		}
 		finally {
+			connection.closeConnection();
+		}
+	}
+
+	public ArrayList<Student> getListStudent() {
+		try {
+			conn=connection.openConnection();
+			String sql="select st.student_id, st.name, st.email, st.phonenumber, st.amountpaid, class.class_id, class.name, "
+					+ " class.fee, class.time "
+					+ " from student st join class on (st.class_id=class.class_id)";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			ResultSet rs=pstmt.executeQuery();
+			ArrayList<Student> students= new ArrayList<Student>();
+			while(rs.next()){
+				Student student= new Student();
+				student.setStudentID(rs.getString(1));
+				student.setName(rs.getString(2));
+				student.setEmail(rs.getString(3));
+				student.setPhoneNumber(rs.getString(4));
+				student.setAmountPaid(rs.getInt(5));
+				student.setClassID(rs.getString(6));
+				student.setClassName(rs.getString(7));
+				student.setClassTime(rs.getString(8));
+				students.add(student);
+			}
+			return students;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		finally{
+			connection.closeConnection();
+		}
+	}
+
+	public Student getStudent(String studentID) {
+		try {
+			conn=connection.openConnection();
+			String sql="select st.student_id, st.name, st.email, st.phonenumber, st.amountpaid, class.class_id, class.name, "
+					+ " class.fee, class.time "
+					+ " from student st join class on (st.class_id=class.class_id)"
+					+ " where st.student_id= ?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, studentID);
+			Student student= new Student();
+			ResultSet rs=pstmt.executeQuery();
+			while(rs.next()){
+				student.setStudentID(rs.getString(1));
+				student.setName(rs.getString(2));
+				student.setEmail(rs.getString(3));
+				student.setPhoneNumber(rs.getString(4));
+				student.setAmountPaid(rs.getInt(5));
+				student.setClassID(rs.getString(6));
+				student.setClassName(rs.getString(7));
+				student.setClassFee(rs.getInt(8));
+				student.setClassTime(rs.getString(9));
+			}
+			return student;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		finally{
+			connection.closeConnection();
+		}
+	}
+
+	public ArrayList<Class> getListClass() {
+		try {
+			conn=connection.openConnection();
+			String sql="select * from class ";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			ResultSet rs=pstmt.executeQuery();
+			ArrayList<Class> listClass= new ArrayList<Class>();
+			while(rs.next()){
+				Class myClass= new Class();
+				myClass.setClassID(rs.getString(1));
+				myClass.setClassName(rs.getString(2));
+				myClass.setClassFee(rs.getInt(3));
+				myClass.setClassTime(rs.getString(4));
+				listClass.add(myClass);
+			}
+			return listClass;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		finally{
 			connection.closeConnection();
 		}
 	}

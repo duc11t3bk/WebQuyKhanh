@@ -18,4 +18,13 @@ public class StudentBO {
 	public ArrayList<Student> getListStudent(String classID) {
 		return studentDAO.getListStudent(classID);
 	}
+	public ArrayList<Student> getListStudent() {
+		return studentDAO.getListStudent();
+	}
+	public Student getStudent(String studentID) {
+		return studentDAO.getStudent(studentID);
+	}
+	public ArrayList<Class> getListClass() {
+		return studentDAO.getListClass();
+	}
 }

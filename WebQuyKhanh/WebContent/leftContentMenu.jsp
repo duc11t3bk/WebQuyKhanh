@@ -27,7 +27,7 @@
 					<li><a href="adminManageSchedule.html">Quản lí thời khóa
 							biểu</a></li>
 					<li><html:link action="/admin-manage-teacher">Quản lí giáo viên</html:link></li>
-					<li><a href="adminManageStudent.html">Quản lí học viên</a></li>
+					<li><html:link action="/admin-manage-student">Quản lí học viên</html:link></li>
 					<li><a href="adminManageMember.html">Quản lí thành viên</a></li>
 					<li><a href="adminManageClass.html">Quản lí lớp</a></li>
 					<li><a href="adminStatistic.html">Thống kê</a></li>

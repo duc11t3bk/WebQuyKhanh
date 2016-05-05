@@ -41,6 +41,7 @@
 			$("#form-confirm").css("top","-300px");
 			$("#form-upload-lesson").css("top","-100%");
 			$("#register-teacher").css("top","-100%");
+			$("#register-student").css("top","-100%");
 			$(".overflow").hide();
 		}
 		$(".overflow").on("click", function() {

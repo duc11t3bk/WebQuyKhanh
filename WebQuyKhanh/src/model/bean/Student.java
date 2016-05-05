@@ -9,8 +9,22 @@ public class Student {
 	private String classID;
 	private String className;
 	private int amountPaid;
+	private String classTime;
+	private int classFee;
 	
 	
+	public int getClassFee() {
+		return classFee;
+	}
+	public void setClassFee(int classFee) {
+		this.classFee = classFee;
+	}
+	public String getClassTime() {
+		return classTime;
+	}
+	public void setClassTime(String classTime) {
+		this.classTime = classTime;
+	}
 	public String getClassName() {
 		return className;
 	}

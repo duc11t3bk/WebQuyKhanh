@@ -20,7 +20,7 @@
 <link rel="stylesheet" type="text/css"
 	href="css/mycss/styleformconfirm.css">
 <link rel="stylesheet" type="text/css"
-	href="css/mycss/styleadminmanageteacher.css">
+	href="css/mycss/styleadminmanage.css">
 <link rel="stylesheet" type="text/css" href="css/mycss/styletooltip.css">
 <script src="js/jquery-2.2.0.min.js"></script>
 <script src="js/jquery-ui.js"></script>
@@ -172,9 +172,9 @@
 	<div class="wrapper">
 		<jsp:include page="header2.jsp"></jsp:include>
 		<jsp:include page="form-confirm.jsp"></jsp:include>
-		<div class="container">
+		<div class="container" id="admin-manage-register">
 			<div class="row">
-				<div class="col-lg-offset-3 col-lg-6" id="register-teacher">
+				<div class="col-lg-offset-3 col-lg-6 form-register" id="register-teacher">
 					<div class="row" style="text-align: right;">
 						<span id="my-remove" class="glyphicon glyphicon-remove" onclick="cancelRegister()"></span>
 					</div>

@@ -16,10 +16,52 @@ public class StudentForm extends ActionForm {
 	private String classID;
 	private int amountPaid;
 	private Student student;
+	private Class myClass;
 	private ArrayList<Class> listClass;
 	private ArrayList<Student> students;
+	private String action;
+	private String classFee;
+	private String className;
+	private String classTime;
+	private String jsonStudent;
 	
 	
+	public String getJsonStudent() {
+		return jsonStudent;
+	}
+	public void setJsonStudent(String jsonStudent) {
+		this.jsonStudent = jsonStudent;
+	}
+	public Class getMyClass() {
+		return myClass;
+	}
+	public void setMyClass(Class myClass) {
+		this.myClass = myClass;
+	}
+	public String getClassTime() {
+		return classTime;
+	}
+	public void setClassTime(String classTime) {
+		this.classTime = classTime;
+	}
+	public String getClassFee() {
+		return classFee;
+	}
+	public void setClassFee(String classFee) {
+		this.classFee = classFee;
+	}
+	public String getClassName() {
+		return className;
+	}
+	public void setClassName(String className) {
+		this.className = className;
+	}
+	public String getAction() {
+		return action;
+	}
+	public void setAction(String action) {
+		this.action = action;
+	}
 	public ArrayList<Student> getStudents() {
 		return students;
 	}

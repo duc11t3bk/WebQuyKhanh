@@ -1,10 +1,9 @@
-#register-teacher{
-	height: 400px;
+#admin-manage-register .form-register{
 	border: 1px solid #ddd;
 	background-color: white;
 	border-radius: 5px;
 	box-shadow: 3px 3px 5px #888888;
-	padding-bottom: 20px;
+	padding-bottom: 10px;
 	position: fixed;
 	top: -100%;
 	z-index: 10;
@@ -12,13 +11,13 @@
 	-moz-transition: top 0.75s;
 	-webkit-transition: top 0.75s;	
 }
-#register-teacher .row {
+#admin-manage-register .form-register .row {
 	margin-bottom: 10px;
 }
-#register-teacher .form-control{
+#admin-manage-register .form-register .form-control{
 	box-shadow: 1px 1px 5px #888888;
 }
-#register-teacher .form-control:hover{
+#admin-manage-register .form-register .form-control:hover{
 	box-shadow: 5px 5px 5px #888888;
 }
 .my-btn{
