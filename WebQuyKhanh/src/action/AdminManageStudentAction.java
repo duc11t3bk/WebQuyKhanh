@@ -35,6 +35,7 @@ public class AdminManageStudentAction extends Action {
 			if("view".equals(action)){
 				Student student=studentBO.getStudent(studentID);
 				JSONObject jsonObject= new JSONObject();
+				jsonObject.put("studentID", student.getStudentID());
 				jsonObject.put("name", student.getName());
 				jsonObject.put("email", student.getEmail());
 				jsonObject.put("phoneNumber", student.getPhoneNumber());
@@ -52,6 +53,7 @@ public class AdminManageStudentAction extends Action {
 				String jsonStudent=studentForm.getJsonStudent();
 				JSONParser jsonParser= new JSONParser();
 				JSONObject jsonObject= (JSONObject)jsonParser.parse(jsonStudent);
+				Student student= new Student();
 				
 			}
 			if("delete".equals(action)){

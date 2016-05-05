@@ -68,6 +68,7 @@
 				$("#class-student").val(response.classID);
 				changeClass();
 				$("#amountPaid-student").val(response.amountPaid);
+				$("#studentID").val(response.studentID);
 			},
 			error : function(errormessage){
 				alert("error"+errormessage);
@@ -87,6 +88,7 @@
 	}
 	$("#btn-submit").on("click",function(){
 		var action=$(this).val();
+		var studentID=$("#studentID").val();
 		var name=$("#name-student").val();
 		var email=$("#email-student").val();
 		var phoneNumber=$("#phoneNumber-student").val();
@@ -97,6 +99,7 @@
 		}
 		if("Lưu"==action){
 			var student= new Object();
+			student.studentID=studentID;
 			student.name=name;
 			student.email=email;
 			student.phoneNumber=phoneNumber;
@@ -136,6 +139,7 @@
 						<hr>
 					</div>
 					<html:form action="/admin-manage-student">
+						<html:hidden styleId="studentID" property="studentID"/>
 						<div class="row">
 							<div class="col-lg-12">
 								<div class="col-lg-3">
