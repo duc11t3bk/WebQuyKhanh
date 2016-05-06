@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.valves.StuckThreadDetectionValve;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -14,9 +15,12 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import common.StringProcess;
+import common.Validate;
 import form.StudentForm;
 import model.bean.Class;
 import model.bean.Student;
+import model.bo.MemberBO;
 import model.bo.StudentBO;
 
 public class AdminManageStudentAction extends Action {
@@ -54,7 +58,24 @@ public class AdminManageStudentAction extends Action {
 				JSONParser jsonParser= new JSONParser();
 				JSONObject jsonObject= (JSONObject)jsonParser.parse(jsonStudent);
 				Student student= new Student();
-				
+				student.setStudentID(jsonObject.get("studentID").toString());
+				student.setName(StringProcess.toUTF8(jsonObject.get("name").toString()));
+				System.out.println("name "+student.getName());
+				student.setEmail(jsonObject.get("email").toString());
+				student.setPhoneNumber(jsonObject.get("phoneNumber").toString());
+				student.setClassID(jsonObject.get("classID").toString());
+				student.setAmountPaid(Integer.valueOf(jsonObject.get("amountPaid").toString()));
+				JSONArray jsonArrayCheckValidate=checkValidate(student);
+				JSONObject jsonObjectCheckValidate=(JSONObject)jsonArrayCheckValidate.get(0);
+				String result=jsonObjectCheckValidate.get("result").toString();
+				if("success".equals(result)){
+					//studentBO.updateStudentInfor(student);
+				}
+				PrintWriter write= response.getWriter();
+				write.println(""+jsonArrayCheckValidate.toString());
+				write.flush();
+				write.close();
+				return null;
 			}
 			if("delete".equals(action)){
 				
@@ -65,5 +86,45 @@ public class AdminManageStudentAction extends Action {
 		studentForm.setStudents(students);
 		studentForm.setListClass(listClass);
 		return mapping.findForward("showListStudent");
+	}
+	@SuppressWarnings("unchecked")
+	public JSONArray checkValidate(Student student){
+		boolean checkValidate=true;
+		JSONArray jsonArray= new JSONArray();
+		JSONObject jsonObject= new JSONObject();
+
+		if(Validate.isEmpty(student.getName())){
+			checkValidate=false;
+			jsonObject.put("nameError", "Họ, tên không được để trống !");
+		}
+		if(Validate.isEmpty(student.getEmail())){
+			checkValidate=false;
+			jsonObject.put("emailError", "Email không được để trống !");
+		}
+		else{
+			if(Validate.emailNotValid(student.getEmail())){
+				checkValidate=false;
+				jsonObject.put("emailError", "Email không đúng định dạng !");
+			}
+		}
+		if(Validate.isEmpty(student.getPhoneNumber())){
+			checkValidate=false;
+			jsonObject.put("phoneNumberError", "Số điện thoại không được để trống !");
+		}
+		else {
+			if(Validate.lengthPhoneNumberNotValid(student.getPhoneNumber())){
+				checkValidate=false;
+				jsonObject.put("phoneNumberError", "Số điện thoại phải >= 9 chữ số !");
+			}
+		}
+		if(checkValidate){
+			jsonObject.put("result", "success");
+			jsonArray.add(jsonObject);
+		}
+		else{
+			jsonObject.put("result", "failed");
+			jsonArray.add(jsonObject);
+		}
+		return jsonArray;
 	}
 }

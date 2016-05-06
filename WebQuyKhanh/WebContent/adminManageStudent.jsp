@@ -22,6 +22,7 @@
 <link rel="stylesheet" type="text/css"
 	href="css/mycss/styleadminmanage.css">
 <link rel="stylesheet" type="text/css" href="css/mycss/styleformconfirm.css">
+<link rel="stylesheet" type="text/css" href="css/mycss/styletooltip.css">
 <script src="js/jquery-2.2.0.min.js"></script>
 <script src="js/jquery-ui.js"></script>
 <script src="js/bootstrap.min.js"></script>
@@ -39,10 +40,10 @@
 		if("Lưu"==action){
 			$("#btn-submit").val("Đăng ký");
 			$("#title").html("Đăng ký học viên");
-			var name=$("#name-student").val("");
-			var email=$("#email-student").val("");
-			var phoneNumber=$("#phoneNumber-student").val("");
-			var amountPaid=$("#amountPaid-student").val("");
+			var name=$("#studentName").val("");
+			var email=$("#studentEmail").val("");
+			var phoneNumber=$("#studentPhoneNumber").val("");
+			var amountPaid=$("#studentAmountPaid").val("");
 			$("#classFee-student").prop("readonly",false);
 			$("#classFee-student").css("cursor","default");
 		}
@@ -62,12 +63,12 @@
 			dataType: "json",
 			success : function(response){
 				console.log("name="+response.name);
-				$("#name-student").val(response.name);
-				$("#email-student").val(response.email);
-				$("#phoneNumber-student").val(response.phoneNumber);
-				$("#class-student").val(response.classID);
+				$("#studentName").val(response.name);
+				$("#studentEmail").val(response.email);
+				$("#studentPhoneNumber").val(response.phoneNumber);
+				$("#studentClass").val(response.classID);
 				changeClass();
-				$("#amountPaid-student").val(response.amountPaid);
+				$("#studentAmountPaid").val(response.amountPaid);
 				$("#studentID").val(response.studentID);
 			},
 			error : function(errormessage){
@@ -82,18 +83,18 @@
 		formConfirm(path, message);
 	}
 	function changeClass(){
-		var classID=$("#class-student").val();
+		var classID=$("#studentClass").val();
 		$("#classFee-student").val(classID);
 		$("#classTime-student").val(classID);
 	}
 	$("#btn-submit").on("click",function(){
 		var action=$(this).val();
 		var studentID=$("#studentID").val();
-		var name=$("#name-student").val();
-		var email=$("#email-student").val();
-		var phoneNumber=$("#phoneNumber-student").val();
-		var classID=$("#class-student").val();
-		var amountPaid=$("#amountPaid-student").val();	
+		var name=$("#studentName").val();
+		var email=$("#studentEmail").val();
+		var phoneNumber=$("#studentPhoneNumber").val();
+		var classID=$("#studentClass").val();
+		var amountPaid=$("#studentAmountPaid").val();	
 		if("Đăng ký"==action){
 			
 		}
@@ -139,15 +140,16 @@
 						<hr>
 					</div>
 					<html:form action="/admin-manage-student">
-						<html:hidden styleId="studentID" property="studentID"/>
+						<html:hidden styleId="studentID" property="studentID" />
 						<div class="row">
 							<div class="col-lg-12">
 								<div class="col-lg-3">
 									<label><span class="glyphicon glyphicon-user"></span>
 										Tên học viên</label>
 								</div>
-								<div class="col-lg-9">
-									<html:text styleId="name-student" property="name" styleClass="form-control"></html:text>
+								<div class="col-lg-9 mytooltip">
+									<html:text styleId="studentName" property="name" styleClass="form-control"></html:text>
+									
 								</div>
 							</div>
 						</div>
@@ -158,7 +160,7 @@
 										Email</label>
 								</div>
 								<div class="col-lg-9">
-									<html:text styleId="email-student" property="email" styleClass="form-control"></html:text>
+									<html:text styleId="studentEmail" property="email" styleClass="form-control"></html:text>
 								</div>
 							</div>
 						</div>
@@ -169,7 +171,7 @@
 										Số điện thoại</label>
 								</div>
 								<div class="col-lg-9">
-									<html:text styleId="phoneNumber-student" property="phoneNumber" styleClass="form-control"></html:text>
+									<html:text styleId="studentPhoneNumber" property="phoneNumber" styleClass="form-control"></html:text>
 								</div>
 							</div>
 						</div>
@@ -179,7 +181,7 @@
 									<label><i class="mdi mdi-book-plus"></i> Chọn lớp</label>
 								</div>
 								<div class="col-lg-9">
-									<html:select styleId="class-student" property="classID" styleClass="form-control" onchange="changeClass()" >
+									<html:select styleId="studentClass" property="classID" styleClass="form-control" onchange="changeClass()" >
 										<logic:iterate id="myClass" property="listClass" name="studentForm">
 											<bean:define id="classID" name="myClass" property="classID"></bean:define>
 											<html:option value="${classID }"><bean:write name="myClass" property="className"/> </html:option>
@@ -225,7 +227,7 @@
 										nộp</label>
 								</div>
 								<div class="col-lg-9">
-									<html:text styleId="amountPaid-student" property="amountPaid" styleClass="form-control" ></html:text>
+									<html:text styleId="studentAmountPaid" property="amountPaid" styleClass="form-control" ></html:text>
 								</div>
 							</div>
 						</div>

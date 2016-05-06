@@ -27,4 +27,7 @@ public class StudentBO {
 	public ArrayList<Class> getListClass() {
 		return studentDAO.getListClass();
 	}
+	public void updateStudentInfor(Student student) {
+		studentDAO.updateStudentInfor(student);
+	}
 }

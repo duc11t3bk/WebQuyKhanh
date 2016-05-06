@@ -181,4 +181,24 @@ public class StudentDAO {
 			connection.closeConnection();
 		}
 	}
+
+	public void updateStudentInfor(Student student) {
+		try {
+			conn=connection.openConnection();
+			String sql="update student set name= ?, email= ?, phonenumber= ?, class_id= ?, amountpaid= ? "
+					+ " where student_id= ?";
+			PreparedStatement pstmt= conn.prepareStatement(sql);
+			pstmt.setString(1, student.getName());
+			pstmt.setString(2, student.getEmail());
+			pstmt.setString(3, student.getPhoneNumber());
+			pstmt.setString(4, student.getClassID());
+			pstmt.setInt(5, student.getAmountPaid());
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally{
+			connection.closeConnection();
+		}
+	}
 }
