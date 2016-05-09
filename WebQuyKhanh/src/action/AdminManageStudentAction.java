@@ -11,6 +11,7 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.eclipse.jdt.internal.compiler.ast.ThrowStatement;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -53,23 +54,29 @@ public class AdminManageStudentAction extends Action {
 				write.close();
 				return null;
 			}
-			if("update".equals(action)){
-				String jsonStudent=studentForm.getJsonStudent();
-				JSONParser jsonParser= new JSONParser();
-				JSONObject jsonObject= (JSONObject)jsonParser.parse(jsonStudent);
-				Student student= new Student();
-				student.setStudentID(jsonObject.get("studentID").toString());
-				student.setName(StringProcess.toUTF8(jsonObject.get("name").toString()));
-				System.out.println("name "+student.getName());
-				student.setEmail(jsonObject.get("email").toString());
-				student.setPhoneNumber(jsonObject.get("phoneNumber").toString());
-				student.setClassID(jsonObject.get("classID").toString());
-				student.setAmountPaid(Integer.valueOf(jsonObject.get("amountPaid").toString()));
+			if("add".equals(action)){
+				String jsonStudent= studentForm.getJsonStudent();
+				Student student=convertToStudent(jsonStudent);
 				JSONArray jsonArrayCheckValidate=checkValidate(student);
 				JSONObject jsonObjectCheckValidate=(JSONObject)jsonArrayCheckValidate.get(0);
 				String result=jsonObjectCheckValidate.get("result").toString();
 				if("success".equals(result)){
-					//studentBO.updateStudentInfor(student);
+					studentBO.addNewStudent(student);
+				}
+				PrintWriter write =response.getWriter();
+				write.println(""+jsonArrayCheckValidate.toString());
+				write.flush();
+				write.close();
+				return null;
+			}
+			if("update".equals(action)){
+				String jsonStudent=studentForm.getJsonStudent();
+				Student student=convertToStudent(jsonStudent);
+				JSONArray jsonArrayCheckValidate=checkValidate(student);
+				JSONObject jsonObjectCheckValidate=(JSONObject)jsonArrayCheckValidate.get(0);
+				String result=jsonObjectCheckValidate.get("result").toString();
+				if("success".equals(result)){
+					studentBO.updateStudentInfor(student);
 				}
 				PrintWriter write= response.getWriter();
 				write.println(""+jsonArrayCheckValidate.toString());
@@ -78,7 +85,9 @@ public class AdminManageStudentAction extends Action {
 				return null;
 			}
 			if("delete".equals(action)){
-				
+				if(!studentBO.deleteStudent(studentID)){
+					return mapping.findForward("occurError");
+				}
 			}
 		}
 		ArrayList<Student> students= studentBO.getListStudent();
@@ -86,6 +95,20 @@ public class AdminManageStudentAction extends Action {
 		studentForm.setStudents(students);
 		studentForm.setListClass(listClass);
 		return mapping.findForward("showListStudent");
+	}
+	public Student convertToStudent(String jsonStudent) throws Exception{
+		JSONParser jsonParser= new JSONParser();
+		JSONObject jsonObject= (JSONObject)jsonParser.parse(jsonStudent);
+		Student student= new Student();
+		if(jsonObject.get("studentID")!=null){
+			student.setStudentID(jsonObject.get("studentID").toString());
+		}
+		student.setName(jsonObject.get("name").toString());
+		student.setEmail(jsonObject.get("email").toString());
+		student.setPhoneNumber(jsonObject.get("phoneNumber").toString());
+		student.setClassID(jsonObject.get("classID").toString());
+		student.setAmountPaid(Integer.valueOf(jsonObject.get("amountPaid").toString()));
+		return student;
 	}
 	@SuppressWarnings("unchecked")
 	public JSONArray checkValidate(Student student){

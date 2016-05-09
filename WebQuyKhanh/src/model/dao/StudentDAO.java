@@ -193,9 +193,48 @@ public class StudentDAO {
 			pstmt.setString(3, student.getPhoneNumber());
 			pstmt.setString(4, student.getClassID());
 			pstmt.setInt(5, student.getAmountPaid());
+			pstmt.setString(6, student.getStudentID());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		finally{
+			connection.closeConnection();
+		}
+	}
+
+	public void addNewStudent(Student student) {
+		try {
+			conn= connection.openConnection();
+			String studentID=ConnectionDAO.increateID("student", "student_id", conn);
+			student.setStudentID(studentID);
+			String sql="insert into student values(?,?,?,?,?,?)";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, student.getStudentID());
+			pstmt.setString(2, student.getName());
+			pstmt.setString(3, student.getEmail());
+			pstmt.setString(4, student.getPhoneNumber());
+			pstmt.setString(5, student.getClassID());
+			pstmt.setInt(6, student.getAmountPaid());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally{
+			connection.closeConnection();
+		}
+	}
+
+	public boolean deleteStudent(String studentID) {
+		try {
+			conn=connection.openConnection();
+			String sql="delete from student where student_id= ?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, studentID);
+			return (pstmt.executeUpdate()!=0) ? true : false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
 		}
 		finally{
 			connection.closeConnection();

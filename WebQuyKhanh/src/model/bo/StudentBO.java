@@ -30,4 +30,10 @@ public class StudentBO {
 	public void updateStudentInfor(Student student) {
 		studentDAO.updateStudentInfor(student);
 	}
+	public void addNewStudent(Student student) {
+		studentDAO.addNewStudent(student);
+	}
+	public boolean deleteStudent(String studentID) {
+		return studentDAO.deleteStudent(studentID);
+	}
 }

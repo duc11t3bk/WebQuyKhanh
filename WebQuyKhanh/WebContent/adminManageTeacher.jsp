@@ -197,7 +197,7 @@
 								</div>
 								<div class="col-lg-9 mytooltip">
 									<html:text styleId="name-teacher" property="name" styleClass="form-control"></html:text>
-									<span id="nameError-teacher" class="tooltiptext">Mời bạn nhập họ, tên</span>
+									<span id="nameError-teacher" class="tooltiptext">Mời bạn nhập họ, tên !</span>
 								</div>
 							</div>
 						</div>
@@ -209,7 +209,7 @@
 								</div>
 								<div class="col-lg-9 mytooltip">
 									<html:text styleId="email-teacher" property="email" styleClass="form-control"></html:text>
-									<span id="emailError-teacher" class="tooltiptext">Mời bạn nhập email</span>
+									<span id="emailError-teacher" class="tooltiptext">Mời bạn nhập email !</span>
 								</div>
 							</div>
 						</div>
@@ -221,7 +221,7 @@
 								</div>
 								<div class="col-lg-9 mytooltip">
 									<html:password styleId="password-teacher" property="password" styleClass="form-control"></html:password>
-									<span id="passwordError-teacher" class="tooltiptext">Mời bạn nhập mật khẩu</span>
+									<span id="passwordError-teacher" class="tooltiptext">Mời bạn nhập mật khẩu !</span>
 								</div>
 							</div>
 						</div>
@@ -233,7 +233,7 @@
 								</div>
 								<div class="col-lg-9 mytooltip">
 									<html:password styleId="retypePassword-teacher" property="retypePassword" styleClass="form-control"></html:password>
-									<span id="retypePasswordError-teacher" class="tooltiptext">Bạn hãy nhập lại mật khẩu</span>
+									<span id="retypePasswordError-teacher" class="tooltiptext">Bạn hãy nhập lại mật khẩu !</span>
 								</div>
 							</div>
 						</div>

@@ -32,6 +32,7 @@
 
 <script type="text/javascript">
 	function showStudentForm(){
+		$("#notification").html("");
 		$("#register-student").css("top","10%");
 		$(".overflow").show();
 	}
@@ -47,6 +48,7 @@
 			$("#classFee-student").prop("readonly",false);
 			$("#classFee-student").css("cursor","default");
 		}
+		$("#studentAmountPaid").val("");
 		showStudentForm();
 	}
 	function cancelRegister(){
@@ -87,39 +89,157 @@
 		$("#classFee-student").val(classID);
 		$("#classTime-student").val(classID);
 	}
-	$("#btn-submit").on("click",function(){
-		var action=$(this).val();
-		var studentID=$("#studentID").val();
-		var name=$("#studentName").val();
-		var email=$("#studentEmail").val();
-		var phoneNumber=$("#studentPhoneNumber").val();
-		var classID=$("#studentClass").val();
-		var amountPaid=$("#studentAmountPaid").val();	
-		if("Đăng ký"==action){
-			
+	function resetStatus(){
+		var toolTipText=$(".tooltiptext");
+		for(var i=0 ;i<toolTipText.length; i++){
+			$(toolTipText[i]).css("visibility","hidden");
+			$(toolTipText[i]).css("opacity","0");
 		}
-		if("Lưu"==action){
-			var student= new Object();
-			student.studentID=studentID;
+		var formControl=$("#register-student .form-control");
+		for(var i=0; i<formControl.length; i++){
+			$(formControl[i]).css("border-color","#ccc");
+		}
+	}
+	$(document).ready(function(){
+		$("#btn-submit").on("click",function(){
+			var action=$(this).val();
+			var studentID=$("#studentID").val();
+			var name=$("#studentName").val();
+			var email=$("#studentEmail").val();
+			var phoneNumber=$("#studentPhoneNumber").val();
+			var classID=$("#studentClass").val();
+			var amountPaid=$("#studentAmountPaid").val();
+			console.log(""+action);
+			console.log("equals"+("Lưu"==action));
+			var student= new Object();	
 			student.name=name;
 			student.email=email;
 			student.phoneNumber=phoneNumber;
 			student.classID=classID;
 			student.amountPaid=amountPaid;
-			
-			$.ajax({
-				type: "POST",
-				url: "http://localhost:8080/WebQuyKhanh/admin-manage-student.do",
-				data : "action=update&jsonStudent="+JSON.stringify(student),
-				dataType: "json",
-				success : function(response){
-					
-				},
-				error : function(errormessage){
-					
-				},
-			});
-		}
+			if("Đăng ký"==action){
+				$.ajax({
+					type: "POST",
+					url : "http://localhost:8080/WebQuyKhanh/admin-manage-student.do",
+					data : "action=add&jsonStudent="+JSON.stringify(student),
+					dataType: "json",
+					success : function(response){
+						var jsonObject= response[0];
+						var result=jsonObject.result;
+						if("success"==result){
+							$("#notification").html("Đăng ký thành công");
+							setTimeout(function(){
+								window.location.reload();	
+							}, 1000);
+						}
+						if("failed"==result){
+							if(jsonObject.nameError !=null){
+								$("#studentName").css("border-color","red");
+								$("#studentNameError").html(""+jsonObject.nameError);	
+							}
+							if(jsonObject.emailError!=null){
+								$("#studentEmail").css("border-color","red");
+								$("#studentEmailError").html(""+jsonObject.emailError);	
+							}
+							if(jsonObject.phoneNumberError !=null){
+								$("#studentPhoneNumber").css("border-color","red");
+								$("#studentPhoneNumberError").html(""+jsonObject.phoneNumberError);	
+							}
+						}
+					},
+					error : function(errormessage){
+						alert("error "+ errormessage);
+					},
+				});
+			}
+			if("Lưu"==action){
+				student.studentID=studentID;
+				$.ajax({
+					type: "POST",
+					url: "http://localhost:8080/WebQuyKhanh/admin-manage-student.do",
+					data : "action=update&jsonStudent="+JSON.stringify(student),
+					dataType: "json",
+					success : function(response){
+						var jsonObject= response[0];
+						var result=jsonObject.result;
+						if("success"==result){
+							$("#notification").html("Lưu thành công");
+							setTimeout(function(){
+								window.location.reload();	
+							}, 1000);
+						}
+						if("failed"==result){
+							if(jsonObject.nameError !=null){
+								$("#studentName").css("border-color","red");
+								$("#studentNameError").html(""+jsonObject.nameError);	
+							}
+							if(jsonObject.emailError!=null){
+								$("#studentEmail").css("border-color","red");
+								$("#studentEmailError").html(""+jsonObject.emailError);	
+							}
+							if(jsonObject.phoneNumberError !=null){
+								$("#studentPhoneNumber").css("border-color","red");
+								$("#studentPhoneNumberError").html(""+jsonObject.phoneNumberError);	
+							}
+						}
+					},
+					error : function(errormessage){
+						alert("error "+errormessage);
+					},
+				});
+			}
+		});
+		/**event focus form control*/
+		$("#studentName").focus(function(){
+			resetStatus();
+			$(this).css("border-color","#66afe9");
+			$("#studentNameError").css("visibility","visible");
+			$("#studentNameError").css("opacity","1");
+			setTimeout(function(){
+				$("#studentNameError").css("opacity","0");
+				$("#studentNameError").css("visibility","hidden");
+			}, 1500);
+		});
+		$("#studentEmail").focus(function(){
+			resetStatus();
+			$(this).css("border-color","#66afe9");
+			$("#studentEmailError").css("visibility","visible");
+			$("#studentEmailError").css("opacity","1");
+			setTimeout(function(){
+				$("#studentEmailError").css("opacity","0");
+				$("#studentEmailError").css("visibility","hidden");
+			}, 1500);
+		});
+		$("#studentPhoneNumber").focus(function(){
+			resetStatus();
+			$(this).css("border-color","#66afe9");
+			$("#studentPhoneNumberError").css("visibility","visible");
+			$("#studentPhoneNumberError").css("opacity","1");
+			setTimeout(function(){
+				$("#studentPhoneNumberError").css("opacity","0");
+				$("#studentPhoneNumberError").css("visibility","hidden");
+			}, 1500);
+		});
+		$("#studentClass").focus(function(){
+			resetStatus();
+			$(this).css("border-color","#66afe9");
+			$("#studentClassError").css("visibility","visible");
+			$("#studentClassError").css("opacity","1");
+			setTimeout(function(){
+				$("#studentClassError").css("opacity","0");
+				$("#studentClassError").css("visibility","hidden");
+			}, 1500);
+		});
+		$("#studentAmountPaid").focus(function(){
+			resetStatus();
+			$(this).css("border-color","#66afe9");
+			$("#studentAmountPaidError").css("visibility","visible");
+			$("#studentAmountPaidError").css("opacity","1");
+			setTimeout(function(){
+				$("#studentAmountPaidError").css("opacity","0");
+				$("#studentAmountPaidError").css("visibility","hidden");
+			}, 1500);
+		});
 	});
 </script>
 </head>
@@ -134,7 +254,12 @@
 						<span id="my-remove" class="glyphicon glyphicon-remove" onclick="cancelRegister()"></span>
 					</div>
 					<div class="row" style="text-align: center">
-						<label id="title" style="font-size: 20px;">Đăng ký học viên mới</label>
+						<div class="col-lg-12">
+							<label id="title" style="font-size: 20px;">Đăng ký học viên mới</label>
+						</div>
+						<div class="col-lg-12">
+							<label id="notification" style="color:#5CB85C"></label>
+						</div>
 					</div>
 					<div class="row">
 						<hr>
@@ -149,7 +274,7 @@
 								</div>
 								<div class="col-lg-9 mytooltip">
 									<html:text styleId="studentName" property="name" styleClass="form-control"></html:text>
-									
+									<span id="studentNameError" class="tooltiptext">Mời bạn nhập họ, tên !</span>
 								</div>
 							</div>
 						</div>
@@ -159,8 +284,9 @@
 									<label><span class="glyphicon glyphicon-envelope"></span>
 										Email</label>
 								</div>
-								<div class="col-lg-9">
+								<div class="col-lg-9 mytooltip">
 									<html:text styleId="studentEmail" property="email" styleClass="form-control"></html:text>
+									<span id="studentEmailError" class="tooltiptext">Mời bạn nhập email !</span>
 								</div>
 							</div>
 						</div>
@@ -170,8 +296,9 @@
 									<label><span class="glyphicon glyphicon-phone"></span>
 										Số điện thoại</label>
 								</div>
-								<div class="col-lg-9">
+								<div class="col-lg-9 mytooltip">
 									<html:text styleId="studentPhoneNumber" property="phoneNumber" styleClass="form-control"></html:text>
+									<span id="studentPhoneNumberError" class="tooltiptext">Mời bạn nhập số điện thoại !</span>
 								</div>
 							</div>
 						</div>
@@ -180,7 +307,8 @@
 								<div class="col-lg-3">
 									<label><i class="mdi mdi-book-plus"></i> Chọn lớp</label>
 								</div>
-								<div class="col-lg-9">
+								<div class="col-lg-9 mytooltip">
+									<span id="studentClassError" class="tooltiptext">Mời bạn chọn lớp ! </span>
 									<html:select styleId="studentClass" property="classID" styleClass="form-control" onchange="changeClass()" >
 										<logic:iterate id="myClass" property="listClass" name="studentForm">
 											<bean:define id="classID" name="myClass" property="classID"></bean:define>
@@ -226,8 +354,9 @@
 									<label><i class="mdi mdi-currency-usd"></i> Số tiền đã
 										nộp</label>
 								</div>
-								<div class="col-lg-9">
+								<div class="col-lg-9 mytooltip">
 									<html:text styleId="studentAmountPaid" property="amountPaid" styleClass="form-control" ></html:text>
+									<span id="studentAmountPaidError" class="tooltiptext">Mời bạn nhập số tiền đã nộp !</span>
 								</div>
 							</div>
 						</div>
