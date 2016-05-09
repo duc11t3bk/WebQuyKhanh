@@ -64,53 +64,53 @@ public class RegisterMemberAction extends Action {
 		boolean checkValidate = true;
 		if (Validate.isEmpty(email)) {
 			checkValidate = false;
-			jsonObject.put("emailError", "Email trống");
+			jsonObject.put("emailError", "Email trống !");
 		} else {
 			if (Validate.emailNotValid(email)) {
 				checkValidate = false;
-				jsonObject.put("emailError", "Email không đúng định dạng");
+				jsonObject.put("emailError", "Email không đúng định dạng !");
 			} else if (memberBO.isEmailExist(email)) {
 				checkValidate = false;
-				jsonObject.put("emailError", "Email đã tồn tại");
+				jsonObject.put("emailError", "Email đã tồn tại !");
 			}
 		}
 		if (Validate.isEmpty(phoneNumber)) {
 			checkValidate = false;
-			jsonObject.put("phoneNumberError", "Số điện thoại trống");
+			jsonObject.put("phoneNumberError", "Số điện thoại trống !");
 		} else {
 			if (Validate.lengthPhoneNumberNotValid(phoneNumber)) {
 				checkValidate = false;
-				jsonObject.put("phoneNumberError", "Số điện thoại phải >= 9 số");
+				jsonObject.put("phoneNumberError", "Số điện thoại phải >= 9 số !");
 			}
 		}
 		if (Validate.isEmpty(password)) {
 			checkValidate = false;
-			jsonObject.put("passwordError", "Mật khẩu trống");
+			jsonObject.put("passwordError", "Mật khẩu trống !");
 		} else {
 			if (Validate.lengthPasswordNotValid(password)) {
 				checkValidate = false;
-				jsonObject.put("passwordError", "Mật khẩu phải >= 6 kí tự");
+				jsonObject.put("passwordError", "Mật khẩu phải >= 6 kí tự !");
 			}
 		}
 		if (Validate.isEmpty(retypePassword)) {
 			checkValidate = false;
-			jsonObject.put("retypePasswordError", "Bạn chưa xác nhận mật khẩu");
+			jsonObject.put("retypePasswordError", "Bạn chưa xác nhận mật khẩu !");
 		} else {
 			if (Validate.lengthPasswordNotValid(retypePassword)) {
 				checkValidate = false;
-				jsonObject.put("retypePasswordError", "Mật khẩu phải >= 6 kí tự");
+				jsonObject.put("retypePasswordError", "Mật khẩu phải >= 6 kí tự !");
 			} else {
 				if (!Validate.isEmpty(password) && !Validate.lengthPasswordNotValid(password)
 						&& !retypePassword.equals(password)) {
 					checkValidate = false;
-					jsonObject.put("retypePasswordError", "Xác nhận mật khẩu không đúng");
+					jsonObject.put("retypePasswordError", "Xác nhận mật khẩu không đúng !");
 				}
 
 			}
 		}
 		if (checkValidate) {
 			jsonObject.put("register", "success");
-			jsonObject.put("message", "Bạn đã đăng ký thành công");
+			jsonObject.put("message", "Bạn đã đăng ký thành công !");
 			jsonArray.add(jsonObject);
 			return jsonArray;
 		} else {

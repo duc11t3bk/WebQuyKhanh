@@ -4,15 +4,13 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic"%>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles"%>
-
 <html>
 <head>
 <meta charset="utf-8" />
 <title>Trung Tâm Du Học và Nhật Ngữ Quý Khanh</title>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/mycss/styleheader.css">
-
-
+<link rel="stylesheet" type="text/css" href="css/mycss/styletooltip.css">
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#btn-login").on("click", function() {
@@ -36,12 +34,12 @@
 		function closeLogReg() {
 			$("#form-login").css("top", "-400px");
 			$("#form-register").css("top", "-600px");
-			$("#new-level").css("top","-300px");
-			$("#new-lesson").css("top","-300px");
-			$("#form-confirm").css("top","-300px");
-			$("#form-upload-lesson").css("top","-100%");
-			$("#register-teacher").css("top","-100%");
-			$("#register-student").css("top","-100%");
+			$("#new-level").css("top", "-300px");
+			$("#new-lesson").css("top", "-300px");
+			$("#form-confirm").css("top", "-300px");
+			$("#form-upload-lesson").css("top", "-100%");
+			$("#register-teacher").css("top", "-100%");
+			$("#register-student").css("top", "-100%");
 			$(".overflow").hide();
 		}
 		$(".overflow").on("click", function() {
@@ -122,11 +120,23 @@
 				var object = response[0];
 				console.log("response" + response[0].register);
 				if (object.register == "failed") {
-					$("#emailRegisError").html(object.emailError);
-					$("#phoneNumberRegisError").html(object.phoneNumberError);
-					$("#passwordRegisError").html(object.passwordError);
-					$("#retypePasswordRegisError").html(
-							object.retypePasswordError);
+					if(object.emailError!=null){
+						$("#emailRegis").css("border-color","red");
+						$("#emailRegisError").html(object.emailError);	
+					}
+					if(object.phoneNumberError!=null){
+						$("#phoneNumberRegis").css("border-color","red");
+						$("#phoneNumberRegisError").html(object.phoneNumberError);	
+					}
+					if(object.passwordError!=null){
+						$("#passwordRegis").css("border-color","red");
+						$("#passwordRegisError").html(object.passwordError);
+					}
+					if(object.retypePasswordError!=null){
+						$("#retypePasswordRegis").css("border-color","red");
+						$("#retypePasswordRegisError").html(
+								object.retypePasswordError);	
+					}
 				} else {
 					if (object.register == "success") {
 						$("#notification-register").html(object.message);
@@ -146,6 +156,59 @@
 			}
 		});
 	}
+	function resetStatus(){
+		var toolTipText=$(".tooltiptext");
+		for(var i=0 ;i<toolTipText.length; i++){
+			$(toolTipText[i]).css("visibility","hidden");
+			$(toolTipText[i]).css("opacity","0");
+		}
+		var formControl=$("#form-register .form-control");
+		for(var i=0; i<formControl.length; i++){
+			$(formControl[i]).css("border-color","#ccc");
+		}
+	}
+	$(document).ready(function(){
+		$("#emailRegis").focus(function(){
+			resetStatus();
+			$(this).css("border-color","#66afe9");
+			$("#emailRegisError").css("visibility","visible");
+			$("#emailRegisError").css("opacity","1");
+			setTimeout(function(){
+				$("#emailRegisError").css("opacity","0");
+				$("#emailRegisError").css("visibility","hidden");
+			}, 1500);
+		});
+		$("#phoneNumberRegis").focus(function(){
+			resetStatus();
+			$(this).css("border-color","#66afe9");
+			$("#phoneNumberRegisError").css("visibility","visible");
+			$("#phoneNumberRegisError").css("opacity","1");
+			setTimeout(function(){
+				$("#phoneNumberRegisError").css("opacity","0");
+				$("#phoneNumberRegisError").css("visibility","hidden");
+			}, 1500);
+		});
+		$("#passwordRegis").focus(function(){
+			resetStatus();
+			$(this).css("border-color","#66afe9");
+			$("#passwordRegisError").css("visibility","visible");
+			$("#passwordRegisError").css("opacity","1");
+			setTimeout(function(){
+				$("#passwordRegisError").css("opacity","0");
+				$("#passwordRegisError").css("visibility","hidden");
+			}, 1500);
+		});
+		$("#retypePasswordRegis").focus(function(){
+			resetStatus();
+			$(this).css("border-color","#66afe9");
+			$("#retypePasswordRegisError").css("visibility","visible");
+			$("#retypePasswordRegisError").css("opacity","1");
+			setTimeout(function(){
+				$("#retypePasswordRegisError").css("opacity","0");
+				$("#retypePasswordRegisError").css("visibility","hidden");
+			}, 1500);
+		});
+	});
 </script>
 </head>
 <body>
@@ -222,51 +285,46 @@
 					<div class="panel-body">
 						<html:form action="/register-member">
 							<div class="row" style="color: red; text-align: center">
-								<label id="notification-register" style="color: red"></label>
+								<label id="notification-register" style="color: #5CB85C"></label>
 							</div>
 							<div class="row">
-								<label class="col-lg-2"><span
-									class="glyphicon glyphicon-envelope"></span> Email</label>
-								<div class="col-lg-8 ">
+								<div class="col-lg-2">
+									<label><span class="glyphicon glyphicon-envelope"></span> Email</label>
+								</div>
+								<div class="col-lg-8 mytooltip">
 									<html:text styleId="emailRegis" styleClass="form-control"
 										property="email"></html:text>
+									<span id="emailRegisError" class="tooltiptext">Mời bạn
+										nhập Email !</span>
 								</div>
-							</div>
-							<div class="row" style="text-align: center">
-								<label id="emailRegisError" style="color: red"></label>
 							</div>
 							<div class="row">
 								<label class="col-lg-2"><span
 									class="glyphicon glyphicon-earphone"></span> Số điện thoại :</label>
-								<div class="col-lg-8 ">
+								<div class="col-lg-8 mytooltip">
 									<html:text styleId="phoneNumberRegis" property="phoneNumber"
 										styleClass="form-control"></html:text>
+									<span id="phoneNumberRegisError" class="tooltiptext">Mời
+										bạn nhập số điện thoại !</span>
 								</div>
-							</div>
-							<div class="row" style="text-align: center">
-								<label id="phoneNumberRegisError" style="color: red"></label>
 							</div>
 							<div class="row">
 								<label class="col-lg-2"><span
 									class="glyphicon glyphicon-lock"></span> Mật khẩu :</label>
-								<div class="col-lg-8">
+								<div class="col-lg-8 mytooltip">
 									<html:password styleId="passwordRegis"
 										styleClass=" form-control" property="password"></html:password>
+									<span id="passwordRegisError" class="tooltiptext">Mời bạn nhập mật khẩu !</span>
 								</div>
-							</div>
-							<div class="row" style="text-align: center">
-								<label id="passwordRegisError" style="color: red"></label>
 							</div>
 							<div class="row">
 								<label class="col-lg-2"><span
 									class="glyphicon glyphicon-lock"></span> Nhập lại mật khẩu </label>
-								<div class="col-lg-8">
+								<div class="col-lg-8 mytooltip">
 									<html:password styleClass="form-control"
 										styleId="retypePasswordRegis" property="retypePassword"></html:password>
+									<span id="retypePasswordRegisError" class="tooltiptext">Mời bạn xác nhận lại mật khẩu !</span>
 								</div>
-							</div>
-							<div class="row" style="text-align: center">
-								<label id="retypePasswordRegisError" style="color: red"></label>
 							</div>
 							<div class="row">
 								<html:button
@@ -316,9 +374,7 @@
 						<img class="img-circle" alt="hinh" src="avata/${image }"
 							height="40px" width="40px">
 						<bean:write name="member" property="email" />
-					</html:link> 
-					<!-- Menu member --> 
-					<logic:equal value="0" name="member"
+					</html:link> <!-- Menu member --> <logic:equal value="0" name="member"
 						property="priority">
 						<ul class="submenu" style="text-align: left">
 							<li><html:link action="/member-update-infor"
@@ -327,15 +383,14 @@
 							<li><html:link action="/logout" style="margin-left:5px;">
 									<span class="glyphicon glyphicon-log-out"></span> Đăng xuất</html:link></li>
 						</ul>
-					</logic:equal> 
-					<!-- Menu teacher admin --> 
-					<logic:notEqual value="0"
+					</logic:equal> <!-- Menu teacher admin --> <logic:notEqual value="0"
 						name="member" property="priority">
 						<ul class="submenu" style="text-align: left">
 							<li><html:link action="/teacher-update-infor"
 									style="margin-left:5px;">
 									<span class="glyphicon glyphicon-info-sign"></span> Thông tin cá nhân</html:link></li>
-							<li><html:link action="/teacher-update-infor" style="margin-left:5px">
+							<li><html:link action="/teacher-update-infor"
+									style="margin-left:5px">
 									<span class="glyphicon glyphicon-cog"></span> Trang Quản lí</html:link></li>
 							<li><html:link action="/logout" style="margin-left:5px;">
 									<span class="glyphicon glyphicon-log-out"></span> Đăng xuất</html:link></li>
@@ -348,4 +403,3 @@
 </body>
 </html>
 
-	
