@@ -31,13 +31,31 @@ public class MemberUpdateInforAction extends Action {
 		response.setCharacterEncoding("utf-8");
 		LoginForm loginForm = (LoginForm) request.getSession().getAttribute("loginForm");
 		MemberForm memberForm = (MemberForm) form;
-		memberForm.setMember(loginForm.getMember());
-		memberForm.setEmail(loginForm.getMember().getEmail());
+		MemberBO memberBO = new MemberBO();
+		String memberID= memberForm.getMemberID();
+		System.out.println("memberID"+memberID);
+		if(Validate.isEmpty(memberID)){
+			memberForm.setMember(loginForm.getMember());
+			memberForm.setEmail(loginForm.getMember().getEmail());
+			memberForm.setMemberID(memberID);
+		}
+		else{
+			//when admin manange member information
+			memberForm.setMember(memberBO.getMember(memberID));
+			memberForm.setEmail(memberForm.getMember().getEmail());
+			memberForm.setMemberID(memberForm.getMember().getMemberID());
+		}
 		if ("Đổi mật khẩu".equals(StringProcess.toUTF8(memberForm.getSubmit()))) {
 			if (validateChangePassword(memberForm)) {
-				MemberBO memberBO = new MemberBO();
 				memberBO.updatePassword(memberForm.getMember().getMemberID(), memberForm.getNewPassword());
-				return mapping.findForward("updateSuccess");
+				if(Validate.isEmpty(memberID)){
+					return mapping.findForward("updateSuccess");
+				}
+				else{
+					memberForm.setEmail("");
+					memberForm.setPhoneNumber("");
+					return mapping.findForward("adminShowListMember");
+				}
 			}
 		}
 		if ("Lưu".equals(StringProcess.toUTF8(memberForm.getSubmit()))) {
@@ -48,15 +66,22 @@ public class MemberUpdateInforAction extends Action {
 				FileProcess.deleteOldFile(getServlet(), memberForm.getMember().getImage(),"avata");
 				System.out.println("" + imageName);
 			}
-			MemberBO memberBO = new MemberBO();
 			Member member= new Member();
 			member.setMemberID(memberForm.getMember().getMemberID());
 			member.setImage(imageName);
 			member.setPhoneNumber(memberForm.getPhoneNumber());
+			System.out.println("phone   "+member.getPhoneNumber());
 			memberBO.updateMemberInfor(member);
-			return mapping.findForward("updateSuccess");
+			if(Validate.isEmpty(memberID)){
+				return mapping.findForward("updateSuccess");
+			}
+			else{
+				memberForm.setEmail("");
+				memberForm.setPhoneNumber("");
+				return mapping.findForward("adminShowListMember");
+			}
 		} else {
-			memberForm.setPhoneNumber(loginForm.getMember().getPhoneNumber());
+			memberForm.setPhoneNumber(memberForm.getMember().getPhoneNumber());
 		}
 		return mapping.findForward("showMemberInfor");
 	}

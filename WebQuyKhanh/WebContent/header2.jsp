@@ -136,7 +136,7 @@
 							$("#phoneNumberRegis").val("");
 							$("#passwordRegis").val("");
 							$("#retypePasswordRegis").val("");
-							$("notification-register").val("");
+							$("#notification-register").val("");
 						}, 1000);
 					}
 				}
@@ -229,7 +229,7 @@
 									class="glyphicon glyphicon-envelope"></span> Email</label>
 								<div class="col-lg-8 ">
 									<html:text styleId="emailRegis" styleClass="form-control"
-										property="email" />
+										property="email"></html:text>
 								</div>
 							</div>
 							<div class="row" style="text-align: center">

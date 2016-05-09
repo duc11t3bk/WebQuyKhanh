@@ -6,8 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
+import com.sun.corba.se.impl.orb.PrefixParserAction;
 
 import common.StringProcess;
 import model.bean.Member;
@@ -200,6 +203,64 @@ public class MemberDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+
+	public ArrayList<Member> getListMember() {
+		try {
+			conn=connection.openConnection();
+			String sql="select * from member where teacher_id is null";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			ResultSet rs=pstmt.executeQuery();
+			ArrayList<Member> members= new ArrayList<Member>();
+			while(rs.next()){
+				Member member= new Member();
+				member.setMemberID(rs.getString(1));
+				member.setEmail(rs.getString(3));
+				member.setPhoneNumber(rs.getString(4));
+				member.setPassword(rs.getString(5));
+				member.setDateattended(StringProcess.formatDate(rs.getString(8), "yyyy-MM-dd", "dd-MM-yyyy"));
+				members.add(member);
+			}
+			return members;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		finally{
+			connection.closeConnection();
+		}
+	}
+	public boolean deleteMember(String memberID) {
+		try {
+			deleteMemberOnTable(memberID,"lessonstatus");
+			deleteMemberOnTable(memberID,"learnword");
+			conn=connection.openConnection();
+			String sql="delete from member where member_id= ?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, memberID);
+			return (pstmt.executeUpdate() !=0) ? true : false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		finally{
+			connection.closeConnection();
+		}
+	}
+	public boolean deleteMemberOnTable(String memberID, String tableName){
+		try {
+			conn= connection.openConnection();
+			String sql="delete from "+tableName+" where member_id= ?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, memberID);
+			return (pstmt.executeUpdate() !=0) ? true : false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		finally{
+			connection.closeConnection();
 		}
 	}
 }

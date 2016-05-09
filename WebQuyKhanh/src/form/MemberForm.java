@@ -1,5 +1,7 @@
 package form;
 
+import java.util.ArrayList;
+
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.upload.FormFile;
 
@@ -23,7 +25,22 @@ public class MemberForm extends ActionForm {
 	private Member member;
 	private FormFile file;
 	private String submit;
+	private ArrayList<Member> members;
+	private String action;
 	
+	
+	public String getAction() {
+		return action;
+	}
+	public void setAction(String action) {
+		this.action = action;
+	}
+	public ArrayList<Member> getMembers() {
+		return members;
+	}
+	public void setMembers(ArrayList<Member> members) {
+		this.members = members;
+	}
 	public String getPhoneNumberError() {
 		return phoneNumberError;
 	}

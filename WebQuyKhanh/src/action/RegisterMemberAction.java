@@ -37,7 +37,7 @@ public class RegisterMemberAction extends Action {
 		MemberBO memberBO= new MemberBO();
 		if(((String)jsonObject.get("register")).equals("success")){
 			Member memberInfor= new Member();
-			memberInfor.setTeacherID("");
+			memberInfor.setTeacherID(null);
 			memberInfor.setEmail(email);
 			memberInfor.setPhoneNumber(phoneNumber);
 			memberInfor.setPassword(password);

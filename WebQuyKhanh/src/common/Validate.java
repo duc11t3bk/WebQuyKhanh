@@ -15,7 +15,7 @@ public class Validate {
 			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 	
 	public static boolean isEmpty(String s){
-		if(s==null || s.length()==0) return true;
+		if(s==null || s.length()==0||s=="") return true;
 		return false;
 	}
 	

@@ -41,6 +41,7 @@
 									</div>
 									<div class="panel-body">
 										<html:form action="/member-update-infor">
+											<html:hidden property="memberID" name="memberForm"/>
 											<div class="row">
 												<div class="col-lg-2">
 													<label><span class="glyphicon glyphicon-lock"></span>
@@ -98,6 +99,7 @@
 									</div>
 									<div class="panel-body">
 										<html:form action="/member-update-infor" enctype="multipart/form-data">
+											<html:hidden property="memberID" name="memberForm"/>
 											<div class="row">
 												<div class="col-lg-5">
 													<label><span class="glyphicon glyphicon-user"></span>

@@ -1,5 +1,7 @@
 package model.bo;
 
+import java.util.ArrayList;
+
 import model.bean.Member;
 import model.bean.Teacher;
 import model.dao.MemberDAO;
@@ -33,5 +35,11 @@ public class MemberBO {
 	}
 	public Member getMember(String memberID) {
 		return memberDAO.getMember(memberID);
+	}
+	public ArrayList<Member> getListMember() {
+		return memberDAO.getListMember();
+	}
+	public boolean deleteMember(String memberID) {
+		return memberDAO.deleteMember(memberID);
 	}
 }
