@@ -135,7 +135,44 @@
 				});
 			}
 			if("Lưu"==action){
-				
+				myClass.classID=$("#classID").val();
+				$.ajax({
+					type: "POST",
+					url : "http://localhost:8080/WebQuyKhanh/admin-manage-class.do",
+					data : "action=update&jsonData="+JSON.stringify(myClass),
+					dataType : "json",
+					success : function(response){
+						var jsonObject=response[0];
+						var result=response[0].result;
+						if("success"==result){
+							$("#classNotify").html("Lưu thành công !");
+							setTimeout(function(){
+								window.location.reload();
+							}, 1000);
+						}
+						if("failed"==result){
+							if(jsonObject.classNameError!=null){
+								$("#className").css("border-color","red");
+								$("#classNameError").html(""+jsonObject.classNameError);
+							}
+							if(jsonObject.classFeeError!=null){
+								$("#classFee").css("border-color","red");
+								$("#classFeeError").html(""+jsonObject.classFeeError);
+							}
+							if(jsonObject.classTimeError!=null){
+								$("#classTime").css("border-color","red");
+								$("#classTimeError").html(""+jsonObject.classTimeError);
+							}
+							if(jsonObject.classRoomError!=null){
+								$("#classRoom").css("border-color","red");
+								$("#classRoomError").html(""+jsonObject.classRoomError);
+							}
+						}
+					},
+					error : function(errormessage){
+						alert("error" +errormessage);
+					},
+				});
 			}
 		});
 	});
@@ -161,21 +198,35 @@
 		showClassForm();
 	}
 	function updateClassInfor(classID){
+		$("#btn-submit").val("Lưu");
+		$("#title").html("Xem thông tin lớp");
 		$.ajax({
 			type : "POST",
 			url : "http://localhost:8080/WebQuyKhanh/admin-manage-class.do",
 			data : "action=view&classID="+classID,
 			dataType: "json",
 			success : function(response){
-				
+				var classID=response.classID;
+				var className=response.className;
+				var classFee=response.classFee;
+				var classTime=response.classTime;
+				var classRoom=response.classRoom;				
+				$("#classID").val(classID);
+				$("#className").val(className);
+				$("#classFee").val(classFee);
+				$("#classTime").val(classTime);
+				$("#classRoom").val(classRoom);		
 			},
 			error : function(errormessage){
-				
+				alert("error "+ errormessage);
 			},
 		});
+		showClassForm();
 	}
 	function deleteClass(classID){
-		
+		var path="http://localhost:8080/WebQuyKhanh/admin-manage-class.do?action=delete&classID="+classID;
+		var message="Bạn có chắc chắn muốn xóa lớp học này ?";
+		formConfirm(path, message);
 	}
 </script>
 </head>
@@ -190,7 +241,7 @@
 					<div class="row" style="text-align: center">
 						<label id="title" style="font-size: 20px;" >Thêm lớp mới</label>
 					</div>
-					<div class="row">
+					<div class="row" style="text-align: center">
 						<label id="classNotify" style="color: #4CAF50"></label>
 					</div>
 					<div class="row">
@@ -250,6 +301,7 @@
 			</div>
 		</div>
 		<jsp:include page="header2.jsp"></jsp:include>
+		<jsp:include page="form-confirm.jsp"></jsp:include>
 		<div class="container main-container2">
 			<div class="row">
 				<div class="content">

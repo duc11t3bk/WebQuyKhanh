@@ -46,12 +46,18 @@
 								<html:form action="/create-new-posts"
 										enctype="multipart/form-data">
 									<div class="row">
-										<label class="col-lg-3">Chọn mục :</label>
+										<label class="col-lg-3">Chọn mục : </label>
 										<div class="col-lg-5">
 											<html:select property="category" styleClass="dropdownlist">
+												<bean:define id="member" name="loginForm" property="member" scope="session"></bean:define>
+												<logic:equal value="3" name="member" property="priority">
+													<html:option value="LGD">Lịch giảng dạy</html:option>
+												</logic:equal>
 												<html:option value="DHNB">Du học Nhật Bản</html:option>
 												<html:option value="LHTN">Lớp học tiếng Nhật</html:option>
-												<html:option value="TD">Tuyển dụng</html:option>
+												<logic:equal value="3" name="member" property="priority">
+													<html:option value="TD">Tuyển dụng</html:option>
+												</logic:equal>
 												<html:option value="TLTK">Tài liệu tham khảo</html:option>
 											</html:select>
 										</div>

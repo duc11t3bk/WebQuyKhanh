@@ -73,11 +73,17 @@
 									<div class="col-lg-5">
 										<html:form styleId="form-submit" action="/manage-posts">
 											<html:select styleClass="form-control" property="group" onchange="changeGroup()" style="box-shadow:2px 2px 3px #888888">
+												<bean:define id="member" name="loginForm" property="member" scope="session"></bean:define>
 												<html:option value="ALL">Tấc cả</html:option>
+												<logic:equal value="3" name="member" property="priority">
+													<html:option value="LGD">Lịch giảng dạy</html:option>
+												</logic:equal>
 												<html:option value="DHNB">Du học Nhật Bản</html:option>
 												<html:option value="LHTN">Lớp học tiếng Nhật</html:option>
 												<html:option value="TLTK">Tài liệu tham khảo</html:option>
-												<html:option value="TD">Tuyển dụng</html:option>
+												<logic:equal value="3" name="member" property="priority">
+													<html:option value="TD">Tuyển dụng</html:option>
+												</logic:equal>
 											</html:select>
 										</html:form>
 									</div>

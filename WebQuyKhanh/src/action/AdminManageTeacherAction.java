@@ -16,7 +16,6 @@ import org.json.simple.parser.JSONParser;
 import common.StringProcess;
 import common.Validate;
 import form.TeacherForm;
-import model.bean.Member;
 import model.bean.Teacher;
 import model.bo.MemberBO;
 import model.bo.TeacherBO;

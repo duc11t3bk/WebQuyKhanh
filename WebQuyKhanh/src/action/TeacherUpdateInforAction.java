@@ -13,13 +13,10 @@ import common.FileProcess;
 import common.StringProcess;
 import common.Validate;
 import form.LoginForm;
-import form.MemberForm;
 import form.TeacherForm;
 import model.bean.Member;
 import model.bean.Teacher;
 import model.bo.MemberBO;
-import model.bo.TeacherBO;
-import model.dao.MemberDAO;
 
 public class TeacherUpdateInforAction extends Action {
 	@Override

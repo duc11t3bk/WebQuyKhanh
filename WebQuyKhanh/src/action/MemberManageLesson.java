@@ -13,7 +13,6 @@ import org.apache.struts.action.ActionMapping;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import common.StringProcess;
 import form.JapaneseForm;
 import form.LoginForm;
 import model.bean.JapaneseData;

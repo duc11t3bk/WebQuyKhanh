@@ -20,4 +20,17 @@ public class ClassBO {
 	public void addNewClass(Class myClass) {
 		classDAO.addNewClass(myClass);
 	}
+
+	public Class getClass(String classID) {
+		return classDAO.getClass(classID);
+	}
+
+	public void updateClass(Class myClass) {
+		classDAO.updateClass(myClass);
+	}
+
+	public boolean deleteClass(String classID) {
+		return classDAO.deleteClass(classID);
+	}
+
 }

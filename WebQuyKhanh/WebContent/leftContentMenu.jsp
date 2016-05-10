@@ -24,8 +24,6 @@
 					<li><a href="adminManageIntroduce.html">Quản lí trang giới
 							thiệu</a></li>
 					<li><html:link action="/manage-posts">Quản lí bài đăng</html:link></li>
-					<li><a href="adminManageSchedule.html">Quản lí thời khóa
-							biểu</a></li>
 					<li><html:link action="/admin-manage-teacher">Quản lí giáo viên</html:link></li>
 					<li><html:link action="/admin-manage-student">Quản lí học viên</html:link></li>
 					<li><html:link action="/admin-manage-member">Quản lí thành viên</html:link></li>
@@ -35,9 +33,9 @@
 			</logic:equal>
 			<logic:equal value="1" name="member" property="priority">
 				<ul>
-					<li><a href="teacherManageInformation.html">Thông tin cá
-							nhân</a></li>
-					<li><a href="teacherViewSchedule.html">Xem thời khóa biểu</a></li>
+					<li><html:link action="/teacher-update-infor"> Thông tin cá
+							nhân</html:link></li>
+					<li><html:link action="/teacher-manage-schedule">Xem lịch giảng dạy </html:link></li>
 					<li><html:link action="/manage-posts">Quản lí bài đăng</html:link>
 					</li>
 					<li><html:link action="/manage-student" >Quản lí học viên</html:link></li>

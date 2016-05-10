@@ -1,17 +1,13 @@
 package action;
 
-import java.io.File;
-import java.io.FileOutputStream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionServlet;
 import org.apache.struts.upload.FormFile;
 
 import common.FileProcess;
@@ -134,9 +130,9 @@ public class MemberUpdateInforAction extends Action {
 		return checkValidate;
 	}
 
-	public static void main(String[] args) {
-		MemberUpdateInforAction test = new MemberUpdateInforAction();
-		String filePath = "/home/davy/Pictures";
-		String imageName = "3k8.png";
-	}
+//	public static void main(String[] args) {
+//		MemberUpdateInforAction test = new MemberUpdateInforAction();
+//		String filePath = "/home/davy/Pictures";
+//		String imageName = "3k8.png";
+//	}
 }

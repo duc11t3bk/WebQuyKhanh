@@ -9,8 +9,6 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.upload.FormFile;
 
-import com.sun.corba.se.impl.ior.OldPOAObjectKeyTemplate;
-
 import common.FileProcess;
 import common.StringProcess;
 import common.Validate;

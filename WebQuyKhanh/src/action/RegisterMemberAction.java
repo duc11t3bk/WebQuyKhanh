@@ -55,7 +55,7 @@ public class RegisterMemberAction extends Action {
 		return null;
 	}
 
-	@SuppressWarnings({ "unused", "unchecked" })
+	@SuppressWarnings({ "unchecked" })
 	public JSONArray checkValidate(String email, String phoneNumber, String password, String retypePassword) {
 		JSONArray jsonArray = new JSONArray();
 		JSONObject jsonObject = new JSONObject();

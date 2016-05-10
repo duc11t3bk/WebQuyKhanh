@@ -13,10 +13,8 @@ import org.apache.struts.action.ActionMapping;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import common.StringProcess;
 import common.Validate;
 import form.JapaneseForm;
-import model.bean.JapaneseData;
 import model.bean.Lesson;
 import model.bean.Level;
 import model.bo.JapaneseBO;
@@ -31,7 +29,6 @@ public class TeacherManageLevelAction extends Action {
 
 		JapaneseForm japaneseForm = (JapaneseForm) form;
 		String action = japaneseForm.getAction();
-		String submit = StringProcess.toUTF8(japaneseForm.getSubmit());
 		System.out.println("action"+action);
 		System.out.println("type="+japaneseForm.getType());
 		if ("vocabulary".equals(action)) {

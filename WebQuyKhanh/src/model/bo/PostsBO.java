@@ -26,5 +26,7 @@ public class PostsBO {
 	public boolean deletePosts(String postID) {
 		return postsDAO.deletePosts(postID);
 	}
-	
+	public ArrayList<Posts> getListPosts(String category) {
+		return postsDAO.getListPosts(category);
+	}
 }

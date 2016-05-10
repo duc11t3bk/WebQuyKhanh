@@ -8,7 +8,8 @@ public class Posts {
 	public static String LOPHOCTIENGNHAT="LHTN";
 	public static String TUYENDUNG="TD";
 	public static String TAILIEUTHAMKHAO="TLTK";
-	
+	public static String LICHGIANGDAY="LGD";
+
 	private String postID;
 	private String teacherID;
 	private String teacherName;

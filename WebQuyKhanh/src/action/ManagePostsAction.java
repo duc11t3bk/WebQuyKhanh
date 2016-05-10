@@ -32,7 +32,9 @@ public class ManagePostsAction extends Action {
 		ArrayList<Posts> posts=postsBO.getListPosts(priority, teacherID, group);
 		for (int i = 0; i < posts.size(); i++) {
 			String category = "";
-			if (posts.get(i).getCategory().equals(Posts.DUHOCNHATBAN)) {
+			if(posts.get(i).getCategory().equals(Posts.LICHGIANGDAY)){
+				category="Lịch giảng dạy";
+			} else if (posts.get(i).getCategory().equals(Posts.DUHOCNHATBAN)) {
 				category = "Du Học Nhật Bản";
 			} else if (posts.get(i).getCategory().equals(Posts.LOPHOCTIENGNHAT)) {
 				category = "Lớp Học Tiếng Nhật";

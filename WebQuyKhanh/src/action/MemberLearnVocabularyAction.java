@@ -14,7 +14,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import common.StringProcess;
-import form.JapaneseForm;
 import form.LearnJapaneseForm;
 import form.LoginForm;
 import model.bean.JapaneseData;
