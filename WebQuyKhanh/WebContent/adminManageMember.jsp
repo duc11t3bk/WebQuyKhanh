@@ -22,7 +22,6 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
 <script src="js/myjs/form-confirm.js"></script>
-<script src="js/myjs/includehtml.js"></script>
 
 <script type="text/javascript">
 	function addNewMember() {

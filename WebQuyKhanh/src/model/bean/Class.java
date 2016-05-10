@@ -6,7 +6,14 @@ public class Class {
 	private String className;
 	private int classFee;
 	private String classTime;
+	private String classRoom;
 	
+	public String getClassRoom() {
+		return classRoom;
+	}
+	public void setClassRoom(String classRoom) {
+		this.classRoom = classRoom;
+	}
 	public String getClassID() {
 		return classID;
 	}

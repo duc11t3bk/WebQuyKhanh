@@ -234,7 +234,7 @@
 								<label id="notification-login" style="color: red"></label>
 							</div>
 							<div class="row">
-								<label class="col-lg-2">Email:</label>
+								<label class="col-lg-2">Email </label>
 								<div class="col-lg-8">
 									<html:text styleId="email" property="email"
 										styleClass="form-control"></html:text>
@@ -246,7 +246,7 @@
 							</div>
 
 							<div class="row">
-								<label class="col-lg-2">Mật khẩu: </label>
+								<label class="col-lg-2">Mật khẩu </label>
 								<div class="col-lg-8">
 									<html:password styleId="password" property="password"
 										styleClass="form-control"></html:password>
@@ -292,7 +292,7 @@
 							<div class="row">
 								<div class="col-lg-3">
 									<label><span class="glyphicon glyphicon-envelope"></span>
-										Email</label>
+										Email </label>
 								</div>
 								<div class="col-lg-9 mytooltip">
 									<html:text styleId="emailRegis" styleClass="form-control"
@@ -303,7 +303,7 @@
 							</div>
 							<div class="row">
 								<label class="col-lg-3"><span
-									class="glyphicon glyphicon-earphone"></span> Số điện thoại :</label>
+									class="glyphicon glyphicon-earphone"></span> Số điện thoại </label>
 								<div class="col-lg-9 mytooltip">
 									<html:text styleId="phoneNumberRegis" property="phoneNumber"
 										styleClass="form-control"></html:text>
@@ -313,7 +313,7 @@
 							</div>
 							<div class="row">
 								<label class="col-lg-3"><span
-									class="glyphicon glyphicon-lock"></span> Mật khẩu :</label>
+									class="glyphicon glyphicon-lock"></span> Mật khẩu </label>
 								<div class="col-lg-9 mytooltip">
 									<html:password styleId="passwordRegis"
 										styleClass=" form-control" property="password"></html:password>

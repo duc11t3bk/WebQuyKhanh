@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/mycss/styleheader.css">
 <link rel="stylesheet" type="text/css" href="css/mycss/styletooltip.css">
+<link rel="stylesheet" type="text/css" href="css/mycss/styleadminmanage.css">
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#btn-login").on("click", function() {
@@ -40,6 +41,7 @@
 			$("#form-upload-lesson").css("top", "-100%");
 			$("#register-teacher").css("top", "-100%");
 			$("#register-student").css("top", "-100%");
+			$("#form-add-new-class").css("top","-100%");
 			$(".overflow").hide();
 		}
 		$(".overflow").on("click", function() {
@@ -120,22 +122,23 @@
 				var object = response[0];
 				console.log("response" + response[0].register);
 				if (object.register == "failed") {
-					if(object.emailError!=null){
-						$("#emailRegis").css("border-color","red");
-						$("#emailRegisError").html(object.emailError);	
+					if (object.emailError != null) {
+						$("#emailRegis").css("border-color", "red");
+						$("#emailRegisError").html(object.emailError);
 					}
-					if(object.phoneNumberError!=null){
-						$("#phoneNumberRegis").css("border-color","red");
-						$("#phoneNumberRegisError").html(object.phoneNumberError);	
+					if (object.phoneNumberError != null) {
+						$("#phoneNumberRegis").css("border-color", "red");
+						$("#phoneNumberRegisError").html(
+								object.phoneNumberError);
 					}
-					if(object.passwordError!=null){
-						$("#passwordRegis").css("border-color","red");
+					if (object.passwordError != null) {
+						$("#passwordRegis").css("border-color", "red");
 						$("#passwordRegisError").html(object.passwordError);
 					}
-					if(object.retypePasswordError!=null){
-						$("#retypePasswordRegis").css("border-color","red");
+					if (object.retypePasswordError != null) {
+						$("#retypePasswordRegis").css("border-color", "red");
 						$("#retypePasswordRegisError").html(
-								object.retypePasswordError);	
+								object.retypePasswordError);
 					}
 				} else {
 					if (object.register == "success") {
@@ -147,6 +150,7 @@
 							$("#passwordRegis").val("");
 							$("#retypePasswordRegis").val("");
 							$("#notification-register").val("");
+							window.location.reload();
 						}, 1000);
 					}
 				}
@@ -156,56 +160,56 @@
 			}
 		});
 	}
-	function resetStatus(){
-		var toolTipText=$(".tooltiptext");
-		for(var i=0 ;i<toolTipText.length; i++){
-			$(toolTipText[i]).css("visibility","hidden");
-			$(toolTipText[i]).css("opacity","0");
+	function resetStatus() {
+		var toolTipText = $(".tooltiptext");
+		for (var i = 0; i < toolTipText.length; i++) {
+			$(toolTipText[i]).css("visibility", "hidden");
+			$(toolTipText[i]).css("opacity", "0");
 		}
-		var formControl=$("#form-register .form-control");
-		for(var i=0; i<formControl.length; i++){
-			$(formControl[i]).css("border-color","#ccc");
+		var formControl = $("#form-register .form-control");
+		for (var i = 0; i < formControl.length; i++) {
+			$(formControl[i]).css("border-color", "#ccc");
 		}
 	}
-	$(document).ready(function(){
-		$("#emailRegis").focus(function(){
+	$(document).ready(function() {
+		$("#emailRegis").focus(function() {
 			resetStatus();
-			$(this).css("border-color","#66afe9");
-			$("#emailRegisError").css("visibility","visible");
-			$("#emailRegisError").css("opacity","1");
-			setTimeout(function(){
-				$("#emailRegisError").css("opacity","0");
-				$("#emailRegisError").css("visibility","hidden");
+			$(this).css("border-color", "#66afe9");
+			$("#emailRegisError").css("visibility", "visible");
+			$("#emailRegisError").css("opacity", "1");
+			setTimeout(function() {
+				$("#emailRegisError").css("opacity", "0");
+				$("#emailRegisError").css("visibility", "hidden");
 			}, 1500);
 		});
-		$("#phoneNumberRegis").focus(function(){
+		$("#phoneNumberRegis").focus(function() {
 			resetStatus();
-			$(this).css("border-color","#66afe9");
-			$("#phoneNumberRegisError").css("visibility","visible");
-			$("#phoneNumberRegisError").css("opacity","1");
-			setTimeout(function(){
-				$("#phoneNumberRegisError").css("opacity","0");
-				$("#phoneNumberRegisError").css("visibility","hidden");
+			$(this).css("border-color", "#66afe9");
+			$("#phoneNumberRegisError").css("visibility", "visible");
+			$("#phoneNumberRegisError").css("opacity", "1");
+			setTimeout(function() {
+				$("#phoneNumberRegisError").css("opacity", "0");
+				$("#phoneNumberRegisError").css("visibility", "hidden");
 			}, 1500);
 		});
-		$("#passwordRegis").focus(function(){
+		$("#passwordRegis").focus(function() {
 			resetStatus();
-			$(this).css("border-color","#66afe9");
-			$("#passwordRegisError").css("visibility","visible");
-			$("#passwordRegisError").css("opacity","1");
-			setTimeout(function(){
-				$("#passwordRegisError").css("opacity","0");
-				$("#passwordRegisError").css("visibility","hidden");
+			$(this).css("border-color", "#66afe9");
+			$("#passwordRegisError").css("visibility", "visible");
+			$("#passwordRegisError").css("opacity", "1");
+			setTimeout(function() {
+				$("#passwordRegisError").css("opacity", "0");
+				$("#passwordRegisError").css("visibility", "hidden");
 			}, 1500);
 		});
-		$("#retypePasswordRegis").focus(function(){
+		$("#retypePasswordRegis").focus(function() {
 			resetStatus();
-			$(this).css("border-color","#66afe9");
-			$("#retypePasswordRegisError").css("visibility","visible");
-			$("#retypePasswordRegisError").css("opacity","1");
-			setTimeout(function(){
-				$("#retypePasswordRegisError").css("opacity","0");
-				$("#retypePasswordRegisError").css("visibility","hidden");
+			$(this).css("border-color", "#66afe9");
+			$("#retypePasswordRegisError").css("visibility", "visible");
+			$("#retypePasswordRegisError").css("opacity", "1");
+			setTimeout(function() {
+				$("#retypePasswordRegisError").css("opacity", "0");
+				$("#retypePasswordRegisError").css("visibility", "hidden");
 			}, 1500);
 		});
 	});
@@ -232,7 +236,7 @@
 								<label id="notification-login" style="color: red"></label>
 							</div>
 							<div class="row">
-								<label class="col-lg-2">Email:</label>
+								<label class="col-lg-2">Email </label>
 								<div class="col-lg-8">
 									<html:text styleId="email" property="email"
 										styleClass="form-control"></html:text>
@@ -244,7 +248,7 @@
 							</div>
 
 							<div class="row">
-								<label class="col-lg-2">Mật khẩu: </label>
+								<label class="col-lg-2">Mật khẩu </label>
 								<div class="col-lg-8">
 									<html:password styleId="password" property="password"
 										styleClass="form-control"></html:password>
@@ -273,7 +277,7 @@
 	<!-- Form đăng ký -->
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-offset-2 col-lg-8" id="form-register">
+			<div class="col-lg-offset-3 col-lg-6" id="form-register">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						<div class="panel-title" style="float: left; text-align: center">Đăng
@@ -288,10 +292,11 @@
 								<label id="notification-register" style="color: #5CB85C"></label>
 							</div>
 							<div class="row">
-								<div class="col-lg-2">
-									<label><span class="glyphicon glyphicon-envelope"></span> Email</label>
+								<div class="col-lg-3">
+									<label><span class="glyphicon glyphicon-envelope"></span>
+										Email </label>
 								</div>
-								<div class="col-lg-8 mytooltip">
+								<div class="col-lg-9 mytooltip">
 									<html:text styleId="emailRegis" styleClass="form-control"
 										property="email"></html:text>
 									<span id="emailRegisError" class="tooltiptext">Mời bạn
@@ -299,9 +304,9 @@
 								</div>
 							</div>
 							<div class="row">
-								<label class="col-lg-2"><span
-									class="glyphicon glyphicon-earphone"></span> Số điện thoại :</label>
-								<div class="col-lg-8 mytooltip">
+								<label class="col-lg-3"><span
+									class="glyphicon glyphicon-earphone"></span> Số điện thoại </label>
+								<div class="col-lg-9 mytooltip">
 									<html:text styleId="phoneNumberRegis" property="phoneNumber"
 										styleClass="form-control"></html:text>
 									<span id="phoneNumberRegisError" class="tooltiptext">Mời
@@ -309,26 +314,28 @@
 								</div>
 							</div>
 							<div class="row">
-								<label class="col-lg-2"><span
-									class="glyphicon glyphicon-lock"></span> Mật khẩu :</label>
-								<div class="col-lg-8 mytooltip">
+								<label class="col-lg-3"><span
+									class="glyphicon glyphicon-lock"></span> Mật khẩu </label>
+								<div class="col-lg-9 mytooltip">
 									<html:password styleId="passwordRegis"
 										styleClass=" form-control" property="password"></html:password>
-									<span id="passwordRegisError" class="tooltiptext">Mời bạn nhập mật khẩu !</span>
+									<span id="passwordRegisError" class="tooltiptext">Mời
+										bạn nhập mật khẩu !</span>
 								</div>
 							</div>
 							<div class="row">
-								<label class="col-lg-2"><span
+								<label class="col-lg-3"><span
 									class="glyphicon glyphicon-lock"></span> Nhập lại mật khẩu </label>
-								<div class="col-lg-8 mytooltip">
+								<div class="col-lg-9 mytooltip">
 									<html:password styleClass="form-control"
 										styleId="retypePasswordRegis" property="retypePassword"></html:password>
-									<span id="retypePasswordRegisError" class="tooltiptext">Mời bạn xác nhận lại mật khẩu !</span>
+									<span id="retypePasswordRegisError" class="tooltiptext">Mời
+										bạn xác nhận lại mật khẩu !</span>
 								</div>
 							</div>
-							<div class="row">
+							<div class="row" style="text-align:center">
 								<html:button
-									styleClass="col-lg-offset-2 col-lg-8 btn btn-primary"
+									styleClass="my-btn"
 									property="submit" value="Đăng ký" onclick="register()"></html:button>
 							</div>
 						</html:form>
@@ -402,4 +409,5 @@
 	</div>
 </body>
 </html>
+
 

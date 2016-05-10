@@ -29,7 +29,7 @@
 					<li><html:link action="/admin-manage-teacher">Quản lí giáo viên</html:link></li>
 					<li><html:link action="/admin-manage-student">Quản lí học viên</html:link></li>
 					<li><html:link action="/admin-manage-member">Quản lí thành viên</html:link></li>
-					<li><a href="adminManageClass.html">Quản lí lớp</a></li>
+					<li><html:link action="/admin-manage-class">Quản lí lớp</html:link></li>
 					<li><a href="adminStatistic.html">Thống kê</a></li>
 				</ul>
 			</logic:equal>

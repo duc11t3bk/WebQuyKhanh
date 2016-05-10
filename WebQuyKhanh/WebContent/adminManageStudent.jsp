@@ -41,10 +41,10 @@
 		if("Lưu"==action){
 			$("#btn-submit").val("Đăng ký");
 			$("#title").html("Đăng ký học viên");
-			var name=$("#studentName").val("");
-			var email=$("#studentEmail").val("");
-			var phoneNumber=$("#studentPhoneNumber").val("");
-			var amountPaid=$("#studentAmountPaid").val("");
+			$("#studentName").val("");
+			$("#studentEmail").val("");
+			$("#studentPhoneNumber").val("");
+			$("#studentAmountPaid").val("");
 			$("#classFee-student").prop("readonly",false);
 			$("#classFee-student").css("cursor","default");
 		}
