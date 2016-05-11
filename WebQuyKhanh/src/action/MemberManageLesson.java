@@ -27,6 +27,8 @@ public class MemberManageLesson extends Action {
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		LoginForm loginForm=(LoginForm)request.getSession().getAttribute("loginForm");
 		String memberID= loginForm.getMember().getMemberID();
 		JapaneseForm japaneseForm=(JapaneseForm)form;

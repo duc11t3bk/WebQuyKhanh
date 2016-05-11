@@ -21,11 +21,6 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
 <script src="js/myjs/includehtml.js"></script>
-<style type="text/css">
-.teacher-info h5 {
-	display: inline;
-}
-</style>
 </head>
 <body>
 	<div class="wrapper">
@@ -63,7 +58,7 @@
 												<td><bean:write property="category" name="post"/> </td>
 												<td><bean:write property="datePosted" name="post"/> </td>
 												<td>
-													<html:link href="#x" style="font-size:20px;" onclick="viewPosts('${postID }')" ><span class="glyphicon glyphicon-new-window"></span> </html:link>
+													<html:link action="/teacher-view-schedule?postID=${postID }" style="font-size:20px;" ><span class="glyphicon glyphicon-new-window"></span> </html:link>
 												</td>
 											</tr>
 										</logic:iterate>

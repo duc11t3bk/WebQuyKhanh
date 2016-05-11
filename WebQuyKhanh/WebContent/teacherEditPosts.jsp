@@ -53,9 +53,15 @@
 										<label class="col-lg-2">Chọn mục :</label>
 										<div class="col-lg-3">
 											<html:select property="category" styleClass="dropdownlist">
+												<bean:define id="member" name="loginForm" property="member"></bean:define>
+												<logic:equal value="3" name="member" property="priority">
+													<html:option value="LGD">Lịch giảng dạy</html:option>
+												</logic:equal>
 												<html:option value="DHNB">Du học Nhật Bản</html:option>
 												<html:option value="LHTN">Lớp học tiếng Nhật</html:option>
-												<html:option value="TD">Tuyển dụng</html:option>
+												<logic:equal value="3" name="member" property="priority">
+													<html:option value="TD">Tuyển dụng</html:option>
+												</logic:equal>
 												<html:option value="TLTK">Tài liệu tham khảo</html:option>
 											</html:select>
 										</div>
@@ -73,8 +79,8 @@
 										</div>
 									</div>
 									<div class="row" style="margin-top: 10px">
-										<label class="col-lg-3">Tiêu đề :</label>
-										<div class="col-lg-9">
+										<label class="col-lg-2">Tiêu đề :</label>
+										<div class="col-lg-10">
 											<html:text property="title" styleClass="form-control"></html:text>
 										</div>
 									</div>
@@ -86,16 +92,16 @@
 										</div>
 									</div>
 									<div class="row" style="margin-top: 10px;">
-										<label class="col-lg-3">Ảnh bài viết :</label>
-										<div class="col-lg-9">
+										<label class="col-lg-2">Ảnh bài viết :</label>
+										<div class="col-lg-10">
 											<bean:define id="image" name="postsForm" property="image"></bean:define>
 											<html:img alt="hinh" src="postsimage/${image }" width="100%"
 												height="100%" />
 										</div>
 									</div>
 									<div class="row" style="margin-top: 10px">
-										<label class="col-lg-3">Upload ảnh mới : </label>
-										<div class="col-lg-9">
+										<label class="col-lg-2">Upload ảnh mới : </label>
+										<div class="col-lg-10">
 											<div class="col-lg-6" style="padding-left: 0px">
 												<html:file property="file" styleClass="file"
 													styleId="input-1" accept="image/*"></html:file>

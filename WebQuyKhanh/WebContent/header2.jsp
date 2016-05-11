@@ -42,6 +42,12 @@
 			$("#register-teacher").css("top", "-100%");
 			$("#register-student").css("top", "-100%");
 			$("#form-add-new-class").css("top","-100%");
+			$("#frame-zoom").css("opacity","0");
+			$("#frame-zoom").css("width","40%");
+			$("#frame-zoom").css("height","40%");
+			$("#frame-zoom").css("top","10%");
+			$("#frame-zoom").css("left","30%");
+			$("#frame-zoom").css("visibility","hidden");
 			$(".overflow").hide();
 		}
 		$(".overflow").on("click", function() {
