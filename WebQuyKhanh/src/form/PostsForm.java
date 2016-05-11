@@ -28,8 +28,29 @@ public class PostsForm extends ActionForm {
 	private String action;
 	private String notification;
 	private String group;
+	private int page;
+	private int totalPage;
+	private ArrayList<Integer> pagination;
 	
 	
+	public ArrayList<Integer> getPagination() {
+		return pagination;
+	}
+	public void setPagination(ArrayList<Integer> pagination) {
+		this.pagination = pagination;
+	}
+	public int getTotalPage() {
+		return totalPage;
+	}
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+	}
+	public int getPage() {
+		return page;
+	}
+	public void setPage(int page) {
+		this.page = page;
+	}
 	public String getGroup() {
 		return group;
 	}

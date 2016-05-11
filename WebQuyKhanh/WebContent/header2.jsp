@@ -356,13 +356,13 @@
 			<li><a href="introduce.jsp">Giới thiệu</a></li>
 			<li><a href="home.jsp"><span
 					class="glyphicon glyphicon-home"></span> Trang chủ</a></li>
-			<li><a href="japanStudyAbroad.html"><span
-					class="glyphicon glyphicon-plane"></span> Du học Nhật Bản</a></li>
-			<li><a href="japanClass.html"><span
-					class="glyphicon glyphicon-hand-right"></span> Lớp học tiếng Nhật</a>
+			<li><html:link action="/view-list-posts?category=DHNB"><span
+					class="glyphicon glyphicon-plane"></span> Du học Nhật Bản</html:link></li>
+			<li><html:link action="/view-list-posts?category=LHTN"><span
+					class="glyphicon glyphicon-hand-right"></span> Lớp học tiếng Nhật</html:link>
 				<ul class="submenu">
-					<li><a href="documentation.html">Tài liệu tham khảo</a></li>
-					<li><a href="recruitment.html">Tuyển dụng</a></li>
+					<li><html:link action="/view-list-posts?category=TLTK"> Tài liệu tham khảo</html:link></li>
+					<li><html:link action="/view-list-posts?category=TD"> Tuyển dụng</html:link></li>
 				</ul></li>
 			<li><a href="#"><span class="glyphicon glyphicon-hourglass"></span>
 					Học từ vựng</a>
@@ -402,7 +402,7 @@
 							<li><html:link action="/teacher-update-infor"
 									style="margin-left:5px;">
 									<span class="glyphicon glyphicon-info-sign"></span> Thông tin cá nhân</html:link></li>
-							<li><html:link action="/teacher-update-infor"
+							<li><html:link action="/manage-posts"
 									style="margin-left:5px">
 									<span class="glyphicon glyphicon-cog"></span> Trang Quản lí</html:link></li>
 							<li><html:link action="/logout" style="margin-left:5px;">
@@ -415,5 +415,3 @@
 	</div>
 </body>
 </html>
-
-

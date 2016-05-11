@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%>
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
+<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic"%>
+<%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -31,8 +35,12 @@
 								</div>
 								<div class="panel-body">
 									<div class="row">
+										<div class="col-lg-12" style="width: 100%; height: 300px;">
+											<img id="postsimage" src="image/phusi2.jpg">
+										</div>
+									</div>
+									<div class="row" style="margin-top: 20px;">
 										<div class="col-lg-12">
-											<img src="image/phusi2.jpg">
 											<p>Lorem ipsum dolor sit amet, consectetur adipiscing
 												elit. Sed non dui sodales, faucibus libero ut, posuere
 												felis. Donec imperdiet suscipit accumsan. Aenean consequat

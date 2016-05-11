@@ -29,4 +29,10 @@ public class PostsBO {
 	public ArrayList<Posts> getListPosts(String category) {
 		return postsDAO.getListPosts(category);
 	}
+	public ArrayList<Posts> getListPosts(String category, int page) {
+		return postsDAO.getListPosts(category,page);
+	}
+	public int getTotalPage(String category) {
+		return postsDAO.getTotalPage(category);
+	}
 }

@@ -201,4 +201,67 @@ public class PostsDAO {
 		}
 	}
 
+	public ArrayList<Posts> getListPosts(String category, int page) {
+		try {
+			conn=connection.openConnection();
+			String sql="select p.post_id, p.teacher_id, tc.fullname, p.title, p.content, p.dateposted, p.image, p.views, p.category "
+					+ "	from post p join teacher tc on (p.teacher_id = tc.teacher_id)"
+					+ " where category= ?"
+					+ " order by p.dateposted desc "
+					+ " limit ?, 5";
+			System.out.println("sql"+sql);
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, category);
+			pstmt.setInt(2, (page-1)*5);
+			ResultSet rs=pstmt.executeQuery();
+			ArrayList<Posts> listPosts= new ArrayList<Posts>();
+			while(rs.next()){
+				Posts posts= new Posts();
+				posts.setPostID(rs.getString(1));
+				posts.setTeacherID(rs.getString(2));
+				posts.setTeacherName(rs.getString(3));
+				posts.setTitle(rs.getString(4));
+				posts.setContent(rs.getString(5));
+				posts.setDatePosted(StringProcess.formatDate(rs.getString(6), "yyyy-MM-dd", "dd-MM-yyyy"));
+				posts.setImage(rs.getString(7));
+				posts.setViews(rs.getInt(8));
+				posts.setCategory(rs.getString(9));
+				listPosts.add(posts);
+			}
+			return listPosts;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		finally{
+			connection.closeConnection();
+		}
+	}
+
+	public int getTotalPage(String category) {
+		try {
+			conn=connection.openConnection();
+			String sql="select count(post_id)"
+					+ " from post "
+					+ " where category= ?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, category);
+			ResultSet rs=pstmt.executeQuery();
+			int totalPage=0;
+			int totalRow=0;
+			while(rs.next()){
+				totalRow=rs.getInt(1);
+			}
+			totalPage=totalRow/5;
+			if(totalRow%5 !=0){
+				totalPage+=1;
+			}
+			System.out.println("totalpage"+totalPage);
+			return totalPage;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
 }

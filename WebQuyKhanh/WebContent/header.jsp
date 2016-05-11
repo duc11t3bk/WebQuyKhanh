@@ -41,6 +41,13 @@
 			$("#form-upload-lesson").css("top", "-100%");
 			$("#register-teacher").css("top", "-100%");
 			$("#register-student").css("top", "-100%");
+			$("#form-add-new-class").css("top","-100%");
+			$("#frame-zoom").css("opacity","0");
+			$("#frame-zoom").css("width","40%");
+			$("#frame-zoom").css("height","40%");
+			$("#frame-zoom").css("top","10%");
+			$("#frame-zoom").css("left","30%");
+			$("#frame-zoom").css("visibility","hidden");
 			$(".overflow").hide();
 		}
 		$(".overflow").on("click", function() {
@@ -149,6 +156,7 @@
 							$("#passwordRegis").val("");
 							$("#retypePasswordRegis").val("");
 							$("#notification-register").val("");
+							window.location.reload();
 						}, 1000);
 					}
 				}
@@ -348,13 +356,13 @@
 			<li><a href="introduce.jsp">Giới thiệu</a></li>
 			<li><a href="home.jsp"><span
 					class="glyphicon glyphicon-home"></span> Trang chủ</a></li>
-			<li><a href="japanStudyAbroad.html"><span
-					class="glyphicon glyphicon-plane"></span> Du học Nhật Bản</a></li>
-			<li><a href="japanClass.html"><span
-					class="glyphicon glyphicon-hand-right"></span> Lớp học tiếng Nhật</a>
+			<li><html:link action="/view-list-posts?category=DHNB"><span
+					class="glyphicon glyphicon-plane"></span> Du học Nhật Bản</html:link></li>
+			<li><html:link action="/view-list-posts?category=LHTN"><span
+					class="glyphicon glyphicon-hand-right"></span> Lớp học tiếng Nhật</html:link>
 				<ul class="submenu">
-					<li><a href="documentation.html">Tài liệu tham khảo</a></li>
-					<li><a href="recruitment.html">Tuyển dụng</a></li>
+					<li><html:link action="/view-list-posts?category=TLTK"> Tài liệu tham khảo</html:link></li>
+					<li><html:link action="/view-list-posts?category=TD"> Tuyển dụng</html:link></li>
 				</ul></li>
 			<li><a href="#"><span class="glyphicon glyphicon-hourglass"></span>
 					Học từ vựng</a>
@@ -394,7 +402,7 @@
 							<li><html:link action="/teacher-update-infor"
 									style="margin-left:5px;">
 									<span class="glyphicon glyphicon-info-sign"></span> Thông tin cá nhân</html:link></li>
-							<li><html:link action="/teacher-update-infor"
+							<li><html:link action="/manage-posts"
 									style="margin-left:5px">
 									<span class="glyphicon glyphicon-cog"></span> Trang Quản lí</html:link></li>
 							<li><html:link action="/logout" style="margin-left:5px;">
@@ -446,5 +454,3 @@
 	</div>
 </body>
 </html>
-
-

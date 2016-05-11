@@ -71,7 +71,7 @@ body {
 .btn-add-new span {
 	font-size: 20px;
 }
-#mypanel {
+.main-content .mypanel {
 	box-shadow : 3px 3px 10px #888888;
 }
 .btn-learn {
