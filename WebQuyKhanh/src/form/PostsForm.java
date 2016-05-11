@@ -19,6 +19,7 @@ public class PostsForm extends ActionForm {
 	private String image;
 	private int	views;
 	private String category;
+	private String categoryName;
 	private Posts post;
 	private FormFile file;
 	private String submit;
@@ -33,6 +34,12 @@ public class PostsForm extends ActionForm {
 	private ArrayList<Integer> pagination;
 	
 	
+	public String getCategoryName() {
+		return categoryName;
+	}
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
 	public ArrayList<Integer> getPagination() {
 		return pagination;
 	}

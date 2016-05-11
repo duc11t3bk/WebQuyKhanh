@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import common.StringProcess;
 import form.LoginForm;
 import form.PostsForm;
 import model.bean.Posts;
@@ -31,18 +32,7 @@ public class ManagePostsAction extends Action {
 		String group= postsForm.getGroup();
 		ArrayList<Posts> posts=postsBO.getListPosts(priority, teacherID, group);
 		for (int i = 0; i < posts.size(); i++) {
-			String category = "";
-			if(posts.get(i).getCategory().equals(Posts.LICHGIANGDAY)){
-				category="Lịch giảng dạy";
-			} else if (posts.get(i).getCategory().equals(Posts.DUHOCNHATBAN)) {
-				category = "Du Học Nhật Bản";
-			} else if (posts.get(i).getCategory().equals(Posts.LOPHOCTIENGNHAT)) {
-				category = "Lớp Học Tiếng Nhật";
-			} else if (posts.get(i).getCategory().equals(Posts.TAILIEUTHAMKHAO)) {
-				category = "Tài liệu tham khảo";
-			} else if (posts.get(i).getCategory().equals(Posts.TUYENDUNG)) {
-				category = "Tuyển dụng";
-			}
+			String category=StringProcess.getNameCategory(posts.get(i));
 			posts.get(i).setCategory(category);
 		}
 		postsForm.setPosts(posts);

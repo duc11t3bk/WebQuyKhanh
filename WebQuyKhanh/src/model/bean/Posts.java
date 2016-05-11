@@ -19,8 +19,15 @@ public class Posts {
 	private String image;
 	private int	views;
 	private String category;
+	private String categoryName;
 	
 	
+	public String getCategoryName() {
+		return categoryName;
+	}
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
 	public String getTeacherName() {
 		return teacherName;
 	}

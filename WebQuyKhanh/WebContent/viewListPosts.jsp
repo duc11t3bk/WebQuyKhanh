@@ -37,6 +37,7 @@
 								<div class="panel-body" style="background-color: transparent;">
 									<logic:iterate id="post" name="postsForm" property="posts">
 										<bean:define id="imageName" name="post" property="image"></bean:define>
+										<bean:define id="postID" name="post" property="postID"></bean:define>
 										<div class="row my-post-item">
 											<div class="col-lg-12">
 												<div class="col-lg-5">
@@ -45,7 +46,7 @@
 												<div class="col-lg-7"
 													style="position: relative; height: 100%; padding: 10px;">
 													<div class="col-lg-12">
-														<label><bean:write property="title" name="post" /> </label>
+														<html:link action="/view-posts?postID=${postID }"><label style="cursor:pointer"><bean:write property="title" name="post" /></label></html:link> 
 													</div>
 													<div class="col-lg-12 my-content">
 														<html:hidden styleClass="contentHidden" property="content" name="post"/>
