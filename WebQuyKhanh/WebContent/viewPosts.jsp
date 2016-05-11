@@ -16,14 +16,17 @@
 	href="css/mycss/styleframehome.css">
 <link rel="stylesheet" type="text/css"
 	href="css/mycss/styleviewpost.css">
+<link rel="stylesheet" type="text/css" href="css/mycss/stylezoomimage.css">
 <script src="js/jquery-2.2.0.min.js"></script>
 <script src="js/jquery-ui.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/myjs/includehtml.js"></script>
+<script src="js/myjs/zoom-image.js"></script>
 </head>
 <body>
 	<div class="wrapper">
 		<jsp:include page="header.jsp"></jsp:include>
+		<jsp:include page="zoom-image.jsp"></jsp:include>
 		<div class="container main-container">
 			<div class="row">
 				<div class="content">
@@ -43,7 +46,7 @@
 									<div class="row">
 										<bean:define id="imageName" name="post" property="image"></bean:define>
 										<div class="col-lg-12" style="width: 100%; height: 300px;">
-											<img id="postsimage" src="postsimage/${imageName }">
+											<img id="image-small" class="postsimage" src="postsimage/${imageName }">
 										</div>
 									</div>
 									<div class="row" style="margin-top: 20px;">

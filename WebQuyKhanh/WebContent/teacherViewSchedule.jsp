@@ -17,51 +17,19 @@
 <link rel="stylesheet" type="text/css"
 	href="css/mycss/styleframehome.css">
 <link rel="stylesheet" type="text/css"
-	href="css/mycss/styleteacherviewschedule.css">
+	href="css/mycss/stylezoomimage.css">
 <script src="js/jquery-2.2.0.min.js"></script>
 <script src="js/jquery-ui.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
 <script src="js/myjs/includehtml.js"></script>
-
-<script type="text/javascript">
-	$(document).ready(function(){
-		$("#image-small").on("click",function(){
-			var src=$(this).attr("src");
-			console.log("src "+src);
-			$("#image-large").attr("src",src);
-			$("#frame-zoom").css("visibility","visible");
-			$("#frame-zoom").css("opacity","1");
-			$("#frame-zoom").css("width","95%");
-			$("#frame-zoom").css("height","70%");
-			$("#frame-zoom").css("top","10px");
-			$("#frame-zoom").css("left","2%");
-			$(".overflow").show();
-		});	
-		$("#my-remove").on("click",function(){
-			$("#frame-zoom").css("opacity","0");
-			$("#frame-zoom").css("width","40%");
-			$("#frame-zoom").css("height","40%");
-			$("#frame-zoom").css("top","10%");
-			$("#frame-zoom").css("left","30%");
-			$("#frame-zoom").css("visibility","hidden");
-			$(".overflow").hide();
-		});
-		var content=$("#contentHidden").val();
-		$("#content").append(""+content);
-	});
-</script>
+<script src="js/myjs/zoom-image.js"></script>
 </head>
 <body>
 	<div class="wrapper">
 		<jsp:include page="header2.jsp"></jsp:include>
 		<div class="container main-container2">
-			<div class="col-lg-12" id="frame-zoom">
-				<span id="my-remove" class="glyphicon glyphicon-remove-circle"></span>
-				<span id="my-remove-background"></span>
-				<img id="image-large" alt="hinh" src="" width="100%"
-					height="100%">
-			</div>
+			<jsp:include page="zoom-image.jsp"></jsp:include>
 			<div class="row">
 				<div class="content">
 					<div class="col-lg-2">
@@ -116,5 +84,9 @@
 			<jsp:include page="footer2.jsp"></jsp:include>
 		</div>
 	</div>
+	<script type="text/javascript">
+		var content=$("#contentHidden").val();
+		$("#content").append(""+content);
+	</script>
 </body>
 </html>
