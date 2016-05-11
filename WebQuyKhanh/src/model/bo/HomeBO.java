@@ -17,5 +17,19 @@ public class HomeBO {
 	public ArrayList<Posts> getListPost(String category, int limit) {
 		return homeDAO.getListPost(category,limit);
 	}
+	public ArrayList<ArrayList<Posts>> divideList(ArrayList<Posts> listPostsStudyAbroad, int numberPosts) {
+		ArrayList<ArrayList<Posts>> listParent= new ArrayList<ArrayList<Posts>>();
+		ArrayList<Posts> listChild= new ArrayList<Posts>();;
+		for(int i=0; i<listPostsStudyAbroad.size(); i++){
+			if(listChild.size()==numberPosts){
+				listParent.add(listChild);
+				listChild= new ArrayList<Posts>();
+			}
+			listChild.add(listPostsStudyAbroad.get(i));
+		}
+		listParent.add(listChild);
+		System.out.println("number child"+listParent.size());
+		return listParent;
+	}
 	
 }

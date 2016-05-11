@@ -11,6 +11,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import form.HomeForm;
+import javafx.geometry.Pos;
 import model.bean.Posts;
 import model.bo.HomeBO;
 
@@ -23,10 +24,15 @@ public class HomeAction extends Action {
 		HomeForm homeForm= (HomeForm)form;
 		HomeBO homeBO= new HomeBO();
 		ArrayList<Posts> listPostsNews= homeBO.getListPostsNews();
-		String category="";
-		int limit=0;
-		ArrayList<Posts> listPostsStudyAbroad=homeBO.getListPost(category,limit);
-		
-		return super.execute(mapping, form, request, response);
+		ArrayList<Posts> listPostsStudyAbroad=homeBO.getListPost(Posts.DUHOCNHATBAN,6);
+		ArrayList<Posts> listPostsJapaneseClass=homeBO.getListPost(Posts.LOPHOCTIENGNHAT,5);
+		ArrayList<Posts> listPostsRecruitment=homeBO.getListPost(Posts.TUYENDUNG, 5);
+		ArrayList<Posts> listPostsDocument=homeBO.getListPost(Posts.TAILIEUTHAMKHAO, 5);
+		homeForm.setListPostsNews(listPostsNews);
+		homeForm.setListPostsStudyAbroad(homeBO.divideList(listPostsStudyAbroad,2));
+		homeForm.setListPostsJapaneseClass(listPostsNews);
+		homeForm.setListPostsRecruitment(listPostsNews);
+		homeForm.setListPostsDocument(listPostsNews);
+		return mapping.findForward("showHome");
 	}
 }

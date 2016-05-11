@@ -95,7 +95,7 @@
 							$("#password").val("");
 							$("#notification-login").val("");
 							closeLogReg();
-							location.href = "/WebQuyKhanh/home.jsp";
+							location.href = "/WebQuyKhanh/home.do";
 						}, 800);
 					}
 				}
@@ -354,8 +354,8 @@
 	<div class="navigation">
 		<ul class="menu">
 			<li><a href="introduce.jsp">Giới thiệu</a></li>
-			<li><a href="home.jsp"><span
-					class="glyphicon glyphicon-home"></span> Trang chủ</a></li>
+			<li><html:link action="/home"><span
+					class="glyphicon glyphicon-home"></span> Trang chủ</html:link></li>
 			<li><html:link action="/view-list-posts?category=DHNB"><span
 					class="glyphicon glyphicon-plane"></span> Du học Nhật Bản</html:link></li>
 			<li><html:link action="/view-list-posts?category=LHTN"><span
@@ -378,7 +378,6 @@
 					</ul></li>
 			</logic:empty>
 			<logic:notEmpty name="loginForm" property="member" scope="session">
-
 				<li style="float: right"><html:link href="#"
 						styleId="emailUser">
 						<bean:define id="member" name="loginForm" property="member"

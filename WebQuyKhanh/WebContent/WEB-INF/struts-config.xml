@@ -34,7 +34,7 @@ Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 			scope="request"
 			type="action.LogoutAction"
 			>
-			<forward name="logout-success" path="/home.jsp" ></forward>
+			<forward name="logout-success" path="/home.do" ></forward>
 		</action>
 		<action 
 			path="/member-update-infor"

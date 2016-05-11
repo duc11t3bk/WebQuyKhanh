@@ -48,7 +48,33 @@ public class HomeDAO {
 		}
 	}
 	public ArrayList<Posts> getListPost(String category, int limit) {
-		return null;
+		try {
+			conn=connection.openConnection();
+			String sql="select *"
+					+ " from post"
+					+ " where category= ?"
+					+ " order by dateposted"
+					+ " limit 0, ?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, category);
+			pstmt.setInt(2, limit);
+			ResultSet rs=pstmt.executeQuery();
+			ArrayList<Posts> listPosts= new ArrayList<Posts>();
+			while(rs.next()){
+				Posts posts= new Posts();
+				posts.setPostID(rs.getString(1));
+				posts.setTeacherID(rs.getString(2));
+				posts.setTitle(rs.getString(3));
+				posts.setDatePosted(StringProcess.formatDate(rs.getString(5), "yyyy-MM-dd", "dd-MM-yyyy"));
+				posts.setImage(rs.getString(6));
+				posts.setCategory(rs.getString(7));
+				listPosts.add(posts);
+			}
+			return listPosts;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 }
