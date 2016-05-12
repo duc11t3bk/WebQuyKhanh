@@ -11,7 +11,6 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import form.HomeForm;
-import javafx.geometry.Pos;
 import model.bean.Posts;
 import model.bo.HomeBO;
 
@@ -28,11 +27,23 @@ public class HomeAction extends Action {
 		ArrayList<Posts> listPostsJapaneseClass=homeBO.getListPost(Posts.LOPHOCTIENGNHAT,5);
 		ArrayList<Posts> listPostsRecruitment=homeBO.getListPost(Posts.TUYENDUNG, 5);
 		ArrayList<Posts> listPostsDocument=homeBO.getListPost(Posts.TAILIEUTHAMKHAO, 5);
+		if(listPostsStudyAbroad.size()==0){
+			listPostsStudyAbroad=homeBO.getListPostsNews();
+		}
+		if(listPostsJapaneseClass.size()==0){
+			listPostsJapaneseClass=homeBO.getListPostsNews();
+		}
+		if(listPostsRecruitment.size()==0){
+			listPostsRecruitment=homeBO.getListPostsNews();
+		}
+		if(listPostsDocument.size()==0){
+			listPostsDocument=homeBO.getListPostsNews();
+		}
 		homeForm.setListPostsNews(listPostsNews);
 		homeForm.setListPostsStudyAbroad(homeBO.divideList(listPostsStudyAbroad,2));
-		homeForm.setListPostsJapaneseClass(listPostsNews);
-		homeForm.setListPostsRecruitment(listPostsNews);
-		homeForm.setListPostsDocument(listPostsNews);
+		homeForm.setListPostsJapaneseClass(listPostsJapaneseClass);
+		homeForm.setListPostsRecruitment(listPostsRecruitment);
+		homeForm.setListPostsDocument(listPostsDocument);
 		return mapping.findForward("showHome");
 	}
 }

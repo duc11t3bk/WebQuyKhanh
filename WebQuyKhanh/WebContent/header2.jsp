@@ -27,6 +27,15 @@
 			$("#form-register").css("top", "12%");
 			$(".overflow").show();
 		});
+		
+		var classRegister=$(".register");
+		for(var i=0; i<classRegister.length; i++){
+			$(classRegister[i]).on("click",function(e){
+				e.stopPropagation();
+				$("#form-register").css("top", "12%");
+				$(".overflow").show();
+			});
+		}
 	});
 </script>
 <script type="text/javascript">
@@ -303,7 +312,7 @@
 										Email </label>
 								</div>
 								<div class="col-lg-9 mytooltip">
-									<html:text styleId="emailRegis" styleClass="form-control"
+									<html:text styleId="emailRegis" styleClass="form-control my-text-input"
 										property="email"></html:text>
 									<span id="emailRegisError" class="tooltiptext">Mời bạn
 										nhập Email !</span>
@@ -314,7 +323,7 @@
 									class="glyphicon glyphicon-earphone"></span> Số điện thoại </label>
 								<div class="col-lg-9 mytooltip">
 									<html:text styleId="phoneNumberRegis" property="phoneNumber"
-										styleClass="form-control"></html:text>
+										styleClass="form-control my-text-input"></html:text>
 									<span id="phoneNumberRegisError" class="tooltiptext">Mời
 										bạn nhập số điện thoại !</span>
 								</div>
@@ -324,7 +333,7 @@
 									class="glyphicon glyphicon-lock"></span> Mật khẩu </label>
 								<div class="col-lg-9 mytooltip">
 									<html:password styleId="passwordRegis"
-										styleClass=" form-control" property="password"></html:password>
+										styleClass=" form-control my-text-input" property="password"></html:password>
 									<span id="passwordRegisError" class="tooltiptext">Mời
 										bạn nhập mật khẩu !</span>
 								</div>
@@ -333,13 +342,13 @@
 								<label class="col-lg-3"><span
 									class="glyphicon glyphicon-lock"></span> Nhập lại mật khẩu </label>
 								<div class="col-lg-9 mytooltip">
-									<html:password styleClass="form-control"
+									<html:password styleClass="form-control my-text-input"
 										styleId="retypePasswordRegis" property="retypePassword"></html:password>
 									<span id="retypePasswordRegisError" class="tooltiptext">Mời
 										bạn xác nhận lại mật khẩu !</span>
 								</div>
 							</div>
-							<div class="row" style="text-align:center">
+							<div class="row" style="text-align:center; margin-bottom: 0px;">
 								<html:button
 									styleClass="my-btn"
 									property="submit" value="Đăng ký" onclick="register()"></html:button>
@@ -361,14 +370,21 @@
 			<li><html:link action="/view-list-posts?category=LHTN"><span
 					class="glyphicon glyphicon-hand-right"></span> Lớp học tiếng Nhật</html:link>
 				<ul class="submenu">
+					<li><html:link action="/register-study?action=registerstudy"> Đăng ký học</html:link></li>
 					<li><html:link action="/view-list-posts?category=TLTK"> Tài liệu tham khảo</html:link></li>
 					<li><html:link action="/view-list-posts?category=TD"> Tuyển dụng</html:link></li>
 				</ul></li>
 			<li><a href="#"><span class="glyphicon glyphicon-hourglass"></span>
 					Học từ vựng</a>
 				<ul class="submenu">
-					<li><html:link action="/member-manage-level?action=vocabulary">Học từ vựng</html:link></li>
-					<li><html:link action="/member-manage-level?action=translate">Luyện dịch câu</html:link></li>
+					<logic:empty name="loginForm" property="member" scope="session">
+						<li><html:link href="#x" styleClass="register">Học từ vựng</html:link></li>
+						<li><html:link href="#x" styleClass="register">Luyện dịch câu</html:link></li>
+					</logic:empty>
+					<logic:notEmpty name="loginForm" property="member" scope="session">
+						<li><html:link action="/member-manage-level?action=vocabulary">Học từ vựng</html:link></li>
+						<li><html:link action="/member-manage-level?action=translate">Luyện dịch câu</html:link></li>
+					</logic:notEmpty>
 				</ul></li>
 			<logic:empty name="loginForm" property="member" scope="session">
 				<li id="btn-login"><a href="#x"><span

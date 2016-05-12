@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.apache.struts.action.ActionForm;
 
 import model.bean.Class;
+import model.bean.Posts;
 
 public class RegisterStudyForm extends ActionForm {
 
@@ -14,9 +15,15 @@ public class RegisterStudyForm extends ActionForm {
 	private ArrayList<Class> listClass;
 	private String submit;
 	private String action;
+	private ArrayList<Posts> listPostsNews;
 	
 	
-	
+	public ArrayList<Posts> getListPostsNews() {
+		return listPostsNews;
+	}
+	public void setListPostsNews(ArrayList<Posts> listPostsNews) {
+		this.listPostsNews = listPostsNews;
+	}
 	public String getAction() {
 		return action;
 	}

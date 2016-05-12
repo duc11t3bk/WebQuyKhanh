@@ -34,12 +34,13 @@ public class RegisterStudyDAO {
 			conn=connection.openConnection();
 			String registerID=ConnectionDAO.increateID("registerstudy", "regiter_id", conn);
 			registerStudy.setRegisterID(registerID);
-			String sql="insert into registerstudy values (?,?,?,?)";
+			String sql="insert into registerstudy values (?,?,?,?,?)";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, registerStudy.getRegisterID());
 			pstmt.setString(2, registerStudy.getEmail());
 			pstmt.setString(3, registerStudy.getPhoneNumber());
-			pstmt.setString(4, registerStudy.getCategory());
+			pstmt.setString(4, registerStudy.getClassID());
+			pstmt.setString(5, registerStudy.getCategory());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -1,6 +1,7 @@
 package action;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,8 +14,13 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import common.Validate;
+import form.ClassForm;
 import form.RegisterStudyForm;
+import model.bean.Class;
+import model.bean.Posts;
 import model.bean.RegisterStudy;
+import model.bo.ClassBO;
+import model.bo.HomeBO;
 import model.bo.RegisterStudyBO;
 
 public class RegisterStudyAction extends Action {
@@ -32,14 +38,13 @@ public class RegisterStudyAction extends Action {
 		RegisterStudy registerStudy= new RegisterStudy();
 		registerStudy.setEmail(email);
 		registerStudy.setPhoneNumber(phoneNumber);
-		System.out.println("runnnnnnn");
 		if("studyabroad".equals(action)){
-			System.out.println("runnnnnnn 111111111");
 			JSONArray jsonArrayCheckValidate=checkValidate(email,phoneNumber);
 			JSONObject jsonObject=(JSONObject)jsonArrayCheckValidate.get(0);
 			String result=jsonObject.get("result").toString();
 			if("success".equals(result)){
-				registerStudy.setCategory("TVDH");
+				registerStudy.setClassID(null);
+				registerStudy.setCategory(RegisterStudy.TUVANDUHOC);
 				registerStudyBO.addNewRegister(registerStudy);
 			}
 			PrintWriter write=response.getWriter();
@@ -49,7 +54,30 @@ public class RegisterStudyAction extends Action {
 			return null;
 		}
 		if("registerstudy".equals(action)){
-			
+			String submit=registerStudyForm.getSubmit();
+			if(submit!=null){
+				String classID= registerStudyForm.getClassID();
+				JSONArray jsonArrayCheckValidate=checkValidate(email, phoneNumber);
+				JSONObject jsonObject= (JSONObject)jsonArrayCheckValidate.get(0);
+				String result=jsonObject.get("result").toString();
+				if("success".equals(result)){
+					registerStudy.setClassID(classID);
+					registerStudy.setCategory(RegisterStudy.DANGKYHOC);
+					registerStudyBO.addNewRegister(registerStudy);
+				}
+				PrintWriter write=response.getWriter();
+				write.println(""+jsonArrayCheckValidate.toString());
+				write.flush();
+				write.close();
+				return null;
+			}
+			HomeBO homeBO = new HomeBO();
+			ArrayList<Posts> listPostsNews= homeBO.getListPostsNews();
+			registerStudyForm.setListPostsNews(listPostsNews);
+			ClassBO classBO= new ClassBO();
+			ArrayList<Class> listClass=classBO.getListClass();
+			registerStudyForm.setListClass(listClass);
+			return mapping.findForward("showPageRegisterStudy");
 		}
 		return super.execute(mapping, form, request, response);
 	}
@@ -57,7 +85,6 @@ public class RegisterStudyAction extends Action {
 	public JSONArray checkValidate(String email, String phoneNumber){
 		JSONArray jsonArray= new JSONArray();
 		JSONObject jsonObject= new JSONObject();
-		System.out.println("runnnnnnn 111111111222");
 		boolean checkValidate=true;
 		if(Validate.isEmpty(email)){
 			checkValidate=false;
