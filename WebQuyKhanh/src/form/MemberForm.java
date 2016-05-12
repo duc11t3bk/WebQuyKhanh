@@ -6,6 +6,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.upload.FormFile;
 
 import model.bean.Member;
+import model.bean.Posts;
 
 public class MemberForm extends ActionForm {
 	
@@ -27,8 +28,15 @@ public class MemberForm extends ActionForm {
 	private String submit;
 	private ArrayList<Member> members;
 	private String action;
+	private ArrayList<Posts> listPostsNews;
 	
 	
+	public ArrayList<Posts> getListPostsNews() {
+		return listPostsNews;
+	}
+	public void setListPostsNews(ArrayList<Posts> listPostsNews) {
+		this.listPostsNews = listPostsNews;
+	}
 	public String getAction() {
 		return action;
 	}

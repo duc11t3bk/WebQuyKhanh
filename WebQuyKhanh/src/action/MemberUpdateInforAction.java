@@ -1,6 +1,8 @@
 package action;
 
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,6 +18,8 @@ import common.Validate;
 import form.LoginForm;
 import form.MemberForm;
 import model.bean.Member;
+import model.bean.Posts;
+import model.bo.HomeBO;
 import model.bo.MemberBO;
 
 public class MemberUpdateInforAction extends Action {
@@ -28,6 +32,9 @@ public class MemberUpdateInforAction extends Action {
 		LoginForm loginForm = (LoginForm) request.getSession().getAttribute("loginForm");
 		MemberForm memberForm = (MemberForm) form;
 		MemberBO memberBO = new MemberBO();
+		HomeBO homeBO= new HomeBO();
+		ArrayList<Posts> listPostsNews= homeBO.getListPostsNews();
+		memberForm.setListPostsNews(listPostsNews);
 		String memberID= memberForm.getMemberID();
 		System.out.println("memberID"+memberID);
 		if(Validate.isEmpty(memberID)){

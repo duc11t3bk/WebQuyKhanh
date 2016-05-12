@@ -9,6 +9,7 @@ import model.bean.JapaneseData;
 import model.bean.Lesson;
 import model.bean.LessonStatus;
 import model.bean.Level;
+import model.bean.Posts;
 import model.bean.WordStatus;
 
 public class JapaneseForm extends ActionForm {
@@ -38,7 +39,15 @@ public class JapaneseForm extends ActionForm {
 	private String notifyError;
 	private String notifySuccess;
 	private String learnOption;
-
+	private ArrayList<Posts> listPostsNews;
+	
+	
+	public ArrayList<Posts> getListPostsNews() {
+		return listPostsNews;
+	}
+	public void setListPostsNews(ArrayList<Posts> listPostsNews) {
+		this.listPostsNews = listPostsNews;
+	}
 	public String getLearnOption() {
 		return learnOption;
 	}

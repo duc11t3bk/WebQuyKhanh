@@ -1,0 +1,98 @@
+package action;
+
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import common.Validate;
+import form.RegisterStudyForm;
+import model.bean.RegisterStudy;
+import model.bo.RegisterStudyBO;
+
+public class RegisterStudyAction extends Action {
+
+	@Override
+	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		RegisterStudyForm registerStudyForm= (RegisterStudyForm)form;
+		RegisterStudyBO registerStudyBO= new RegisterStudyBO();
+		String action=registerStudyForm.getAction();
+		String email=registerStudyForm.getEmail();
+		String phoneNumber=registerStudyForm.getPhoneNumber();
+		RegisterStudy registerStudy= new RegisterStudy();
+		registerStudy.setEmail(email);
+		registerStudy.setPhoneNumber(phoneNumber);
+		System.out.println("runnnnnnn");
+		if("studyabroad".equals(action)){
+			System.out.println("runnnnnnn 111111111");
+			JSONArray jsonArrayCheckValidate=checkValidate(email,phoneNumber);
+			JSONObject jsonObject=(JSONObject)jsonArrayCheckValidate.get(0);
+			String result=jsonObject.get("result").toString();
+			if("success".equals(result)){
+				registerStudy.setCategory("TVDH");
+				registerStudyBO.addNewRegister(registerStudy);
+			}
+			PrintWriter write=response.getWriter();
+			write.println(""+jsonArrayCheckValidate.toString());
+			write.flush();
+			write.close();
+			return null;
+		}
+		if("registerstudy".equals(action)){
+			
+		}
+		return super.execute(mapping, form, request, response);
+	}
+	@SuppressWarnings("unchecked")
+	public JSONArray checkValidate(String email, String phoneNumber){
+		JSONArray jsonArray= new JSONArray();
+		JSONObject jsonObject= new JSONObject();
+		System.out.println("runnnnnnn 111111111222");
+		boolean checkValidate=true;
+		if(Validate.isEmpty(email)){
+			checkValidate=false;
+			jsonObject.put("emailError", "Bạn phải nhập email !");
+		}
+		else{
+			if(Validate.emailNotValid(email)){
+				checkValidate=false;
+				jsonObject.put("emailError", "Email không đúng định dạng !");
+			}
+			else{
+				RegisterStudyBO registerStudyBO = new RegisterStudyBO();
+				if(registerStudyBO.emailExist(email)){
+					checkValidate=false;
+					jsonObject.put("emailError", "Bạn đã đăng ký tư vấn, xin vui lòng đợi chúng tôi liên lạc");
+				}
+			}
+		}
+		if(Validate.isEmpty(phoneNumber)){
+			checkValidate=false;
+			jsonObject.put("phoneNumberError", "Bạn phải nhập số điện thoại !");
+		}
+		else{
+			if(Validate.lengthPhoneNumberNotValid(phoneNumber)){
+				checkValidate=false;
+				jsonObject.put("phoneNumberErro", "Số điện thoại phải >= 9 chữ số !");
+			}	
+		}
+		if(checkValidate){
+			jsonObject.put("result", "success");
+		}
+		else{
+			jsonObject.put("result", "failed");
+		}
+		jsonArray.add(jsonObject);
+		return jsonArray;
+	}
+}

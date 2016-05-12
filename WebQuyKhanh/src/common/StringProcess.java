@@ -36,17 +36,17 @@ public class StringProcess {
 	public static int convertLessonStatus(int complete){
 		return (complete*100)/JapaneseData.TOTAL_QUESTIONS;
 	}
-	public static String getNameCategory(Posts posts){
+	public static String getNameCategory(String categoryCode){
 		String category = "";
-		if(posts.getCategory().equals(Posts.LICHGIANGDAY)){
+		if(Posts.LICHGIANGDAY.equals(categoryCode)){
 			category="Lịch giảng dạy";
-		} else if (posts.getCategory().equals(Posts.DUHOCNHATBAN)) {
+		} else if (Posts.DUHOCNHATBAN.equals(categoryCode)) {
 			category = "Du Học Nhật Bản";
-		} else if (posts.getCategory().equals(Posts.LOPHOCTIENGNHAT)) {
+		} else if (Posts.LOPHOCTIENGNHAT.equals(categoryCode)) {
 			category = "Lớp Học Tiếng Nhật";
-		} else if (posts.getCategory().equals(Posts.TAILIEUTHAMKHAO)) {
+		} else if (Posts.TAILIEUTHAMKHAO.equals(categoryCode)) {
 			category = "Tài liệu tham khảo";
-		} else if (posts.getCategory().equals(Posts.TUYENDUNG)) {
+		} else if (Posts.TUYENDUNG.equals(categoryCode)) {
 			category = "Tuyển dụng";
 		}
 		return category;

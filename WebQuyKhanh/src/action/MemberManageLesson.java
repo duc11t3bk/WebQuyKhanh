@@ -18,7 +18,9 @@ import form.LoginForm;
 import model.bean.JapaneseData;
 import model.bean.Lesson;
 import model.bean.LessonStatus;
+import model.bean.Posts;
 import model.bean.WordStatus;
+import model.bo.HomeBO;
 import model.bo.JapaneseBO;
 
 public class MemberManageLesson extends Action {
@@ -33,6 +35,7 @@ public class MemberManageLesson extends Action {
 		String memberID= loginForm.getMember().getMemberID();
 		JapaneseForm japaneseForm=(JapaneseForm)form;
 		JapaneseBO japaneseBO= new JapaneseBO();
+		HomeBO homeBO= new HomeBO();
 		String lessonID=japaneseForm.getLessonID();
 		String learnOption=japaneseForm.getLearnOption();
 		System.out.println("lesson ID"+lessonID);
@@ -45,7 +48,9 @@ public class MemberManageLesson extends Action {
 		japaneseForm.setLessonStatus(lessonStatus);
 		japaneseForm.setListData(listData);
 		ArrayList<WordStatus> wordStatus= japaneseBO.getListWordStatus(memberID, lessonID);
+		ArrayList<Posts> listPostsNews= homeBO.getListPostsNews();
 		japaneseForm.setListWordStatus(wordStatus);
+		japaneseForm.setListPostsNews(listPostsNews);
 		if("voca".equals(lesson.getCategory())){
 			japaneseForm.setAction("vocabulary");
 			if("review".equals(learnOption)){

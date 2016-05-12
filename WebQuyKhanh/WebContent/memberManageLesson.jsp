@@ -70,6 +70,53 @@
 <body>
 	<div class="wrapper">
 		<jsp:include page="header.jsp"></jsp:include>
+		<div class="container" style="margin-top: 50px;">
+			<div class="row">
+				<div id="myCarousel" class="carousel slide" data-ride="carousel">
+					<!-- Indicators -->
+					<ol class="carousel-indicators">
+						<logic:iterate id="posts" name="japaneseForm" property="listPostsNews" indexId="index">
+							<logic:equal value="0" name="index">
+								<li data-target="#myCarousel" data-slide-to="${index }" class="active"></li>
+							</logic:equal>
+							<logic:notEqual value="0" name="index">
+								<li data-target="#myCarousel" data-slide-to="${index }" ></li>
+							</logic:notEqual>
+						</logic:iterate>
+					</ol>
+
+					<!-- Wrapper for slides -->
+					<div class="carousel-inner" role="listbox">
+						<logic:iterate id="posts" name="japaneseForm" property="listPostsNews" indexId="index">
+							<bean:define id="imageName" name="posts" property="image"></bean:define>
+							<bean:define id="postID" name="posts" property="postID"></bean:define>
+							<logic:equal value="0" name="index">
+								<div class="item active">
+									<html:link action="/view-posts?postID=${postID }"><img src="postsimage/${imageName }" alt="Hinh"></html:link>
+									<div class="carousel-caption"><bean:write name="posts" property="title"/> </div>
+								</div>
+							</logic:equal>
+							<logic:notEqual value="0" name="index">
+								<div class="item">
+									<html:link action="/view-posts?postID=${postID }"><img src="postsimage/${imageName }" alt="Hinh"></html:link>
+									<div class="carousel-caption"><bean:write name="posts" property="title"/></div>
+								</div>
+							</logic:notEqual>
+						</logic:iterate>
+					</div>
+					<!-- Controls -->
+					<a class="left carousel-control" href="#myCarousel" role="button"
+						data-slide="prev"> <span
+						class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a> <a class="right carousel-control" href="#myCarousel" role="button"
+						data-slide="next"> <span
+						class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					</a>
+				</div>
+			</div>
+		</div>
 		<div class="container main-container">
 			<bean:define id="lesson" name="japaneseForm" property="lesson"></bean:define>
 			<div class="row" style="margin-top: 20px;">

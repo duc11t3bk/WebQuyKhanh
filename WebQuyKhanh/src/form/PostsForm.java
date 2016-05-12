@@ -32,8 +32,15 @@ public class PostsForm extends ActionForm {
 	private int page;
 	private int totalPage;
 	private ArrayList<Integer> pagination;
+	private ArrayList<Posts> listPostsNews;
 	
 	
+	public ArrayList<Posts> getListPostsNews() {
+		return listPostsNews;
+	}
+	public void setListPostsNews(ArrayList<Posts> listPostsNews) {
+		this.listPostsNews = listPostsNews;
+	}
 	public String getCategoryName() {
 		return categoryName;
 	}

@@ -32,7 +32,7 @@ public class ManagePostsAction extends Action {
 		String group= postsForm.getGroup();
 		ArrayList<Posts> posts=postsBO.getListPosts(priority, teacherID, group);
 		for (int i = 0; i < posts.size(); i++) {
-			String category=StringProcess.getNameCategory(posts.get(i));
+			String category=StringProcess.getNameCategory(posts.get(i).getCategory());
 			posts.get(i).setCategory(category);
 		}
 		postsForm.setPosts(posts);

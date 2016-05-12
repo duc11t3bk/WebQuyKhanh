@@ -23,19 +23,67 @@
 <body>
 	<div class="wrapper">
 		<jsp:include page="header.jsp"></jsp:include>
+		<div class="container" style="margin-top: 50px;">
+			<div class="row">
+				<div id="myCarousel" class="carousel slide" data-ride="carousel">
+					<!-- Indicators -->
+					<ol class="carousel-indicators">
+						<logic:iterate id="posts" name="homeForm" property="listPostsNews" indexId="index">
+							<logic:equal value="0" name="index">
+								<li data-target="#myCarousel" data-slide-to="${index }" class="active"></li>
+							</logic:equal>
+							<logic:notEqual value="0" name="index">
+								<li data-target="#myCarousel" data-slide-to="${index }" ></li>
+							</logic:notEqual>
+						</logic:iterate>
+					</ol>
 
+					<!-- Wrapper for slides -->
+					<div class="carousel-inner" role="listbox">
+						<logic:iterate id="posts" name="homeForm" property="listPostsNews" indexId="index">
+							<bean:define id="imageName" name="posts" property="image"></bean:define>
+							<bean:define id="postID" name="posts" property="postID"></bean:define>
+							<logic:equal value="0" name="index">
+								<div class="item active">
+									<html:link action="/view-posts?postID=${postID }"><img src="postsimage/${imageName }" alt="Hinh"></html:link>
+									<div class="carousel-caption"><bean:write name="posts" property="title"/> </div>
+								</div>
+							</logic:equal>
+							<logic:notEqual value="0" name="index">
+								<div class="item">
+									<html:link action="/view-posts?postID=${postID }"><img src="postsimage/${imageName }" alt="Hinh"></html:link>
+									<div class="carousel-caption"><bean:write name="posts" property="title"/></div>
+								</div>
+							</logic:notEqual>
+						</logic:iterate>
+					</div>
+					<!-- Controls -->
+					<a class="left carousel-control" href="#myCarousel" role="button"
+						data-slide="prev"> <span
+						class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a> <a class="right carousel-control" href="#myCarousel" role="button"
+						data-slide="next"> <span
+						class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					</a>
+				</div>
+			</div>
+		</div>
 		<div class="container main-container">
 			<div class="row">
 				<div class="content">
 					<div class="col-lg-9 main-content">
-						<div class="row">
-							<div class="col-lg-6 new-post" style="padding-right: 0px;">
-								<img src="image/phusi3.jpg" width="100%" height="250px"> <a
-									href="#" id="new-more">Xem thêm <span
-									class="glyphicon glyphicon-chevron-right"></span></a>
+						<div class="row parent">
+							<div class="col-lg-6 childLeft" style="padding-right: 0px;">
+								<bean:define id="postsFirst" name="homeForm" property="listPostsNews[0]"></bean:define>
+								<bean:define id="imageNameFirst" name="postsFirst" property="image"></bean:define>
+								<bean:define id="postsFirstID" name="postsFirst" property="postID"></bean:define>
+								<img src="postsimage/${imageNameFirst }" width="100%" height="100%" ><html:link action="/view-posts?postID=${postsFirstID }" styleId="new-more">Xem thêm <span
+									class="glyphicon glyphicon-chevron-right"></span></html:link>
 							</div>
-							<div class="col-lg-6" style="padding-left: 0px;">
-								<div class="panel panel-default mypanel" style="height: 250px">
+							<div class="col-lg-6 childRight" style="padding-left: 0px;">
+								<div class="panel panel-default mypanel" >
 									<div class="panel-heading">
 										<div class="panel-title">
 											<a href="#">Tin mới đăng</a>
@@ -45,7 +93,7 @@
 										<ul>
 											<logic:iterate id="posts" name="homeForm" property="listPostsNews" >
 												<bean:define id="postsID" name="posts" property="postID"></bean:define>
-												<li><html:link action="/view-posts?postID=${postsID }"><bean:write property="title" name="posts"/> </html:link> </li>
+												<li><span class="glyphicon glyphicon-stop"></span> <html:link action="/view-posts?postID=${postsID }"><bean:write property="title" name="posts"/> </html:link> </li>
 											</logic:iterate>
 										</ul>
 									</div>
@@ -57,7 +105,7 @@
 								<div class="panel panel-default mypanel">
 									<div class="panel-heading">
 										<div class="panel-title">
-											<a href="#">Du học Nhật Bản</a>
+											<html:link action="/view-list-posts?category=DHNB"> Du học Nhật Bản</html:link>
 										</div>
 									</div>
 									<div class="panel-body">
@@ -109,24 +157,26 @@
 								</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-lg-6 new-post" style="padding-right: 0px;">
-								<img src="image/phusi3.jpg" width="100%" height="250px"> <a
-									href="#" id="new-more">Xem thêm <span
-									class="glyphicon glyphicon-chevron-right"></span></a>
+						<div class="row parent">
+							<div class="col-lg-6 childLeft" style="padding-right: 0px;">
+								<bean:define id="postsSecond" name="homeForm" property="listPostsJapaneseClass[0]"></bean:define>
+								<bean:define id="imageNameSecond" name="postsSecond" property="image"></bean:define>
+								<bean:define id="postsSecondID" name="postsSecond" property="postID"></bean:define>
+								<img src="postsimage/${imageNameSecond }" width="100%" height="100%"><html:link action="/view-posts?postID=${postsSecondID }" styleId="new-more">Xem thêm <span
+									class="glyphicon glyphicon-chevron-right"></span></html:link>
 							</div>
-							<div class="col-lg-6" style="padding-left: 0px;">
-								<div class="panel panel-default mypanel" style="height: 250px">
+							<div class="col-lg-6 childRight" style="padding-left: 0px;">
+								<div class="panel panel-default mypanel">
 									<div class="panel-heading">
 										<div class="panel-title">
-											<a href="#">Lớp học tiếng Nhật</a>
+											<html:link action="/view-list-posts?category=LHTN"> Lớp học tiếng Nhật</html:link>
 										</div>
 									</div>
 									<div class="panel-body">
 										<ul>
 											<logic:iterate id="posts" name="homeForm" property="listPostsJapaneseClass">
 												<bean:define id="postsID" name="posts" property="postID"></bean:define>
-												<li><html:link action="/view-posts?postID=${postsID }"><bean:write property="title" name="posts"/> </html:link> </li>
+												<li><span class="glyphicon glyphicon-stop"></span> <html:link action="/view-posts?postID=${postsID }"><bean:write property="title" name="posts"/> </html:link> </li>
 											</logic:iterate>
 										</ul>
 									</div>
@@ -137,13 +187,13 @@
 							<div class="col-lg-6">
 								<div class="panel panel-default mypanel">
 									<div class="panel-heading">
-										<div class="panel-title">Tuyển dụng</div>
+										<div class="panel-title"><html:link action="/view-list-posts?category=TD"> Tuyển dụng</html:link></div>
 									</div>
 									<div class="panel-body">
 										<ul>
 											<logic:iterate id="posts" name="homeForm" property="listPostsRecruitment">
 												<bean:define id="postsID" name="posts" property="postID"></bean:define>
-												<li><html:link action="/view-posts?postID=${postID }"><bean:write property="title" name="posts"/> </html:link> </li>
+												<li><span class="glyphicon glyphicon-stop"></span> <html:link action="/view-posts?postID=${postID }"><bean:write property="title" name="posts"/> </html:link> </li>
 											</logic:iterate>
 										</ul>
 									</div>
@@ -152,13 +202,13 @@
 							<div class="col-lg-6">
 								<div class="panel panel-default mypanel">
 									<div class="panel-heading">
-										<div class="panel-title">Tài liệu tham khảo</div>
+										<div class="panel-title"><html:link action="/view-list-posts?category=TLTK"> Tài liệu tham khảo</html:link> </div>
 									</div>
 									<div class="panel-body">
 										<ul>
 											<logic:iterate id="posts" name="homeForm" property="listPostsDocument">
 												<bean:define id="postsID" name="posts" property="postID"></bean:define>
-												<li><html:link action="/view-posts?postID=${postsID }"><bean:write property="title" name="posts"/> </html:link> </li>
+												<li><span class="glyphicon glyphicon-stop"></span> <html:link action="/view-posts?postID=${postsID }"><bean:write property="title" name="posts"/> </html:link> </li>
 											</logic:iterate>
 										</ul>
 									</div>
