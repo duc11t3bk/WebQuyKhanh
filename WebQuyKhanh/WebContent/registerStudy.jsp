@@ -25,18 +25,18 @@
 }
 </style>
 <script type="text/javascript">
-	function resetStatus() {
-		var toolTipText = $(".tooltiptext");
-		for (var i = 0; i < toolTipText.length; i++) {
-			$(toolTipText[i]).css("visibility", "hidden");
-			$(toolTipText[i]).css("opacity", "0");
-		}
-		var formControl = $("#form-register-study .form-control");
-		for (var i = 0; i < formControl.length; i++) {
-			$(formControl[i]).css("border-color", "#ccc");
-		}
-	}
 	$(document).ready(function(){
+		function resetStatus() {
+			var toolTipText = $(".tooltiptext");
+			for (var i = 0; i < toolTipText.length; i++) {
+				$(toolTipText[i]).css("visibility", "hidden");
+				$(toolTipText[i]).css("opacity", "0");
+			}
+			var formControl = $("#form-register-study .form-control");
+			for (var i = 0; i < formControl.length; i++) {
+				$(formControl[i]).css("border-color", "#ccc");
+			}
+		}
 		$("#emailRT").focus(function(){
 			resetStatus();
 			$(this).css("border-color", "#66afe9");
@@ -75,14 +75,31 @@
 			console.log("email"+email+"phone"+phoneNumber+"class"+classID);
 			$.ajax({
 				type : "POST",
-				url : "http://localhost:8080/WebQuyKhanh/register-study.do",
+				url : "register-study.do",
 				data : "action=registerstudy&submit=true&email="+email+"&phoneNumber="+phoneNumber+"&classID="+classID,
 				dataType : "json",
 				success : function(response){
-					
+					var jsonObject= response[0];
+					var result=jsonObject.result;
+					if("success"==result){
+						$("#notify").html("Bạn đã đăng ký học thành công, chúng tôi sẽ liên lạc với bạn sớm nhất có thể. Cảm ơn !");
+						setTimeout(function(){
+							window.location.href="home.do";
+						}, 1500);
+					}
+					else{
+						if(jsonObject.emailError!=null){
+							$("#emailRT").css("border-color","red");
+							$("#emailRTError").html(""+jsonObject.emailError);
+						}
+						if(jsonObject.phoneNumberError!=null){
+							$("#phoneNumberRT").css("border-color","red");
+							$("#phoneNumberRTError").html(""+jsonObject.phoneNumberError);
+						}
+					}
 				},
 				error : function(errormessage){
-					
+					alert("error" +errormessage);
 				},
 			});
 		});

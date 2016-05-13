@@ -14,7 +14,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import common.Validate;
-import form.ClassForm;
 import form.RegisterStudyForm;
 import model.bean.Class;
 import model.bean.Posts;

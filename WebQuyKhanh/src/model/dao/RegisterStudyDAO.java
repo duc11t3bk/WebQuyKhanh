@@ -32,7 +32,7 @@ public class RegisterStudyDAO {
 	public void addNewRegister(RegisterStudy registerStudy) {
 		try {
 			conn=connection.openConnection();
-			String registerID=ConnectionDAO.increateID("registerstudy", "regiter_id", conn);
+			String registerID=ConnectionDAO.increateID("registerstudy", "register_id", conn);
 			registerStudy.setRegisterID(registerID);
 			String sql="insert into registerstudy values (?,?,?,?,?)";
 			PreparedStatement pstmt=conn.prepareStatement(sql);

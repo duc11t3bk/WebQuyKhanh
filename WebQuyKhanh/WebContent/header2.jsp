@@ -85,7 +85,7 @@
 		console.log("email" + email + ":password" + password);
 		$.ajax({
 			type : "POST",
-			url : "http://localhost:8080/WebQuyKhanh/login.do",
+			url : "login.do",
 			data : "email=" + email + "&password=" + password,
 			dataType : "json",
 			success : function(response) {
@@ -128,7 +128,7 @@
 				+ password + "retype" + retypePassword);
 		$.ajax({
 			type : "POST",
-			url : "http://localhost:8080/WebQuyKhanh/register-member.do",
+			url : "register-member.do",
 			data : "email=" + email + "&phoneNumber=" + phoneNumber
 					+ "&password=" + password + "&retypePassword="
 					+ retypePassword,
@@ -175,18 +175,20 @@
 			}
 		});
 	}
-	function resetStatus() {
-		var toolTipText = $(".tooltiptext");
-		for (var i = 0; i < toolTipText.length; i++) {
-			$(toolTipText[i]).css("visibility", "hidden");
-			$(toolTipText[i]).css("opacity", "0");
-		}
-		var formControl = $("#form-register .form-control");
-		for (var i = 0; i < formControl.length; i++) {
-			$(formControl[i]).css("border-color", "#ccc");
-		}
-	}
+	
 	$(document).ready(function() {
+		function resetStatus() {
+			var toolTipText = $(".tooltiptext");
+			for (var i = 0; i < toolTipText.length; i++) {
+				$(toolTipText[i]).css("visibility", "hidden");
+				$(toolTipText[i]).css("opacity", "0");
+			}
+			var formControl = $("#form-register .form-control");
+			for (var i = 0; i < formControl.length; i++) {
+				$(formControl[i]).css("border-color", "#ccc");
+			}
+		}
+		
 		$("#emailRegis").focus(function() {
 			resetStatus();
 			$(this).css("border-color", "#66afe9");

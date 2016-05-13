@@ -28,7 +28,6 @@ public class HomeBO {
 			listChild.add(listPostsStudyAbroad.get(i));
 		}
 		listParent.add(listChild);
-		System.out.println("number child"+listParent.size());
 		return listParent;
 	}
 	

@@ -5,7 +5,7 @@
 .panel-body ul a{
 	text-decoration: none;
 }
-#new-more{
+.new-more{
 	text-decoration: none;
 	color:black;
 	position: absolute;
@@ -15,7 +15,7 @@
 	-moz-transform : scale(0.95);
 	-webkit-transform : scale(0.95);
 }
-#new-more:hover {
+.new-more:hover {
 	color: #23527c;
 	transform : scale(1);
 	-moz-transform : scale(1);
@@ -54,3 +54,25 @@
 .main-content .row {
 	margin-bottom: 10px;
 }
+.mypanel ul {
+	padding-left: 0px;
+}
+.mypanel .panel-body li hr {
+	margin: 0px;
+	width: 0px;
+	border-width: 2px;
+	border-color: #009688;
+	transition : width 0.75s;
+	-moz-transition : width 0.75s;
+	-webkit-transition : width 0.75s;
+}
+.mypanel .panel-body li:hover hr {
+	width: 100%;
+}
+.mypanel .panel-body a {
+	color : black;
+	font-size: 13px;
+}
+.mypanel .panel-body a:hover {
+	color : #23527c;
+} 
