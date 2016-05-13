@@ -93,8 +93,10 @@
 									property="image"></bean:define>
 								<bean:define id="postsFirstID" name="postsFirst"
 									property="postID"></bean:define>
-								<img src="postsimage/${imageNameFirst }" width="100%"
-									height="100%">
+								<html:link action="/view-posts?postID=${postsFirstID }">
+									<img src="postsimage/${imageNameFirst }" width="100%"
+										height="100%">
+								</html:link>
 								<html:link action="/view-posts?postID=${postsFirstID }"
 									styleClass="new-more">Xem thêm <span
 										class="glyphicon glyphicon-chevron-right"></span>
@@ -150,12 +152,15 @@
 																<logic:iterate id="posts" name="listChild">
 																	<bean:define id="imageName" name="posts"
 																		property="image"></bean:define>
-																	<div class="col-lg-6">
-																		<img src="postsimage/${imageName }" alt="Hinh">
-																		<div class="carousel-caption">
-																			<bean:write property="title" name="posts" />
+																	<bean:define id="postID" name="posts" property="postID"></bean:define>
+																	<html:link action="/view-posts?postID=${postID }">
+																		<div class="col-lg-6">
+																			<img src="postsimage/${imageName }" alt="Hinh">
+																			<div class="carousel-caption">
+																				<bean:write property="title" name="posts" />
+																			</div>
 																		</div>
-																	</div>
+																	</html:link>
 																</logic:iterate>
 															</div>
 														</div>
@@ -166,12 +171,15 @@
 																<logic:iterate id="posts" name="listChild">
 																	<bean:define id="imageName" name="posts"
 																		property="image"></bean:define>
-																	<div class="col-lg-6">
-																		<img src="postsimage/${imageName }" alt="Hinh">
-																		<div class="carousel-caption">
-																			<bean:write property="title" name="posts" />
+																	<bean:define id="postID" name="posts" property="postID"></bean:define>
+																	<html:link action="/view-posts?postID=${postID }">
+																		<div class="col-lg-6">
+																			<img src="postsimage/${imageName }" alt="Hinh">
+																			<div class="carousel-caption">
+																				<bean:write property="title" name="posts" />
+																			</div>
 																		</div>
-																	</div>
+																	</html:link>
 																</logic:iterate>
 															</div>
 														</div>
@@ -201,8 +209,10 @@
 									property="image"></bean:define>
 								<bean:define id="postsSecondID" name="postsSecond"
 									property="postID"></bean:define>
-								<img src="postsimage/${imageNameSecond }" width="100%"
-									height="100%">
+								<html:link action="/view-posts?postID=${postID }">
+									<img src="postsimage/${imageNameSecond }" width="100%"
+										height="100%">
+								</html:link>
 								<html:link action="/view-posts?postID=${postsSecondID }"
 									styleClass="new-more">Xem thêm <span
 										class="glyphicon glyphicon-chevron-right"></span>

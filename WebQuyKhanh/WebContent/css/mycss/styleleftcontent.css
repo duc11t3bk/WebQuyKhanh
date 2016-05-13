@@ -22,8 +22,6 @@
 }
 .left-menu ul li:hover {
 	background-color:#f5f5f5;
-	text-align: center;
-	line-height: 50px;	
 }
 .left-menu > ul > li:hover > a{
 	color :black;
@@ -57,4 +55,19 @@
 }
 .sub-submenu li:hover a{
 	color:white;
+}
+.left-menu ul li hr {
+	margin: 0px;
+	width: 0px;
+	border-width: 2px;
+	border-color: #009688;
+}
+.left-menu ul li:hover hr {
+	width: 100%;
+	transition : width 0.75s;
+	-moz-transition : width 0.75s;
+	-webkit-transition : width 0.75s;
+}
+.left-menu ul .col-lg-12 {
+	padding: 0px;
 }

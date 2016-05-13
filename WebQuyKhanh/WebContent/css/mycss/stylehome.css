@@ -62,12 +62,12 @@
 	width: 0px;
 	border-width: 2px;
 	border-color: #009688;
-	transition : width 0.75s;
-	-moz-transition : width 0.75s;
-	-webkit-transition : width 0.75s;
 }
 .mypanel .panel-body li:hover hr {
 	width: 100%;
+	transition : width 0.75s;
+	-moz-transition : width 0.75s;
+	-webkit-transition : width 0.75s;
 }
 .mypanel .panel-body a {
 	color : black;

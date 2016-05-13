@@ -42,7 +42,7 @@
 			
 			$.ajax({
 				type: "POST",
-				url : "http://localhost:8080/WebQuyKhanh/register-study.do",
+				url : "register-study.do",
 				data : "action=studyabroad&email="+email+"&phoneNumber="+phoneNumber,
 				dataType : "json",
 				success : function(response){
@@ -102,7 +102,7 @@
 				<div class="row" style="text-align: center">
 					<label id="notify"></label>
 				</div>
-				<div class="row">
+				<div class="row" style="margin-bottom: 10px">
 					<div class="col-lg-12 mytooltip">
 						<html:text styleId="emailRS" property="email" styleClass="form-control my-text-input" ></html:text>
 						<span id="emailRSError" class="tooltiptext">Mời bạn nhập email ! </span>

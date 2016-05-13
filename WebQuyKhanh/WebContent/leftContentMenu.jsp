@@ -20,28 +20,123 @@
 				scope="session"></bean:define>
 			<logic:equal value="3" name="member" property="priority">
 				<ul>
-					<li><html:link action="/teacher-update-infor">Thông tin cá nhân</html:link></li>
-					<li><a href="adminManageIntroduce.html">Quản lí trang giới
-							thiệu</a></li>
-					<li><html:link action="/manage-posts">Quản lí bài đăng</html:link></li>
-					<li><html:link action="/admin-manage-teacher">Quản lí giáo viên</html:link></li>
-					<li><html:link action="/admin-manage-student">Quản lí học viên</html:link></li>
-					<li><html:link action="/admin-manage-member">Quản lí thành viên</html:link></li>
-					<li><html:link action="/admin-manage-class">Quản lí lớp</html:link></li>
-					<li><a href="adminStatistic.html">Thống kê</a></li>
+					<li class="col-lg-12">
+						<div class="col-lg-12">
+							<html:link action="/teacher-update-infor">Thông tin cá nhân</html:link>
+						</div>
+						<div class="col-lg-12">
+							<hr>
+						</div>
+					</li>
+					<li class="col-lg-12">
+						<div class="col-lg-12">
+							<a href="adminManageIntroduce.html">Quản lí trang giới
+									thiệu</a>
+						</div>
+						<div class="col-lg-12">
+							<hr>
+						</div>
+					</li>
+					<li class="col-lg-12">
+						<div class="col-lg-12">
+						<html:link action="/manage-posts">Quản lí bài đăng</html:link>
+						</div>
+						<div class="col-lg-12">
+							<hr>
+						</div>
+					</li>
+					<li class="col-lg-12">
+						<div class="col-lg-12">
+							<html:link action="/admin-manage-teacher">Quản lí giáo viên</html:link>
+						</div>
+						<div class="col-lg-12">
+							<hr>
+						</div>
+					</li>
+					<li class="col-lg-12">
+						<div class="col-lg-12">
+							<html:link action="/admin-manage-student">Quản lí học viên</html:link>
+						</div>
+						<div class="col-lg-12">
+							<hr>
+						</div>
+					</li>
+					<li class="col-lg-12">
+						<div class="col-lg-12">
+							<html:link action="/admin-manage-member">Quản lí thành viên</html:link>
+						</div>
+						<div class="col-lg-12">
+							<hr>
+						</div>
+					</li>
+					<li class="col-lg-12">
+						<div class="col-lg-12">
+							<html:link action="/admin-manage-class">Quản lí lớp</html:link>
+						</div>
+						<div class="col-lg-12">
+							<hr>
+						</div>
+					</li>
+					<li class="col-lg-12">
+						<div class="col-lg-12">
+							<a href="adminStatistic.html">Thống kê</a>
+						</div>
+						<div class="col-lg-12">
+							<hr>
+						</div>
+					</li>
 				</ul>
 			</logic:equal>
 			<logic:equal value="1" name="member" property="priority">
 				<ul>
-					<li><html:link action="/teacher-update-infor"> Thông tin cá
-							nhân</html:link></li>
-					<li><html:link action="/teacher-manage-schedule">Xem lịch giảng dạy </html:link></li>
-					<li><html:link action="/manage-posts">Quản lí bài đăng</html:link>
+					<li class="col-lg-12">
+						<div class="col-lg-12">
+							<html:link action="/teacher-update-infor"> Thông tin cá
+								nhân</html:link>
+						</div>
+						<div class="col-lg-12">
+							<hr>
+						</div>
 					</li>
-					<li><html:link action="/manage-student" >Quản lí học viên</html:link></li>
-					<li><html:link action="/manage-level?action=vocabulary">Quản lí từ vựng</html:link>
+					<li class="col-lg-12">
+						<div class="col-lg-12">
+							<html:link action="/teacher-manage-schedule">Xem lịch giảng dạy </html:link>
+						</div>
+						<div class="col-lg-12">
+							<hr>
+						</div>		
 					</li>
-					<li><html:link action="/manage-level?action=translate"> Quản lí dịch câu</html:link>
+					<li class="col-lg-12">
+						<div class="col-lg-12">
+							<html:link action="/manage-posts">Quản lí bài đăng</html:link>
+						</div>
+						<div class="col-lg-12">
+							<hr>
+						</div>
+					</li>
+					<li class="col-lg-12">
+						<div class="col-lg-12">
+							<html:link action="/manage-student" >Quản lí học viên</html:link>
+						</div>
+						<div class="col-lg-12">
+							<hr>
+						</div>
+					</li>
+					<li class="col-lg-12">
+						<div class="col-lg-12">
+							<html:link action="/manage-level?action=vocabulary">Quản lí từ vựng</html:link>
+						</div>
+						<div class="col-lg-12">
+							<hr>
+						</div>
+					</li>
+					<li class="col-lg-12">
+						<div class="col-lg-12">
+							<html:link action="/manage-level?action=translate"> Quản lí dịch câu</html:link>
+						</div>
+						<div class="col-lg-12">
+							<hr>
+						</div>
 					</li>
 				</ul>
 			</logic:equal>
