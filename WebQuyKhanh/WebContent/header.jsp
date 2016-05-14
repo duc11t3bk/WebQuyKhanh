@@ -364,7 +364,7 @@
 	<!-- Menu -->
 	<div class="navigation">
 		<ul class="menu">
-			<li><a href="introduce.jsp">Giới thiệu</a></li>
+			<li><a href="introduce.do">Giới thiệu</a></li>
 			<li><html:link action="/home"><span
 					class="glyphicon glyphicon-home"></span> Trang chủ</html:link></li>
 			<li><html:link action="/view-list-posts?category=DHNB"><span

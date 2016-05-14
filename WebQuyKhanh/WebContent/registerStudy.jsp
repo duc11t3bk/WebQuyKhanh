@@ -171,7 +171,7 @@
 				<div class="content">
 					<div class="col-lg-9 main-content">
 						<div class="row">
-							<div class="panel panel-primary mypanel">
+							<div class="panel panel-default mypanel">
 								<div class="panel-heading">
 									<div class="panel-title">Đăng ký học</div>
 								</div>

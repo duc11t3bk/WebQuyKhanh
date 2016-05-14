@@ -42,7 +42,7 @@ public class ViewListPostsAction extends Action {
 			pagination.add(i+1);
 		}
 		postsForm.setPagination(pagination);
-		postsForm.setCategory(StringProcess.getNameCategory(category));
+		postsForm.setCategoryName(StringProcess.getNameCategory(category));
 		return mapping.findForward("showListPosts");
 	}
 }

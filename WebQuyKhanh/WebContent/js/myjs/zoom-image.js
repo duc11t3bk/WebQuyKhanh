@@ -6,7 +6,7 @@ $(document).ready(function(){
 		$("#frame-zoom").css("visibility", "visible");
 		$("#frame-zoom").css("opacity", "1");
 		$("#frame-zoom").css("width", "95%");
-		$("#frame-zoom").css("height", "70%");
+		$("#frame-zoom").css("height", "800px");
 		$("#frame-zoom").css("top", "10px");
 		$("#frame-zoom").css("left", "2%");
 		$(".overflow").show();

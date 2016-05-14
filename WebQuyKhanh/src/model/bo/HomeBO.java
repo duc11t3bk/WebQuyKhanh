@@ -3,6 +3,7 @@ package model.bo;
 import java.util.ArrayList;
 
 import model.bean.Posts;
+import model.bean.Teacher;
 import model.dao.HomeDAO;
 
 public class HomeBO {
@@ -17,8 +18,8 @@ public class HomeBO {
 	public ArrayList<Posts> getListPost(String category, int limit) {
 		return homeDAO.getListPost(category,limit);
 	}
-	public ArrayList<ArrayList<Posts>> divideList(ArrayList<Posts> listPostsStudyAbroad, int numberPosts) {
-		ArrayList<ArrayList<Posts>> listParent= new ArrayList<ArrayList<Posts>>();
+	public ArrayList<ArrayList<Posts>> divideListPosts(ArrayList<Posts> listPostsStudyAbroad, int numberPosts) {
+		ArrayList<ArrayList<Posts> > listParent= new ArrayList<ArrayList<Posts>>();
 		ArrayList<Posts> listChild= new ArrayList<Posts>();;
 		for(int i=0; i<listPostsStudyAbroad.size(); i++){
 			if(listChild.size()==numberPosts){
@@ -30,5 +31,20 @@ public class HomeBO {
 		listParent.add(listChild);
 		return listParent;
 	}
-	
+	public ArrayList<ArrayList<Teacher>> divideListTeacher(ArrayList<Teacher> listTeacher, int numberTeacher){
+		ArrayList<ArrayList<Teacher> > listParent= new ArrayList<ArrayList<Teacher>>();
+		ArrayList<Teacher> listChild= new ArrayList<Teacher>();;
+		for(int i=0; i<listTeacher.size(); i++){
+			if(listChild.size()==numberTeacher){
+				listParent.add(listChild);
+				listChild= new ArrayList<Teacher>();
+			}
+			listChild.add(listTeacher.get(i));
+		}
+		listParent.add(listChild);
+		return listParent;
+	}
+	public String getBanner(String status) {
+		return homeDAO.getBanner(status);
+	}
 }

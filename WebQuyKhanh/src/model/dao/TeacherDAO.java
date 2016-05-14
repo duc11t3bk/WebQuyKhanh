@@ -21,7 +21,7 @@ public class TeacherDAO {
 	public ArrayList<Teacher> getListTeacher() {
 		try {
 			conn= connection.openConnection();
-			String sql="select mb.member_id, tc.teacher_id, tc.fullname, tc.dayofbirth, tc.sex, mb.phonenumber, mb.email "
+			String sql="select mb.member_id, tc.teacher_id, tc.fullname, tc.dayofbirth, tc.sex, mb.phonenumber, mb.email, mb.image, tc.certificate "
 					+ " from teacher tc join member mb on (tc.teacher_id=mb.teacher_id) "
 					+ " where mb.priority= ?";
 			System.out.println("sql"+sql);
@@ -42,6 +42,8 @@ public class TeacherDAO {
 				teacher.setSex(rs.getInt(5));
 				teacher.setPhoneNumber(rs.getString(6));
 				teacher.setEmail(rs.getString(7));
+				teacher.setImage(rs.getString(8));
+				teacher.setCertificate(rs.getString(9));
 				teachers.add(teacher);
 			}
 			System.out.println("size"+ teachers.size());

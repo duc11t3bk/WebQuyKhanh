@@ -79,7 +79,7 @@
 							<div class="panel panel-default"
 								style="background-color: transparent">
 								<div class="panel-heading">
-									<div class="panel-title"><bean:write property="category" name="postsForm"/> </div>
+									<div class="panel-title"><bean:write property="categoryName" name="postsForm"/> </div>
 								</div>
 								<div class="panel-body" style="background-color: transparent;">
 									<logic:iterate id="post" name="postsForm" property="posts">

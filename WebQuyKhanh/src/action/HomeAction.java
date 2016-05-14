@@ -40,7 +40,7 @@ public class HomeAction extends Action {
 			listPostsDocument=homeBO.getListPostsNews();
 		}
 		homeForm.setListPostsNews(listPostsNews);
-		homeForm.setListPostsStudyAbroad(homeBO.divideList(listPostsStudyAbroad,2));
+		homeForm.setListPostsStudyAbroad(homeBO.divideListPosts(listPostsStudyAbroad,2));
 		homeForm.setListPostsJapaneseClass(listPostsJapaneseClass);
 		homeForm.setListPostsRecruitment(listPostsRecruitment);
 		homeForm.setListPostsDocument(listPostsDocument);

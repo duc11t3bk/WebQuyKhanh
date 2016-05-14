@@ -4,6 +4,15 @@ public class Image {
 	
 	private String imgID;
 	private String imgName;
+	private String status;
+	
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public String getImgID() {
 		return imgID;
 	}

@@ -30,8 +30,8 @@
 					</li>
 					<li class="col-lg-12">
 						<div class="col-lg-12">
-							<a href="adminManageIntroduce.html">Quản lí trang giới
-									thiệu</a>
+							<html:link action="/admin-manage-introduce"> Quản lí trang giới
+									thiệu</html:link>
 						</div>
 						<div class="col-lg-12">
 							<hr>

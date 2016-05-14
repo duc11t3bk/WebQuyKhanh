@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import common.StringProcess;
+import model.bean.Image;
 import model.bean.Posts;
 
 public class HomeDAO {
@@ -74,6 +75,26 @@ public class HomeDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+	public String getBanner(String status) {
+		try {
+			conn=connection.openConnection();
+			String sql="select content from image where status= ?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, status);
+			ResultSet rs= pstmt.executeQuery();
+			String imageName=null;
+			if(rs.next()){
+				imageName=rs.getString(1);
+			}
+			return imageName;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		finally{
+			connection.closeConnection();
 		}
 	}
 	

@@ -8,3 +8,8 @@
 	width: 100%;
 	height: 200px;
 }
+#right-content .panel-heading{
+	background-color: #FFEB3B;
+	color: #333333;
+	font-weight: bold;
+}
