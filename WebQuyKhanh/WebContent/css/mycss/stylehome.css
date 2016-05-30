@@ -8,7 +8,8 @@
 
 .new-more{
 	text-decoration: none;
-	color:black;
+	color: white;
+	font-weight: bold;
 	position: absolute;
 	bottom: 5%;
 	right: 10%;
@@ -17,8 +18,9 @@
 	-webkit-transform : scale(0.95);
 }
 .new-more:hover {
-	color: #23527c;
+	text-decoration : none;
 	transform : scale(1);
+	color: white;
 	-moz-transform : scale(1);
 	-webkit-transform : scale(1);
 	transition: transform 0.3s;
@@ -70,10 +72,20 @@
 	-moz-transition : width 0.75s;
 	-webkit-transition : width 0.75s;
 }
-.mypanel .panel-body a {
+.mypanel .panel-body li a {
 	color : black;
 	font-size: 13px;
 }
-.mypanel .panel-body a:hover {
+.mypanel .panel-body li a:hover {
 	color : #23527c;
 } 
+.panel-caption {
+	position: absolute;
+	bottom: 0px;
+	left: 15px;
+	right: 0px;
+	background-color: rgba(33,150,243,0.4);
+	min-height: 86px;
+	color: white;
+	text-align: center;
+}

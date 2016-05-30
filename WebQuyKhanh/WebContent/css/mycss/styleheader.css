@@ -59,9 +59,7 @@
 	-moz-transition: top 1s;
 	-webkit-transition: top 1s;
 }
-#form-login .panel-body div{
-	margin-bottom: 10px;
-}
+
 .overflow{
 	width: 100%;
 	height: 100%;

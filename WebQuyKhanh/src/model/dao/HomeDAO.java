@@ -23,7 +23,7 @@ public class HomeDAO {
 			String sql="select * "
 					+ " from post "
 					+ " where category != ? "
-					+ " order by dateposted desc"
+					+ " order by dateposted desc, post_id desc"
 					+ " limit 0,5";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, "LGD");
@@ -54,7 +54,7 @@ public class HomeDAO {
 			String sql="select *"
 					+ " from post"
 					+ " where category= ?"
-					+ " order by dateposted"
+					+ " order by dateposted desc, post_id desc"
 					+ " limit 0, ?";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, category);

@@ -96,7 +96,7 @@
 		</div>
 	</div>
 	<div class="parent">
-		<div class="overflow"></div>
+		
 		<div class="col-lg-12" id="center-name"
 			style="margin-top: 10px; margin-bottom: 10px">
 			<div class="col-lg-1">

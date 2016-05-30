@@ -6,9 +6,11 @@ import org.apache.struts.action.ActionForm;
 
 import model.bean.Class;
 import model.bean.Posts;
+import model.bean.RegisterStudy;
 
 public class RegisterStudyForm extends ActionForm {
 
+	private String registerID;
 	private String email;
 	private String phoneNumber;
 	private String classID;
@@ -16,8 +18,28 @@ public class RegisterStudyForm extends ActionForm {
 	private String submit;
 	private String action;
 	private ArrayList<Posts> listPostsNews;
+	private RegisterStudy registerStudy;
+	private ArrayList<RegisterStudy> listRegisterStudy;
 	
 	
+	public String getRegisterID() {
+		return registerID;
+	}
+	public void setRegisterID(String registerID) {
+		this.registerID = registerID;
+	}
+	public RegisterStudy getRegisterStudy() {
+		return registerStudy;
+	}
+	public void setRegisterStudy(RegisterStudy registerStudy) {
+		this.registerStudy = registerStudy;
+	}
+	public ArrayList<RegisterStudy> getListRegisterStudy() {
+		return listRegisterStudy;
+	}
+	public void setListRegisterStudy(ArrayList<RegisterStudy> listRegisterStudy) {
+		this.listRegisterStudy = listRegisterStudy;
+	}
 	public ArrayList<Posts> getListPostsNews() {
 		return listPostsNews;
 	}

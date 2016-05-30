@@ -1,5 +1,7 @@
 package model.bo;
 
+import java.util.ArrayList;
+
 import model.bean.RegisterStudy;
 import model.dao.RegisterStudyDAO;
 
@@ -14,5 +16,11 @@ public class RegisterStudyBO {
 	}
 	public void addNewRegister(RegisterStudy registerStudy) {
 		registerStudyDAO.addNewRegister(registerStudy);
+	}
+	public ArrayList<RegisterStudy> getListRegisterStudy(){
+		return registerStudyDAO.getListRegisterStudy();
+	}
+	public boolean deleteRegister(String registerID) {
+		return registerStudyDAO.deleteRegister(registerID);
 	}
 }

@@ -53,14 +53,14 @@ public class PostsDAO {
 					sql="select p.post_id, p.teacher_id, tc.fullname, p.title, p.content, p.dateposted "
 							+ ", p.image, p.views, p.category "
 							+ " from post p join teacher tc on (p.teacher_id=tc.teacher_id)"
-							+ " order by dateposted desc";
+							+ " order by dateposted desc, post_id desc";
 				}
 				else{
 					sql="select p.post_id, p.teacher_id, tc.fullname, p.title, p.content, p.dateposted "
 							+ ", p.image, p.views, p.category "
 							+ " from post p join teacher tc on (p.teacher_id=tc.teacher_id)"
 							+ " where p.category= '"+group+"'"
-							+ " order by dateposted desc";
+							+ " order by dateposted desc, post_id desc";
 				}
 			}
 			if(priority==1){
@@ -69,14 +69,14 @@ public class PostsDAO {
 							+ ", p.image, p.views, p.category "
 							+ " from post p join teacher tc on (p.teacher_id=tc.teacher_id)"
 							+ " where p.teacher_id='"+teacherID+"' "
-							+ " order by dateposted desc";
+							+ " order by dateposted desc, post_id desc";
 				}
 				else{
 					sql="select p.post_id, p.teacher_id, tc.fullname, p.title, p.content, p.dateposted "
 							+ ", p.image, p.views, p.category "
 							+ " from post p join teacher tc on (p.teacher_id=tc.teacher_id)"
 							+ " where p.teacher_id='"+teacherID+"' and p.category='"+group+"'"
-							+ " order by dateposted desc";
+							+ " order by dateposted desc, post_id desc";
 				}
 			}
 			PreparedStatement pstmt= conn.prepareStatement(sql);

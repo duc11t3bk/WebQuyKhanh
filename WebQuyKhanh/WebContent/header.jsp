@@ -237,7 +237,7 @@
 	<!-- Form đăng nhập -->
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-offset-2 col-lg-8" id="form-login">
+			<div class="col-lg-offset-3 col-lg-6" id="form-login">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						<div class="panel-title" style="text-align: center; float: left">Đăng
@@ -253,32 +253,32 @@
 								<label id="notification-login" style="color: red"></label>
 							</div>
 							<div class="row">
-								<label class="col-lg-2">Email </label>
-								<div class="col-lg-8">
-									<html:text styleId="email" property="email"
-										styleClass="form-control"></html:text>
+								<div class="col-lg-12">	
+									<label class="col-lg-2">Email </label>
+									<div class="col-lg-10">
+										<html:text styleId="email" property="email"
+											styleClass="form-control my-text-input"></html:text>
+									</div>
+								</div>
+								<div class="col-lg-12" style="text-align: center">
+									<label id="emailError" style="color: red"></label>
 								</div>
 							</div>
-
-							<div class="row" style="text-align: center">
-								<label id="emailError" style="color: red"></label>
-							</div>
-
 							<div class="row">
-								<label class="col-lg-2">Mật khẩu </label>
-								<div class="col-lg-8">
-									<html:password styleId="password" property="password"
-										styleClass="form-control"></html:password>
+								<div class="col-lg-12">
+									<label class="col-lg-2">Mật khẩu </label>
+									<div class="col-lg-10">
+										<html:password styleId="password" property="password"
+											styleClass="form-control my-text-input"></html:password>
+									</div>
 								</div>
-							</div>
-							<logic:notEmpty name="loginForm" scope="session">
-								<div class="row" style="text-align: center">
+								<div class="col-lg-12" style="text-align: center">
 									<label id="passwordError" style="color: red"> </label>
 								</div>
-							</logic:notEmpty>
-							<div class="row">
+							</div>
+							<div class="row" style="text-align: center">
 								<html:button property="submit"
-									styleClass="col-lg-offset-2 col-lg-8 btn btn-primary"
+									styleClass="my-btn"
 									onclick="login()">Đăng nhập</html:button>
 							</div>
 							<div class="row" style="text-align: center">

@@ -30,7 +30,7 @@
 					</li>
 					<li class="col-lg-12">
 						<div class="col-lg-12">
-							<html:link action="/admin-manage-introduce"> Quản lí trang giới
+							<html:link action="/admin-manage-introduce"> Quản lý trang giới
 									thiệu</html:link>
 						</div>
 						<div class="col-lg-12">
@@ -39,7 +39,7 @@
 					</li>
 					<li class="col-lg-12">
 						<div class="col-lg-12">
-						<html:link action="/manage-posts">Quản lí bài đăng</html:link>
+						<html:link action="/manage-posts">Quản lý bài đăng</html:link>
 						</div>
 						<div class="col-lg-12">
 							<hr>
@@ -47,7 +47,7 @@
 					</li>
 					<li class="col-lg-12">
 						<div class="col-lg-12">
-							<html:link action="/admin-manage-teacher">Quản lí giáo viên</html:link>
+							<html:link action="/admin-manage-teacher">Quản lý giáo viên</html:link>
 						</div>
 						<div class="col-lg-12">
 							<hr>
@@ -55,7 +55,7 @@
 					</li>
 					<li class="col-lg-12">
 						<div class="col-lg-12">
-							<html:link action="/admin-manage-student">Quản lí học viên</html:link>
+							<html:link action="/admin-manage-student">Quản lý học viên</html:link>
 						</div>
 						<div class="col-lg-12">
 							<hr>
@@ -63,7 +63,7 @@
 					</li>
 					<li class="col-lg-12">
 						<div class="col-lg-12">
-							<html:link action="/admin-manage-member">Quản lí thành viên</html:link>
+							<html:link action="/admin-manage-member">Quản lý thành viên</html:link>
 						</div>
 						<div class="col-lg-12">
 							<hr>
@@ -71,7 +71,7 @@
 					</li>
 					<li class="col-lg-12">
 						<div class="col-lg-12">
-							<html:link action="/admin-manage-class">Quản lí lớp</html:link>
+							<html:link action="/admin-manage-class">Quản lý lớp</html:link>
 						</div>
 						<div class="col-lg-12">
 							<hr>
@@ -79,7 +79,7 @@
 					</li>
 					<li class="col-lg-12">
 						<div class="col-lg-12">
-							<a href="adminStatistic.html">Thống kê</a>
+							<html:link action="/admin-manage-register-study">Quản lý đăng ký học</html:link>
 						</div>
 						<div class="col-lg-12">
 							<hr>
@@ -108,7 +108,7 @@
 					</li>
 					<li class="col-lg-12">
 						<div class="col-lg-12">
-							<html:link action="/manage-posts">Quản lí bài đăng</html:link>
+							<html:link action="/manage-posts">Quản lý bài đăng</html:link>
 						</div>
 						<div class="col-lg-12">
 							<hr>
@@ -116,7 +116,7 @@
 					</li>
 					<li class="col-lg-12">
 						<div class="col-lg-12">
-							<html:link action="/manage-student" >Quản lí học viên</html:link>
+							<html:link action="/manage-student" >Quản lý học viên</html:link>
 						</div>
 						<div class="col-lg-12">
 							<hr>
@@ -124,7 +124,7 @@
 					</li>
 					<li class="col-lg-12">
 						<div class="col-lg-12">
-							<html:link action="/manage-level?action=vocabulary">Quản lí từ vựng</html:link>
+							<html:link action="/manage-level?action=vocabulary">Quản lý từ vựng</html:link>
 						</div>
 						<div class="col-lg-12">
 							<hr>
@@ -132,7 +132,7 @@
 					</li>
 					<li class="col-lg-12">
 						<div class="col-lg-12">
-							<html:link action="/manage-level?action=translate"> Quản lí dịch câu</html:link>
+							<html:link action="/manage-level?action=translate"> Quản lý dịch câu</html:link>
 						</div>
 						<div class="col-lg-12">
 							<hr>

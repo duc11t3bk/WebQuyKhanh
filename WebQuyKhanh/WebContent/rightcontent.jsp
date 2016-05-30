@@ -139,7 +139,7 @@
 			<div class="panel-body form-register-study"
 				style="text-align: center">
 				<html:form action="/register-study">
-					<div class="row" style="text-align: center">
+					<div class="row" style="text-align: center; color: #5cb85c">
 						<label id="notify"></label>
 					</div>
 					<div class="row" style="margin-bottom: 10px">

@@ -9,9 +9,23 @@ public class RegisterStudy {
 	private String email;
 	private String phoneNumber;
 	private String classID;
+	private String className;
 	private String category;
+	private String categoryName;
 	
 	
+	public String getClassName() {
+		return className;
+	}
+	public void setClassName(String className) {
+		this.className = className;
+	}
+	public String getCategoryName() {
+		return categoryName;
+	}
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
 	public String getClassID() {
 		return classID;
 	}

@@ -71,8 +71,10 @@
 				function showFormNewWord(){
 					hideAllForm();
 					$("#form-new-word").css("display","block");
-					$("fnw-ja").html(sentences[currentSentence].japanese);
-					$("fnw-vi").html(sentences[currentSentence].vietnamese);
+					console.log(""+sentences[currentSentence].japanese);
+					console.log(""+sentences[currentSentence].vietnamese);
+					$("#fnw-ja").html(sentences[currentSentence].japanese);
+					$("#fnw-vi").html(sentences[currentSentence].vietnamese);
 				}
 				$("#btn-check-write").on("click",function(){
 					$("#fq-write-answer").removeClass("btn-answer-true");

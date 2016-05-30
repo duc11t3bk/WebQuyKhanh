@@ -33,25 +33,23 @@ public class TeacherManageLessonAction extends Action {
 			if("vocabulary".equals(action)){
 				if ((!Validate.isEmpty(fileExcel.getFileName()))
 						&& (!Validate.isEmpty(filesAudio.get(0).getFileName()))) {
-					String fileExcelName = FileProcess.uploadFile(fileExcel, getServlet(), "japanese/excel");
-					String filePath = "/home/davy/Git/WebQuyKhanh/WebContent/japanese/excel/" + fileExcelName;
-					// String fileExcelName=FileProcess.uploadFile(fileExcel,
-					// getServlet(), "japanese\\excel");
-					// String
-					// filePath="C:\\Users\\viettel\\Documents\\gitspace\\WebQuyKhanh\\WebQuyKhanh\\WebContent\\japanese\\excel\\"+fileExcelName;
+//					String fileExcelName = FileProcess.uploadFile(fileExcel, getServlet(), "japanese/excel");
+//					String filePath = "/home/davy/Git/WebQuyKhanh/WebContent/japanese/excel/" + fileExcelName;
+					String fileExcelName=FileProcess.uploadFile(fileExcel, getServlet(), "japanese\\excel");
+					String filePath="C:\\Users\\viettel\\Documents\\gitspace\\WebQuyKhanh\\WebQuyKhanh\\WebContent\\japanese\\excel\\"+fileExcelName;
 					/** upload file excel */
 					japaneseBO.importFileExcel(lessonID, filePath);
 					/** delete file excel after import data */
-					FileProcess.deleteOldFile(getServlet(), fileExcelName, "japanese/excel");
+					FileProcess.deleteOldFile(getServlet(), fileExcelName, "japanese\\excel");
 					/** delete file audio */
 					ArrayList<String> oldFilesAudio = japaneseBO.getFilesAudio(lessonID);
 					for (int i = 0; i < oldFilesAudio.size(); i++) {
-						FileProcess.deleteOldFile(getServlet(), oldFilesAudio.get(i), "japanese/audio/" + lessonID);
+						FileProcess.deleteOldFile(getServlet(), oldFilesAudio.get(i), "japanese\\audio\\" + lessonID);
 					}
-					FileProcess.deleteOldFile(getServlet(), lessonID, "japanese/audio");
+					FileProcess.deleteOldFile(getServlet(), lessonID, "japanese\\audio");
 					/** upload file audio */
 					for (int i = 0; i < filesAudio.size(); i++) {
-						FileProcess.uploadFile(filesAudio.get(i), getServlet(), "japanese/audio/" + lessonID);
+						FileProcess.uploadFile(filesAudio.get(i), getServlet(), "japanese\\audio\\" + lessonID);
 					}
 					japaneseForm.setNotifySuccess("Tải lên thành công");
 				} else {
@@ -61,10 +59,12 @@ public class TeacherManageLessonAction extends Action {
 			else{
 				if("translate".equals(action)){
 					if(!Validate.isEmpty(fileExcel.getFileName())){
-						String fileExcelName=FileProcess.uploadFile(fileExcel, getServlet(), "japanese/excel");
-						String filePath = "/home/davy/Git/WebQuyKhanh/WebContent/japanese/excel/" + fileExcelName;
+//						String fileExcelName=FileProcess.uploadFile(fileExcel, getServlet(), "japanese/excel");
+//						String filePath = "/home/davy/Git/WebQuyKhanh/WebContent/japanese/excel/" + fileExcelName;
+						String fileExcelName=FileProcess.uploadFile(fileExcel, getServlet(), "japanese\\excel");
+						String filePath="C:\\Users\\viettel\\Documents\\gitspace\\WebQuyKhanh\\WebQuyKhanh\\WebContent\\japanese\\excel\\"+fileExcelName;
 						japaneseBO.importFileExcel(lessonID, filePath);
-						FileProcess.deleteOldFile(getServlet(), fileExcelName, "japanese/excel");
+						FileProcess.deleteOldFile(getServlet(), fileExcelName, "japanese\\excel");
 						japaneseForm.setNotifySuccess("Tải lên thành công");
 					}
 					else{
@@ -79,9 +79,9 @@ public class TeacherManageLessonAction extends Action {
 				ArrayList<String> oldFilesAudio=japaneseBO.getFilesAudio(lessonID);
 				for(int i=0; i<oldFilesAudio.size(); i++){
 					System.out.println(""+oldFilesAudio.get(i));
-					FileProcess.deleteOldFile(getServlet(), oldFilesAudio.get(i), "japanese/audio/"+lessonID);
+					FileProcess.deleteOldFile(getServlet(), oldFilesAudio.get(i), "japanese\\audio\\"+lessonID);
 				}
-				FileProcess.deleteOldFile(getServlet(), lessonID, "japanese/audio");
+				FileProcess.deleteOldFile(getServlet(), lessonID, "japanese\\audio");
 				/**delete data from database*/
 				japaneseBO.deleteLesson(lessonID);
 				return mapping.findForward("showListLevelVocabulary");

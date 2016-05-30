@@ -97,10 +97,12 @@
 									<img src="postsimage/${imageNameFirst }" width="100%"
 										height="100%">
 								</html:link>
-								<html:link action="/view-posts?postID=${postsFirstID }"
-									styleClass="new-more">Xem thêm <span
-										class="glyphicon glyphicon-chevron-right"></span>
-								</html:link>
+								<div class="panel-caption">
+									<bean:write name="postsFirst" property="title"/>
+									<html:link action="/view-posts?postID=${postsFirstID }" styleClass="new-more">Xem thêm <span
+											class="glyphicon glyphicon-chevron-right"></span>
+									</html:link>
+								</div>
 							</div>
 							<div class="col-lg-6 childRight" style="padding-left: 0px;">
 								<div class="panel panel-default mypanel">
@@ -213,10 +215,13 @@
 									<img src="postsimage/${imageNameSecond }" width="100%"
 										height="100%">
 								</html:link>
-								<html:link action="/view-posts?postID=${postsSecondID }"
-									styleClass="new-more">Xem thêm <span
-										class="glyphicon glyphicon-chevron-right"></span>
-								</html:link>
+								<div class="panel-caption">
+									<bean:write name="postsSecond" property="title"/>
+									<html:link action="/view-posts?postID=${postsSecondID }"
+										styleClass="new-more">Xem thêm <span
+											class="glyphicon glyphicon-chevron-right"></span>
+									</html:link>
+								</div>
 							</div>
 							<div class="col-lg-6 childRight" style="padding-left: 0px;">
 								<div class="panel panel-default mypanel">
