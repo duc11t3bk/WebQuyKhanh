@@ -95,7 +95,10 @@
 				} else {
 					if (response[0].login == "failed") {
 						$("#notification-login").html(
-								"Tài khoản hoặc mật khẩu không đúng");
+								"Tài khoản hoặc mật khẩu không đúng !");
+					}
+					if (response[0].login == "not_active") {
+						$("#notification-login").html("Bạn phải kích hoạt tài khoản trước khi sử dụng");
 					}
 					if (response[0].login == "success") {
 						$("#notification-login").html("Đăng nhập thành công");

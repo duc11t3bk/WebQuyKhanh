@@ -73,9 +73,11 @@ public class LoginAction extends Action {
 			jsonObject.put("checkValidate","true");
 			MemberBO memberBO= new MemberBO();
 			Member member=memberBO.checkLogin(email, password);
-			if(member!=null){
+			if(member!=null && "1".equals(member.getStatus())){
 				loginForm.setMember(member);
 				jsonObject.put("login", "success");				
+			} else if(member!=null && "0".equals(member.getStatus())) {
+				jsonObject.put("login", "not_active");
 			}
 			else{
 				jsonObject.put("login", "failed");

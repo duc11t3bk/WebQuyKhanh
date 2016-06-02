@@ -1,9 +1,19 @@
 package model.bo;
 
 import java.util.ArrayList;
+import java.util.Properties;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.Message.RecipientType;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import model.bean.Member;
 import model.bean.Teacher;
+import model.dao.ConnectionDAO;
 import model.dao.MemberDAO;
 
 public class MemberBO {
@@ -41,5 +51,8 @@ public class MemberBO {
 	}
 	public boolean deleteMember(String memberID) {
 		return memberDAO.deleteMember(memberID);
+	}
+	public boolean activeAccount(String memberID, String uuid) {
+		return memberDAO.activeAccount(memberID,uuid);
 	}
 }

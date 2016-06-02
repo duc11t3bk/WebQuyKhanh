@@ -9,6 +9,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Properties;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.Message.RecipientType;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import com.sun.corba.se.impl.orb.PrefixParserAction;
 
@@ -45,6 +55,7 @@ public class MemberDAO {
 				member.setPriority(Integer.valueOf(rs.getString(7)));
 				member.setDateattended(StringProcess.formatDate(rs.getString(8),
 						"yyyy-MM-dd", "dd-MM-yyyy"));
+				member.setStatus(rs.getString(9));
 				return member;
 			}
 			return null;
@@ -74,10 +85,12 @@ public class MemberDAO {
 	public void registerMember(Member memberInfor) {
 		try {
 			conn = connection.openConnection();
-			String sql = "insert into member values(?,?,?,?,?,?,?,?)";
+			String sql = "insert into member values(?,?,?,?,?,?,?,?,?,?)";
 			String newID = ConnectionDAO.increateID("member", "member_id", conn);
-			System.out.println("" + newID);
+			String uuid= ConnectionDAO.createUUID();
 			memberInfor.setMemberID(newID);
+			memberInfor.setUuid(uuid);
+			memberInfor.setStatus("0");
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memberInfor.getMemberID());
 			pstmt.setString(2, memberInfor.getTeacherID());
@@ -87,14 +100,42 @@ public class MemberDAO {
 			pstmt.setString(6, memberInfor.getImage());
 			pstmt.setInt(7, memberInfor.getPriority());
 			pstmt.setString(8, memberInfor.getDateattended());
+			pstmt.setString(9, memberInfor.getStatus());
+			pstmt.setString(10, memberInfor.getUuid());
 			pstmt.executeUpdate();
+			sendEmail(memberInfor);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			connection.closeConnection();
 		}
 	}
-
+	public void sendEmail(Member memberInfor){
+		Properties pro = System.getProperties();
+		pro.put("mail.smtp.host", "smtp.gmail.com");
+		pro.put("mail.smtp.auth","true");
+		pro.put("mail.smtp.port", "465");
+		pro.put("mail.smtp.socketFactory.class", javax.net.ssl.SSLSocketFactory.class.getName());
+		
+		Session session= Session.getDefaultInstance(pro, new Authenticator() {
+			@Override
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication("duc11t3bk@gmail.com", "0985785930");
+			}
+		});
+		Message message= new MimeMessage(session);
+		try {
+			message.addRecipient(RecipientType.TO, new InternetAddress(memberInfor.getEmail()));
+			message.setSubject("TRUNG TÂM DU HỌC VÀ NHẬT NGỮ QUÝ KHANH - ĐĂNG KÝ THÀNH VIÊN");
+			String content = "<a href='http://localhost:8080/WebQuyKhanh/active-account.do?memberID="
+					+memberInfor.getMemberID()+"&uuid="+memberInfor.getUuid()+"'> NHẤN VÀO ĐÂY ĐỂ KÍCH HOẠT TÀI KHOẢN </a>";
+			System.out.println(""+content);
+			message.setContent(content, "text/html; charset=utf-8");
+			Transport.send(message);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	public void updatePassword(String memberID, String newPassword) {
 		try {
 			conn = connection.openConnection();
@@ -204,6 +245,9 @@ public class MemberDAO {
 			e.printStackTrace();
 			return null;
 		}
+		finally {
+			connection.closeConnection();
+		}
 	}
 
 	public ArrayList<Member> getListMember() {
@@ -254,6 +298,24 @@ public class MemberDAO {
 			String sql="delete from "+tableName+" where member_id= ?";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, memberID);
+			return (pstmt.executeUpdate() !=0) ? true : false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		finally{
+			connection.closeConnection();
+		}
+	}
+
+	public boolean activeAccount(String memberID, String uuid) {
+		try {
+			conn=connection.openConnection();
+			String sql="update member set status= ? where member_id= ? and uuid = ?";
+			PreparedStatement pstmt= conn.prepareStatement(sql);
+			pstmt.setString(1, "1");
+			pstmt.setString(2, memberID);
+			pstmt.setString(3, uuid);
 			return (pstmt.executeUpdate() !=0) ? true : false;
 		} catch (SQLException e) {
 			e.printStackTrace();

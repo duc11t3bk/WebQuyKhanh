@@ -31,6 +31,15 @@ Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 			>
 		</action>
 		<action 
+			path="/active-account"
+			name="memberForm"
+			scope="request"
+			type="action.ActiveAccountAction"
+			>
+			<forward name="active-success" path="/home.do"></forward>
+			<forward name="occurError" path="/errorPage.jsp"></forward>
+		</action>
+		<action 
 			path="/logout"
 			scope="request"
 			type="action.LogoutAction"

@@ -29,8 +29,22 @@ public class MemberForm extends ActionForm {
 	private ArrayList<Member> members;
 	private String action;
 	private ArrayList<Posts> listPostsNews;
+	private String status;
+	private String uuid;
 	
 	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getUuid() {
+		return uuid;
+	}
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
 	public ArrayList<Posts> getListPostsNews() {
 		return listPostsNews;
 	}

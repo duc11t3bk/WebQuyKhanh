@@ -110,7 +110,7 @@ public class RegisterMemberAction extends Action {
 		}
 		if (checkValidate) {
 			jsonObject.put("register", "success");
-			jsonObject.put("message", "Bạn đã đăng ký thành công !");
+			jsonObject.put("message", "Bạn đã đăng ký thành công, vui lòng kích hoạt tài khoản trước khi sử dụng !");
 			jsonArray.add(jsonObject);
 			return jsonArray;
 		} else {

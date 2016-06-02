@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.UUID;
 
 import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 
@@ -68,7 +69,11 @@ public class ConnectionDAO {
 			return null;
 		}
 	}
-
+	
+	public static String createUUID(){
+		UUID uuid= UUID.randomUUID();
+		return uuid.toString();
+	}
 	public static void main(String[] args) {
 		ConnectionDAO test= new ConnectionDAO();
 		Connection conn=test.openConnection();
